@@ -16,19 +16,19 @@
 
 @interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate>
 {
-	VLCMediaPlayer *_mediaplayer;
 	BOOL _setPosition;
 	BOOL _displayRemainingTime;
 	int _currentAspectRatioMask;
 	NSArray *_aspectRatios;
-//	UIActionSheet *_audiotrackActionSheet;
-//	UIActionSheet *_subtitleActionSheet;
-	NSURL *_url;
 	NSTimer *_idleTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *movieView;
+@property (weak, nonatomic) IBOutlet UIView *controllerPanel;
+@property (weak, nonatomic) IBOutlet UIView *titlePanel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
 @property (strong, nonatomic) NSArray *playlist;
 @property (assign, nonatomic) NSUInteger currentTrack;
 
@@ -45,10 +45,14 @@
 	
 	/* setup gesture recognizer to toggle controls' visibility */
 	_movieView.userInteractionEnabled = NO;
+	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
 																					action:@selector(toggleControlsVisible)];
 	tapRecognizer.delegate = self;
-	[self.movieView addGestureRecognizer:tapRecognizer];
+	[self.view addGestureRecognizer:tapRecognizer];
+	
+	self.controllerPanel.hidden = self.titlePanel.hidden = YES;
+	self.controllerPanel.alpha = self.titlePanel.alpha = 0.0;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,15 +67,7 @@
 	//[_mediaplayer addObserver:self forKeyPath:@"time" options:0 context:nil];
 	//[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
 	
-	/* create a media object and give it to the player */
-	_mediaplayer.media = [VLCMedia mediaWithURL:_url];
-	
-	[_mediaplayer play];
-	
-//	if (self.controllerPanel.hidden)
-//		[self toggleControlsVisible];
-//	
-//	[self _resetIdleTimer];
+	[self playCurrentTrack];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -109,18 +105,146 @@
 {
 	self.currentTrack = aPosition;
 	self.playlist = aPlayList;
-	
+}
+
+- (void)playNextTrack:(id)sender
+{
+	if (++self.currentTrack < self.playlist.count)
+	{
+		[self playCurrentTrack];
+	}
+	else
+	{
+		[self closePlayback:sender];
+	}
+}
+
+- (void)playCurrentTrack
+{
+	/* create a media object and give it to the player */
 	IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 	
-	_url = [NSURL URLWithString:track.location];
+	self.titleLabel.text = track.name;
+	NSURL *url = [NSURL URLWithString:track.location];
+	
+	_mediaplayer.media = [VLCMedia mediaWithURL:url];
+	
+	[_mediaplayer play];
+	
+	if (self.controllerPanel.isHidden)
+	{
+		[self toggleControlsVisible];
+	}
+	
+	[self _resetIdleTimer];
 }
 
 - (void)toggleControlsVisible
 {
-//	BOOL controlsHidden = !self.controllerPanel.hidden;
-//	self.controllerPanel.hidden = controlsHidden;
+	BOOL controlsHidden = !self.controllerPanel.hidden;
+	
+	CGFloat secs = controlsHidden ? 0.3 : 0.1;
+	[UIView animateWithDuration:secs animations:^{
+		
+		self.controllerPanel.alpha = self.titlePanel.alpha = controlsHidden ? 0.0 : 0.8;
+		
+    } completion:^(BOOL finished) {
+		
+		self.controllerPanel.hidden = self.titlePanel.hidden = controlsHidden;
+    }];
+	
 //	self.toolbar.hidden = controlsHidden;
-//	[[UIApplication sharedApplication] setStatusBarHidden:controlsHidden withAnimation:UIStatusBarAnimationFade];
+}
+
+- (void)togglePlay
+{
+	if (_mediaplayer.isPlaying)
+	{
+		[_mediaplayer pause];
+	}
+	else
+	{
+		[_mediaplayer play];
+	}
+}
+
+- (void)_resetIdleTimer
+{
+	if (!_idleTimer)
+		_idleTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+													  target:self
+													selector:@selector(idleTimerExceeded)
+													userInfo:nil
+													 repeats:NO];
+	else {
+		if (fabs([_idleTimer.fireDate timeIntervalSinceNow]) < 5.0)
+			[_idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:5.0]];
+	}
+}
+
+- (void)idleTimerExceeded
+{
+	_idleTimer = nil;
+	
+	if (!self.controllerPanel.isHidden)
+	{
+		[self toggleControlsVisible];
+	}
+}
+
+- (void)closePlayback:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - VLCMediaPlayerDelegate
+
+- (void)mediaPlayerStateChanged:(NSNotification *)aNotification
+{
+	VLCMediaPlayerState currentState = _mediaplayer.state;
+	
+	/* distruct view controller on error */
+	if (currentState == VLCMediaPlayerStateError || currentState == VLCMediaPlayerStateStopped)
+	{
+		[self performSelector:@selector(closePlayback:) withObject:nil afterDelay:2.0];
+	}
+	/* or if playback ended */
+	else if (currentState == VLCMediaPlayerStateEnded)
+	{
+		[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
+	}
+	else if (currentState == VLCMediaPlayerStatePlaying)
+	{
+		[self.view bringSubviewToFront:self.controllerPanel];
+	}
+}
+
+-(void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+	if (presses.anyObject.type == UIPressTypeMenu)
+	{
+		
+	}
+	else if (presses.anyObject.type == UIPressTypeUpArrow)
+	{
+
+	}
+	else if (presses.anyObject.type == UIPressTypeDownArrow)
+	{
+	}
+	else if (presses.anyObject.type == UIPressTypeSelect)
+	{
+		if (self.controllerPanel.isHidden)
+		{
+			[self _resetIdleTimer];
+		}
+		
+		[self toggleControlsVisible];
+	}
+	else if (presses.anyObject.type == UIPressTypePlayPause)
+	{
+		[self togglePlay];
+	}
 }
 
 @end
