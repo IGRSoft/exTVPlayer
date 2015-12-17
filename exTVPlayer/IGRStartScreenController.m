@@ -41,7 +41,12 @@
 	if ([segue.identifier isEqualToString:@"openCatalog"])
 	{
 		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
+		
+#if DEBUG1
+		[catalogViewController setCatalogId:@"94195016"];
+#else
 		[catalogViewController setCatalogId:self.catalogId];
+#endif
 	}
 }
 

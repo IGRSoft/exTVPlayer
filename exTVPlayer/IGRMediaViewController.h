@@ -10,4 +10,6 @@
 
 @interface IGRMediaViewController : UIViewController
 
+- (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition;
+
 @end

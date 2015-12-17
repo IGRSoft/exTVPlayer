@@ -7,6 +7,8 @@
 //
 
 #import "IGRCatalogViewController.h"
+#import "IGRMediaViewController.h"
+
 #import "IGREXParser.h"
 #import "IGRExTrack.h"
 #import "IGRExItemCell.h"
@@ -57,8 +59,11 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
+	{
+		IGRMediaViewController *catalogViewController = segue.destinationViewController;
+		[catalogViewController setPlaylist:self.catalogTracks position:self.tableView.indexPathForSelectedRow.row];
+	}
 }
 
 #pragma mark - UITableViewDataSource

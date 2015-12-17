@@ -95,7 +95,7 @@
                                         <connections>
                                             <outlet property="title" destination="zgm-jF-CHu" id="dRf-QE-rC9"/>
                                             <outlet property="viewStatus" destination="5Tu-jY-jQ2" id="nVh-kW-93H"/>
-                                            <segue destination="xDf-oz-I9d" kind="show" id="cq6-lq-HAb"/>
+                                            <segue destination="xDf-oz-I9d" kind="show" identifier="playPlaylistPosition" id="cq6-lq-HAb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -138,11 +138,20 @@
                     <view key="view" contentMode="scaleToFill" id="RBz-Cr-Qf9">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6yp-JQ-pIr">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="movieView" destination="6yp-JQ-pIr" id="1Gc-m5-8lH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7m-CU-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3965" y="107"/>
+            <point key="canvasLocation" x="4397" y="347"/>
         </scene>
     </scenes>
 </document>

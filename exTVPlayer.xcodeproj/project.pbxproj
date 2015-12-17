@@ -13,6 +13,18 @@
 		A51F38641C22F35E00F6080A /* IGRExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38631C22F35E00F6080A /* IGRExTrack.m */; };
 		A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38671C22F4DA00F6080A /* RXMLElement.m */; };
 		A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
+		A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38721C230F3800F6080A /* AVFoundation.framework */; };
+		A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38781C230F8100F6080A /* MediaPlayer.framework */; };
+		A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38401C22C56A00F6080A /* libTVVLCKit.a */; };
+		A51F387C1C2312AA00F6080A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387B1C2312AA00F6080A /* libc++.tbd */; };
+		A51F387E1C2313C100F6080A /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387D1C2313C100F6080A /* libiconv.tbd */; };
+		A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387F1C2314A700F6080A /* OpenGLES.framework */; };
+		A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38811C23153A00F6080A /* QuartzCore.framework */; };
+		A51F38871C23156B00F6080A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38831C23156B00F6080A /* CoreAudio.framework */; };
+		A51F38881C23156B00F6080A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38841C23156B00F6080A /* CoreGraphics.framework */; };
+		A51F38891C23156B00F6080A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38851C23156B00F6080A /* CoreMedia.framework */; };
+		A51F388A1C23156B00F6080A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38861C23156B00F6080A /* CoreVideo.framework */; };
+		A51F388C1C23157D00F6080A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F388B1C23157D00F6080A /* CoreText.framework */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
@@ -73,6 +85,17 @@
 		A51F38671C22F4DA00F6080A /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
 		A51F386E1C23091200F6080A /* IGRMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRMediaViewController.h; sourceTree = "<group>"; };
 		A51F386F1C23091200F6080A /* IGRMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRMediaViewController.m; sourceTree = "<group>"; };
+		A51F38721C230F3800F6080A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A51F38781C230F8100F6080A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A51F387B1C2312AA00F6080A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A51F387D1C2313C100F6080A /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		A51F387F1C2314A700F6080A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A51F38811C23153A00F6080A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A51F38831C23156B00F6080A /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		A51F38841C23156B00F6080A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A51F38851C23156B00F6080A /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		A51F38861C23156B00F6080A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		A51F388B1C23157D00F6080A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +113,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51F388C1C23157D00F6080A /* CoreText.framework in Frameworks */,
+				A51F38871C23156B00F6080A /* CoreAudio.framework in Frameworks */,
+				A51F38881C23156B00F6080A /* CoreGraphics.framework in Frameworks */,
+				A51F38891C23156B00F6080A /* CoreMedia.framework in Frameworks */,
+				A51F388A1C23156B00F6080A /* CoreVideo.framework in Frameworks */,
+				A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */,
+				A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */,
+				A51F387E1C2313C100F6080A /* libiconv.tbd in Frameworks */,
+				A51F387C1C2312AA00F6080A /* libc++.tbd in Frameworks */,
+				A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */,
+				A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */,
+				A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,11 +178,30 @@
 			path = RaptureXML/RaptureXML;
 			sourceTree = "<group>";
 		};
+		A51F38771C230F6A00F6080A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A51F388B1C23157D00F6080A /* CoreText.framework */,
+				A51F38831C23156B00F6080A /* CoreAudio.framework */,
+				A51F38841C23156B00F6080A /* CoreGraphics.framework */,
+				A51F38851C23156B00F6080A /* CoreMedia.framework */,
+				A51F38861C23156B00F6080A /* CoreVideo.framework */,
+				A51F38811C23153A00F6080A /* QuartzCore.framework */,
+				A51F387F1C2314A700F6080A /* OpenGLES.framework */,
+				A51F387D1C2313C100F6080A /* libiconv.tbd */,
+				A51F387B1C2312AA00F6080A /* libc++.tbd */,
+				A51F38781C230F8100F6080A /* MediaPlayer.framework */,
+				A51F38721C230F3800F6080A /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
 				A5E81BD91C22B72D00EABFC5 /* exTVPlayer */,
 				A51F38301C22C50A00F6080A /* Submodules */,
+				A51F38771C230F6A00F6080A /* Frameworks */,
 				A5E81BF11C22B7A500EABFC5 /* Resources */,
 				A5E81BD81C22B72D00EABFC5 /* Products */,
 			);
@@ -428,7 +482,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
@@ -442,7 +499,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
