@@ -24,7 +24,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="S5q-DC-Jz2"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="806-21-3HV">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="806-21-3HV">
                                 <rect key="frame" x="695" y="587" width="531" height="86"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="Получить список файлов"/>
@@ -55,6 +55,7 @@
                     </view>
                     <connections>
                         <outlet property="catalogTextField" destination="hxx-IK-k2R" id="l12-oX-MJv"/>
+                        <outlet property="nextButton" destination="806-21-3HV" id="j6F-BV-mgr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

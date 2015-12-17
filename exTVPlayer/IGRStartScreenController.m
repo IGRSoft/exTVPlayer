@@ -16,6 +16,7 @@
 @property (copy, nonatomic) NSString *catalogId;
 
 @property (weak, nonatomic) IBOutlet UITextField *catalogTextField;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
 
@@ -32,6 +33,7 @@
 	
 	IGREntityAppSettings *settings = [self appSettings];
 	self.catalogTextField.text = self.catalogId = settings.lastPlayedCatalog;
+	self.nextButton.enabled = self.catalogId.length > 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +50,8 @@
 	
 	IGREntityAppSettings *settings = [self appSettings];
 	settings.lastPlayedCatalog = self.catalogId;
+	
+	self.nextButton.enabled = self.catalogId.length > 0;
 }
 
 #pragma mark - UITextFieldDelegate

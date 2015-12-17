@@ -31,9 +31,6 @@
 {
 	_catalogId = aCatalogId;
 	[IGREXParser parseCatalogContent:aCatalogId];
-	
-	//self.catalogTracks = catalogContent[@"tracks"];
-	//self.catalogTitleString = catalogContent[@"title"];
 }
 
 - (void)viewDidLoad
@@ -46,7 +43,13 @@
 {
 	[super viewDidAppear:animated];
 	
-	//self.catalogTitle.text = self.catalogTitleString;
+	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
+																	withValue:_catalogId];
+	
+	if (catalog)
+	{
+		self.catalogTitle.text = catalog.name;
+	}
 	
 	[self.tableView reloadData];
 }
