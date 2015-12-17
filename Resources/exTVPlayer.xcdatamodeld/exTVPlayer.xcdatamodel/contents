@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="AppSettings" representedClassName="IGREntityAppSettings" syncable="YES">
+        <attribute name="lastPlayedCatalog" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ExCatalog" representedClassName="IGREntityExCatalog" syncable="YES">
+        <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExTrack" inverseName="catalog" inverseEntity="ExTrack" syncable="YES"/>
+    </entity>
+    <entity name="ExTrack" representedClassName="IGREntityExTrack" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="stopTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="catalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExCatalog" inverseName="tracks" inverseEntity="ExCatalog" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ExCatalog" positionX="-54" positionY="0" width="128" height="90"/>
+        <element name="AppSettings" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="ExTrack" positionX="-36" positionY="18" width="128" height="120"/>
+    </elements>
 </model>

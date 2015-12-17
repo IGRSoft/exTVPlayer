@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  exTVPlayer
+//
+//  Created by Vitalii Parovishnyk on 12/17/15.
+//  Copyright © 2015 IGR Software. All rights reserved.
+//
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#endif
+
+#import "MagicalRecord.h"
+#define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]

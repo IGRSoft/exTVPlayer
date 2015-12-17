@@ -8,14 +8,13 @@
 
 #import "IGREXParser.h"
 #import "RXMLElement.h"
-#import "IGRExTrack.h"
+#import "IGREntityExCatalog.h"
+#import "IGREntityExTrack.h"
 
 @implementation IGREXParser
 
-+ (NSDictionary *)catalogContent:(NSString *)aCatalogId
++ (void)parseCatalogContent:(NSString *)aCatalogId
 {
-	NSMutableArray *tracks = [NSMutableArray array];
-	
 	NSError *error = nil;
 	NSStringEncoding encoding;
 	NSString *xspfUrl = [NSString stringWithFormat:@"http://www.ex.ua/playlist/%@.xspf", aCatalogId];
@@ -29,18 +28,32 @@
 	
 	NSString *title = [[xmlDocument child:@"title"] text];
 	
+	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+																			withValue:aCatalogId];
+	catalog.name = title;
+	
 	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
 		NSString *title = [[node child:@"title"] text];
 		NSString *location = [[node child:@"location"] text];
 		
-		IGRExTrack *track = [[IGRExTrack alloc] init];
-		track.title = title;
-		track.location = location;
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"location == %@ AND catalog = %@", location, catalog];
+		IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
 		
-		[tracks addObject:track];
+		if (!track)
+		{
+			track = [IGREntityExTrack MR_createEntity];
+			track.location = location;
+			track.name = title;
+			track.status = 0;
+			track.stopTime = 0;
+			track.catalog = catalog;
+		}
 	}];
 	
-	return @{@"title": title, @"tracks": tracks};
+	if ([MR_DEFAULT_CONTEXT hasChanges])
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
 }
 
 @end

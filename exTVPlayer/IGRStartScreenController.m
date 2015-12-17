@@ -9,20 +9,33 @@
 #import "IGRStartScreenController.h"
 #import "IGRCatalogViewController.h"
 
+#import "IGREntityAppSettings.h"
+
 @interface IGRStartScreenController () <UITextFieldDelegate>
 
 @property (copy, nonatomic) NSString *catalogId;
+
+@property (weak, nonatomic) IBOutlet UITextField *catalogTextField;
 
 @end
 
 @implementation IGRStartScreenController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	IGREntityAppSettings *settings = [self appSettings];
+	self.catalogTextField.text = self.catalogId = settings.lastPlayedCatalog;
+}
+
+- (void)didReceiveMemoryWarning
+{
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }
@@ -32,6 +45,9 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
 	self.catalogId = [textField.text copy];
+	
+	IGREntityAppSettings *settings = [self appSettings];
+	settings.lastPlayedCatalog = self.catalogId;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -42,12 +58,20 @@
 	{
 		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
 		
-#if DEBUG1
-		[catalogViewController setCatalogId:@"94195016"];
-#else
 		[catalogViewController setCatalogId:self.catalogId];
-#endif
 	}
+}
+
+- (IGREntityAppSettings*)appSettings
+{
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+	if (!settings)
+	{
+		settings = [IGREntityAppSettings MR_createEntity];
+		[MR_DEFAULT_CONTEXT saveOnlySelfAndWait];
+	}
+	
+	return settings;
 }
 
 @end

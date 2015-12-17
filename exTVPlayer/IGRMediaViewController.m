@@ -12,7 +12,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <TVVLCKit/TVVLCKit.h>
 
-#import "IGRExTrack.h"
+#import "IGREntityExTrack.h"
 
 @interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate>
 {
@@ -84,7 +84,7 @@
 	self.currentTrack = aPosition;
 	self.playlist = aPlayList;
 	
-	IGRExTrack *track = self.playlist[self.currentTrack];
+	IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 	
 	_url = [NSURL URLWithString:track.location];
 }
