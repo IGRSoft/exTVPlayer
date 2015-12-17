@@ -74,6 +74,32 @@
 //	[self _resetIdleTimer];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	if (_mediaplayer) {
+//		@try {
+//			[_mediaplayer removeObserver:self forKeyPath:@"time"];
+//			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
+//		}
+//		@catch (NSException *exception) {
+//			NSLog(@"we weren't an observer yet");
+//		}
+		
+		if (_mediaplayer.media)
+			[_mediaplayer stop];
+		
+		if (_mediaplayer)
+			_mediaplayer = nil;
+	}
+	
+	if (_idleTimer) {
+		[_idleTimer invalidate];
+		_idleTimer = nil;
+	}
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
