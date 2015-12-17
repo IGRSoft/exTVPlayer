@@ -1,3 +1,6 @@
 [submodule "Submodules/VLCKit"]
 	path = Submodules/VLCKit
 	url = https://code.videolan.org/videolan/VLCKit.git
+[submodule "Submodules/RaptureXML"]
+	path = Submodules/RaptureXML
+	url = https://github.com/ZaBlanc/RaptureXML.git

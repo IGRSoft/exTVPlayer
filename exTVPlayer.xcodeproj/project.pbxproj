@@ -7,21 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
+		A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
+		A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
+		A51F38641C22F35E00F6080A /* IGRExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38631C22F35E00F6080A /* IGRExTrack.m */; };
+		A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38671C22F4DA00F6080A /* RXMLElement.m */; };
+		A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
-		A5E81BE21C22B72D00EABFC5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* ViewController.m */; };
+		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
 		A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF31C22B7A500EABFC5 /* Main.storyboard */; };
 		A5E81BFA1C22B7A500EABFC5 /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BF51C22B7A500EABFC5 /* exTVPlayer.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A51F38391C22C56A00F6080A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = MobileVLCKit;
+		};
+		A51F383B1C22C56A00F6080A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D8939271B500D1C008F2B14;
+			remoteInfo = DynamicMobileVLCKit;
+		};
+		A51F383D1C22C56A00F6080A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D89394E1B500DBC008F2B14;
+			remoteInfo = StaticLibVLC;
+		};
+		A51F383F1C22C56A00F6080A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D1329591BA304D900BE647E;
+			remoteInfo = TVVLCKit;
+		};
+		A51F38411C22C57900F6080A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D1329581BA304D900BE647E;
+			remoteInfo = TVVLCKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MobileVLCKit.xcodeproj; sourceTree = "<group>"; };
+		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
+		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
+		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
+		A51F38471C22D3E600F6080A /* IGRExItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRExItemCell.m; sourceTree = "<group>"; };
+		A51F385F1C22F2FA00F6080A /* IGREXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREXParser.h; sourceTree = "<group>"; };
+		A51F38601C22F2FA00F6080A /* IGREXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXParser.m; sourceTree = "<group>"; };
+		A51F38621C22F35E00F6080A /* IGRExTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExTrack.h; sourceTree = "<group>"; };
+		A51F38631C22F35E00F6080A /* IGRExTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRExTrack.m; sourceTree = "<group>"; };
+		A51F38661C22F4DA00F6080A /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
+		A51F38671C22F4DA00F6080A /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
+		A51F386E1C23091200F6080A /* IGRMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRMediaViewController.h; sourceTree = "<group>"; };
+		A51F386F1C23091200F6080A /* IGRMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRMediaViewController.m; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A5E81BE01C22B72D00EABFC5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A5E81BE11C22B72D00EABFC5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRStartScreenController.h; sourceTree = "<group>"; };
+		A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRStartScreenController.m; sourceTree = "<group>"; };
 		A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E81BF41C22B7A500EABFC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5E81BF61C22B7A500EABFC5 /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
@@ -39,11 +96,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A51F38301C22C50A00F6080A /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				A51F38651C22F4DA00F6080A /* RaptureXML */,
+				A51F38311C22C54500F6080A /* VLCKit */,
+			);
+			path = Submodules;
+			sourceTree = "<group>";
+		};
+		A51F38311C22C54500F6080A /* VLCKit */ = {
+			isa = PBXGroup;
+			children = (
+				A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */,
+			);
+			path = VLCKit;
+			sourceTree = "<group>";
+		};
+		A51F38331C22C56A00F6080A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A51F383A1C22C56A00F6080A /* libMobileVLCKit.a */,
+				A51F383C1C22C56A00F6080A /* DynamicMobileVLCKit.framework */,
+				A51F383E1C22C56A00F6080A /* libStaticLibVLC.a */,
+				A51F38401C22C56A00F6080A /* libTVVLCKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A51F385E1C22F2BD00F6080A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A51F385F1C22F2FA00F6080A /* IGREXParser.h */,
+				A51F38601C22F2FA00F6080A /* IGREXParser.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A51F38651C22F4DA00F6080A /* RaptureXML */ = {
+			isa = PBXGroup;
+			children = (
+				A51F38661C22F4DA00F6080A /* RXMLElement.h */,
+				A51F38671C22F4DA00F6080A /* RXMLElement.m */,
+			);
+			name = RaptureXML;
+			path = RaptureXML/RaptureXML;
+			sourceTree = "<group>";
+		};
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
-				A5E81BF11C22B7A500EABFC5 /* Resources */,
 				A5E81BD91C22B72D00EABFC5 /* exTVPlayer */,
+				A51F38301C22C50A00F6080A /* Submodules */,
+				A5E81BF11C22B7A500EABFC5 /* Resources */,
 				A5E81BD81C22B72D00EABFC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,10 +164,19 @@
 		A5E81BD91C22B72D00EABFC5 /* exTVPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				A51F385E1C22F2BD00F6080A /* Helpers */,
 				A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */,
-				A5E81BE01C22B72D00EABFC5 /* ViewController.h */,
-				A5E81BE11C22B72D00EABFC5 /* ViewController.m */,
+				A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */,
+				A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */,
+				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
+				A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */,
+				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
+				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
+				A51F38621C22F35E00F6080A /* IGRExTrack.h */,
+				A51F38631C22F35E00F6080A /* IGRExTrack.m */,
+				A51F386E1C23091200F6080A /* IGRMediaViewController.h */,
+				A51F386F1C23091200F6080A /* IGRMediaViewController.m */,
 				A5E81BDA1C22B72D00EABFC5 /* Supporting Files */,
 			);
 			path = exTVPlayer;
@@ -101,6 +215,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A51F38421C22C57900F6080A /* PBXTargetDependency */,
 			);
 			name = exTVPlayer;
 			productName = exTVPlayer;
@@ -132,12 +247,49 @@
 			mainGroup = A5E81BCE1C22B72D00EABFC5;
 			productRefGroup = A5E81BD81C22B72D00EABFC5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A51F38331C22C56A00F6080A /* Products */;
+					ProjectRef = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A5E81BD61C22B72D00EABFC5 /* exTVPlayer */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A51F383A1C22C56A00F6080A /* libMobileVLCKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMobileVLCKit.a;
+			remoteRef = A51F38391C22C56A00F6080A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A51F383C1C22C56A00F6080A /* DynamicMobileVLCKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DynamicMobileVLCKit.framework;
+			remoteRef = A51F383B1C22C56A00F6080A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A51F383E1C22C56A00F6080A /* libStaticLibVLC.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libStaticLibVLC.a;
+			remoteRef = A51F383D1C22C56A00F6080A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A51F38401C22C56A00F6080A /* libTVVLCKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTVVLCKit.a;
+			remoteRef = A51F383F1C22C56A00F6080A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A5E81BD51C22B72D00EABFC5 /* Resources */ = {
@@ -156,14 +308,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E81BE21C22B72D00EABFC5 /* ViewController.m in Sources */,
+				A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */,
+				A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */,
+				A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */,
 				A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */,
+				A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */,
+				A51F38641C22F35E00F6080A /* IGRExTrack.m in Sources */,
+				A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */,
 				A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */,
+				A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */,
 				A5E81BFA1C22B7A500EABFC5 /* exTVPlayer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A51F38421C22C57900F6080A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TVVLCKit;
+			targetProxy = A51F38411C22C57900F6080A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A5E81BF31C22B7A500EABFC5 /* Main.storyboard */ = {
@@ -262,8 +428,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -274,8 +442,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
