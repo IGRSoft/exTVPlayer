@@ -1,0 +1,3 @@
+[submodule "Submodules/VLCKit"]
+	path = Submodules/VLCKit
+	url = https://code.videolan.org/videolan/VLCKit.git
