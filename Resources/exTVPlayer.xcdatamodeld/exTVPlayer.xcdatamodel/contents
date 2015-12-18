@@ -11,13 +11,13 @@
     <entity name="ExTrack" representedClassName="IGREntityExTrack" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="stopTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="catalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExCatalog" inverseName="tracks" inverseEntity="ExCatalog" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ExCatalog" positionX="-54" positionY="0" width="128" height="90"/>
         <element name="AppSettings" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="ExCatalog" positionX="-54" positionY="0" width="128" height="90"/>
         <element name="ExTrack" positionX="-36" positionY="18" width="128" height="120"/>
     </elements>
 </model>

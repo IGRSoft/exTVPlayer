@@ -44,8 +44,8 @@
 			track = [IGREntityExTrack MR_createEntity];
 			track.location = location;
 			track.name = title;
-			track.status = 0;
-			track.stopTime = 0;
+			track.status = @(IGRTrackState_New);
+			track.position = @(0.0);
 			track.catalog = catalog;
 		}
 	}];

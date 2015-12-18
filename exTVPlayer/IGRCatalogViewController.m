@@ -122,7 +122,22 @@
 	IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	
 	cell.title.text = track.name;
-	cell.viewStatus.image = [UIImage imageNamed:@"new"];
+	
+	UIImage *img = nil;
+	switch (track.status.integerValue)
+	{
+		case IGRTrackState_Done:
+			img = [UIImage imageNamed:@"done"];
+			break;
+		case IGRTrackState_Half:
+			img = [UIImage imageNamed:@"half"];
+			break;
+		case IGRTrackState_New:
+		default:
+			img = [UIImage imageNamed:@"new"];
+			break;
+	}
+	cell.viewStatus.image = img;
 }
 
 #pragma mark - Fetched results controller

@@ -28,9 +28,18 @@
 @property (weak, nonatomic) IBOutlet UIView *titlePanel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *remainingTime;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressPosition;
+
 @property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
 @property (strong, nonatomic) NSArray *playlist;
 @property (assign, nonatomic) NSUInteger currentTrack;
+@property (assign, nonatomic) BOOL firstPlay;
+
+@property (assign, nonatomic) CGPoint lastTouchLocation;
+@property (assign, nonatomic) BOOL updatingPosition;
+@property (assign, nonatomic) BOOL skipState;
 
 @end
 
@@ -43,16 +52,11 @@
 	/* populate array of supported aspect ratios (there are more!) */
 	_aspectRatios = @[@"DEFAULT", @"FILL_TO_SCREEN", @"4:3", @"16:9", @"16:10", @"2.21:1"];
 	
-	/* setup gesture recognizer to toggle controls' visibility */
-	_movieView.userInteractionEnabled = NO;
-	
-	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-																					action:@selector(toggleControlsVisible)];
-	tapRecognizer.delegate = self;
-	[self.view addGestureRecognizer:tapRecognizer];
-	
 	self.controllerPanel.hidden = self.titlePanel.hidden = YES;
 	self.controllerPanel.alpha = self.titlePanel.alpha = 0.0;
+	
+	self.updatingPosition = NO;
+	self.skipState = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,8 +68,8 @@
 	_mediaplayer.drawable = self.movieView;
 	
 	/* listen for notifications from the player */
-	//[_mediaplayer addObserver:self forKeyPath:@"time" options:0 context:nil];
-	//[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
+	[_mediaplayer addObserver:self forKeyPath:@"time" options:0 context:nil];
+	[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
 	
 	[self playCurrentTrack];
 }
@@ -75,28 +79,42 @@
 	[super viewWillDisappear:animated];
 	
 	if (_mediaplayer) {
-//		@try {
-//			[_mediaplayer removeObserver:self forKeyPath:@"time"];
-//			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
-//		}
-//		@catch (NSException *exception) {
-//			NSLog(@"we weren't an observer yet");
-//		}
+		@try {
+			[_mediaplayer removeObserver:self forKeyPath:@"time"];
+			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
+		}
+		@catch (NSException *exception) {
+			NSLog(@"we weren't an observer yet");
+		}
 		
 		if (_mediaplayer.media)
+		{
+			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
+			{
+				IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
+				track.status = @(IGRTrackState_Half);
+				track.position = @(_mediaplayer.position);
+				[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+			}
+			
+			self.skipState = YES;
 			[_mediaplayer stop];
-		
+		}
 		if (_mediaplayer)
+		{
 			_mediaplayer = nil;
+		}
 	}
 	
-	if (_idleTimer) {
+	if (_idleTimer)
+	{
 		[_idleTimer invalidate];
 		_idleTimer = nil;
 	}
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -121,6 +139,7 @@
 
 - (void)playCurrentTrack
 {
+	self.firstPlay = YES;
 	/* create a media object and give it to the player */
 	IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 	
@@ -129,7 +148,17 @@
 	
 	_mediaplayer.media = [VLCMedia mediaWithURL:url];
 	
+	[_mediaplayer setPosition:track.position.floatValue];
+	
 	[_mediaplayer play];
+	
+	if (track.position.floatValue > 0.02 && track.position.floatValue < 0.98)
+	{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			
+			[self setPosition:track.position];
+		});
+	}
 	
 	if (self.controllerPanel.isHidden)
 	{
@@ -137,6 +166,8 @@
 	}
 	
 	[self _resetIdleTimer];
+	
+	self.skipState = NO;
 }
 
 - (void)toggleControlsVisible
@@ -204,35 +235,34 @@
 	VLCMediaPlayerState currentState = _mediaplayer.state;
 	
 	/* distruct view controller on error */
-	if (currentState == VLCMediaPlayerStateError || currentState == VLCMediaPlayerStateStopped)
+	if (currentState == VLCMediaPlayerStateError)
 	{
 		[self performSelector:@selector(closePlayback:) withObject:nil afterDelay:2.0];
 	}
 	/* or if playback ended */
-	else if (currentState == VLCMediaPlayerStateEnded)
+	else if (currentState == VLCMediaPlayerStateEnded || currentState == VLCMediaPlayerStateStopped)
 	{
-		[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
+		if (!self.skipState)
+		{
+			self.skipState = YES;
+			IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
+			track.position = @(0.0);
+			track.status = @(IGRTrackState_Done);
+			
+			[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
+		}
 	}
 	else if (currentState == VLCMediaPlayerStatePlaying)
 	{
-		[self.view bringSubviewToFront:self.controllerPanel];
+	}
+	else if (currentState == VLCMediaPlayerStatePaused)
+	{
 	}
 }
 
 -(void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
-	if (presses.anyObject.type == UIPressTypeMenu)
-	{
-		
-	}
-	else if (presses.anyObject.type == UIPressTypeUpArrow)
-	{
-
-	}
-	else if (presses.anyObject.type == UIPressTypeDownArrow)
-	{
-	}
-	else if (presses.anyObject.type == UIPressTypeSelect)
+	if (presses.anyObject.type == UIPressTypeSelect)
 	{
 		if (self.controllerPanel.isHidden)
 		{
@@ -245,6 +275,87 @@
 	{
 		[self togglePlay];
 	}
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+	self.lastTouchLocation = CGPointMake(-1, -1);
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch *touch in touches)
+	{
+		CGPoint location = [touch locationInView:self.movieView];
+		
+		if(self.lastTouchLocation.x == -1 && self.lastTouchLocation.y == -1)
+		{
+			// Prevent cursor from recentering
+			self.lastTouchLocation = location;
+		}
+		else
+		{
+			CGFloat xDiff = location.x - self.lastTouchLocation.x;
+
+			[self updatePosition:xDiff];
+			
+			self.lastTouchLocation = location;
+		}
+		
+		// We only use one touch, break the loop
+		break;
+	}
+}
+
+- (void)updatePosition:(CGFloat)xDiff
+{
+	if (xDiff == 0)
+	{
+		return;
+	}
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setPosition:) object:nil];
+	
+	self.updatingPosition = YES;
+	
+	CGFloat newPosition = self.progressPosition.progress + xDiff / 10000;
+	
+	newPosition = MIN(1.0, newPosition);
+	newPosition = MAX(0.0, newPosition);
+	
+	self.progressPosition.progress = newPosition;
+	
+	[self performSelector:@selector(setPosition:) withObject:@(newPosition) afterDelay:1.0];
+}
+
+- (void)setPosition:(NSNumber *)newPos
+{
+	[_mediaplayer setPosition:newPos.floatValue];
+
+	if (self.controllerPanel.isHidden)
+	{
+		[self toggleControlsVisible];
+	}
+	
+	[self _resetIdleTimer];
+	
+	self.updatingPosition = NO;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (!self.updatingPosition)
+	{
+		self.progressPosition.progress = [_mediaplayer position];
+		
+		if (self.progressPosition.progress > 1.0)
+		{
+			[_mediaplayer stop];
+		}
+	}
+	
+	self.remainingTime.text = [[_mediaplayer remainingTime] stringValue];
+	self.time.text = [[_mediaplayer time] stringValue];
 }
 
 @end

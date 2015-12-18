@@ -15,8 +15,6 @@
 		A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38721C230F3800F6080A /* AVFoundation.framework */; };
 		A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38781C230F8100F6080A /* MediaPlayer.framework */; };
 		A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38401C22C56A00F6080A /* libTVVLCKit.a */; };
-		A51F387C1C2312AA00F6080A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387B1C2312AA00F6080A /* libc++.tbd */; };
-		A51F387E1C2313C100F6080A /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387D1C2313C100F6080A /* libiconv.tbd */; };
 		A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387F1C2314A700F6080A /* OpenGLES.framework */; };
 		A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38811C23153A00F6080A /* QuartzCore.framework */; };
 		A51F38871C23156B00F6080A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38831C23156B00F6080A /* CoreAudio.framework */; };
@@ -74,6 +72,7 @@
 		A51F3C251C232AF200F6080A /* IGREntityExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C1D1C232AF200F6080A /* IGREntityExTrack.m */; };
 		A51F3C261C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C1F1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m */; };
 		A51F3C271C232AF200F6080A /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C211C232AF200F6080A /* IGREntityExCatalog.m */; };
+		A569EC891C240ADE004EF247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A569EC881C240ADE004EF247 /* InfoPlist.strings */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
@@ -251,6 +250,7 @@
 		A51F3C1F1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExCatalog+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A51F3C201C232AF200F6080A /* IGREntityExCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExCatalog.h; sourceTree = "<group>"; };
 		A51F3C211C232AF200F6080A /* IGREntityExCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExCatalog.m; sourceTree = "<group>"; };
+		A569EC881C240ADE004EF247 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -275,8 +275,6 @@
 				A51F388A1C23156B00F6080A /* CoreVideo.framework in Frameworks */,
 				A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */,
 				A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */,
-				A51F387E1C2313C100F6080A /* libiconv.tbd in Frameworks */,
-				A51F387C1C2312AA00F6080A /* libc++.tbd in Frameworks */,
 				A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */,
 				A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */,
 				A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */,
@@ -601,6 +599,7 @@
 				A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */,
 				A5E81BF31C22B7A500EABFC5 /* Main.storyboard */,
 				A5E81BF71C22B7A500EABFC5 /* Info.plist */,
+				A569EC881C240ADE004EF247 /* InfoPlist.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -701,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */,
+				A569EC891C240ADE004EF247 /* InfoPlist.strings in Resources */,
 				A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,8 +798,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -815,7 +813,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -833,7 +830,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Debug;
 		};
@@ -841,8 +837,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -858,7 +852,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -869,7 +862,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -887,7 +879,11 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-lxml2",
+					"-lstdc++",
+					"-liconv",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -906,7 +902,11 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-lxml2",
+					"-lstdc++",
+					"-liconv",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

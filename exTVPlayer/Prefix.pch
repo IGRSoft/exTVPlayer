@@ -14,3 +14,10 @@
 
 #import "MagicalRecord.h"
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
+
+typedef NS_ENUM(NSUInteger, IGRTrackState)
+{
+	IGRTrackState_New = 0,
+	IGRTrackState_Half,
+	IGRTrackState_Done
+};
