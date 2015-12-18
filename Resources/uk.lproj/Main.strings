@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "7lq-us-cva"; */
+"7lq-us-cva.text" = "00:00:00";
+
+/* Class = "UIButton"; normalTitle = "Get list of tracks"; ObjectID = "806-21-3HV"; */
+"806-21-3HV.normalTitle" = "Отримати список треків";
+
+/* Class = "UILabel"; text = "Catalog Title"; ObjectID = "AXw-fN-k8y"; */
+"AXw-fN-k8y.text" = "Catalog Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bf2-sc-Zp5"; */
+"Bf2-sc-Zp5.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Введите номер каталога"; ObjectID = "hxx-IK-k2R"; */
+"hxx-IK-k2R.placeholder" = "Введіть номер каталога";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "kB3-dH-JT0"; */
+"kB3-dH-JT0.text" = "00:00:00";
+
+/* Class = "UILabel"; text = "Item Title"; ObjectID = "zgm-jF-CHu"; */
+"zgm-jF-CHu.text" = "Item Title";
