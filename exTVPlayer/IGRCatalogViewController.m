@@ -68,9 +68,12 @@
 	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
 	{
 		IGRMediaViewController *catalogViewController = segue.destinationViewController;
-				
-		[catalogViewController setPlaylist:[self.fetchedResultsController sections]
-								  position:self.tableView.indexPathForSelectedRow.section];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[catalogViewController setPlaylist:[self.fetchedResultsController sections]
+									  position:self.tableView.indexPathForSelectedRow.section];
+		});
 	}
 }
 

@@ -51,31 +51,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-sO-Rah">
-                                <rect key="frame" x="500" y="360" width="920" height="622"/>
+                                <rect key="frame" x="350" y="360" width="1220" height="622"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8Yq-dC-2OX">
-                                    <size key="itemSize" width="300" height="75"/>
+                                    <size key="itemSize" width="400" height="75"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRChanelCell" id="iZ3-4w-yrl" customClass="IGRChanelCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pdb-bS-CiQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="75"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-xS-Dlo" propertyAccessControl="nonLocalizable">
-                                                            <rect key="frame" x="8" y="27" width="284" height="21"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-xS-Dlo">
+                                                            <rect key="frame" x="8" y="13" width="384" height="50"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="H5k-WS-KkP">
+                                                            <rect key="frame" x="168" y="6" width="64" height="64"/>
+                                                            <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" red="0.83529411764705885" green="0.90588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,6 +95,7 @@
                                         <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="backgroundView" destination="Pdb-bS-CiQ" id="btx-xo-KU0"/>
+                                            <outlet property="progress" destination="H5k-WS-KkP" id="TSg-Ka-fW5"/>
                                             <outlet property="title" destination="Pmq-xS-Dlo" id="xqu-6V-eeM"/>
                                             <segue destination="fJe-F3-V2o" kind="show" identifier="showChanel" id="gEk-2O-Nr2"/>
                                         </connections>
@@ -231,6 +236,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wqW-Wp-agY">
+                                                    <rect key="frame" x="178" y="192" width="64" height="64"/>
+                                                    <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -244,6 +253,7 @@
                                 <connections>
                                     <outlet property="backgroundView" destination="g9V-7d-kia" id="JHT-pP-37T"/>
                                     <outlet property="image" destination="zqV-mV-8Nv" id="o24-Eq-BF4"/>
+                                    <outlet property="progress" destination="wqW-Wp-agY" id="6rA-Oh-RMS"/>
                                     <outlet property="title" destination="JZs-fq-fd4" id="ytR-gs-aR1"/>
                                     <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="stc-s6-1Oz"/>
                                 </connections>

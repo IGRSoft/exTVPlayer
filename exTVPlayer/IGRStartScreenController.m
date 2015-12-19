@@ -62,6 +62,16 @@
 	self.nextButton.enabled = self.catalogId.length > 0;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		[obj setSelected:NO];
+	}];
+	
+	[super viewWillDisappear:animated];
+}
+
 - (UIView *)preferredFocusedView
 {
 	return self.catalogTextField;
@@ -149,12 +159,15 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+{	
 	if ([segue.identifier isEqualToString:@"openCatalog"])
 	{
 		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
 		
-		[catalogViewController setCatalogId:self.catalogId];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[catalogViewController setCatalogId:self.catalogId];
+		});
 	}
 	else if ([segue.identifier isEqualToString:@"showChanel"])
 	{
@@ -163,7 +176,10 @@
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.chanels.indexPathsForSelectedItems.firstObject.row + self.chanels.indexPathsForSelectedItems.firstObject.section)];
 		IGREntityExChanel *chanel = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
-		[catalogViewController setChanel:chanel];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[catalogViewController setChanel:chanel];
+		});
 	}
 }
 

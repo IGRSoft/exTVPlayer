@@ -59,6 +59,16 @@
 //	[cell setHighlighted:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		[obj setSelected:NO];
+	}];
+	
+	[super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -87,7 +97,10 @@
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalogs.indexPathsForSelectedItems.firstObject.row + self.catalogs.indexPathsForSelectedItems.firstObject.section)];
 		IGREntityExCatalog *catalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
-		[catalogViewController setCatalogId:catalog.itemId];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[catalogViewController setCatalogId:catalog.itemId];
+		});
 	}
 }
 
