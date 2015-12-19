@@ -41,6 +41,8 @@
 @property (assign, nonatomic) BOOL updatingPosition;
 @property (assign, nonatomic) BOOL skipState;
 
+@property (assign, nonatomic) BOOL needResumeVideo;
+
 @end
 
 @implementation IGRMediaViewController
@@ -63,6 +65,16 @@
 {
 	[super viewDidAppear:animated];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationWillResignActive:)
+												 name:kApplicationWillResignActive
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationDidBecomeActive:)
+												 name:kapplicationDidBecomeActive
+											   object:nil];
+	
 	_mediaplayer = [[VLCMediaPlayer alloc] init];
 	_mediaplayer.delegate = self;
 	_mediaplayer.drawable = self.movieView;
@@ -78,7 +90,10 @@
 {
 	[super viewWillDisappear:animated];
 	
-	if (_mediaplayer) {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	if (_mediaplayer)
+	{
 		@try {
 			[_mediaplayer removeObserver:self forKeyPath:@"time"];
 			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
@@ -372,6 +387,24 @@
 	
 	self.remainingTime.text = [[_mediaplayer remainingTime] stringValue];
 	self.time.text = [[_mediaplayer time] stringValue];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)aNotification
+{
+	if ([_mediaplayer isPlaying])
+	{
+		[_mediaplayer pause];
+	}
+	
+	self.needResumeVideo = [_mediaplayer isPlaying];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)aNotification
+{
+	if (self.needResumeVideo)
+	{
+		[_mediaplayer play];
+	}
 }
 
 @end

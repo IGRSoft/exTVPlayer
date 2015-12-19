@@ -31,3 +31,6 @@ typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 	IGRVideoCategory_De  = 45205,
 	IGRVideoCategory_Pl  = 968815,
 };
+
+static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
+static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";
