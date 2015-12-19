@@ -147,9 +147,9 @@
 	if (_fetchedResultsController == nil)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"catalog.itemId == %@", self.catalogId];
-		_fetchedResultsController = [IGREntityExTrack MR_fetchAllGroupedBy:@"name"
+		_fetchedResultsController = [IGREntityExTrack MR_fetchAllGroupedBy:@"orderId"
 															 withPredicate:predicate
-																  sortedBy:@"name"
+																  sortedBy:@"orderId"
 																 ascending:YES];
 	}
 	

@@ -17,6 +17,7 @@
 @dynamic name;
 @dynamic position;
 @dynamic status;
+@dynamic orderId;
 @dynamic catalog;
 
 @end

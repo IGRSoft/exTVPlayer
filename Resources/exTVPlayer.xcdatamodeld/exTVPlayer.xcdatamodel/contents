@@ -5,8 +5,10 @@
         <attribute name="videoLanguageId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="ExCatalog" representedClassName="IGREntityExCatalog" syncable="YES">
+        <attribute name="imgUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="chanel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExChanel" inverseName="catalogs" inverseEntity="ExChanel" syncable="YES"/>
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExTrack" inverseName="catalog" inverseEntity="ExTrack" syncable="YES"/>
     </entity>
@@ -19,6 +21,7 @@
     <entity name="ExTrack" representedClassName="IGREntityExTrack" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="catalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExCatalog" inverseName="tracks" inverseEntity="ExCatalog" syncable="YES"/>
@@ -30,8 +33,8 @@
     </entity>
     <elements>
         <element name="AppSettings" positionX="-738" positionY="-318" width="128" height="75"/>
-        <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="103"/>
-        <element name="ExTrack" positionX="-272" positionY="-252" width="128" height="120"/>
+        <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="133"/>
+        <element name="ExTrack" positionX="-272" positionY="-252" width="128" height="133"/>
         <element name="ExVideoCatalog" positionX="-738" positionY="-135" width="128" height="88"/>
         <element name="ExChanel" positionX="-504" positionY="-349" width="128" height="103"/>
     </elements>

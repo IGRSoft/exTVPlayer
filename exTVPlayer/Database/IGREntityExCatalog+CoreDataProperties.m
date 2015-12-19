@@ -15,6 +15,8 @@
 
 @dynamic itemId;
 @dynamic name;
+@dynamic imgUrl;
+@dynamic orderId;
 @dynamic tracks;
 @dynamic chanel;
 

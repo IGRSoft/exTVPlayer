@@ -32,7 +32,7 @@
                                     <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="e42-cZ-efR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEt-0E-7Ie" propertyAccessControl="nonLocalizable">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEt-0E-7Ie">
                                 <rect key="frame" x="695" y="60" width="531" height="50"/>
                                 <attributedString key="attributedText">
                                     <fragment content="http://www.ex.ua/">
@@ -43,15 +43,15 @@
                                     </fragment>
                                     <fragment content="94195016">
                                         <attributes>
-                                            <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="28" name="HelveticaNeue"/>
+                                            <color key="NSColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="28" name="HelveticaNeue-Bold"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-sO-Rah">
-                                <rect key="frame" x="500" y="360" width="920" height="700"/>
+                                <rect key="frame" x="500" y="360" width="920" height="622"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8Yq-dC-2OX">
                                     <size key="itemSize" width="300" height="75"/>
@@ -92,6 +92,7 @@
                                         <connections>
                                             <outlet property="backgroundView" destination="Pdb-bS-CiQ" id="btx-xo-KU0"/>
                                             <outlet property="title" destination="Pmq-xS-Dlo" id="xqu-6V-eeM"/>
+                                            <segue destination="fJe-F3-V2o" kind="show" identifier="showChanel" id="gEk-2O-Nr2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -106,12 +107,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-0p-on4">
+                                <rect key="frame" x="885" y="1007" width="150" height="53"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="LANG"/>
+                                <connections>
+                                    <action selector="onChangeLanguage:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="x8R-hD-sOe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="catalogTextField" destination="hxx-IK-k2R" id="l12-oX-MJv"/>
                         <outlet property="chanels" destination="GKm-sO-Rah" id="7oR-VU-Js7"/>
+                        <outlet property="languageButton" destination="PT2-0p-on4" id="5ZG-yE-16b"/>
                         <outlet property="nextButton" destination="806-21-3HV" id="j6F-BV-mgr"/>
                     </connections>
                 </viewController>
@@ -188,6 +198,70 @@
             </objects>
             <point key="canvasLocation" x="2317" y="355"/>
         </scene>
+        <!--Chanel View Controller-->
+        <scene sceneID="pk4-VW-pwL">
+            <objects>
+                <collectionViewController id="fJe-F3-V2o" customClass="IGRCChanelViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cC0-WZ-Srx">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="10" id="OwP-oH-rPx">
+                            <size key="itemSize" width="420" height="600"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRCatalogCell" id="CnY-NU-09F" customClass="IGRCatalogCell">
+                                <rect key="frame" x="20" y="20" width="420" height="600"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9V-7d-kia">
+                                            <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zqV-mV-8Nv">
+                                                    <rect key="frame" x="35" y="8" width="350" height="432"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZs-fq-fd4">
+                                                    <rect key="frame" x="8" y="448" width="404" height="144"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="backgroundView" destination="g9V-7d-kia" id="JHT-pP-37T"/>
+                                    <outlet property="image" destination="zqV-mV-8Nv" id="o24-Eq-BF4"/>
+                                    <outlet property="title" destination="JZs-fq-fd4" id="ytR-gs-aR1"/>
+                                    <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="stc-s6-1Oz"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="fJe-F3-V2o" id="0fR-8g-iIK"/>
+                            <outlet property="delegate" destination="fJe-F3-V2o" id="fP5-Iw-z9J"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <outlet property="catalogs" destination="cC0-WZ-Srx" id="agg-v3-QRw"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Peb-2b-ufw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="281" y="1691"/>
+        </scene>
         <!--Media View Controller-->
         <scene sceneID="K56-Ut-ovB">
             <objects>
@@ -255,4 +329,7 @@
             <point key="canvasLocation" x="4397" y="347"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="e42-cZ-efR"/>
+    </inferredMetricsTieBreakers>
 </document>

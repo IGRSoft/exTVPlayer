@@ -79,6 +79,10 @@
 		A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
 		A569ED681C2581E1004EF247 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
 		A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
+		A569ED6F1C25D0D7004EF247 /* IGRCChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */; };
+		A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
+		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
+		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
@@ -122,7 +126,70 @@
 			remoteGlobalIDString = 7D1329581BA304D900BE647E;
 			remoteInfo = TVVLCKit;
 		};
+		A569EE031C25D8FD004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 53761325155AD0D5005750A4;
+			remoteInfo = SDWebImage;
+		};
+		A569EE051C25D8FD004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 537D95C117ECC1FE0097C263;
+			remoteInfo = "SDWebImage+WebP";
+		};
+		A569EE071C25D8FD004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 531041E0157EAFA400BBABC3;
+			remoteInfo = "SDWebImage+MKAnnotation";
+		};
+		A569EE091C25D8FD004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4A2CADFF1AB4BB5300B6BC39;
+			remoteInfo = WebImage;
+		};
+		A569EE0B1C25D8FD004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00733A4C1BC487C000A5A117;
+			remoteInfo = "WebImage tvOS";
+		};
+		A569EE0D1C25D927004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 00733A4B1BC487C000A5A117;
+			remoteInfo = "WebImage tvOS";
+		};
+		A569EE111C25D935004EF247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 00733A4B1BC487C000A5A117;
+			remoteInfo = "WebImage tvOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A569EE131C25D935004EF247 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MobileVLCKit.xcodeproj; sourceTree = "<group>"; };
@@ -277,6 +344,11 @@
 		A569ED661C2581E1004EF247 /* IGREntityExChanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExChanel.m; sourceTree = "<group>"; };
 		A569ED691C25889C004EF247 /* IGRChanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelCell.h; sourceTree = "<group>"; };
 		A569ED6A1C25889C004EF247 /* IGRChanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelCell.m; sourceTree = "<group>"; };
+		A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController.h; sourceTree = "<group>"; };
+		A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCChanelViewController.m; sourceTree = "<group>"; };
+		A569ED701C25D683004EF247 /* IGRCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogCell.h; sourceTree = "<group>"; };
+		A569ED711C25D683004EF247 /* IGRCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogCell.m; sourceTree = "<group>"; };
+		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -296,6 +368,7 @@
 				A51F3B0D1C231EE700F6080A /* CoreData.framework in Frameworks */,
 				A51F388C1C23157D00F6080A /* CoreText.framework in Frameworks */,
 				A51F38871C23156B00F6080A /* CoreAudio.framework in Frameworks */,
+				A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */,
 				A51F38881C23156B00F6080A /* CoreGraphics.framework in Frameworks */,
 				A51F38891C23156B00F6080A /* CoreMedia.framework in Frameworks */,
 				A51F388A1C23156B00F6080A /* CoreVideo.framework in Frameworks */,
@@ -313,6 +386,7 @@
 		A51F38301C22C50A00F6080A /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A569ED731C25D8FC004EF247 /* SDWebImage */,
 				A51F3B6A1C23223900F6080A /* Library */,
 				A51F38651C22F4DA00F6080A /* RaptureXML */,
 				A51F38311C22C54500F6080A /* VLCKit */,
@@ -585,8 +659,30 @@
 				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
 				A569ED691C25889C004EF247 /* IGRChanelCell.h */,
 				A569ED6A1C25889C004EF247 /* IGRChanelCell.m */,
+				A569ED701C25D683004EF247 /* IGRCatalogCell.h */,
+				A569ED711C25D683004EF247 /* IGRCatalogCell.m */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		A569ED731C25D8FC004EF247 /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */,
+			);
+			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		A569EDB61C25D8FD004EF247 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A569EE041C25D8FD004EF247 /* libSDWebImage.a */,
+				A569EE061C25D8FD004EF247 /* libSDWebImage+WebP.a */,
+				A569EE081C25D8FD004EF247 /* libSDWebImage+MKAnnotation.a */,
+				A569EE0A1C25D8FD004EF247 /* WebImage.framework */,
+				A569EE0C1C25D8FD004EF247 /* WebImage.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A5E81BCE1C22B72D00EABFC5 = {
@@ -618,6 +714,8 @@
 				A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */,
 				A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */,
 				A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */,
+				A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */,
+				A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
 				A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */,
 				A51F386E1C23091200F6080A /* IGRMediaViewController.h */,
@@ -659,11 +757,14 @@
 				A5E81BD31C22B72D00EABFC5 /* Sources */,
 				A5E81BD41C22B72D00EABFC5 /* Frameworks */,
 				A5E81BD51C22B72D00EABFC5 /* Resources */,
+				A569EE131C25D935004EF247 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A569EE0E1C25D927004EF247 /* PBXTargetDependency */,
 				A51F38421C22C57900F6080A /* PBXTargetDependency */,
+				A569EE121C25D935004EF247 /* PBXTargetDependency */,
 			);
 			name = exTVPlayer;
 			productName = exTVPlayer;
@@ -702,6 +803,10 @@
 					ProductGroup = A51F38331C22C56A00F6080A /* Products */;
 					ProjectRef = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
 				},
+				{
+					ProductGroup = A569EDB61C25D8FD004EF247 /* Products */;
+					ProjectRef = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -739,6 +844,41 @@
 			remoteRef = A51F383F1C22C56A00F6080A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A569EE041C25D8FD004EF247 /* libSDWebImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSDWebImage.a;
+			remoteRef = A569EE031C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A569EE061C25D8FD004EF247 /* libSDWebImage+WebP.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSDWebImage+WebP.a";
+			remoteRef = A569EE051C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A569EE081C25D8FD004EF247 /* libSDWebImage+MKAnnotation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSDWebImage+MKAnnotation.a";
+			remoteRef = A569EE071C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A569EE0A1C25D8FD004EF247 /* WebImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WebImage.framework;
+			remoteRef = A569EE091C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A569EE0C1C25D8FD004EF247 /* WebImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WebImage.framework;
+			remoteRef = A569EE0B1C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -768,6 +908,7 @@
 				A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */,
 				A51F3BF61C23223900F6080A /* MagicalRecordStack+Actions.m in Sources */,
 				A51F3BD31C23223900F6080A /* NSNumber+MagicalDataImport.m in Sources */,
+				A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */,
 				A51F3BE01C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */,
 				A51F3BE81C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m in Sources */,
@@ -809,6 +950,7 @@
 				A51F3BE71C23223900F6080A /* NSArray+MagicalRecord.m in Sources */,
 				A51F3BD81C23223900F6080A /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A51F3BDA1C23223900F6080A /* NSManagedObject+MagicalFetching.m in Sources */,
+				A569ED6F1C25D0D7004EF247 /* IGRCChanelViewController.m in Sources */,
 				A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */,
 				A51F3BE91C23223900F6080A /* NSError+MagicalRecordErrorHandling.m in Sources */,
 				A51F3BD91C23223900F6080A /* NSManagedObject+MagicalDataImport.m in Sources */,
@@ -832,6 +974,16 @@
 			isa = PBXTargetDependency;
 			name = TVVLCKit;
 			targetProxy = A51F38411C22C57900F6080A /* PBXContainerItemProxy */;
+		};
+		A569EE0E1C25D927004EF247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WebImage tvOS";
+			targetProxy = A569EE0D1C25D927004EF247 /* PBXContainerItemProxy */;
+		};
+		A569EE121C25D935004EF247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WebImage tvOS";
+			targetProxy = A569EE111C25D935004EF247 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

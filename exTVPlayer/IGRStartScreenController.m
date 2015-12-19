@@ -8,6 +8,7 @@
 
 #import "IGRStartScreenController.h"
 #import "IGRCatalogViewController.h"
+#import "IGRCChanelViewController.h"
 
 #import "IGREXParser.h"
 #import "IGREntityAppSettings.h"
@@ -22,10 +23,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *catalogTextField;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *chanels;
+@property (weak, nonatomic) IBOutlet UIButton *languageButton;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSMutableArray *sectionChanges;
 @property (strong, nonatomic) NSMutableArray *itemChanges;
+
+@property (strong, nonatomic) NSArray *languages;
 
 @end
 
@@ -33,12 +37,20 @@
 
 - (void)viewDidLoad
 {
+	self.languages = @[
+					   @{@"id": @(IGRVideoCategory_Rus), @"langString": @"Рус"},
+					   @{@"id": @(IGRVideoCategory_Ukr), @"langString": @"Укр"},
+					   @{@"id": @(IGRVideoCategory_Eng), @"langString": @"En"},
+					   @{@"id": @(IGRVideoCategory_Esp), @"langString": @"Esp"},
+					   @{@"id": @(IGRVideoCategory_De), @"langString": @"DE"},
+					   @{@"id": @(IGRVideoCategory_Pl), @"langString": @"Pl"}
+					   ];
+	
 	[super viewDidLoad];
 	
-	IGREntityAppSettings *settings = [self appSettings];
-	[IGREXParser parseVideoCatalogContent:settings.videoLanguageId.stringValue];
-	
 	self.chanels.backgroundColor = [UIColor clearColor];
+	
+	[self updateViewForLanguage];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,6 +76,49 @@
 #pragma mark - Public
 
 #pragma mark - Privat
+
+- (IBAction)onChangeLanguage:(id)sender
+{
+	IGREntityAppSettings *settings = [self appSettings];
+	NSNumber *langId = settings.videoLanguageId;
+	
+	NSUInteger pos = [self.languages indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		BOOL result = [obj[@"id"] isEqualToNumber:langId];
+		*stop = result;
+		
+		return result;
+	}];
+	
+	pos = ((pos + 1) == self.languages.count) ? 0 : ++pos;
+	
+	NSDictionary *newLanguage = self.languages[pos];
+	settings.videoLanguageId = newLanguage[@"id"];
+	
+	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	
+	[self updateViewForLanguage];
+}
+
+- (void)updateViewForLanguage
+{
+	_fetchedResultsController = nil;
+	
+	IGREntityAppSettings *settings = [self appSettings];
+	NSNumber *langId = settings.videoLanguageId;
+	[IGREXParser parseVideoCatalogContent:langId.stringValue];
+	
+	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+		
+		return [evaluatedObject[@"id"] isEqualToNumber:langId];
+	}];
+	
+	NSString *langString = [[self.languages filteredArrayUsingPredicate:predicate] firstObject][@"langString"];
+	
+	[self.languageButton setTitle:langString forState:UIControlStateNormal];
+	
+	[self.chanels reloadData];
+}
 
 - (IGREntityAppSettings*)appSettings
 {
@@ -101,6 +156,15 @@
 		
 		[catalogViewController setCatalogId:self.catalogId];
 	}
+	else if ([segue.identifier isEqualToString:@"showChanel"])
+	{
+		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
+		
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.chanels.indexPathsForSelectedItems.firstObject.row + self.chanels.indexPathsForSelectedItems.firstObject.section)];
+		IGREntityExChanel *chanel = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+		
+		[catalogViewController setChanel:chanel];
+	}
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -136,25 +200,11 @@
 	if ([previouslyFocusedCell isKindOfClass:[IGRChanelCell class]])
 	{
 		[previouslyFocusedCell setHighlighted:NO];
-		[UIView animateWithDuration:0.1
-							  delay:0
-							options:(UIViewAnimationOptionAllowUserInteraction)
-						 animations:^{
-							 [previouslyFocusedCell.backgroundView setBackgroundColor:[UIColor whiteColor]];
-						 }
-						 completion:nil ];
 	}
 	
 	if ([nextFocusedCell isKindOfClass:[IGRChanelCell class]])
 	{
-		[previouslyFocusedCell setHighlighted:YES];
-		[UIView animateWithDuration:0.1
-							  delay:0
-							options:(UIViewAnimationOptionAllowUserInteraction)
-						 animations:^{
-							 [nextFocusedCell.backgroundView setBackgroundColor:[UIColor colorWithRed:213/255.0f green:232/255.0f blue:255/255.0f alpha:1]];
-						 }
-						 completion:nil];
+		[nextFocusedCell setHighlighted:YES];
 	}
 	
 	return YES;
@@ -260,4 +310,5 @@
 		_itemChanges = nil;
 	}];
 }
+
 @end

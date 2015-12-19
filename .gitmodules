@@ -7,3 +7,6 @@
 [submodule "Submodules/MagicalRecord"]
 	path = Submodules/MagicalRecord
 	url = https://github.com/magicalpanda/MagicalRecord.git
+[submodule "Submodules/SDWebImage"]
+	path = Submodules/SDWebImage
+	url = https://github.com/rs/SDWebImage.git

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *position;
 @property (nullable, nonatomic, retain) NSNumber *status;
+@property (nullable, nonatomic, retain) NSNumber *orderId;
 @property (nullable, nonatomic, retain) IGREntityExCatalog *catalog;
 
 @end
