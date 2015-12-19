@@ -65,15 +65,20 @@
 		A51F3BF91C23223900F6080A /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCD1C23223900F6080A /* SQLiteMagicalRecordStack.m */; };
 		A51F3BFA1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */; };
 		A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
-		A51F3C151C2329D800F6080A /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C141C2329D800F6080A /* NSManagedObject+MRExtensions.m */; };
-		A51F3C221C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C171C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.m */; };
-		A51F3C231C232AF200F6080A /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C191C232AF200F6080A /* IGREntityAppSettings.m */; };
-		A51F3C241C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C1B1C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.m */; };
-		A51F3C251C232AF200F6080A /* IGREntityExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C1D1C232AF200F6080A /* IGREntityExTrack.m */; };
-		A51F3C261C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C1F1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m */; };
-		A51F3C271C232AF200F6080A /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3C211C232AF200F6080A /* IGREntityExCatalog.m */; };
 		A569ECCD1C24455D004EF247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A569ECCF1C24455D004EF247 /* InfoPlist.strings */; };
 		A569ECD31C24459E004EF247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A569ECD51C24459E004EF247 /* Localizable.strings */; };
+		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
+		A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
+		A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
+		A569ED5D1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */; };
+		A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED511C257CA7004EF247 /* IGREntityExTrack.m */; };
+		A569ED5F1C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */; };
+		A569ED601C257CA7004EF247 /* IGREntityExVideoCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */; };
+		A569ED611C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */; };
+		A569ED621C257CA7004EF247 /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */; };
+		A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
+		A569ED681C2581E1004EF247 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
+		A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
@@ -237,20 +242,6 @@
 		A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteWithSavingContextMagicalRecordStack.m; sourceTree = "<group>"; };
 		A51F3BFB1C23245000F6080A /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
-		A51F3C131C2329D800F6080A /* NSManagedObject+MRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+MRExtensions.h"; sourceTree = "<group>"; };
-		A51F3C141C2329D800F6080A /* NSManagedObject+MRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MRExtensions.m"; sourceTree = "<group>"; };
-		A51F3C161C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityAppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A51F3C171C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityAppSettings+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A51F3C181C232AF200F6080A /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
-		A51F3C191C232AF200F6080A /* IGREntityAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityAppSettings.m; sourceTree = "<group>"; };
-		A51F3C1A1C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExTrack+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A51F3C1B1C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExTrack+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A51F3C1C1C232AF200F6080A /* IGREntityExTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExTrack.h; sourceTree = "<group>"; };
-		A51F3C1D1C232AF200F6080A /* IGREntityExTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExTrack.m; sourceTree = "<group>"; };
-		A51F3C1E1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExCatalog+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A51F3C1F1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExCatalog+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A51F3C201C232AF200F6080A /* IGREntityExCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExCatalog.h; sourceTree = "<group>"; };
-		A51F3C211C232AF200F6080A /* IGREntityExCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExCatalog.m; sourceTree = "<group>"; };
 		A569ECCC1C244528004EF247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A569ECCE1C24455D004EF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A569ECD01C244561004EF247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -262,6 +253,30 @@
 		A569ECDA1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		A569ECDB1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A569ECDC1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
+		A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityAppSettings.m; sourceTree = "<group>"; };
+		A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityAppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityAppSettings+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A569ED4C1C257CA7004EF247 /* IGREntityExCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExCatalog.h; sourceTree = "<group>"; };
+		A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExCatalog.m; sourceTree = "<group>"; };
+		A569ED4E1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExCatalog+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExCatalog+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A569ED501C257CA7004EF247 /* IGREntityExTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExTrack.h; sourceTree = "<group>"; };
+		A569ED511C257CA7004EF247 /* IGREntityExTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExTrack.m; sourceTree = "<group>"; };
+		A569ED521C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExTrack+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExTrack+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A569ED541C257CA7004EF247 /* IGREntityExVideoCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExVideoCatalog.h; sourceTree = "<group>"; };
+		A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExVideoCatalog.m; sourceTree = "<group>"; };
+		A569ED561C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExVideoCatalog+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExVideoCatalog+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A569ED581C257CA7004EF247 /* NSManagedObject+MRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+MRExtensions.h"; sourceTree = "<group>"; };
+		A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MRExtensions.m"; sourceTree = "<group>"; };
+		A569ED631C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityExChanel+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExChanel+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A569ED651C2581E1004EF247 /* IGREntityExChanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExChanel.h; sourceTree = "<group>"; };
+		A569ED661C2581E1004EF247 /* IGREntityExChanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExChanel.m; sourceTree = "<group>"; };
+		A569ED691C25889C004EF247 /* IGRChanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelCell.h; sourceTree = "<group>"; };
+		A569ED6A1C25889C004EF247 /* IGRChanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelCell.m; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -365,20 +380,28 @@
 		A51F388D1C23191B00F6080A /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				A51F3C131C2329D800F6080A /* NSManagedObject+MRExtensions.h */,
-				A51F3C141C2329D800F6080A /* NSManagedObject+MRExtensions.m */,
-				A51F3C161C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.h */,
-				A51F3C171C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.m */,
-				A51F3C181C232AF200F6080A /* IGREntityAppSettings.h */,
-				A51F3C191C232AF200F6080A /* IGREntityAppSettings.m */,
-				A51F3C1A1C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.h */,
-				A51F3C1B1C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.m */,
-				A51F3C1C1C232AF200F6080A /* IGREntityExTrack.h */,
-				A51F3C1D1C232AF200F6080A /* IGREntityExTrack.m */,
-				A51F3C1E1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.h */,
-				A51F3C1F1C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m */,
-				A51F3C201C232AF200F6080A /* IGREntityExCatalog.h */,
-				A51F3C211C232AF200F6080A /* IGREntityExCatalog.m */,
+				A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */,
+				A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */,
+				A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */,
+				A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */,
+				A569ED4C1C257CA7004EF247 /* IGREntityExCatalog.h */,
+				A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */,
+				A569ED4E1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.h */,
+				A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */,
+				A569ED501C257CA7004EF247 /* IGREntityExTrack.h */,
+				A569ED511C257CA7004EF247 /* IGREntityExTrack.m */,
+				A569ED521C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.h */,
+				A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */,
+				A569ED541C257CA7004EF247 /* IGREntityExVideoCatalog.h */,
+				A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */,
+				A569ED561C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.h */,
+				A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */,
+				A569ED581C257CA7004EF247 /* NSManagedObject+MRExtensions.h */,
+				A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */,
+				A569ED631C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.h */,
+				A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */,
+				A569ED651C2581E1004EF247 /* IGREntityExChanel.h */,
+				A569ED661C2581E1004EF247 /* IGREntityExChanel.m */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -555,6 +578,17 @@
 			path = MagicalRecordStack;
 			sourceTree = "<group>";
 		};
+		A569ED6C1C25B062004EF247 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
+				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
+				A569ED691C25889C004EF247 /* IGRChanelCell.h */,
+				A569ED6A1C25889C004EF247 /* IGRChanelCell.m */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
@@ -579,14 +613,13 @@
 			children = (
 				A51F388D1C23191B00F6080A /* Database */,
 				A51F385E1C22F2BD00F6080A /* Helpers */,
+				A569ED6C1C25B062004EF247 /* CustomView */,
 				A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */,
 				A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */,
 				A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
 				A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */,
-				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
-				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
 				A51F386E1C23091200F6080A /* IGRMediaViewController.h */,
 				A51F386F1C23091200F6080A /* IGRMediaViewController.m */,
 				A5E81BDA1C22B72D00EABFC5 /* Supporting Files */,
@@ -727,18 +760,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A569ED611C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
 				A51F3BF21C23223900F6080A /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */,
 				A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */,
+				A569ED681C2581E1004EF247 /* IGREntityExChanel.m in Sources */,
 				A51F3BFA1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */,
+				A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */,
 				A51F3BF61C23223900F6080A /* MagicalRecordStack+Actions.m in Sources */,
 				A51F3BD31C23223900F6080A /* NSNumber+MagicalDataImport.m in Sources */,
 				A51F3BE01C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */,
 				A51F3BE81C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m in Sources */,
 				A51F3BF41C23223900F6080A /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */,
-				A51F3C261C232AF200F6080A /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */,
 				A51F3BEA1C23223900F6080A /* MagicalMigrationManager.m in Sources */,
 				A51F3BD01C23223900F6080A /* MagicalImportFunctions.m in Sources */,
+				A569ED5F1C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A51F3BD61C23223900F6080A /* NSString+MagicalDataImport.m in Sources */,
 				A51F3BD11C23223900F6080A /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				A51F3BF91C23223900F6080A /* SQLiteMagicalRecordStack.m in Sources */,
@@ -748,7 +785,8 @@
 				A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */,
 				A51F3BD41C23223900F6080A /* NSObject+MagicalDataImport.m in Sources */,
 				A51F3BDF1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m in Sources */,
-				A51F3C231C232AF200F6080A /* IGREntityAppSettings.m in Sources */,
+				A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
+				A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */,
 				A51F3BE41C23223900F6080A /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
 				A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */,
 				A51F3BE21C23223900F6080A /* NSPersistentStore+MagicalRecord.m in Sources */,
@@ -758,19 +796,20 @@
 				A51F3BEB1C23223900F6080A /* MagicalRecord+Actions.m in Sources */,
 				A51F3BD21C23223900F6080A /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				A51F3BEC1C23223900F6080A /* MagicalRecord+Options.m in Sources */,
-				A51F3C251C232AF200F6080A /* IGREntityExTrack.m in Sources */,
 				A51F3BF31C23223900F6080A /* ClassicSQLiteMagicalRecordStack.m in Sources */,
 				A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */,
+				A569ED601C257CA7004EF247 /* IGREntityExVideoCatalog.m in Sources */,
 				A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */,
+				A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */,
 				A51F3BDC1C23223900F6080A /* NSManagedObject+MagicalRecord.m in Sources */,
 				A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */,
 				A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */,
-				A51F3C221C232AF200F6080A /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
+				A569ED5D1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
+				A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
 				A51F3BE71C23223900F6080A /* NSArray+MagicalRecord.m in Sources */,
 				A51F3BD81C23223900F6080A /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A51F3BDA1C23223900F6080A /* NSManagedObject+MagicalFetching.m in Sources */,
 				A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */,
-				A51F3C271C232AF200F6080A /* IGREntityExCatalog.m in Sources */,
 				A51F3BE91C23223900F6080A /* NSError+MagicalRecordErrorHandling.m in Sources */,
 				A51F3BD91C23223900F6080A /* NSManagedObject+MagicalDataImport.m in Sources */,
 				A51F3BE11C23223900F6080A /* NSManagedObjectModel+MagicalRecord.m in Sources */,
@@ -779,9 +818,8 @@
 				A51F3BF71C23223900F6080A /* MagicalRecordStack.m in Sources */,
 				A51F3BDB1C23223900F6080A /* NSManagedObject+MagicalFinders.m in Sources */,
 				A51F3BF51C23223900F6080A /* InMemoryMagicalRecordStack.m in Sources */,
-				A51F3C151C2329D800F6080A /* NSManagedObject+MRExtensions.m in Sources */,
+				A569ED621C257CA7004EF247 /* NSManagedObject+MRExtensions.m in Sources */,
 				A51F3BF11C23223900F6080A /* AutoMigratingMagicalRecordStack.m in Sources */,
-				A51F3C241C232AF200F6080A /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A51F3BEF1C23223900F6080A /* MagicalRecordInternal.m in Sources */,
 				A51F3BE51C23223900F6080A /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */,
 			);

@@ -9,5 +9,7 @@
 @interface IGREXParser : NSObject
 
 + (void)parseCatalogContent:(NSString *)aCatalogId;
++ (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId;
++ (void)parseChanelContent:(NSString *)aChanelId;
 
 @end

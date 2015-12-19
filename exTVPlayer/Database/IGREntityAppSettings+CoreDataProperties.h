@@ -2,7 +2,7 @@
 //  IGREntityAppSettings+CoreDataProperties.h
 //  exTVPlayer
 //
-//  Created by Vitalii Parovishnyk on 12/17/15.
+//  Created by Vitalii Parovishnyk on 12/19/15.
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface IGREntityAppSettings (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *lastPlayedCatalog;
+@property (nullable, nonatomic, retain) NSNumber *videoLanguageId;
 
 @end
 

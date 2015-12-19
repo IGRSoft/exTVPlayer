@@ -21,3 +21,13 @@ typedef NS_ENUM(NSUInteger, IGRTrackState)
 	IGRTrackState_Half,
 	IGRTrackState_Done
 };
+
+typedef NS_ENUM(NSUInteger, IGRVideoCategory)
+{
+	IGRVideoCategory_Rus = 23775,
+	IGRVideoCategory_Ukr = 80934,
+	IGRVideoCategory_Eng = 80925,
+	IGRVideoCategory_Esp = 187077,
+	IGRVideoCategory_De  = 45205,
+	IGRVideoCategory_Pl  = 968815,
+};

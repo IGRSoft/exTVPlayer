@@ -1,5 +1,5 @@
 //
-//  IGREntityExCatalog.h
+//  IGREntityExChanel.h
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 12/19/15.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class IGREntityExChanel, IGREntityExTrack;
+@class IGREntityExCatalog, IGREntityExVideoCatalog;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface IGREntityExCatalog : NSManagedObject
+@interface IGREntityExChanel : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "IGREntityExCatalog+CoreDataProperties.h"
+#import "IGREntityExChanel+CoreDataProperties.h"

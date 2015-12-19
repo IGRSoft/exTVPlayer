@@ -1,5 +1,5 @@
 //
-//  IGREntityExCatalog+CoreDataProperties.m
+//  IGREntityExChanel+CoreDataProperties.m
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 12/19/15.
@@ -9,13 +9,13 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "IGREntityExCatalog+CoreDataProperties.h"
+#import "IGREntityExChanel+CoreDataProperties.h"
 
-@implementation IGREntityExCatalog (CoreDataProperties)
+@implementation IGREntityExChanel (CoreDataProperties)
 
 @dynamic itemId;
 @dynamic name;
-@dynamic tracks;
-@dynamic chanel;
+@dynamic catalogs;
+@dynamic videoCatalog;
 
 @end

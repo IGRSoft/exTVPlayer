@@ -2,11 +2,19 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
     <entity name="AppSettings" representedClassName="IGREntityAppSettings" syncable="YES">
         <attribute name="lastPlayedCatalog" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoLanguageId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="ExCatalog" representedClassName="IGREntityExCatalog" syncable="YES">
         <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chanel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExChanel" inverseName="catalogs" inverseEntity="ExChanel" syncable="YES"/>
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExTrack" inverseName="catalog" inverseEntity="ExTrack" syncable="YES"/>
+    </entity>
+    <entity name="ExChanel" representedClassName="IGREntityExChanel" syncable="YES">
+        <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="catalogs" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ExCatalog" inverseName="chanel" inverseEntity="ExCatalog" syncable="YES"/>
+        <relationship name="videoCatalog" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ExVideoCatalog" inverseName="chanels" inverseEntity="ExVideoCatalog" syncable="YES"/>
     </entity>
     <entity name="ExTrack" representedClassName="IGREntityExTrack" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,9 +23,16 @@
         <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="catalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExCatalog" inverseName="tracks" inverseEntity="ExCatalog" syncable="YES"/>
     </entity>
+    <entity name="ExVideoCatalog" representedClassName="IGREntityExVideoCatalog" syncable="YES">
+        <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chanels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExChanel" inverseName="videoCatalog" inverseEntity="ExChanel" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="AppSettings" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="ExCatalog" positionX="-54" positionY="0" width="128" height="90"/>
-        <element name="ExTrack" positionX="-36" positionY="18" width="128" height="120"/>
+        <element name="AppSettings" positionX="-738" positionY="-318" width="128" height="75"/>
+        <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="103"/>
+        <element name="ExTrack" positionX="-272" positionY="-252" width="128" height="120"/>
+        <element name="ExVideoCatalog" positionX="-738" positionY="-135" width="128" height="88"/>
+        <element name="ExChanel" positionX="-504" positionY="-349" width="128" height="103"/>
     </elements>
 </model>

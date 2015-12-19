@@ -119,11 +119,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Public
+
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition
 {
 	self.currentTrack = aPosition;
 	self.playlist = aPlayList;
 }
+
+#pragma mark - Privat
 
 - (void)playNextTrack:(id)sender
 {
@@ -165,26 +169,9 @@
 		[self toggleControlsVisible];
 	}
 	
-	[self _resetIdleTimer];
+	[self resetIdleTimer];
 	
 	self.skipState = NO;
-}
-
-- (void)toggleControlsVisible
-{
-	BOOL controlsHidden = !self.controllerPanel.hidden;
-	
-	CGFloat secs = controlsHidden ? 0.3 : 0.1;
-	[UIView animateWithDuration:secs animations:^{
-		
-		self.controllerPanel.alpha = self.titlePanel.alpha = controlsHidden ? 0.0 : 0.8;
-		
-    } completion:^(BOOL finished) {
-		
-		self.controllerPanel.hidden = self.titlePanel.hidden = controlsHidden;
-    }];
-	
-//	self.toolbar.hidden = controlsHidden;
 }
 
 - (void)togglePlay
@@ -199,17 +186,79 @@
 	}
 }
 
-- (void)_resetIdleTimer
+- (void)closePlayback:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)updatePosition:(CGFloat)xDiff
+{
+	if (xDiff == 0)
+	{
+		return;
+	}
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setPosition:) object:nil];
+	
+	self.updatingPosition = YES;
+	
+	CGFloat newPosition = self.progressPosition.progress + xDiff / 10000;
+	
+	newPosition = MIN(1.0, newPosition);
+	newPosition = MAX(0.0, newPosition);
+	
+	self.progressPosition.progress = newPosition;
+	
+	[self performSelector:@selector(setPosition:) withObject:@(newPosition) afterDelay:1.0];
+}
+
+- (void)setPosition:(NSNumber *)newPos
+{
+	[_mediaplayer setPosition:newPos.floatValue];
+	
+	if (self.controllerPanel.isHidden)
+	{
+		[self toggleControlsVisible];
+	}
+	
+	[self resetIdleTimer];
+	
+	self.updatingPosition = NO;
+}
+
+- (void)toggleControlsVisible
+{
+	BOOL controlsHidden = !self.controllerPanel.hidden;
+	
+	CGFloat secs = controlsHidden ? 0.3 : 0.1;
+	[UIView animateWithDuration:secs animations:^{
+		
+		self.controllerPanel.alpha = self.titlePanel.alpha = controlsHidden ? 0.0 : 0.8;
+		
+	} completion:^(BOOL finished) {
+		
+		self.controllerPanel.hidden = self.titlePanel.hidden = controlsHidden;
+	}];
+}
+
+#pragma mark - Timer
+
+- (void)resetIdleTimer
 {
 	if (!_idleTimer)
+	{
 		_idleTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
 													  target:self
 													selector:@selector(idleTimerExceeded)
 													userInfo:nil
 													 repeats:NO];
-	else {
+	}
+	else
+	{
 		if (fabs([_idleTimer.fireDate timeIntervalSinceNow]) < 5.0)
+		{
 			[_idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:5.0]];
+		}
 	}
 }
 
@@ -221,11 +270,6 @@
 	{
 		[self toggleControlsVisible];
 	}
-}
-
-- (void)closePlayback:(id)sender
-{
-	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - VLCMediaPlayerDelegate
@@ -260,13 +304,15 @@
 	}
 }
 
--(void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+#pragma mark - Touches
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
 	if (presses.anyObject.type == UIPressTypeSelect)
 	{
 		if (self.controllerPanel.isHidden)
 		{
-			[self _resetIdleTimer];
+			[self resetIdleTimer];
 		}
 		
 		[self toggleControlsVisible];
@@ -297,7 +343,10 @@
 		{
 			CGFloat xDiff = location.x - self.lastTouchLocation.x;
 
-			[self updatePosition:xDiff];
+			if (self.updatingPosition || (!self.updatingPosition && (xDiff < -5.0 || xDiff > 5.0)))
+			{
+				[self updatePosition:xDiff];
+			}
 			
 			self.lastTouchLocation = location;
 		}
@@ -307,40 +356,7 @@
 	}
 }
 
-- (void)updatePosition:(CGFloat)xDiff
-{
-	if (xDiff == 0)
-	{
-		return;
-	}
-	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setPosition:) object:nil];
-	
-	self.updatingPosition = YES;
-	
-	CGFloat newPosition = self.progressPosition.progress + xDiff / 10000;
-	
-	newPosition = MIN(1.0, newPosition);
-	newPosition = MAX(0.0, newPosition);
-	
-	self.progressPosition.progress = newPosition;
-	
-	[self performSelector:@selector(setPosition:) withObject:@(newPosition) afterDelay:1.0];
-}
-
-- (void)setPosition:(NSNumber *)newPos
-{
-	[_mediaplayer setPosition:newPos.floatValue];
-
-	if (self.controllerPanel.isHidden)
-	{
-		[self toggleControlsVisible];
-	}
-	
-	[self _resetIdleTimer];
-	
-	self.updatingPosition = NO;
-}
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
