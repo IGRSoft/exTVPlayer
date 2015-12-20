@@ -34,6 +34,11 @@
 																			withValue:aCatalogId];
 	catalog.name = title;
 	
+	[catalog.tracks enumerateObjectsUsingBlock:^(IGREntityExTrack * _Nonnull obj, BOOL * _Nonnull stop) {
+		
+		[obj MR_deleteEntity];
+	}];
+	
 	__block NSUInteger orderId = 0;
 	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
 		NSString *title = [[node child:@"title"] text];
@@ -114,6 +119,13 @@
 																		 withValue:aChanelId];
 	chanel.name = title;
 	
+	NSSet<IGREntityExCatalog *> *catalogs = chanel.catalogs;
+	
+	[catalogs enumerateObjectsUsingBlock:^(IGREntityExCatalog * _Nonnull obj, BOOL * _Nonnull stop) {
+		
+		obj.orderId = @(obj.orderId.integerValue * -1);
+	}];
+	
 	__block NSUInteger orderId = 0;
 	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
 		NSString *title = [[node child:@"title"] text];
@@ -145,6 +157,19 @@
 		
 		catalog.orderId = @(orderId++);
 		
+	}];
+	
+	NSArray *newCatalogs = [IGREntityExCatalog MR_findByAttribute:@"chanel"
+												   withValue:chanel
+												  andOrderBy:@"orderId"
+												   ascending:NO];
+	
+	[newCatalogs enumerateObjectsUsingBlock:^(IGREntityExCatalog * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		if (obj.orderId.integerValue < 0)
+		{
+			obj.orderId = @(orderId++);
+		}
 	}];
 	
 	if ([MR_DEFAULT_CONTEXT hasChanges])
