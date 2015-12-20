@@ -135,19 +135,29 @@
 	NSString *title = [[[xmlDocument child:@"channel"] child:@"title"] text];
 	chanel.name = title;
 	
-	NSSet<IGREntityExCatalog *> *catalogs = chanel.catalogs;
-	
-	[catalogs enumerateObjectsUsingBlock:^(IGREntityExCatalog * _Nonnull obj, BOOL * _Nonnull stop) {
+	NSMutableArray *items = [NSMutableArray array];
+	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
 		
-		obj.orderId = @(obj.orderId.integerValue * -1);
+		[items addObject:node];
 	}];
 	
-	__block NSUInteger orderId = 0;
-	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
+	NSInteger itemsCount = items.count - 1;
+	
+	NSNumber *lastId = [IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"];
+	__block NSUInteger orderId = lastId.integerValue;
+	
+	for (RXMLElement *node in [items reverseObjectEnumerator])
+	{
 		NSString *title = [[node child:@"title"] text];
 		NSString *itemId = [[node child:@"guid"] text];
 		
 		IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+		
+		if (catalog.orderId.integerValue == (orderId - itemsCount--))
+		{
+			continue; //same position;
+		}
+		
 		if (!catalog.imgUrl)
 		{
 			NSError *error = nil;
@@ -165,28 +175,13 @@
 				NSString *imgUrl = [node text];
 				imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
 				catalog.imgUrl = imgUrl;
-				[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 			}];
 		}
 		catalog.name = title;
 		catalog.chanel = chanel;
 		
 		catalog.orderId = @(orderId++);
-		
-	}];
-	
-	NSArray *newCatalogs = [IGREntityExCatalog MR_findByAttribute:@"chanel"
-												   withValue:chanel
-												  andOrderBy:@"orderId"
-												   ascending:NO];
-	
-	[newCatalogs enumerateObjectsUsingBlock:^(IGREntityExCatalog * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		
-		if (obj.orderId.integerValue < 0)
-		{
-			obj.orderId = @(orderId++);
-		}
-	}];
+	}
 	
 	chanel.timestamp = [NSDate date];
 	

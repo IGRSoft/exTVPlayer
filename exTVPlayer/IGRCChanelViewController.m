@@ -183,7 +183,7 @@
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															  withPredicate:predicate
 																   sortedBy:@"orderId"
-																  ascending:YES];
+																  ascending:NO];
 	}
 	
 	return _fetchedResultsController;
