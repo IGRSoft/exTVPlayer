@@ -17,6 +17,17 @@
 
 + (void)parseCatalogContent:(NSString *)aCatalogId
 {
+	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+																			withValue:aCatalogId];
+	
+	if (catalog.timestamp)
+	{
+		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 1)
+		{
+			return; //skip update
+		}
+	}
+	
 	NSError *error = nil;
 	NSStringEncoding encoding;
 	NSString *xspfUrl = [NSString stringWithFormat:@"http://www.ex.ua/playlist/%@.xspf", aCatalogId];
@@ -29,15 +40,7 @@
 	NSParameterAssert(xmlDocument.isValid);
 	
 	NSString *title = [[xmlDocument child:@"title"] text];
-	
-	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
-																			withValue:aCatalogId];
 	catalog.name = title;
-	
-	[catalog.tracks enumerateObjectsUsingBlock:^(IGREntityExTrack * _Nonnull obj, BOOL * _Nonnull stop) {
-		
-		[obj MR_deleteEntity];
-	}];
 	
 	__block NSUInteger orderId = 0;
 	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
@@ -60,14 +63,23 @@
 		++orderId;
 	}];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	catalog.timestamp = [NSDate date];
+	
+	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 }
 
 + (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId
 {
+	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+																						   withValue:aVideoCatalogId];
+	if (videoCatalog.timestamp)
+	{
+		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 1)
+		{
+			return; //skip update
+		}
+	}
+	
 	NSError *error = nil;
 	NSStringEncoding encoding;
 	NSString *xspfUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aVideoCatalogId];
@@ -80,9 +92,6 @@
 	NSParameterAssert(xmlDocument.isValid);
 	
 	NSString *title = [[[xmlDocument child:@"channel"] child:@"title"] text];
-	
-	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
-																						   withValue:aVideoCatalogId];
 	videoCatalog.name = title;
 	
 	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
@@ -94,14 +103,24 @@
 		chanel.videoCatalog = videoCatalog;
 	}];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	videoCatalog.timestamp = [NSDate date];
+	
+	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+
 }
 
 + (void)parseChanelContent:(NSString *)aChanelId
 {
+	IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																		 withValue:aChanelId];
+	if (chanel.timestamp)
+	{
+		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < 1)
+		{
+			return; //skip update
+		}
+	}
+	
 	NSError *error = nil;
 	NSStringEncoding encoding;
 	NSString *rrsUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aChanelId];
@@ -114,9 +133,6 @@
 	NSParameterAssert(xmlDocument.isValid);
 	
 	NSString *title = [[[xmlDocument child:@"channel"] child:@"title"] text];
-	
-	IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
-																		 withValue:aChanelId];
 	chanel.name = title;
 	
 	NSSet<IGREntityExCatalog *> *catalogs = chanel.catalogs;
@@ -172,10 +188,19 @@
 		}
 	}];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	chanel.timestamp = [NSDate date];
+	
+	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+}
+
++ (NSInteger)hoursBetweenCurrwntDate:(NSDate *)aDate
+{
+	NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+																   fromDate:aDate
+																	 toDate:[NSDate date]
+																	options:0];
+	
+	return components.hour;
 }
 
 @end
