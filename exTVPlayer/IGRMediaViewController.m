@@ -325,12 +325,18 @@
 {
 	if (presses.anyObject.type == UIPressTypeSelect)
 	{
-		if (self.controllerPanel.isHidden)
+		[self togglePlay];
+		
+		if (_mediaplayer.isPlaying && !self.controllerPanel.hidden)
 		{
-			[self resetIdleTimer];
+			//do nothing
+		}
+		else
+		{
+			[self toggleControlsVisible];
 		}
 		
-		[self toggleControlsVisible];
+		[self resetIdleTimer];
 	}
 	else if (presses.anyObject.type == UIPressTypePlayPause)
 	{
