@@ -158,19 +158,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-jF-CHu" propertyAccessControl="nonLocalizable">
-                                                    <rect key="frame" x="68" y="8" width="1828" height="50"/>
+                                                    <rect key="frame" x="83" y="8" width="1813" height="50"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Tu-jY-jQ2">
-                                                    <rect key="frame" x="28" y="17" width="32" height="32"/>
-                                                </imageView>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-U9-ZGd" customClass="DACircularProgressView">
+                                                    <rect key="frame" x="30" y="18" width="30" height="30"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="title" destination="zgm-jF-CHu" id="dRf-QE-rC9"/>
-                                            <outlet property="viewStatus" destination="5Tu-jY-jQ2" id="nVh-kW-93H"/>
+                                            <outlet property="trackStatus" destination="Q8P-U9-ZGd" id="SCG-eW-rvW"/>
                                             <segue destination="xDf-oz-I9d" kind="show" identifier="playPlaylistPosition" id="cq6-lq-HAb"/>
                                         </connections>
                                     </tableViewCell>
@@ -340,6 +341,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="e42-cZ-efR"/>
+        <segue reference="stc-s6-1Oz"/>
     </inferredMetricsTieBreakers>
 </document>

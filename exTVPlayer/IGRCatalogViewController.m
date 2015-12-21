@@ -13,6 +13,7 @@
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
 #import "IGRExItemCell.h"
+#import "DACircularProgressView.h"
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate>
 
@@ -126,21 +127,12 @@
 	
 	cell.title.text = track.name;
 	
-	UIImage *img = nil;
-	switch (track.status.integerValue)
+	CGFloat trackPosition = track.position.floatValue;
+	if (track.status.integerValue == IGRTrackState_Done)
 	{
-		case IGRTrackState_Done:
-			img = [UIImage imageNamed:@"done"];
-			break;
-		case IGRTrackState_Half:
-			img = [UIImage imageNamed:@"half"];
-			break;
-		case IGRTrackState_New:
-		default:
-			img = [UIImage imageNamed:@"new"];
-			break;
+		trackPosition = 1.0;
 	}
-	cell.viewStatus.image = img;
+	cell.trackStatus.progress = 1.0 - trackPosition;
 }
 
 #pragma mark - Fetched results controller

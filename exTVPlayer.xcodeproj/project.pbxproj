@@ -89,6 +89,7 @@
 		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
 		A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF31C22B7A500EABFC5 /* Main.storyboard */; };
+		A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +362,8 @@
 		A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E81BF41C22B7A500EABFC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5E81BF71C22B7A500EABFC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,8 +392,9 @@
 		A51F38301C22C50A00F6080A /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A5F3720C1C282FD500AB1395 /* DACircularProgress */,
 				A569ED731C25D8FC004EF247 /* SDWebImage */,
-				A51F3B6A1C23223900F6080A /* Library */,
+				A51F3B6A1C23223900F6080A /* MagicalRecord */,
 				A51F38651C22F4DA00F6080A /* RaptureXML */,
 				A51F38311C22C54500F6080A /* VLCKit */,
 			);
@@ -483,7 +487,7 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
-		A51F3B6A1C23223900F6080A /* Library */ = {
+		A51F3B6A1C23223900F6080A /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
 				A51F3B6B1C23223900F6080A /* Categories */,
@@ -493,7 +497,7 @@
 				A51F3BB91C23223900F6080A /* MagicalRecord.h */,
 				A51F3BBA1C23223900F6080A /* MagicalRecordStack */,
 			);
-			name = Library;
+			name = MagicalRecord;
 			path = MagicalRecord/Library;
 			sourceTree = "<group>";
 		};
@@ -752,6 +756,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A5F3720C1C282FD500AB1395 /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */,
+				A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */,
+			);
+			name = DACircularProgress;
+			path = DACircularProgress/DACircularProgress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -966,6 +980,7 @@
 				A51F3BF71C23223900F6080A /* MagicalRecordStack.m in Sources */,
 				A51F3BDB1C23223900F6080A /* NSManagedObject+MagicalFinders.m in Sources */,
 				A51F3BF51C23223900F6080A /* InMemoryMagicalRecordStack.m in Sources */,
+				A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */,
 				A569ED621C257CA7004EF247 /* NSManagedObject+MRExtensions.m in Sources */,
 				A51F3BF11C23223900F6080A /* AutoMigratingMagicalRecordStack.m in Sources */,
 				A51F3BEF1C23223900F6080A /* MagicalRecordInternal.m in Sources */,

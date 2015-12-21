@@ -7,10 +7,11 @@
 //
 
 @class IGRExTrack;
+@class DACircularProgressView;
 
 @interface IGRExItemCell : UITableViewCell
 
 @property (weak  , nonatomic) IBOutlet UILabel *title;
-@property (weak  , nonatomic) IBOutlet UIImageView *viewStatus;
+@property (weak  , nonatomic) IBOutlet DACircularProgressView *trackStatus;
 
 @end

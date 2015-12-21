@@ -10,3 +10,6 @@
 [submodule "Submodules/SDWebImage"]
 	path = Submodules/SDWebImage
 	url = https://github.com/rs/SDWebImage.git
+[submodule "Submodules/DACircularProgress"]
+	path = Submodules/DACircularProgress
+	url = https://github.com/danielamitay/DACircularProgress.git
