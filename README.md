@@ -42,6 +42,6 @@ This application is free open source software and licensed under the LGPL 2.1.
 
 
 [screen1]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/1.png?raw=true "Screenshot #1"
-[screen2]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/1.png?raw=true "Screenshot #2"
-[screen3]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/1.png?raw=true "Screenshot #3"
-[screen4]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/1.png?raw=true "Screenshot #4"
+[screen2]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/2.png?raw=true "Screenshot #2"
+[screen3]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/3.png?raw=true "Screenshot #3"
+[screen4]: https://github.com/IGRSoft/exTVPlayer/blob/master/Screenshots/4.png?raw=true "Screenshot #4"
