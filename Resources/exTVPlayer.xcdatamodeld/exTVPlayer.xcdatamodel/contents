@@ -17,8 +17,8 @@
         <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="catalogs" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ExCatalog" inverseName="chanel" inverseEntity="ExCatalog" syncable="YES"/>
-        <relationship name="videoCatalog" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ExVideoCatalog" inverseName="chanels" inverseEntity="ExVideoCatalog" syncable="YES"/>
+        <relationship name="catalogs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExCatalog" inverseName="chanel" inverseEntity="ExCatalog" syncable="YES"/>
+        <relationship name="videoCatalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExVideoCatalog" inverseName="chanels" inverseEntity="ExVideoCatalog" syncable="YES"/>
     </entity>
     <entity name="ExTrack" representedClassName="IGREntityExTrack" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
