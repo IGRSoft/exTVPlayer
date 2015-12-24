@@ -13,11 +13,10 @@
 
 - (void)awakeFromNib
 {
-	self.trackStatus.roundedCorners = YES;
+	self.trackStatus.thicknessRatio = 1.0;
 	self.trackStatus.clockwiseProgress = NO;
-	self.trackStatus.trackTintColor = [UIColor whiteColor];
-	self.trackStatus.innerTintColor = [UIColor colorWithWhite:0.900 alpha:1.000];
-	self.trackStatus.progressTintColor  = [UIColor colorWithRed:0.756 green:0.856 blue:1.000 alpha:1.000];
+	self.trackStatus.trackTintColor = [UIColor colorWithRed:0.999 green:1.000 blue:0.895 alpha:1.000];
+	self.trackStatus.progressTintColor  = [UIColor colorWithRed:0.500 green:0.675 blue:1.000 alpha:1.000];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
