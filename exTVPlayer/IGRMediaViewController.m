@@ -264,12 +264,12 @@
 			[_mediaplayer pause];
 		}
 		
-		UIAlertController *view = [UIAlertController alertControllerWithTitle:@"Track Properties"
+		UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Track Properties", @"")
 																	  message:@""
 															   preferredStyle:UIAlertControllerStyleActionSheet];
 		
 		__weak typeof(self) weak = self;
-		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:@"Audio Track"
+		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:NSLocalizedString(@"Audio Tracks", @"")
 															 style:UIAlertActionStyleDefault
 														   handler:^(UIAlertAction * action) {
 															   
@@ -279,7 +279,7 @@
 															   
 														   }];
 		
-		UIAlertAction* aspectRatios = [UIAlertAction actionWithTitle:@"Video Aspect Ratios"
+		UIAlertAction* aspectRatios = [UIAlertAction actionWithTitle:NSLocalizedString(@"Video Aspect Ratios", @"")
 															   style:UIAlertActionStyleDefault
 															 handler:^(UIAlertAction * action) {
 																 
@@ -288,7 +288,7 @@
 																 [weak showVideoAspectRatiosProperties];
 															 }];
 		
-		UIAlertAction* subtitles = [UIAlertAction actionWithTitle:@"Subtitles"
+		UIAlertAction* subtitles = [UIAlertAction actionWithTitle:NSLocalizedString(@"Subtitles", @"")
 															style:UIAlertActionStyleDefault
 															 handler:^(UIAlertAction * action) {
 																 
@@ -297,8 +297,8 @@
 																 [weak showSubtitlesProperties];
 															 }];
 		
-		UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
-														 style:UIAlertActionStyleDefault
+		UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+														 style:UIAlertActionStyleCancel
 													   handler:^(UIAlertAction * action) {
 														   
 														   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
@@ -318,7 +318,7 @@
 
 - (void)showAudioTrackProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:@"Audio Track"
+	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Audio Tracks", @"")
 																  message:@""
 														   preferredStyle:UIAlertControllerStyleActionSheet];
 	
@@ -341,8 +341,8 @@
 		[view addAction:audioTrack];
 	}
 	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
-													 style:UIAlertActionStyleDefault
+	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+													 style:UIAlertActionStyleCancel
 												   handler:^(UIAlertAction * action)
 							 {
 								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
@@ -357,7 +357,7 @@
 
 - (void)showVideoAspectRatiosProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:@"Aspect Ratios"
+	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Video Aspect Ratios", @"")
 																  message:@""
 														   preferredStyle:UIAlertControllerStyleActionSheet];
 	
@@ -390,8 +390,8 @@
 		[view addAction:audioTrack];
 	}
 	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
-													 style:UIAlertActionStyleDefault
+	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+													 style:UIAlertActionStyleCancel
 												   handler:^(UIAlertAction * action)
 							 {
 								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
@@ -406,7 +406,7 @@
 
 - (void)showSubtitlesProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:@"Subtitles"
+	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subtitles", @"")
 																  message:@""
 														   preferredStyle:UIAlertControllerStyleActionSheet];
 	
@@ -429,8 +429,8 @@
 		[view addAction:audioTrack];
 	}
 	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
-													 style:UIAlertActionStyleDefault
+	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+													 style:UIAlertActionStyleCancel
 												   handler:^(UIAlertAction * action)
 							 {
 								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
