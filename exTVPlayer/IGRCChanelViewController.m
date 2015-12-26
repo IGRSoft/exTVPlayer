@@ -28,6 +28,8 @@
 @property (strong, nonatomic) NSMutableArray *sectionChanges;
 @property (strong, nonatomic) NSMutableArray *itemChanges;
 
+@property (strong, nonatomic) NSIndexPath *lastSelectedItem;
+
 @end
 
 @implementation IGRCChanelViewController
@@ -36,29 +38,14 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    
-    // Do any additional setup after loading the view.
+    self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
-//	NSIndexPath *dbIndexPath = [[self.catalogs indexPathsForSelectedItems] firstObject];
-//	if (!dbIndexPath)
-//	{
-//		dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//	}
-//	
-//	IGRCatalogCell *cell = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:dbIndexPath];;
-//
-//	[self.catalogs selectItemAtIndexPath:dbIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-//	
-//	[cell setHighlighted:YES];
+	[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -170,7 +157,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSLog(@"Selected item!");
+	self.lastSelectedItem = indexPath;
 }
 
 #pragma mark - Fetched results controller

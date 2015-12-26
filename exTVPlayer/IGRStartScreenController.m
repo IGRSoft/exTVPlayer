@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) NSArray *languages;
 
+@property (strong, nonatomic) NSIndexPath *lastSelectedItem;
+
 @end
 
 @implementation IGRStartScreenController
@@ -49,6 +51,7 @@
 	[super viewDidLoad];
 	
 	self.chanels.backgroundColor = [UIColor clearColor];
+	self.lastSelectedItem = nil;
 	
 	[self updateViewForLanguage];
 }
@@ -60,6 +63,11 @@
 	IGREntityAppSettings *settings = [self appSettings];
 	self.catalogTextField.text = self.catalogId = settings.lastPlayedCatalog;
 	self.nextButton.enabled = self.catalogId.length > 0;
+	
+	if (self.lastSelectedItem)
+	{
+		[[self.chanels cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -162,6 +170,7 @@
 {	
 	if ([segue.identifier isEqualToString:@"openCatalog"])
 	{
+		self.lastSelectedItem = nil;
 		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -228,7 +237,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Selected item!");
+	self.lastSelectedItem = indexPath;
 }
 
 #pragma mark - Fetched results controller
