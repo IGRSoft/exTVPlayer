@@ -311,14 +311,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AK-q5-btt">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="92"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="83"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf2-sc-Zp5" propertyAccessControl="nonLocalizable">
-                                        <rect key="frame" x="8" y="18" width="1904" height="54"/>
+                                        <rect key="frame" x="8" y="8" width="1904" height="54"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="ArrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="HMD-fJ-FBy">
+                                        <rect key="frame" x="935" y="45" width="50" height="50"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -340,7 +343,10 @@
             <point key="canvasLocation" x="4397" y="347"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ArrowDown" width="50" height="50"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="stc-s6-1Oz"/>
+        <segue reference="e42-cZ-efR"/>
     </inferredMetricsTieBreakers>
 </document>
