@@ -50,7 +50,7 @@
 	[super viewDidLoad];
 	
 	/* populate array of supported aspect ratios (there are more!) */
-	self.aspectRatios = @[@"DEFAULT", @"4:3", @"16:9", @"16:10"];
+	self.aspectRatios = @[NSLocalizedString(@"Default", @""), @"16:9", @"4:3", @"1:1", @"16:10", @"2.21:1", @"2.35:1", @"2.39:1", @"5:4"];
 	
 	self.controllerPanel.hidden = self.titlePanel.hidden = YES;
 	self.controllerPanel.alpha = self.titlePanel.alpha = 0.0;
