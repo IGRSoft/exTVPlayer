@@ -15,7 +15,7 @@
 #import "IGRExItemCell.h"
 #import "DACircularProgressView.h"
 
-@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate>
+@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IGREntityExCatalog *catalog;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (assign, nonatomic) BOOL needUpdateSelection;
 
 - (IBAction)onTouchFavorit:(id)sender;
 
@@ -49,6 +50,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+
+	self.needUpdateSelection = YES;
 	
 	if (self.catalog)
 	{
@@ -80,6 +83,39 @@
 	return [self.tableView cellForRowAtIndexPath:indexPath];
 }
 
+#pragma mark - UICollectionViewDelegate
+#pragma mark -
+
+- (BOOL)tableView:(UITableView *)tableView canFocusRowAtIndexPath:(NSIndexPath *)aIndexPath
+{
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+	
+	if (self.needUpdateSelection)
+	{
+		return indexPath.section == aIndexPath.section;
+	}
+	
+	return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context
+{
+	IGRExItemCell *previouslyFocusedCell = (IGRExItemCell *)context.previouslyFocusedView;
+	IGRExItemCell *nextFocusedCell = (IGRExItemCell *)context.nextFocusedView;
+	
+	if ([previouslyFocusedCell isKindOfClass:[IGRExItemCell class]])
+	{
+		[previouslyFocusedCell setHighlighted:NO];
+	}
+	
+	if ([nextFocusedCell isKindOfClass:[IGRExItemCell class]])
+	{
+		[nextFocusedCell setHighlighted:YES];
+	}
+	
+	return YES;
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -107,7 +143,8 @@
 			self.catalog.isFavorit = @(![self.catalog.isFavorit boolValue]);
 		}
 		
-		UIImage *image = [self.catalog.isFavorit boolValue] ? [UIImage imageNamed:@"favorit-on"] : [UIImage imageNamed:@"favorit-off"];
+		UIImage *image = [self.catalog.isFavorit boolValue] ?	[UIImage imageNamed:@"favorit-on"] :
+																[UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
 	}
 }
@@ -130,6 +167,14 @@
 {
 	IGRExItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IGRExItemCell" forIndexPath:indexPath];
 	[self configureCell:cell atIndexPath:indexPath];
+	
+	if (indexPath == [[tableView indexPathsForVisibleRows] lastObject])
+	{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			self.needUpdateSelection = NO;
+		});
+	}
+	
 	return cell;
 }
 

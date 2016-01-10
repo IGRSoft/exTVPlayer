@@ -28,7 +28,7 @@
 
 @property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
 @property (strong, nonatomic) NSArray *playlist;
-@property (assign, nonatomic) NSUInteger currentTrack;
+@property (assign, nonatomic) NSInteger currentTrack;
 
 @property (assign, nonatomic) IGRTrackProperties trakProperiesStatus;
 @property (strong, nonatomic) NSArray *aspectRatios;
@@ -82,6 +82,9 @@
 	[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
 	
 	[self playCurrentTrack];
+	
+	UIGestureRecognizer *gr = [[self.view gestureRecognizers] firstObject];
+	gr.allowedPressTypes = @[@(UIPressTypeLeftArrow), @(UIPressTypeRightArrow), @(UIPressTypePlayPause), @(UIPressTypeMenu)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -143,6 +146,19 @@
 	if ((self.currentTrack + 1) < self.playlist.count)
 	{
 		++self.currentTrack;
+		[self playCurrentTrack];
+	}
+	else
+	{
+		[self closePlayback];
+	}
+}
+
+- (void)playPreviousTrack:(id)sender
+{
+	if ((self.currentTrack - 1) >= 0)
+	{
+		--self.currentTrack;
 		[self playCurrentTrack];
 	}
 	else
@@ -531,6 +547,11 @@
 
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
+	if (self.trakProperiesStatus == IGRTrackProperties_None)
+	{
+		return;
+	}
+	
 	if (presses.anyObject.type == UIPressTypeSelect)
 	{
 		[self togglePlay];
@@ -550,9 +571,13 @@
 	{
 		[self togglePlay];
 	}
-	else if (presses.anyObject.type == UIPressTypeMenu)
+	else if (presses.anyObject.type == UIPressTypeLeftArrow)
 	{
-		[self closePlayback];
+		[self playPreviousTrack:nil];
+	}
+	else if (presses.anyObject.type == UIPressTypeRightArrow)
+	{
+		[self playNextTrack:nil];
 	}
 }
 

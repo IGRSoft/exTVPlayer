@@ -227,7 +227,6 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
-	
 	IGRChanelCell *previouslyFocusedCell = (IGRChanelCell *)context.previouslyFocusedView;
 	IGRChanelCell *nextFocusedCell = (IGRChanelCell *)context.nextFocusedView;
 	
