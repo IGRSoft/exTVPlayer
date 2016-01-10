@@ -192,6 +192,7 @@
 	}
 	else if ([segue.identifier isEqualToString:@"showFavoritChanel"])
 	{
+		self.lastSelectedItem = nil;
 		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
 		
 		dispatch_async(dispatch_get_main_queue(), ^{

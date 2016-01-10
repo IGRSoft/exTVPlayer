@@ -51,11 +51,15 @@
 	[self.catalogs addGestureRecognizer:lpgr];
 	
 	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
-	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
-	IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 	
-	[catalog setFavorit:[entityatalog.isFavorit boolValue]];
-	[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+	if (catalog)
+	{
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
+		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+		
+		[catalog setFavorit:[entityatalog.isFavorit boolValue]];
+		[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated

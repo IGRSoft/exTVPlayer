@@ -63,6 +63,26 @@
 		++orderId;
 	}];
 	
+	if (!catalog.imgUrl)
+	{
+		NSError *error = nil;
+		NSStringEncoding encoding;
+		NSString *rrsUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aCatalogId];
+		NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
+														 usedEncoding:&encoding
+																error:&error];
+		
+		RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
+		
+		NSParameterAssert(xmlDocument.isValid);
+		
+		[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
+			NSString *imgUrl = [node text];
+			imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
+			catalog.imgUrl = imgUrl;
+		}];
+	}
+	
 	catalog.timestamp = [NSDate date];
 	
 	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
