@@ -59,6 +59,9 @@
 		[self onTouchFavorit:nil];
 	}
 	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+	
 	[self.tableView reloadData];
 }
 
