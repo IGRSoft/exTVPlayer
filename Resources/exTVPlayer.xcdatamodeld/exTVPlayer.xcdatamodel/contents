@@ -6,6 +6,7 @@
     </entity>
     <entity name="ExCatalog" representedClassName="IGREntityExCatalog" syncable="YES">
         <attribute name="imgUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFavorit" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="itemId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -36,7 +37,7 @@
     </entity>
     <elements>
         <element name="AppSettings" positionX="-738" positionY="-318" width="128" height="75"/>
-        <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="150"/>
+        <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="165"/>
         <element name="ExChanel" positionX="-504" positionY="-349" width="128" height="120"/>
         <element name="ExTrack" positionX="-272" positionY="-252" width="128" height="133"/>
         <element name="ExVideoCatalog" positionX="-738" positionY="-135" width="128" height="105"/>

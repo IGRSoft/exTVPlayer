@@ -12,4 +12,6 @@
 
 - (void)setChanel:(IGREntityExChanel *)aChanel;
 
+- (void)showFavorit;
+
 @end

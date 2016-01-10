@@ -11,5 +11,8 @@
 @interface IGRCatalogCell : IGRTableViewCell
 
 @property (weak  , nonatomic) IBOutlet UIImageView *image;
+@property (assign, nonatomic) BOOL favorit;
+
+@property (assign, nonatomic, readonly) BOOL isHighlighted;
 
 @end

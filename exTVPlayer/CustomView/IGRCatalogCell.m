@@ -8,6 +8,32 @@
 
 #import "IGRCatalogCell.h"
 
+@interface IGRCatalogCell ()
+
+@property (weak  , nonatomic) IBOutlet UIImageView *isFavorit;
+
+@end
+
 @implementation IGRCatalogCell
+
+- (void)setHighlighted:(BOOL)highlighted
+{
+	if (_isHighlighted == highlighted)
+	{
+		return;
+	}
+	
+	_isHighlighted = highlighted;
+	
+	[super setHighlighted:highlighted];
+}
+
+- (void)setFavorit:(BOOL)isFavorit
+{
+	_favorit = isFavorit;
+	
+	self.isFavorit.image = isFavorit ? [UIImage imageNamed:@"favorit-on"] : [UIImage imageNamed:@"favorit-off"];
+	[self setNeedsDisplay];
+}
 
 @end

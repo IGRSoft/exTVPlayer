@@ -190,6 +190,15 @@
 			[catalogViewController setChanel:chanel];
 		});
 	}
+	else if ([segue.identifier isEqualToString:@"showFavoritChanel"])
+	{
+		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[catalogViewController showFavorit];
+		});
+	}
 }
 
 #pragma mark - UICollectionViewDataSource

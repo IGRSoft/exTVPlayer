@@ -18,17 +18,16 @@
 #import "IGREXParser.h"
 #import <WebImage/WebImage.h>
 
-@interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate>
+@interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *catalogs;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) IGREntityExChanel *chanel;
 
-@property (strong, nonatomic) NSMutableArray *sectionChanges;
-@property (strong, nonatomic) NSMutableArray *itemChanges;
-
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
+
+@property (assign, nonatomic) BOOL isShowFavorit;
 
 @end
 
@@ -45,6 +44,17 @@
 {
 	[super viewDidAppear:animated];
 	
+	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+										  initWithTarget:self action:@selector(handleLongPress:)];
+	lpgr.minimumPressDuration = 1.0; //seconds
+	lpgr.delegate = self;
+	[self.catalogs addGestureRecognizer:lpgr];
+	
+	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
+	IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+	
+	[catalog setFavorit:[entityatalog.isFavorit boolValue]];
 	[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
 }
 
@@ -54,6 +64,11 @@
 		
 		[obj setSelected:NO];
 	}];
+	
+	for (UIGestureRecognizer *gr in self.catalogs.gestureRecognizers)
+	{
+		[self.catalogs removeGestureRecognizer:gr];
+	}
 	
 	[super viewWillDisappear:animated];
 }
@@ -68,8 +83,14 @@
 
 - (void)setChanel:(IGREntityExChanel *)aChanel
 {
+	self.isShowFavorit = NO;
 	_chanel = aChanel;
 	[IGREXParser parseChanelContent:aChanel.itemId];
+}
+
+- (void)showFavorit
+{
+	self.isShowFavorit = YES;
 }
 
 #pragma mark - Privat
@@ -91,8 +112,8 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{	
 	if ([segue.identifier isEqualToString:@"openCatalog"])
 	{
 		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
@@ -130,6 +151,8 @@
 	[cell.image sd_setImageWithURL:[NSURL URLWithString:catalog.imgUrl]
 				  placeholderImage:nil];
 	
+	[cell setFavorit:[catalog.isFavorit boolValue]];
+	
 	return cell;
 }
 
@@ -138,7 +161,6 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
-	
 	IGRCatalogCell *previouslyFocusedCell = (IGRCatalogCell *)context.previouslyFocusedView;
 	IGRCatalogCell *nextFocusedCell = (IGRCatalogCell *)context.nextFocusedView;
 	
@@ -164,95 +186,59 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (_fetchedResultsController == nil)
+	if (_fetchedResultsController == nil && self.isShowFavorit)
 	{
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanel.itemId];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															  withPredicate:predicate
 																   sortedBy:@"orderId"
 																  ascending:NO];
 	}
+	else if (_fetchedResultsController == nil && !self.isShowFavorit)
+	{
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanel.itemId];
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+															   withPredicate:predicate
+																	sortedBy:@"orderId"
+																   ascending:NO];
+	}
 	
 	return _fetchedResultsController;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-	_sectionChanges = [[NSMutableArray alloc] init];
-	_itemChanges = [[NSMutableArray alloc] init];
-}
+#pragma mark - UIGestureRecognizerDelegate
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-		   atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-	NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-	change[@(type)] = @(sectionIndex);
-	[_sectionChanges addObject:change];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-	   atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-	  newIndexPath:(NSIndexPath *)newIndexPath
-{
-	NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-	switch(type) {
-		case NSFetchedResultsChangeInsert:
-			change[@(type)] = newIndexPath;
-			break;
-		case NSFetchedResultsChangeDelete:
-			change[@(type)] = indexPath;
-			break;
-		case NSFetchedResultsChangeUpdate:
-			change[@(type)] = indexPath;
-			break;
-		case NSFetchedResultsChangeMove:
-			change[@(type)] = @[indexPath, newIndexPath];
-			break;
+	if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+	{
+		NSIndexPath *indexPath = nil;
+		for (indexPath in [self.catalogs indexPathsForVisibleItems])
+		{
+			IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:indexPath];
+			if (catalog.isHighlighted)
+			{
+				NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
+				IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+				
+				entityatalog.isFavorit = @(!catalog.favorit);
+				[catalog setFavorit:[entityatalog.isFavorit boolValue]];
+				
+				self.lastSelectedItem = indexPath;
+				
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+					
+					[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+				});
+				
+				break;
+			}
+			else
+			{
+				indexPath = nil;
+			}
+		}
 	}
-	[_itemChanges addObject:change];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-	[self.catalogs performBatchUpdates:^{
-		for (NSDictionary *change in _sectionChanges) {
-			[change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-				NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-				switch(type) {
-					case NSFetchedResultsChangeInsert:
-						[self.catalogs insertSections:[NSIndexSet indexSetWithIndex:[obj unsignedIntegerValue]]];
-						break;
-					case NSFetchedResultsChangeDelete:
-						[self.catalogs deleteSections:[NSIndexSet indexSetWithIndex:[obj unsignedIntegerValue]]];
-						break;
-					default:
-						break;
-				}
-			}];
-		}
-		for (NSDictionary *change in _itemChanges) {
-			[change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-				NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-				switch(type) {
-					case NSFetchedResultsChangeInsert:
-						[self.catalogs insertItemsAtIndexPaths:@[obj]];
-						break;
-					case NSFetchedResultsChangeDelete:
-						[self.catalogs deleteItemsAtIndexPaths:@[obj]];
-						break;
-					case NSFetchedResultsChangeUpdate:
-						[self.catalogs reloadItemsAtIndexPaths:@[obj]];
-						break;
-					case NSFetchedResultsChangeMove:
-						[self.catalogs moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-						break;
-				}
-			}];
-		}
-	} completion:^(BOOL finished) {
-		_sectionChanges = nil;
-		_itemChanges = nil;
-	}];
 }
 
 @end

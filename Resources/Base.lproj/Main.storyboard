@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-sO-Rah">
-                                <rect key="frame" x="350" y="360" width="1220" height="622"/>
+                                <rect key="frame" x="350" y="360" width="1220" height="603"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8Yq-dC-2OX">
                                     <size key="itemSize" width="400" height="75"/>
@@ -112,8 +112,17 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFI-SF-UHd">
+                                <rect key="frame" x="744" y="979" width="400" height="86"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Favorit"/>
+                                <connections>
+                                    <segue destination="fJe-F3-V2o" kind="show" identifier="showFavoritChanel" id="6AP-ZQ-4Vr"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-0p-on4">
-                                <rect key="frame" x="885" y="1007" width="150" height="53"/>
+                                <rect key="frame" x="1500" y="985" width="400" height="75"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="LANG"/>
                                 <connections>
@@ -151,7 +160,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="IGRExItemCell" id="n3V-JD-V6d" customClass="IGRExItemCell">
-                                        <rect key="frame" x="0.0" y="54" width="1920" height="66"/>
+                                        <rect key="frame" x="0.0" y="199" width="1920" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n3V-JD-V6d" id="kig-lV-2na">
                                             <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
@@ -190,13 +199,25 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT5-Dp-i97">
+                                        <rect key="frame" x="1847" y="10" width="64" height="60"/>
+                                        <state key="normal" title="Button" image="favorit-off"/>
+                                        <connections>
+                                            <action selector="onTouchFavorit:" destination="WAl-RG-hb9" eventType="primaryActionTriggered" id="TT2-XD-tpa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="mLr-vW-cgY"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="catalogTitle" destination="AXw-fN-k8y" id="vnX-Br-SQD"/>
+                        <outlet property="favoritButton" destination="lT5-Dp-i97" id="Sjc-uB-pRP"/>
                         <outlet property="tableView" destination="hZy-T1-m3Y" id="OvP-Ob-9fa"/>
                     </connections>
                 </viewController>
@@ -241,6 +262,9 @@
                                                     <rect key="frame" x="178" y="192" width="64" height="64"/>
                                                     <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="favorit-off" translatesAutoresizingMaskIntoConstraints="NO" id="4YP-eV-Y5B">
+                                                    <rect key="frame" x="284" y="8" width="128" height="128"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -254,6 +278,7 @@
                                 <connections>
                                     <outlet property="backgroundView" destination="g9V-7d-kia" id="JHT-pP-37T"/>
                                     <outlet property="image" destination="zqV-mV-8Nv" id="o24-Eq-BF4"/>
+                                    <outlet property="isFavorit" destination="4YP-eV-Y5B" id="F5b-dw-LKP"/>
                                     <outlet property="progress" destination="wqW-Wp-agY" id="6rA-Oh-RMS"/>
                                     <outlet property="title" destination="JZs-fq-fd4" id="ytR-gs-aR1"/>
                                     <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="stc-s6-1Oz"/>
@@ -325,8 +350,10 @@
     </scenes>
     <resources>
         <image name="ArrowDown" width="50" height="50"/>
+        <image name="favorit-off" width="128" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e42-cZ-efR"/>
+        <segue reference="6AP-ZQ-4Vr"/>
+        <segue reference="stc-s6-1Oz"/>
     </inferredMetricsTieBreakers>
 </document>

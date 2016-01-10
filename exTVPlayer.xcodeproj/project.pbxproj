@@ -397,6 +397,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5097B701C4291C900159377 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */,
+				A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */,
+				A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */,
+				A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */,
+				A569ED4C1C257CA7004EF247 /* IGREntityExCatalog.h */,
+				A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */,
+				A569ED4E1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.h */,
+				A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */,
+				A569ED501C257CA7004EF247 /* IGREntityExTrack.h */,
+				A569ED511C257CA7004EF247 /* IGREntityExTrack.m */,
+				A569ED521C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.h */,
+				A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */,
+				A569ED541C257CA7004EF247 /* IGREntityExVideoCatalog.h */,
+				A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */,
+				A569ED561C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.h */,
+				A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */,
+				A569ED581C257CA7004EF247 /* NSManagedObject+MRExtensions.h */,
+				A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */,
+				A569ED631C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.h */,
+				A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */,
+				A569ED651C2581E1004EF247 /* IGREntityExChanel.h */,
+				A569ED661C2581E1004EF247 /* IGREntityExChanel.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		A51F38301C22C50A00F6080A /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,28 +498,8 @@
 		A51F388D1C23191B00F6080A /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */,
-				A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */,
-				A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */,
-				A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */,
-				A569ED4C1C257CA7004EF247 /* IGREntityExCatalog.h */,
-				A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */,
-				A569ED4E1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.h */,
-				A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */,
-				A569ED501C257CA7004EF247 /* IGREntityExTrack.h */,
-				A569ED511C257CA7004EF247 /* IGREntityExTrack.m */,
-				A569ED521C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.h */,
-				A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */,
-				A569ED541C257CA7004EF247 /* IGREntityExVideoCatalog.h */,
-				A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */,
-				A569ED561C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.h */,
-				A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */,
-				A569ED581C257CA7004EF247 /* NSManagedObject+MRExtensions.h */,
-				A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */,
-				A569ED631C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.h */,
-				A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */,
-				A569ED651C2581E1004EF247 /* IGREntityExChanel.h */,
-				A569ED661C2581E1004EF247 /* IGREntityExChanel.m */,
+				A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */,
+				A5097B701C4291C900159377 /* Entity */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -759,7 +768,6 @@
 		A5E81BF11C22B7A500EABFC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */,
 				A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */,
 				A5E81BF31C22B7A500EABFC5 /* Main.storyboard */,
 				A5E81BF71C22B7A500EABFC5 /* Info.plist */,
@@ -1211,7 +1219,8 @@
 				A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */,
 			);
 			currentVersion = A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */;
-			path = exTVPlayer.xcdatamodeld;
+			name = exTVPlayer.xcdatamodeld;
+			path = ../../Resources/exTVPlayer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
