@@ -7,6 +7,7 @@
 //
 
 #import "IGRMediaViewController.h"
+#import "IGRMediaProgressView.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -14,19 +15,15 @@
 
 #import "IGREntityExTrack.h"
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate>
+@interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate, IGRMediaProgressDelegate>
 {
 	NSTimer *_idleTimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *movieView;
-@property (weak, nonatomic) IBOutlet UIView *controllerPanel;
+@property (weak, nonatomic) IBOutlet IGRMediaProgressView *mediaProgressView;
 @property (weak, nonatomic) IBOutlet UIView *titlePanel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *time;
-@property (weak, nonatomic) IBOutlet UILabel *remainingTime;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressPosition;
 
 @property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
 @property (strong, nonatomic) NSArray *playlist;
@@ -52,12 +49,13 @@
 	/* populate array of supported aspect ratios (there are more!) */
 	self.aspectRatios = @[NSLocalizedString(@"Default", @""), @"16:9", @"4:3", @"1:1", @"16:10", @"2.21:1", @"2.35:1", @"2.39:1", @"5:4"];
 	
-	self.controllerPanel.hidden = self.titlePanel.hidden = YES;
-	self.controllerPanel.alpha = self.titlePanel.alpha = 0.0;
+	self.mediaProgressView.hidden = self.titlePanel.hidden = YES;
+	self.mediaProgressView.alpha = self.titlePanel.alpha = 0.0;
 	
 	self.updatingPosition = NO;
 	self.skipState = NO;
 	self.trakProperiesStatus = IGRTrackProperties_None;
+	self.mediaProgressView.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -164,16 +162,16 @@
 	
 	[_mediaplayer setPosition:track.position.floatValue];
 	[_mediaplayer play];
-	
+		
 	if (track.position.floatValue > 0.02 && track.position.floatValue < 0.98)
 	{
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			
-			[self setPosition:track.position];
+			[self setMediaPosition:track.position.floatValue];
 		});
 	}
 	
-	if (self.controllerPanel.isHidden)
+	if (self.mediaProgressView.isHidden)
 	{
 		[self toggleControlsVisible];
 	}
@@ -207,47 +205,43 @@
 	{
 		return;
 	}
-	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setPosition:) object:nil];
-	
+		
 	self.updatingPosition = YES;
 	
-	CGFloat newPosition = self.progressPosition.progress + xDiff / 10000;
+	CGFloat newPosition = self.mediaProgressView.progress + xDiff / 10000;
 	
 	newPosition = MIN(1.0, newPosition);
 	newPosition = MAX(0.0, newPosition);
 	
-	self.progressPosition.progress = newPosition;
+	[self.mediaProgressView setNextTimePosition:newPosition];
 	
-	[self performSelector:@selector(setPosition:) withObject:@(newPosition) afterDelay:1.0];
-}
-
-- (void)setPosition:(NSNumber *)newPos
-{
-	[_mediaplayer setPosition:newPos.floatValue];
-	
-	if (self.controllerPanel.isHidden)
+	if (self.mediaProgressView.isHidden)
 	{
 		[self toggleControlsVisible];
 	}
 	
 	[self resetIdleTimer];
+}
+
+- (void)setMediaPosition:(CGFloat)newPos
+{
+	[_mediaplayer setPosition:newPos];
 	
 	self.updatingPosition = NO;
 }
 
 - (void)toggleControlsVisible
 {
-	BOOL controlsHidden = !self.controllerPanel.hidden;
+	BOOL controlsHidden = !self.mediaProgressView.hidden;
 	
 	CGFloat secs = controlsHidden ? 0.3 : 0.1;
 	[UIView animateWithDuration:secs animations:^{
 		
-		self.controllerPanel.alpha = self.titlePanel.alpha = controlsHidden ? 0.0 : 0.8;
+		self.mediaProgressView.alpha = self.titlePanel.alpha = controlsHidden ? 0.0 : 0.8;
 		
 	} completion:^(BOOL finished) {
 		
-		self.controllerPanel.hidden = self.titlePanel.hidden = controlsHidden;
+		self.mediaProgressView.hidden = self.titlePanel.hidden = controlsHidden;
 	}];
 }
 
@@ -468,7 +462,7 @@
 {
 	_idleTimer = nil;
 	
-	if (!self.controllerPanel.isHidden)
+	if (!self.mediaProgressView.isHidden)
 	{
 		[self toggleControlsVisible];
 	}
@@ -525,6 +519,13 @@
 	}
 }
 
+#pragma mark - IGRMediaProgressDelegate
+
+- (void)updatedProgressPosition:(CGFloat)aProgressPosition
+{
+	[self setMediaPosition:aProgressPosition];
+}
+
 #pragma mark - Touches
 
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
@@ -533,7 +534,7 @@
 	{
 		[self togglePlay];
 		
-		if (_mediaplayer.isPlaying && !self.controllerPanel.hidden)
+		if (_mediaplayer.isPlaying && !self.mediaProgressView.hidden)
 		{
 			//do nothing
 		}
@@ -553,6 +554,13 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 	self.lastTouchLocation = CGPointMake(-1, -1);
+	
+	if (self.updatingPosition)
+	{
+		[NSObject cancelPreviousPerformRequestsWithTarget:self.mediaProgressView
+												 selector:@selector(processNewPosition)
+												   object:nil];
+	}
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -575,16 +583,19 @@
 		{
 			CGFloat xDiff = location.x - self.lastTouchLocation.x;
 			
-			if (self.updatingPosition || (!self.updatingPosition && (xDiff < -5.0 || xDiff > 5.0)))
+			if (self.updatingPosition || (!self.updatingPosition && (xDiff < -35.0 || xDiff > 35.0)))
 			{
 				[self updatePosition:xDiff];
 			}
 			
-			CGFloat yDiff = location.y - self.lastTouchLocation.y;
-			
-			if (yDiff > 25.0)
+			if (!self.updatingPosition)
 			{
-				[self showTrackProperties];
+				CGFloat yDiff = location.y - self.lastTouchLocation.y;
+				
+				if (yDiff > 45.0)
+				{
+					[self showTrackProperties];
+				}
 			}
 			
 			self.lastTouchLocation = location;
@@ -595,22 +606,28 @@
 	}
 }
 
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
+{
+	if (self.updatingPosition)
+	{
+		[self.mediaProgressView performSelector:@selector(processNewPosition) withObject:nil afterDelay:1.0];
+	}
+}
+
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (!self.updatingPosition)
+	CGFloat position = [_mediaplayer position];
+	[self.mediaProgressView setTimePosition:position];
+	
+	if (position > 1.0)
 	{
-		self.progressPosition.progress = [_mediaplayer position];
-		
-		if (self.progressPosition.progress > 1.0)
-		{
-			[_mediaplayer stop];
-		}
+		[_mediaplayer stop];
 	}
 	
-	self.remainingTime.text = [[_mediaplayer remainingTime] stringValue];
-	self.time.text = [[_mediaplayer time] stringValue];
+	[self.mediaProgressView setRemainingTime:[[_mediaplayer remainingTime] stringValue]];
+	[self.mediaProgressView setTime:[[_mediaplayer time] stringValue]];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)aNotification

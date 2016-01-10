@@ -289,25 +289,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RcV-rA-beM">
-                                <rect key="frame" x="0.0" y="1008" width="1920" height="72"/>
-                                <subviews>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNn-mb-6BL">
-                                        <rect key="frame" x="148" y="32" width="1624" height="10"/>
-                                    </progressView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kB3-dH-JT0" propertyAccessControl="nonLocalizable">
-                                        <rect key="frame" x="28" y="20" width="112" height="34"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lq-us-cva" propertyAccessControl="nonLocalizable">
-                                        <rect key="frame" x="1780" y="20" width="112" height="34"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RcV-rA-beM" customClass="IGRMediaProgressView">
+                                <rect key="frame" x="0.0" y="1006" width="1920" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AK-q5-btt">
@@ -328,11 +311,8 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="controllerPanel" destination="RcV-rA-beM" id="41P-vZ-jwO"/>
+                        <outlet property="mediaProgressView" destination="RcV-rA-beM" id="44I-uy-us4"/>
                         <outlet property="movieView" destination="6yp-JQ-pIr" id="1Gc-m5-8lH"/>
-                        <outlet property="progressPosition" destination="wNn-mb-6BL" id="6bC-hL-H1K"/>
-                        <outlet property="remainingTime" destination="7lq-us-cva" id="517-Xl-FHF"/>
-                        <outlet property="time" destination="kB3-dH-JT0" id="PJd-II-ZJ8"/>
                         <outlet property="titleLabel" destination="Bf2-sc-Zp5" id="NYp-FI-kf4"/>
                         <outlet property="titlePanel" destination="2AK-q5-btt" id="Ept-8K-bQJ"/>
                         <outlet property="view" destination="RBz-Cr-Qf9" id="XYY-OE-pbf"/>
