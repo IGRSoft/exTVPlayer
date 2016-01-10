@@ -19,6 +19,7 @@
 @dynamic orderId;
 @dynamic timestamp;
 @dynamic isFavorit;
+@dynamic latestViewedTrack;
 @dynamic chanel;
 @dynamic tracks;
 

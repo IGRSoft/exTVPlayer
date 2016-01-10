@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *favoritButton;
 
 @property (copy, nonatomic) NSString *catalogId;
+@property (strong, nonatomic) IGREntityExCatalog *catalog;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
@@ -34,6 +35,8 @@
 - (void)setCatalogId:(NSString *)aCatalogId
 {
 	_catalogId = aCatalogId;
+	self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
+													 withValue:_catalogId];
 	[IGREXParser parseCatalogContent:aCatalogId];
 }
 
@@ -47,12 +50,9 @@
 {
 	[super viewDidAppear:animated];
 	
-	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
-																	withValue:_catalogId];
-	
-	if (catalog)
+	if (self.catalog)
 	{
-		self.catalogTitle.text = catalog.name;
+		self.catalogTitle.text = self.catalog.name;
 		[self onTouchFavorit:nil];
 	}
 	
@@ -73,6 +73,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIView *)preferredFocusedView
+{
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+	
+	return [self.tableView cellForRowAtIndexPath:indexPath];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -81,6 +88,7 @@
 	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
 	{
 		IGRMediaViewController *catalogViewController = segue.destinationViewController;
+		self.catalog.latestViewedTrack = @(self.tableView.indexPathForSelectedRow.section);
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
@@ -92,17 +100,14 @@
 
 - (IBAction)onTouchFavorit:(UIButton *)sender
 {
-	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
-																	withValue:_catalogId];
-	
-	if (catalog)
+	if (self.catalog)
 	{
 		if (sender)
 		{
-			catalog.isFavorit = @(![catalog.isFavorit boolValue]);
+			self.catalog.isFavorit = @(![self.catalog.isFavorit boolValue]);
 		}
 		
-		UIImage *image = [catalog.isFavorit boolValue] ? [UIImage imageNamed:@"favorit-on"] : [UIImage imageNamed:@"favorit-off"];
+		UIImage *image = [self.catalog.isFavorit boolValue] ? [UIImage imageNamed:@"favorit-on"] : [UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
 	}
 }

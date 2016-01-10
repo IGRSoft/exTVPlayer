@@ -14,6 +14,7 @@
 #import <TVVLCKit/TVVLCKit.h>
 
 #import "IGREntityExTrack.h"
+#import "IGREntityExCatalog.h"
 
 @interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate, IGRMediaProgressDelegate>
 {
@@ -101,21 +102,21 @@
 		
 		if (_mediaplayer.media)
 		{
+			IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
 			{
-				IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 				track.status = @(IGRTrackState_Half);
 				track.position = @(_mediaplayer.position);
-				[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 			}
+			
+			track.catalog.latestViewedTrack = @(self.currentTrack);
+			[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 			
 			self.skipState = YES;
 			[_mediaplayer stop];
 		}
-		if (_mediaplayer)
-		{
-			_mediaplayer = nil;
-		}
+		
+		_mediaplayer = nil;
 	}
 	
 	[self invalidateTimer];
@@ -146,7 +147,7 @@
 	}
 	else
 	{
-		[self closePlayback:sender];
+		[self closePlayback];
 	}
 }
 
@@ -194,7 +195,7 @@
 	}
 }
 
-- (void)closePlayback:(id)sender
+- (void)closePlayback
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -488,7 +489,7 @@
 	/* distruct view controller on error */
 	if (currentState == VLCMediaPlayerStateError)
 	{
-		[self performSelector:@selector(closePlayback:) withObject:nil afterDelay:2.0];
+		[self performSelector:@selector(closePlayback) withObject:nil afterDelay:2.0];
 	}
 	/* or if playback ended */
 	else if (currentState == VLCMediaPlayerStateEnded || currentState == VLCMediaPlayerStateStopped)
@@ -548,6 +549,10 @@
 	else if (presses.anyObject.type == UIPressTypePlayPause)
 	{
 		[self togglePlay];
+	}
+	else if (presses.anyObject.type == UIPressTypeMenu)
+	{
+		[self closePlayback];
 	}
 }
 

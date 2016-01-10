@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *orderId;
 @property (nullable, nonatomic, retain) NSDate *timestamp;
 @property (nullable, nonatomic, retain) NSNumber *isFavorit;
+@property (nullable, nonatomic, retain) NSNumber *latestViewedTrack;
 @property (nullable, nonatomic, retain) IGREntityExChanel *chanel;
 @property (nullable, nonatomic, retain) NSSet<IGREntityExTrack *> *tracks;
 
