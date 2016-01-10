@@ -34,6 +34,7 @@
 @property (strong, nonatomic) NSArray *aspectRatios;
 
 @property (assign, nonatomic) CGPoint lastTouchLocation;
+@property (assign, nonatomic) NSTimeInterval latestPressTimestamp;
 @property (assign, nonatomic) BOOL updatingPosition;
 @property (assign, nonatomic) BOOL skipState;
 
@@ -57,6 +58,7 @@
 	self.skipState = NO;
 	self.trakProperiesStatus = IGRTrackProperties_None;
 	self.mediaProgressView.delegate = self;
+	self.latestPressTimestamp = 0.0;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -552,7 +554,11 @@
 		return;
 	}
 	
-	if (presses.anyObject.type == UIPressTypeSelect)
+	UIPress *press = presses.anyObject;
+	NSInteger deltaTouchTime = press.timestamp - self.latestPressTimestamp;
+	NSInteger timeLimit = CLOCKS_PER_SEC * 500; //0.5s
+	
+	if (press.type == UIPressTypeSelect)
 	{
 		[self togglePlay];
 		
@@ -567,18 +573,20 @@
 		
 		[self resetIdleTimer];
 	}
-	else if (presses.anyObject.type == UIPressTypePlayPause)
+	else if (press.type == UIPressTypePlayPause)
 	{
 		[self togglePlay];
 	}
-	else if (presses.anyObject.type == UIPressTypeLeftArrow)
+	else if (press.type == UIPressTypeLeftArrow && deltaTouchTime < timeLimit)
 	{
 		[self playPreviousTrack:nil];
 	}
-	else if (presses.anyObject.type == UIPressTypeRightArrow)
+	else if (press.type == UIPressTypeRightArrow && deltaTouchTime < timeLimit)
 	{
 		[self playNextTrack:nil];
 	}
+	
+	self.latestPressTimestamp = press.timestamp;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
