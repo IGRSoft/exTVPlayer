@@ -28,3 +28,9 @@
 
 /* Class = "UITabBarItem"; */
 "Dbe-5w-BU1.title" = "Настройки";
+
+/* Class = "UIButton"; */
+"6wl-9z-G0c.normalTitle" = "Показать Избранные";
+
+/* Class = "UIButton"; */
+"BSf-Ny-vvZ.normalTitle" = "Показать Историю";

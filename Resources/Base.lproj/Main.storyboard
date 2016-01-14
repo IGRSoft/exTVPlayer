@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="-1690" y="-2413"/>
         </scene>
-        <!--Favorits-->
+        <!--Favorites-->
         <scene sceneID="izi-ft-RNo">
             <objects>
                 <viewController id="D7A-Lb-odv" customClass="IGRFavoritsViewController" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wl-9z-G0c">
-                                <rect key="frame" x="800" y="497" width="319" height="86"/>
+                                <rect key="frame" x="710" y="497" width="500" height="86"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="Show Favorits"/>
                                 <connections>
@@ -105,7 +105,7 @@
                             </button>
                         </subviews>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorits" image="favorit" id="d7E-Y7-Lny"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorit" id="d7E-Y7-Lny"/>
                     <connections>
                         <outlet property="showFavoritsButton" destination="6wl-9z-G0c" id="VGC-Mg-yVx"/>
                     </connections>
@@ -252,7 +252,8 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT5-Dp-i97">
                                         <rect key="frame" x="1847" y="10" width="64" height="60"/>
-                                        <state key="normal" title="Button" image="favorit-off"/>
+                                        <color key="tintColor" red="0.83529411760000005" green="0.90588235289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="favorit-off"/>
                                         <connections>
                                             <action selector="onTouchFavorit:" destination="WAl-RG-hb9" eventType="primaryActionTriggered" id="TT2-XD-tpa"/>
                                         </connections>
@@ -315,7 +316,7 @@
                                                     <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="favorit-off" translatesAutoresizingMaskIntoConstraints="NO" id="4YP-eV-Y5B">
-                                                    <rect key="frame" x="284" y="8" width="128" height="128"/>
+                                                    <rect key="frame" x="364" y="8" width="48" height="48"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,7 +414,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSf-Ny-vvZ">
-                                <rect key="frame" x="806" y="497" width="308" height="86"/>
+                                <rect key="frame" x="710" y="497" width="500" height="86"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="Show History"/>
                                 <connections>
@@ -507,13 +508,13 @@
         <image name="ArrowDown" width="50" height="50"/>
         <image name="catalog" width="48" height="48"/>
         <image name="favorit" width="48" height="48"/>
-        <image name="favorit-off" width="128" height="120"/>
+        <image name="favorit-off" width="48" height="48"/>
         <image name="history" width="48" height="48"/>
         <image name="search" width="48" height="48"/>
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Q3-pp-UYR"/>
+        <segue reference="PmK-TX-jcP"/>
         <segue reference="stc-s6-1Oz"/>
     </inferredMetricsTieBreakers>
 </document>

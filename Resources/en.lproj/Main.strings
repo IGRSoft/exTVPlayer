@@ -18,7 +18,7 @@
 "sGR-gy-uXL.title" = "Catalogs";
 
 /* Class = "UITabBarItem"; */
-"d7E-Y7-Lny.title" = "Favorits";
+"d7E-Y7-Lny.title" = "Favorites";
 
 /* Class = "UITabBarItem"; */
 "BPa-p4-hAu.title" = "Search";
@@ -28,3 +28,9 @@
 
 /* Class = "UITabBarItem"; */
 "Dbe-5w-BU1.title" = "Settings";
+
+/* Class = "UIButton"; */
+"6wl-9z-G0c.normalTitle" = "Show Favorites";
+
+/* Class = "UIButton"; */
+"BSf-Ny-vvZ.normalTitle" = "Show History";
