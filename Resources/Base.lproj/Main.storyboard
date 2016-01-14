@@ -467,6 +467,14 @@
                                     <action selector="onChangeCache:" destination="VoP-1A-waA" eventType="primaryActionTriggered" id="yPB-YA-vcn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7S-sO-oe9">
+                                <rect key="frame" x="982" y="404" width="400" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="onChangeHistorySize:" destination="VoP-1A-waA" eventType="primaryActionTriggered" id="EIa-Ql-Xi7"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Main Catalog:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yis-TA-ANo">
                                 <rect key="frame" x="20" y="195" width="921" height="75"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
@@ -479,11 +487,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="History Size:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJu-kg-a1j">
+                                <rect key="frame" x="20" y="404" width="921" height="86"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Dbe-5w-BU1"/>
                     <connections>
                         <outlet property="cacheButton" destination="f0S-Od-6bX" id="0ZC-4c-YQU"/>
+                        <outlet property="historySizeButton" destination="c7S-sO-oe9" id="yPU-11-Bvk"/>
                         <outlet property="languageButton" destination="5zU-Zk-16A" id="WQj-lp-3pW"/>
                     </connections>
                 </viewController>
@@ -495,6 +510,10 @@
         <scene sceneID="7KW-a3-ovK">
             <objects>
                 <viewController id="Orx-b2-1TH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MB5-cC-YdZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="k5M-IK-dAF"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vIA-6A-59T">
                         <rect key="frame" x="0.0" y="0.0" width="3" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,7 +533,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PmK-TX-jcP"/>
+        <segue reference="nlx-MM-lnS"/>
         <segue reference="stc-s6-1Oz"/>
     </inferredMetricsTieBreakers>
 </document>

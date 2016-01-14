@@ -12,9 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *languageButton;
 @property (weak, nonatomic) IBOutlet UIButton *cacheButton;
+@property (weak, nonatomic) IBOutlet UIButton *historySizeButton;
 
 @property (strong, nonatomic) NSArray *languages;
 @property (strong, nonatomic) NSArray *caches;
+@property (strong, nonatomic) NSArray *history;
 
 @end
 
@@ -37,10 +39,17 @@
 					@{@"value": @(IGRCache_HigherLatency),	@"name": NSLocalizedString(@"Cache_HigherLatency", nil)}
 					];
 	
+	self.history = @[@(IGRHistorySize_5),
+					 @(IGRHistorySize_10),
+					 @(IGRHistorySize_20),
+					 @(IGRHistorySize_50)
+					];
+	
 	[super viewDidLoad];
 	
 	[self updateViewForLanguage];
 	[self updateViewForCache];
+	[self updateViewForHistorySize];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -95,7 +104,7 @@
 - (IBAction)onChangeCache:(id)sender
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *cache = settings.cache;
+	NSNumber *cache = settings.cacheSize;
 	
 	NSUInteger pos = [self.caches indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		
@@ -108,7 +117,7 @@
 	pos = ((pos + 1) == self.caches.count) ? 0 : ++pos;
 	
 	NSDictionary *newCache = self.caches[pos];
-	settings.cache = newCache[@"value"];
+	settings.cacheSize = newCache[@"value"];
 	
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	
@@ -118,7 +127,7 @@
 - (void)updateViewForCache
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *cache = settings.cache;
+	NSNumber *cache = settings.cacheSize;
 	
 	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
 		
@@ -128,6 +137,31 @@
 	NSString *cacheName = [[self.caches filteredArrayUsingPredicate:predicate] firstObject][@"name"];
 	
 	[self.cacheButton setTitle:cacheName forState:UIControlStateNormal];
+}
+
+- (IBAction)onChangeHistorySize:(id)sender
+{
+	IGREntityAppSettings *settings = [self appSettings];
+	NSNumber *historySize = settings.historySize;
+	
+	NSUInteger pos = [self.history indexOfObject:historySize];
+	
+	pos = ((pos + 1) == self.history.count) ? 0 : ++pos;
+	
+	NSNumber *newHistorySize = self.history[pos];
+	settings.historySize = newHistorySize;
+	
+	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	
+	[self updateViewForHistorySize];
+}
+
+- (void)updateViewForHistorySize
+{
+	IGREntityAppSettings *settings = [self appSettings];
+	NSNumber *historySize = settings.historySize;
+	
+	[self.historySizeButton setTitle:historySize.stringValue forState:UIControlStateNormal];
 }
 
 @end

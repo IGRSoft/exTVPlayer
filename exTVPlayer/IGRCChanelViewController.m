@@ -104,20 +104,6 @@
 
 #pragma mark - Privat
 
-- (IGREntityAppSettings*)appSettings
-{
-	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-	if (!settings)
-	{
-		settings = [IGREntityAppSettings MR_createEntity];
-		settings.videoLanguageId = @(IGRVideoCategory_Rus);
-		
-		[MR_DEFAULT_CONTEXT saveOnlySelfAndWait];
-	}
-	
-	return settings;
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -130,7 +116,7 @@
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalogs.indexPathsForSelectedItems.firstObject.row + self.catalogs.indexPathsForSelectedItems.firstObject.section)];
 		IGREntityExCatalog *catalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
-		IGREntityAppSettings *settings = [self appSettings];
+		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
 		settings.lastPlayedCatalog = catalog.itemId;
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -145,6 +131,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+	if (self.chanelMode == IGRChanelMode_History)
+	{
+		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+		return MIN(settings.historySize.integerValue, [[self.fetchedResultsController sections] count]);
+	}
+	
 	return [[self.fetchedResultsController sections] count];
 }
 

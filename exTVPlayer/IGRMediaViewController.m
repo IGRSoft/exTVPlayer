@@ -15,6 +15,7 @@
 
 #import "IGREntityExTrack.h"
 #import "IGREntityExCatalog.h"
+#import "IGREntityAppSettings.h"
 
 @interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate, IGRMediaProgressDelegate>
 {
@@ -75,7 +76,9 @@
 												 name:kapplicationDidBecomeActive
 											   object:nil];
 	
-	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--network-caching=3000"]];
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+	NSString *cacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.cacheSize];
+	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[cacheOption]];
 	_mediaplayer.delegate = self;
 	_mediaplayer.drawable = self.movieView;
 	

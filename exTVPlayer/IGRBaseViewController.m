@@ -23,7 +23,8 @@
 	{
 		settings = [IGREntityAppSettings MR_createEntity];
 		settings.videoLanguageId = @(IGRVideoCategory_Rus);
-		settings.cache = @(IGRCache_Default);
+		settings.cacheSize = @(IGRCache_Default);
+		settings.historySize = @(IGRHistorySize_10);
 		
 		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	}

@@ -13,8 +13,9 @@
 
 @implementation IGREntityAppSettings (CoreDataProperties)
 
+@dynamic cacheSize;
 @dynamic lastPlayedCatalog;
 @dynamic videoLanguageId;
-@dynamic cache;
+@dynamic historySize;
 
 @end

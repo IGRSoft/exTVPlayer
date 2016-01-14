@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IGREntityAppSettings (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *cacheSize;
 @property (nullable, nonatomic, retain) NSString *lastPlayedCatalog;
 @property (nullable, nonatomic, retain) NSNumber *videoLanguageId;
-@property (nullable, nonatomic, retain) NSNumber *cache;
+@property (nullable, nonatomic, retain) NSNumber *historySize;
 
 @end
 

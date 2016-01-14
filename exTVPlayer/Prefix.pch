@@ -29,21 +29,29 @@ typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 	IGRVideoCategory_Eng = 80925,
 	IGRVideoCategory_Esp = 187077,
 	IGRVideoCategory_De  = 45205,
-	IGRVideoCategory_Pl  = 968815,
+	IGRVideoCategory_Pl  = 968815
 };
 
 typedef NS_ENUM(NSUInteger, IGRCache)
 {
 	IGRCache_Default		= 1024,
 	IGRCache_HighLatency	= 3096,
-	IGRCache_HigherLatency	= 5120,
+	IGRCache_HigherLatency	= 5120
+};
+
+typedef NS_ENUM(NSUInteger, IGRHistorySize)
+{
+	IGRHistorySize_5	= 5,
+	IGRHistorySize_10	= 10,
+	IGRHistorySize_20	= 20,
+	IGRHistorySize_50	= 50
 };
 
 typedef NS_ENUM(NSUInteger, IGRChanelMode)
 {
 	IGRChanelMode_Catalog		= 0,
 	IGRChanelMode_Favorites		= 1,
-	IGRChanelMode_History		= 2,
+	IGRChanelMode_History		= 2
 };
 
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
