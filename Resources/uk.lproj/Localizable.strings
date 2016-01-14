@@ -17,3 +17,9 @@
 "Subtitles" = "Субтитри";
 
 "Default" = "За замовчуванням";
+
+"Cache_Default" = "1 Мб";
+
+"Cache_HighLatency" = "3 Мб";
+
+"Cache_HigherLatency" = "5 Мб";

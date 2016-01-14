@@ -27,7 +27,7 @@
 
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
 
-@property (assign, nonatomic) BOOL isShowFavorit;
+@property (assign, nonatomic) IGRChanelMode chanelMode;
 
 @end
 
@@ -87,14 +87,19 @@
 
 - (void)setChanel:(IGREntityExChanel *)aChanel
 {
-	self.isShowFavorit = NO;
+	self.chanelMode = IGRChanelMode_Catalog;
 	_chanel = aChanel;
 	[IGREXParser parseChanelContent:aChanel.itemId];
 }
 
-- (void)showFavorit
+- (void)showFavorites
 {
-	self.isShowFavorit = YES;
+	self.chanelMode = IGRChanelMode_Favorites;
+}
+
+- (void)showHistory
+{
+	self.chanelMode = IGRChanelMode_History;
 }
 
 #pragma mark - Privat
@@ -190,7 +195,7 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (_fetchedResultsController == nil && self.isShowFavorit)
+	if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Favorites)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
@@ -198,12 +203,20 @@
 																   sortedBy:@"orderId"
 																  ascending:NO];
 	}
-	else if (_fetchedResultsController == nil && !self.isShowFavorit)
+	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanel.itemId];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"
+																   ascending:NO];
+	}
+	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_History)
+	{
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"viewedTimestamp != nil"];
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"viewedTimestamp"
+															   withPredicate:predicate
+																	sortedBy:@"viewedTimestamp"
 																   ascending:NO];
 	}
 	

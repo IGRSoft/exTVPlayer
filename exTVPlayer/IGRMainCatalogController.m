@@ -6,54 +6,35 @@
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 
-#import "IGRStartScreenController.h"
-#import "IGRCatalogViewController.h"
+#import "IGRMainCatalogController.h"
 #import "IGRCChanelViewController.h"
 
 #import "IGREXParser.h"
-#import "IGREntityAppSettings.h"
 #import "IGREntityExChanel.h"
 
 #import "IGRChanelCell.h"
 
-@interface IGRStartScreenController () <UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@interface IGRMainCatalogController () <NSFetchedResultsControllerDelegate>
 
-@property (copy, nonatomic) NSString *catalogId;
-
-@property (weak, nonatomic) IBOutlet UITextField *catalogTextField;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *chanels;
-@property (weak, nonatomic) IBOutlet UIButton *languageButton;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSMutableArray *sectionChanges;
 @property (strong, nonatomic) NSMutableArray *itemChanges;
 
-@property (strong, nonatomic) NSArray *languages;
-
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
+@property (strong, nonatomic) NSNumber *lastVideoCatalog;
 
 @end
 
-@implementation IGRStartScreenController
+@implementation IGRMainCatalogController
 
 - (void)viewDidLoad
 {
-	self.languages = @[
-					   @{@"id": @(IGRVideoCategory_Rus), @"langString": @"Рус"},
-					   @{@"id": @(IGRVideoCategory_Ukr), @"langString": @"Укр"},
-					   @{@"id": @(IGRVideoCategory_Eng), @"langString": @"En"},
-					   @{@"id": @(IGRVideoCategory_Esp), @"langString": @"Esp"},
-					   @{@"id": @(IGRVideoCategory_De), @"langString": @"DE"},
-					   @{@"id": @(IGRVideoCategory_Pl), @"langString": @"Pl"}
-					   ];
-	
 	[super viewDidLoad];
 	
 	self.chanels.backgroundColor = [UIColor clearColor];
 	self.lastSelectedItem = nil;
-	
-	[self updateViewForLanguage];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,10 +42,20 @@
 	[super viewDidAppear:animated];
 	
 	IGREntityAppSettings *settings = [self appSettings];
-	self.catalogTextField.text = self.catalogId = settings.lastPlayedCatalog;
-	self.nextButton.enabled = self.catalogId.length > 0;
+	NSNumber *langId = settings.videoLanguageId;
 	
-	if (self.lastSelectedItem)
+	if (![self.lastVideoCatalog isEqualToNumber:langId])
+	{
+		self.lastVideoCatalog = langId;
+		
+		[IGREXParser parseVideoCatalogContent:langId.stringValue];
+		
+		_fetchedResultsController = nil;
+		self.lastSelectedItem = nil;
+		
+		[self.chanels reloadData];
+	}
+	else if (self.lastSelectedItem)
 	{
 		[[self.chanels cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
 	}
@@ -82,7 +73,7 @@
 
 - (UIView *)preferredFocusedView
 {
-	return self.catalogTextField;
+	return self.chanels;
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,90 +86,12 @@
 
 #pragma mark - Privat
 
-- (IBAction)onChangeLanguage:(id)sender
-{
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *langId = settings.videoLanguageId;
-	
-	NSUInteger pos = [self.languages indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		
-		BOOL result = [obj[@"id"] isEqualToNumber:langId];
-		*stop = result;
-		
-		return result;
-	}];
-	
-	pos = ((pos + 1) == self.languages.count) ? 0 : ++pos;
-	
-	NSDictionary *newLanguage = self.languages[pos];
-	settings.videoLanguageId = newLanguage[@"id"];
-	
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-	
-	[self updateViewForLanguage];
-}
-
-- (void)updateViewForLanguage
-{
-	_fetchedResultsController = nil;
-	
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *langId = settings.videoLanguageId;
-	[IGREXParser parseVideoCatalogContent:langId.stringValue];
-	
-	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-		
-		return [evaluatedObject[@"id"] isEqualToNumber:langId];
-	}];
-	
-	NSString *langString = [[self.languages filteredArrayUsingPredicate:predicate] firstObject][@"langString"];
-	
-	[self.languageButton setTitle:langString forState:UIControlStateNormal];
-	
-	[self.chanels reloadData];
-}
-
-- (IGREntityAppSettings*)appSettings
-{
-	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-	if (!settings)
-	{
-		settings = [IGREntityAppSettings MR_createEntity];
-		settings.videoLanguageId = @(IGRVideoCategory_Rus);
-		
-		[MR_DEFAULT_CONTEXT saveOnlySelfAndWait];
-	}
-	
-	return settings;
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-	self.catalogId = [textField.text copy];
-	
-	IGREntityAppSettings *settings = [self appSettings];
-	settings.lastPlayedCatalog = self.catalogId;
-	
-	self.nextButton.enabled = self.catalogId.length > 0;
-}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{	
-	if ([segue.identifier isEqualToString:@"openCatalog"])
-	{
-		self.lastSelectedItem = nil;
-		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-			[catalogViewController setCatalogId:self.catalogId];
-		});
-	}
-	else if ([segue.identifier isEqualToString:@"showChanel"])
+{
+	if ([segue.identifier isEqualToString:@"showChanel"])
 	{
 		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
 		
@@ -188,16 +101,6 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			[catalogViewController setChanel:chanel];
-		});
-	}
-	else if ([segue.identifier isEqualToString:@"showFavoritChanel"])
-	{
-		self.lastSelectedItem = nil;
-		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-			[catalogViewController showFavorit];
 		});
 	}
 }
@@ -231,15 +134,8 @@
 	IGRChanelCell *previouslyFocusedCell = (IGRChanelCell *)context.previouslyFocusedView;
 	IGRChanelCell *nextFocusedCell = (IGRChanelCell *)context.nextFocusedView;
 	
-	if ([previouslyFocusedCell isKindOfClass:[IGRChanelCell class]])
-	{
-		[previouslyFocusedCell setHighlighted:NO];
-	}
-	
-	if ([nextFocusedCell isKindOfClass:[IGRChanelCell class]])
-	{
-		[nextFocusedCell setHighlighted:YES];
-	}
+	[previouslyFocusedCell setHighlighted:NO];
+	[nextFocusedCell setHighlighted:YES];
 	
 	return YES;
 }

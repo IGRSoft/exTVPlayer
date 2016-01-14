@@ -1,9 +1,30 @@
 
-/* Class = "UIButton"; normalTitle = "Get list of tracks"; ObjectID = "806-21-3HV"; */
+/* Class = "UIButton"; */
 "806-21-3HV.normalTitle" = "Отримати список треків";
 
-/* Class = "UITextField"; placeholder = "Enter a catalog number"; ObjectID = "hxx-IK-k2R"; */
+/* Class = "UITextField"; */
 "hxx-IK-k2R.placeholder" = "Введіть номер каталога";
 
-/* Class = "UILabel"; text = "or Get latest catalog web-feed from Category"; ObjectID = "ukS-Og-T2L"; */
+/* Class = "UILabel"; */
 "ukS-Og-T2L.text" = "чи отримати останні каталоги з веб-каналу для категорії";
+
+/* Class = "UILabel"; */
+"Yis-TA-ANo.text" = "Головний каталог:";
+
+/* Class = "UILabel"; */
+"DWF-Pf-tV8.text" = "Відео буфер:";
+
+/* Class = "UITabBarItem"; */
+"sGR-gy-uXL.title" = "Каталог";
+
+/* Class = "UITabBarItem"; */
+"d7E-Y7-Lny.title" = "Вибрані";
+
+/* Class = "UITabBarItem"; */
+"BPa-p4-hAu.title" = "Пошук";
+
+/* Class = "UITabBarItem"; */
+"YMC-Rl-ePT.title" = "Історія";
+
+/* Class = "UITabBarItem"; */
+"Dbe-5w-BU1.title" = "Налаштування";

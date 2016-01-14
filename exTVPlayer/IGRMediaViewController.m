@@ -75,7 +75,7 @@
 												 name:kapplicationDidBecomeActive
 											   object:nil];
 	
-	_mediaplayer = [[VLCMediaPlayer alloc] init];
+	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--network-caching=3000"]];
 	_mediaplayer.delegate = self;
 	_mediaplayer.drawable = self.movieView;
 	

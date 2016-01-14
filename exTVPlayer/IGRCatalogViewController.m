@@ -36,9 +36,12 @@
 - (void)setCatalogId:(NSString *)aCatalogId
 {
 	_catalogId = aCatalogId;
+	[IGREXParser parseCatalogContent:aCatalogId];
+	
 	self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
 													 withValue:_catalogId];
-	[IGREXParser parseCatalogContent:aCatalogId];
+	
+	self.catalog.viewedTimestamp = [NSDate date];
 }
 
 - (void)viewDidLoad
@@ -59,8 +62,11 @@
 		[self onTouchFavorit:nil];
 	}
 	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
-	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+	if ([[self.fetchedResultsController sections] count])
+	{
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+	}
 	
 	[self.tableView reloadData];
 }

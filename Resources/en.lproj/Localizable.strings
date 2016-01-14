@@ -17,3 +17,9 @@
 "Subtitles" = "Subtitles";
 
 "Default" = "Default";
+
+"Cache_Default" = "1 MB";
+
+"Cache_HighLatency" = "3 MB";
+
+"Cache_HigherLatency" = "5 MB";

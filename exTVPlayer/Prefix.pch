@@ -32,5 +32,19 @@ typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 	IGRVideoCategory_Pl  = 968815,
 };
 
+typedef NS_ENUM(NSUInteger, IGRCache)
+{
+	IGRCache_Default		= 1024,
+	IGRCache_HighLatency	= 3096,
+	IGRCache_HigherLatency	= 5120,
+};
+
+typedef NS_ENUM(NSUInteger, IGRChanelMode)
+{
+	IGRChanelMode_Catalog		= 0,
+	IGRChanelMode_Favorites		= 1,
+	IGRChanelMode_History		= 2,
+};
+
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
 static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";

@@ -87,9 +87,15 @@
 		A581C5B21C346E430016D086 /* IGRMediaProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A581C5B11C346E430016D086 /* IGRMediaProgressView.m */; };
 		A581C5BC1C346E5A0016D086 /* IGRMediaProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */; };
 		A581C5BF1C3485A00016D086 /* IGRCustomViewFromXib.m in Sources */ = {isa = PBXBuildFile; fileRef = A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */; };
+		A58F66EF1C47C33400D7518B /* IGRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */; };
+		A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */; };
+		A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F41C47C51800D7518B /* IGRBaseViewController.m */; };
+		A58F66F81C47C9F300D7518B /* IGRFavoritsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */; };
+		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
+		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
-		A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */; };
+		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
 		A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF31C22B7A500EABFC5 /* Main.storyboard */; };
 		A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
@@ -361,12 +367,24 @@
 		A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGRMediaProgressView.xib; sourceTree = "<group>"; };
 		A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCustomViewFromXib.h; sourceTree = "<group>"; };
 		A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCustomViewFromXib.m; sourceTree = "<group>"; };
+		A58F66ED1C47C33400D7518B /* IGRSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSearchViewController.h; sourceTree = "<group>"; };
+		A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRSearchViewController.m; sourceTree = "<group>"; };
+		A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSettingsViewController.h; sourceTree = "<group>"; };
+		A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRSettingsViewController.m; sourceTree = "<group>"; };
+		A58F66F31C47C51800D7518B /* IGRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRBaseViewController.h; sourceTree = "<group>"; };
+		A58F66F41C47C51800D7518B /* IGRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRBaseViewController.m; sourceTree = "<group>"; };
+		A58F66F61C47C9F300D7518B /* IGRFavoritsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRFavoritsViewController.h; sourceTree = "<group>"; };
+		A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRFavoritsViewController.m; sourceTree = "<group>"; };
+		A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTabBarViewController.h; sourceTree = "<group>"; };
+		A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTabBarViewController.m; sourceTree = "<group>"; };
+		A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRHistoryViewController.h; sourceTree = "<group>"; };
+		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRStartScreenController.h; sourceTree = "<group>"; };
-		A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRStartScreenController.m; sourceTree = "<group>"; };
+		A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRMainCatalogController.h; sourceTree = "<group>"; };
+		A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRMainCatalogController.m; sourceTree = "<group>"; };
 		A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E81BF41C22B7A500EABFC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5E81BF71C22B7A500EABFC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -743,8 +761,20 @@
 				A569ED6C1C25B062004EF247 /* CustomView */,
 				A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */,
-				A5E81BE01C22B72D00EABFC5 /* IGRStartScreenController.h */,
-				A5E81BE11C22B72D00EABFC5 /* IGRStartScreenController.m */,
+				A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */,
+				A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */,
+				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
+				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
+				A58F66F61C47C9F300D7518B /* IGRFavoritsViewController.h */,
+				A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */,
+				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
+				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
+				A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */,
+				A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */,
+				A58F66ED1C47C33400D7518B /* IGRSearchViewController.h */,
+				A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */,
+				A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */,
+				A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */,
 				A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */,
 				A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
@@ -942,6 +972,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58F66EF1C47C33400D7518B /* IGRSearchViewController.m in Sources */,
 				A569ED611C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
 				A51F3BF21C23223900F6080A /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */,
 				A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */,
@@ -955,6 +986,7 @@
 				A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */,
 				A51F3BE81C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m in Sources */,
 				A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */,
+				A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */,
 				A51F3BF41C23223900F6080A /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */,
 				A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */,
 				A51F3BEA1C23223900F6080A /* MagicalMigrationManager.m in Sources */,
@@ -965,8 +997,9 @@
 				A51F3BF91C23223900F6080A /* SQLiteMagicalRecordStack.m in Sources */,
 				A51F3BE61C23223900F6080A /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				A51F3BE31C23223900F6080A /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
+				A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */,
 				A51F3BD71C23223900F6080A /* NSFetchedResultsController+MagicalFetching.m in Sources */,
-				A5E81BE21C22B72D00EABFC5 /* IGRStartScreenController.m in Sources */,
+				A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */,
 				A51F3BD41C23223900F6080A /* NSObject+MagicalDataImport.m in Sources */,
 				A51F3BDF1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
@@ -985,6 +1018,7 @@
 				A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */,
 				A569ED601C257CA7004EF247 /* IGREntityExVideoCatalog.m in Sources */,
 				A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */,
+				A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */,
 				A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */,
 				A51F3BDC1C23223900F6080A /* NSManagedObject+MagicalRecord.m in Sources */,
 				A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */,
@@ -992,11 +1026,13 @@
 				A581C5B21C346E430016D086 /* IGRMediaProgressView.m in Sources */,
 				A569ED5D1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
+				A58F66F81C47C9F300D7518B /* IGRFavoritsViewController.m in Sources */,
 				A51F3BE71C23223900F6080A /* NSArray+MagicalRecord.m in Sources */,
 				A51F3BD81C23223900F6080A /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A51F3BDA1C23223900F6080A /* NSManagedObject+MagicalFetching.m in Sources */,
 				A569ED6F1C25D0D7004EF247 /* IGRCChanelViewController.m in Sources */,
 				A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */,
+				A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */,
 				A51F3BE91C23223900F6080A /* NSError+MagicalRecordErrorHandling.m in Sources */,
 				A51F3BD91C23223900F6080A /* NSManagedObject+MagicalDataImport.m in Sources */,
 				A51F3BE11C23223900F6080A /* NSManagedObjectModel+MagicalRecord.m in Sources */,

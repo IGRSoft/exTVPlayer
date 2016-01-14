@@ -6,7 +6,9 @@
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 
-@interface IGRStartScreenController : UIViewController
+#import "IGRBaseViewController.h"
+
+@interface IGRMainCatalogController : IGRBaseViewController
 
 
 @end

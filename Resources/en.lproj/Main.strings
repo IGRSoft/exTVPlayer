@@ -1,9 +1,30 @@
 
-/* Class = "UIButton"; normalTitle = "Get list of tracks"; ObjectID = "806-21-3HV"; */
+/* Class = "UIButton"; */
 "806-21-3HV.normalTitle" = "Get list of tracks";
 
-/* Class = "UITextField"; placeholder = "Enter a catalog number"; ObjectID = "hxx-IK-k2R"; */
+/* Class = "UITextField"; */
 "hxx-IK-k2R.placeholder" = "Enter a catalog number";
 
-/* Class = "UILabel"; text = "or Get latest catalog web-feed from Category"; ObjectID = "ukS-Og-T2L"; */
+/* Class = "UILabel"; */
 "ukS-Og-T2L.text" = "or Get latest catalog web-feed from Category";
+
+/* Class = "UILabel"; */
+"Yis-TA-ANo.text" = "Main Catalog:";
+
+/* Class = "UILabel"; */
+"DWF-Pf-tV8.text" = "Video Buffer:";
+
+/* Class = "UITabBarItem"; */
+"sGR-gy-uXL.title" = "Catalogs";
+
+/* Class = "UITabBarItem"; */
+"d7E-Y7-Lny.title" = "Favorits";
+
+/* Class = "UITabBarItem"; */
+"BPa-p4-hAu.title" = "Search";
+
+/* Class = "UITabBarItem"; */
+"YMC-Rl-ePT.title" = "History";
+
+/* Class = "UITabBarItem"; */
+"Dbe-5w-BU1.title" = "Settings";
