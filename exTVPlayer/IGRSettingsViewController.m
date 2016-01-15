@@ -10,46 +10,64 @@
 
 @interface IGRSettingsViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *languageButton;
-@property (weak, nonatomic) IBOutlet UIButton *cacheButton;
+@property (weak, nonatomic) IBOutlet UIButton *sourceButton;
+@property (weak, nonatomic) IBOutlet UIButton *languageCategoryButton;
+@property (weak, nonatomic) IBOutlet UIButton *videoBufferButton;
 @property (weak, nonatomic) IBOutlet UIButton *historySizeButton;
 
-@property (strong, nonatomic) NSArray *languages;
+@property (strong, nonatomic) NSArray *sources;
+@property (strong, nonatomic) NSArray *languagesCategory;
 @property (strong, nonatomic) NSArray *caches;
 @property (strong, nonatomic) NSArray *history;
 
 @end
 
+typedef NS_ENUM(NSUInteger, IGRSettingsType)
+{
+	IGRSettingsType_Source	= 0,
+	IGRSettingsType_LanguageCategory,
+	IGRSettingsType_Cache,
+	IGRSettingsType_History
+};
+
 @implementation IGRSettingsViewController
 
 - (void)viewDidLoad
 {
-	self.languages = @[
-					   @{@"id": @(IGRVideoCategory_Rus), @"langString": @"Русский"},
-					   @{@"id": @(IGRVideoCategory_Ukr), @"langString": @"Укрїнський"},
-					   @{@"id": @(IGRVideoCategory_Eng), @"langString": @"Ennglish"},
-					   @{@"id": @(IGRVideoCategory_Esp), @"langString": @"Española"},
-					   @{@"id": @(IGRVideoCategory_De),  @"langString": @"Deutsch"},
-					   @{@"id": @(IGRVideoCategory_Pl),  @"langString": @"Polskie"}
+	self.sources = @[
+					@{@"value": @(IGRSourceType_RSS),	@"name": NSLocalizedString(@"SourceType_RSS", nil)},
+					@{@"value": @(IGRSourceType_Live),	@"name": NSLocalizedString(@"SourceType_Live", nil)}
+					];
+	
+	self.languagesCategory = @[
+					   @{@"value": @(IGRVideoCategory_Rus), @"name": @"Русский"},
+					   @{@"value": @(IGRVideoCategory_Ukr), @"name": @"Укрїнський"},
+					   @{@"value": @(IGRVideoCategory_Eng), @"name": @"Ennglish"},
+					   @{@"value": @(IGRVideoCategory_Esp), @"name": @"Española"},
+					   @{@"value": @(IGRVideoCategory_De),  @"name": @"Deutsch"},
+					   @{@"value": @(IGRVideoCategory_Pl),  @"name": @"Polskie"}
 					   ];
 	
 	self.caches = @[
-					@{@"value": @(IGRCache_Default),		@"name": NSLocalizedString(@"Cache_Default", nil)},
-					@{@"value": @(IGRCache_HighLatency),	@"name": NSLocalizedString(@"Cache_HighLatency", nil)},
-					@{@"value": @(IGRCache_HigherLatency),	@"name": NSLocalizedString(@"Cache_HigherLatency", nil)}
+					@{@"value": @(IGRVideoBufferSize_1mb),	@"name": NSLocalizedString(@"VideoBufferSize_1mb", nil)},
+					@{@"value": @(IGRVideoBufferSize_3mb),	@"name": NSLocalizedString(@"VideoBufferSize_3mb", nil)},
+					@{@"value": @(IGRVideoBufferSize_5mb),	@"name": NSLocalizedString(@"VideoBufferSize_5mb", nil)},
+					@{@"value": @(IGRVideoBufferSize_10mb),	@"name": NSLocalizedString(@"VideoBufferSize_10mb", nil)},
+					@{@"value": @(IGRVideoBufferSize_20mb),	@"name": NSLocalizedString(@"VideoBufferSize_20mb", nil)}
 					];
 	
-	self.history = @[@(IGRHistorySize_5),
-					 @(IGRHistorySize_10),
-					 @(IGRHistorySize_20),
-					 @(IGRHistorySize_50)
+	self.history = @[@{@"value": @(IGRHistorySize_5),	@"name": @(IGRHistorySize_5).stringValue},
+					 @{@"value": @(IGRHistorySize_10),	@"name": @(IGRHistorySize_10).stringValue},
+					 @{@"value": @(IGRHistorySize_20),	@"name": @(IGRHistorySize_20).stringValue},
+					 @{@"value": @(IGRHistorySize_50),	@"name": @(IGRHistorySize_50).stringValue}
 					];
 	
 	[super viewDidLoad];
 	
-	[self updateViewForLanguage];
-	[self updateViewForCache];
-	[self updateViewForHistorySize];
+	[self updateViewForSettings:IGRSettingsType_Source from:self.sourceButton];
+	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:self.languageCategoryButton];
+	[self updateViewForSettings:IGRSettingsType_Cache from:self.videoBufferButton];
+	[self updateViewForSettings:IGRSettingsType_History from:self.historySizeButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,105 +81,145 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onChangeLanguage:(id)sender
+- (void)updateSettingsFor:(IGRSettingsType)aSettingsType
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *langId = settings.videoLanguageId;
+	NSNumber *settingsId = @0;
+	NSArray *settingsData = nil;
 	
-	NSUInteger pos = [self.languages indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	switch (aSettingsType)
+	{
+		case IGRSettingsType_Source:
+		{
+			settingsId = settings.sourceType;
+			settingsData = self.sources;
+		}
+			break;
+		case IGRSettingsType_LanguageCategory:
+		{
+			settingsId = settings.videoLanguageId;
+			settingsData = self.languagesCategory;
+		}
+			break;
+		case IGRSettingsType_Cache:
+		{
+			settingsId = settings.videoBufferSize;
+			settingsData = self.caches;
+		}
+			break;
+		case IGRSettingsType_History:
+		{
+			settingsId = settings.historySize;
+			settingsData = self.history;
+		}
+			break;
+	}
+	
+	NSUInteger pos = [settingsData indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		
-		BOOL result = [obj[@"id"] isEqualToNumber:langId];
+		BOOL result = [obj[@"value"] isEqualToNumber:settingsId];
 		*stop = result;
 		
 		return result;
 	}];
 	
-	pos = ((pos + 1) == self.languages.count) ? 0 : ++pos;
+	pos = ((pos + 1) == settingsData.count) ? 0 : ++pos;
 	
-	NSDictionary *newLanguage = self.languages[pos];
-	settings.videoLanguageId = newLanguage[@"id"];
+	NSDictionary *newSettings = settingsData[pos];
+	
+	switch (aSettingsType)
+	{
+		case IGRSettingsType_Source:
+		{
+			settings.sourceType = newSettings[@"value"];
+		}
+			break;
+		case IGRSettingsType_LanguageCategory:
+		{
+			settings.videoLanguageId = newSettings[@"value"];
+		}
+			break;
+		case IGRSettingsType_Cache:
+		{
+			settings.videoBufferSize = newSettings[@"value"];
+		}
+			break;
+		case IGRSettingsType_History:
+		{
+			settings.historySize = newSettings[@"value"];
+		}
+			break;
+	}
 	
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-	
-	[self updateViewForLanguage];
 }
 
-- (void)updateViewForLanguage
+- (void)updateViewForSettings:(IGRSettingsType)aSettingsType from:(UIButton *)sender
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *langId = settings.videoLanguageId;
+	NSNumber *settingsId = @0;
+	NSArray *settingsData = nil;
+	
+	switch (aSettingsType)
+	{
+		case IGRSettingsType_Source:
+		{
+			settingsId = settings.sourceType;
+			settingsData = self.sources;
+		}
+			break;
+		case IGRSettingsType_LanguageCategory:
+		{
+			settingsId = settings.videoLanguageId;
+			settingsData = self.languagesCategory;
+		}
+			break;
+		case IGRSettingsType_Cache:
+		{
+			settingsId = settings.videoBufferSize;
+			settingsData = self.caches;
+		}
+			break;
+		case IGRSettingsType_History:
+		{
+			settingsId = settings.historySize;
+			settingsData = self.history;
+		}
+			break;
+	}
 	
 	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
 		
-		return [evaluatedObject[@"id"] isEqualToNumber:langId];
+		return [evaluatedObject[@"value"] isEqualToNumber:settingsId];
 	}];
 	
-	NSString *langString = [[self.languages filteredArrayUsingPredicate:predicate] firstObject][@"langString"];
+	NSString *settingsString = [[settingsData filteredArrayUsingPredicate:predicate] firstObject][@"name"];
 	
-	[self.languageButton setTitle:langString forState:UIControlStateNormal];
+	[sender setTitle:settingsString forState:UIControlStateNormal];
+}
+
+- (IBAction)onChangeSource:(id)sender
+{
+	[self updateSettingsFor:IGRSettingsType_Source];
+	[self updateViewForSettings:IGRSettingsType_Source from:sender];
+}
+
+- (IBAction)onChangeLanguage:(id)sender
+{
+	[self updateSettingsFor:IGRSettingsType_LanguageCategory];
+	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:sender];
 }
 
 - (IBAction)onChangeCache:(id)sender
 {
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *cache = settings.cacheSize;
-	
-	NSUInteger pos = [self.caches indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		
-		BOOL result = [obj[@"value"] isEqualToNumber:cache];
-		*stop = result;
-		
-		return result;
-	}];
-	
-	pos = ((pos + 1) == self.caches.count) ? 0 : ++pos;
-	
-	NSDictionary *newCache = self.caches[pos];
-	settings.cacheSize = newCache[@"value"];
-	
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-	
-	[self updateViewForCache];
-}
-
-- (void)updateViewForCache
-{
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *cache = settings.cacheSize;
-	
-	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-		
-		return [evaluatedObject[@"value"] isEqualToNumber:cache];
-	}];
-	
-	NSString *cacheName = [[self.caches filteredArrayUsingPredicate:predicate] firstObject][@"name"];
-	
-	[self.cacheButton setTitle:cacheName forState:UIControlStateNormal];
+	[self updateSettingsFor:IGRSettingsType_Cache];
+	[self updateViewForSettings:IGRSettingsType_Cache from:sender];
 }
 
 - (IBAction)onChangeHistorySize:(id)sender
 {
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *historySize = settings.historySize;
-	
-	NSUInteger pos = [self.history indexOfObject:historySize];
-	
-	pos = ((pos + 1) == self.history.count) ? 0 : ++pos;
-	
-	NSNumber *newHistorySize = self.history[pos];
-	settings.historySize = newHistorySize;
-	
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-	
-	[self updateViewForHistorySize];
-}
-
-- (void)updateViewForHistorySize
-{
-	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *historySize = settings.historySize;
-	
-	[self.historySizeButton setTitle:historySize.stringValue forState:UIControlStateNormal];
+	[self updateSettingsFor:IGRSettingsType_History];
+	[self updateViewForSettings:IGRSettingsType_History from:sender];
 }
 
 @end

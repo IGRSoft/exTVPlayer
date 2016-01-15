@@ -86,6 +86,21 @@
 
 #pragma mark - Privat
 
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+{
+	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
+	{
+		[self.chanels.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+			
+			[obj setHighlighted:NO];
+		}];
+	}
+	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] && [context.nextFocusedView isKindOfClass:[IGRChanelCell class]])
+	{
+		[(IGRChanelCell *)context.nextFocusedView setHighlighted:YES];
+	}
+		
+}
 
 #pragma mark - Navigation
 
@@ -100,7 +115,7 @@
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
-			[catalogViewController setChanel:chanel];
+			[catalogViewController setChanel:chanel.itemId];
 		});
 	}
 }

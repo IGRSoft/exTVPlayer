@@ -15,6 +15,12 @@
 #import "MagicalRecord.h"
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
 
+typedef NS_ENUM(NSUInteger, IGRSourceType)
+{
+	IGRSourceType_RSS		= 0,
+	IGRSourceType_Live		= 1
+};
+
 typedef NS_ENUM(NSUInteger, IGRTrackState)
 {
 	IGRTrackState_New = 0,
@@ -32,11 +38,13 @@ typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 	IGRVideoCategory_Pl  = 968815
 };
 
-typedef NS_ENUM(NSUInteger, IGRCache)
+typedef NS_ENUM(NSUInteger, IGRVideoBufferSize)
 {
-	IGRCache_Default		= 1024,
-	IGRCache_HighLatency	= 3096,
-	IGRCache_HigherLatency	= 5120
+	IGRVideoBufferSize_1mb	= 1024,
+	IGRVideoBufferSize_3mb	= 3096,
+	IGRVideoBufferSize_5mb	= 5120,
+	IGRVideoBufferSize_10mb	= 10240,
+	IGRVideoBufferSize_20mb	= 20480
 };
 
 typedef NS_ENUM(NSUInteger, IGRHistorySize)
@@ -50,8 +58,10 @@ typedef NS_ENUM(NSUInteger, IGRHistorySize)
 typedef NS_ENUM(NSUInteger, IGRChanelMode)
 {
 	IGRChanelMode_Catalog		= 0,
-	IGRChanelMode_Favorites		= 1,
-	IGRChanelMode_History		= 2
+	IGRChanelMode_Catalog_Live,
+	IGRChanelMode_Favorites,
+	IGRChanelMode_History,
+	IGRChanelMode_Search
 };
 
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";

@@ -7,14 +7,14 @@
 //
 
 #import "IGRSearchViewController.h"
-#import "IGRCatalogViewController.h"
+#import "IGRCChanelViewController.h"
 
 @interface IGRSearchViewController () <UITextFieldDelegate>
 
-@property (copy, nonatomic) NSString *catalogId;
+@property (copy, nonatomic) NSString *searchText;
 
 @property (weak, nonatomic) IBOutlet UITextField *catalogTextField;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *getListButton;
 
 @end
 
@@ -31,8 +31,8 @@
 	[super viewDidAppear:animated];
 	
 	IGREntityAppSettings *settings = [self appSettings];
-	self.catalogTextField.text = self.catalogId = settings.lastPlayedCatalog;
-	self.nextButton.enabled = self.catalogId.length > 0;
+	self.catalogTextField.text = self.searchText = settings.lastPlayedCatalog;
+	self.getListButton.enabled = self.searchText.length > 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,14 +51,26 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"openCatalog"])
+	if ([segue.identifier isEqualToString:@"openSearch"])
 	{
-		IGRCatalogViewController *catalogViewController = segue.destinationViewController;
+		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
 		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-			[catalogViewController setCatalogId:self.catalogId];
-		});
+		NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+		NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.searchText];
+		if ([alphaNums isSupersetOfSet:inStringSet])
+		{
+			dispatch_async(dispatch_get_main_queue(), ^{
+				
+				[catalogViewController setChanel:self.searchText];
+			});
+		}
+		else
+		{
+			dispatch_async(dispatch_get_main_queue(), ^{
+				
+				[catalogViewController setSearchResult:self.searchText];
+			});
+		}
 	}
 }
 
@@ -66,12 +78,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	self.catalogId = [textField.text copy];
+	self.searchText = [textField.text copy];
 	
 	IGREntityAppSettings *settings = [self appSettings];
-	settings.lastPlayedCatalog = self.catalogId;
+	settings.lastPlayedCatalog = self.searchText;
 	
-	self.nextButton.enabled = self.catalogId.length > 0;
+	self.getListButton.enabled = self.searchText.length > 0;
 }
 
 @end

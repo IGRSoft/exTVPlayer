@@ -93,6 +93,7 @@
 		A58F66F81C47C9F300D7518B /* IGRFavoritsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */; };
 		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
+		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* AppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
@@ -379,6 +380,8 @@
 		A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTabBarViewController.m; sourceTree = "<group>"; };
 		A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRHistoryViewController.h; sourceTree = "<group>"; };
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
+		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -710,6 +713,8 @@
 				A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */,
 				A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */,
 				A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */,
+				A58F671E1C4829E300D7518B /* UIView+Extension.h */,
+				A58F671F1C4829E300D7518B /* UIView+Extension.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1017,6 +1022,7 @@
 				A51F3BF31C23223900F6080A /* ClassicSQLiteMagicalRecordStack.m in Sources */,
 				A5E81BDF1C22B72D00EABFC5 /* AppDelegate.m in Sources */,
 				A569ED601C257CA7004EF247 /* IGREntityExVideoCatalog.m in Sources */,
+				A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */,
 				A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */,
 				A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */,
 				A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */,

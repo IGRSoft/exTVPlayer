@@ -10,7 +10,8 @@
 
 @interface IGRCChanelViewController : UICollectionViewController
 
-- (void)setChanel:(IGREntityExChanel *)aChanel;
+- (void)setChanel:(NSString *)aChanel;
+- (void)setSearchResult:(NSString *)aSearchRequest;
 
 - (void)showFavorites;
 - (void)showHistory;

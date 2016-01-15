@@ -22,9 +22,10 @@
 	if (!settings)
 	{
 		settings = [IGREntityAppSettings MR_createEntity];
-		settings.videoLanguageId = @(IGRVideoCategory_Rus);
-		settings.cacheSize = @(IGRCache_Default);
-		settings.historySize = @(IGRHistorySize_10);
+		settings.videoLanguageId	= @(IGRVideoCategory_Rus);
+		settings.videoBufferSize	= @(IGRVideoBufferSize_5mb);
+		settings.historySize		= @(IGRHistorySize_10);
+		settings.sourceType			= @(IGRSourceType_RSS);
 		
 		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	}

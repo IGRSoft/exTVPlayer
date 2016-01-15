@@ -77,7 +77,7 @@
 											   object:nil];
 	
 	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-	NSString *cacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.cacheSize];
+	NSString *cacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.videoBufferSize];
 	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[cacheOption]];
 	_mediaplayer.delegate = self;
 	_mediaplayer.drawable = self.movieView;

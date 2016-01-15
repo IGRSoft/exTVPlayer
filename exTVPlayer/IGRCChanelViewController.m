@@ -20,14 +20,19 @@
 
 @interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *catalogs;
+@property (weak, nonatomic  ) IBOutlet UICollectionView *catalogs;
+@property (strong, nonatomic) UILabel *noContentLabel;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) IGREntityExChanel *chanel;
+@property (strong, nonatomic) NSMutableArray<NSString*> *chanels;
 
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
 
 @property (assign, nonatomic) IGRChanelMode chanelMode;
+
+@property (copy,   nonatomic) NSString *liveSearchRequest;
+@property (copy,   nonatomic) NSString *liveChanel;
+@property (assign, nonatomic) NSInteger livePage;
 
 @end
 
@@ -38,6 +43,19 @@
     [super viewDidLoad];
     
     self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
+	
+	CGFloat w = 1000.0;
+	CGFloat h = 50.0;
+	CGRect labelRect = CGRectMake((self.view.bounds.size.width - w) * 0.5,
+								  (self.view.bounds.size.height - h) * 0.5, w, h);
+	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
+	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
+	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
+	self.noContentLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:32.0];
+	self.noContentLabel.textColor = [UIColor darkGrayColor];
+	self.noContentLabel.hidden = YES;
+	
+	[self.view addSubview:self.noContentLabel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -85,11 +103,59 @@
 
 #pragma mark - Public
 
-- (void)setChanel:(IGREntityExChanel *)aChanel
+- (void)setChanel:(NSString *)aChanel
 {
-	self.chanelMode = IGRChanelMode_Catalog;
-	_chanel = aChanel;
-	[IGREXParser parseChanelContent:aChanel.itemId];
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+
+	self.chanelMode = [settings.sourceType isEqualToNumber:@(IGRSourceType_RSS)] ? IGRChanelMode_Catalog : IGRChanelMode_Catalog_Live;
+	
+	if (self.chanelMode == IGRChanelMode_Catalog)
+	{
+		_chanels = [NSMutableArray arrayWithObject:aChanel];
+		[IGREXParser parseChanelContent:aChanel];
+	}
+	else
+	{
+		_liveChanel = aChanel;
+		_livePage = 0;
+		_chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage]];
+		
+		[self asyncUpdate];
+	}
+}
+
+- (void)setSearchResult:(NSString *)aSearchRequest
+{
+	_liveSearchRequest = aSearchRequest;
+	self.chanelMode = IGRChanelMode_Search;
+	
+	_liveChanel = @"0";
+	_livePage = 0;
+	_chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveSearchContent:self.liveSearchRequest
+																			 page:self.livePage
+																		  catalog:self.liveChanel.integerValue]];
+	
+	[self asyncUpdate];
+}
+
+- (void)asyncUpdate
+{
+	NSUInteger count = self.chanels.count;
+	__weak typeof(self) weak = self;
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+		[weak.chanels enumerateObjectsUsingBlock:^(NSString * _Nonnull chanel, NSUInteger idx, BOOL * _Nonnull stop) {
+			
+			if ([IGREXParser parseCatalogContent:chanel] || (idx + 1) == count)
+			{
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					
+					[weak.fetchedResultsController performFetch:nil];
+					[weak.catalogs reloadData];
+				});
+			}
+		}];
+	});
 }
 
 - (void)showFavorites
@@ -116,9 +182,6 @@
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalogs.indexPathsForSelectedItems.firstObject.row + self.catalogs.indexPathsForSelectedItems.firstObject.section)];
 		IGREntityExCatalog *catalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
-		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-		settings.lastPlayedCatalog = catalog.itemId;
-		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			[catalogViewController setCatalogId:catalog.itemId];
@@ -131,13 +194,16 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+	NSUInteger count = [[self.fetchedResultsController sections] count];
 	if (self.chanelMode == IGRChanelMode_History)
 	{
 		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-		return MIN(settings.historySize.integerValue, [[self.fetchedResultsController sections] count]);
+		count = MIN(settings.historySize.integerValue, count);
 	}
 	
-	return [[self.fetchedResultsController sections] count];
+	self.noContentLabel.hidden = count > 0;
+	
+	return count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -183,6 +249,41 @@
 	self.lastSelectedItem = indexPath;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live)
+	{
+		if ((indexPath.row + indexPath.section) == (self.chanels.count - 1) && self.livePage >= 0)
+		{
+			++self.livePage;
+			
+			NSArray *chanels = nil;
+			
+			if (self.chanelMode == IGRChanelMode_Search)
+			{
+				chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveSearchContent:self.liveSearchRequest
+																						 page:self.livePage
+																					  catalog:self.liveChanel.integerValue]];
+			}
+			else
+			{
+				chanels = [IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage];
+			}
+			
+			if (chanels.count)
+			{
+				[_chanels addObjectsFromArray:chanels];
+				self.fetchedResultsController = nil;
+				[self asyncUpdate];
+			}
+			else
+			{
+				self.livePage = -1;
+			}
+		}
+	}
+}
+
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -197,7 +298,7 @@
 	}
 	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
 	{
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanel.itemId];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanels.firstObject];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"
@@ -210,6 +311,14 @@
 															   withPredicate:predicate
 																	sortedBy:@"viewedTimestamp"
 																   ascending:NO];
+	}
+	else if (_fetchedResultsController == nil && (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live))
+	{
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId IN %@", self.chanels];
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+															   withPredicate:predicate
+																	sortedBy:@"orderId"
+																   ascending:YES];
 	}
 	
 	return _fetchedResultsController;

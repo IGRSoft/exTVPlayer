@@ -14,13 +14,17 @@
 {
 	[super setHighlighted:highlighted];
 	
-	UIColor *cellColor = highlighted ?  [UIColor colorWithRed:213/255.0f green:232/255.0f blue:255/255.0f alpha:1] :
-	[UIColor whiteColor];
+	UIColor *cellColor = highlighted ?  [UIColor colorWithRed:0.035 green:0.314 blue:0.816 alpha:1.000] :
+										[UIColor whiteColor];
+	
+	UIColor *textColor = highlighted ?  [UIColor whiteColor] : [UIColor colorWithRed:0.075 green:0.000 blue:0.459 alpha:1.000];
+	
 	[UIView animateWithDuration:0.1
 						  delay:0
 						options:(UIViewAnimationOptionAllowUserInteraction)
 					 animations:^{
 						 [self.backgroundView setBackgroundColor:cellColor];
+						 self.title.textColor = textColor;
 					 }
 					 completion:nil];
 }

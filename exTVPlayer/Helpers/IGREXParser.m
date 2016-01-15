@@ -15,7 +15,7 @@
 
 @implementation IGREXParser
 
-+ (void)parseCatalogContent:(NSString *)aCatalogId
++ (BOOL)parseCatalogContent:(NSString *)aCatalogId
 {
 	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																			withValue:aCatalogId];
@@ -24,7 +24,7 @@
 	{
 		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 1)
 		{
-			return; //skip update
+			return NO; //skip update
 		}
 	}
 	
@@ -83,9 +83,20 @@
 		}];
 	}
 	
+	if ([catalog.orderId isEqualToNumber:@0])
+	{
+		NSInteger orderId = [[IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"] integerValue];
+		catalog.orderId = @(++orderId);
+	}
+	
 	catalog.timestamp = [NSDate date];
 	
-	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	if ([MR_DEFAULT_CONTEXT hasChanges])
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+	
+	return YES;
 }
 
 + (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId
@@ -125,7 +136,10 @@
 	
 	videoCatalog.timestamp = [NSDate date];
 	
-	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	if ([MR_DEFAULT_CONTEXT hasChanges])
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
 
 }
 
@@ -205,7 +219,64 @@
 	
 	chanel.timestamp = [NSDate date];
 	
-	[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	if ([MR_DEFAULT_CONTEXT hasChanges])
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+}
+
++ (NSArray *)parseLiveSearchContent:(NSString *)aSearchText page:(NSUInteger)aPage catalog:(NSInteger)aCatalog
+{
+	NSError *error = nil;
+	NSStringEncoding encoding;
+	NSString *rrsUrl = [NSString stringWithFormat:@"http://rover.info/r_video_search?s=%@&p=%@", aSearchText, @(aPage)];
+	if (aCatalog > 0)
+	{
+		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", @(aCatalog)];
+	}
+	rrsUrl = [rrsUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
+													 usedEncoding:&encoding
+															error:&error];
+	
+	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
+	
+	NSParameterAssert(xmlDocument.isValid);
+	
+	NSMutableArray *items = [NSMutableArray array];
+	[xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
+		
+		NSString *catalogId = [node attribute:@"id"];
+		[items addObject:catalogId];
+	}];
+	
+	return items;
+}
+
++ (NSArray *)parseLiveCatalog:(NSString *)aCatalog page:(NSUInteger)aPage
+{
+	NSError *error = nil;
+	NSStringEncoding encoding;
+	NSString *rrsUrl = [NSString stringWithFormat:@"http://rover.info/r_video_search?original_id=%@&p=%@", aCatalog, @(aPage)];
+	rrsUrl = [rrsUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+	
+	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
+													 usedEncoding:&encoding
+															error:&error];
+	
+	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
+	
+	NSParameterAssert(xmlDocument.isValid);
+	
+	NSMutableArray *items = [NSMutableArray array];
+	[xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
+		
+		NSString *catalogId = [node attribute:@"id"];
+		[items addObject:catalogId];
+	}];
+	
+	return items;
 }
 
 + (NSInteger)hoursBetweenCurrwntDate:(NSDate *)aDate

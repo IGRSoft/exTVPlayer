@@ -18,8 +18,18 @@
 
 "Default" = "Default";
 
-"Cache_Default" = "1 MB";
+"VideoBufferSize_1mb" = "1 MB";
 
-"Cache_HighLatency" = "3 MB";
+"VideoBufferSize_3mb" = "3 MB";
 
-"Cache_HigherLatency" = "5 MB";
+"VideoBufferSize_5mb" = "5 MB";
+
+"VideoBufferSize_10mb" = "10 MB";
+
+"VideoBufferSize_20mb" = "20 MB";
+
+"No_Content" = "There is no content for this catalog";
+
+"SourceType_RSS" = "RSS";
+
+"SourceType_Live" = "Live";

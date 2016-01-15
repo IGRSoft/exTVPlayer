@@ -18,8 +18,18 @@
 
 "Default" = "По умолчанию";
 
-"Cache_Default" = "1 Мб";
+"VideoBufferSize_1mb" = "1 Мб";
 
-"Cache_HighLatency" = "3 Мб";
+"VideoBufferSize_3mb" = "3 Мб";
 
-"Cache_HigherLatency" = "5 Мб";
+"VideoBufferSize_5mb" = "5 Мб";
+
+"VideoBufferSize_10mb" = "10 Мб";
+
+"VideoBufferSize_20mb" = "20 Мб";
+
+"No_Content" = "Нет контента для этого каталога";
+
+"SourceType_RSS" = "RSS";
+
+"SourceType_Live" = "Онлайн";

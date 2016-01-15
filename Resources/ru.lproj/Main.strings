@@ -1,12 +1,12 @@
 
 /* Class = "UIButton"; */
-"806-21-3HV.normalTitle" = "Получит список треков";
+"Ied-0W-5kR.normalTitle" = "Получит список треков";
 
 /* Class = "UITextField"; */
-"hxx-IK-k2R.placeholder" = "Введите номер каталога";
+"DQr-if-9jc.placeholder" = "Номер каталога или название";
 
 /* Class = "UILabel"; */
-"ukS-Og-T2L.text" = "или получить последние каталоги из веб-канала для категории";
+"kJ5-zH-itW.text" = "Источник:";
 
 /* Class = "UILabel"; */
 "Yis-TA-ANo.text" = "Главный каталог:";

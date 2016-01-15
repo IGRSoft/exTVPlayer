@@ -1,12 +1,12 @@
 
 /* Class = "UIButton"; */
-"806-21-3HV.normalTitle" = "Get list of tracks";
+"Ied-0W-5kR.normalTitle" = "Get list of tracks";
 
 /* Class = "UITextField"; */
-"hxx-IK-k2R.placeholder" = "Enter a catalog number";
+"DQr-if-9jc.placeholder" = "Catalog ID or Title name";
 
 /* Class = "UILabel"; */
-"ukS-Og-T2L.text" = "or Get latest catalog web-feed from Category";
+"kJ5-zH-itW.text" = "Source:";
 
 /* Class = "UILabel"; */
 "Yis-TA-ANo.text" = "Main Catalog:";
