@@ -137,7 +137,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Catalog ID or Title name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQr-if-9jc">
                                 <rect key="frame" x="694" y="433" width="531" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="Rrn-MF-ArD" id="fQS-wQ-PSz"/>
                                 </connections>
@@ -204,7 +204,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="IGRExItemCell" rowHeight="70" id="n3V-JD-V6d" customClass="IGRExItemCell">
-                                        <rect key="frame" x="0.0" y="199" width="1920" height="70"/>
+                                        <rect key="frame" x="0.0" y="54" width="1920" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n3V-JD-V6d" id="kig-lV-2na">
                                             <rect key="frame" x="0.0" y="0.0" width="1904" height="70"/>
@@ -549,6 +549,6 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Q3-pp-UYR"/>
+        <segue reference="qbP-pN-dRE"/>
     </inferredMetricsTieBreakers>
 </document>
