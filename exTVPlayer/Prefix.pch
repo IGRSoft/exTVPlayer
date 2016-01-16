@@ -59,6 +59,7 @@ typedef NS_ENUM(NSUInteger, IGRChanelMode)
 {
 	IGRChanelMode_Catalog		= 0,
 	IGRChanelMode_Catalog_Live,
+	IGRChanelMode_Catalog_One,
 	IGRChanelMode_Favorites,
 	IGRChanelMode_History,
 	IGRChanelMode_Search

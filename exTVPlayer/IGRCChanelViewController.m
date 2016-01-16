@@ -124,6 +124,14 @@
 	}
 }
 
+- (void)setCatalog:(NSString *)aCatalog
+{
+	self.chanelMode = IGRChanelMode_Catalog_One;
+	
+	_chanels = [NSMutableArray arrayWithObject:aCatalog];
+	[IGREXParser parseCatalogContent:aCatalog];
+}
+
 - (void)setSearchResult:(NSString *)aSearchRequest
 {
 	_liveSearchRequest = aSearchRequest;
@@ -299,6 +307,14 @@
 	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanels.firstObject];
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+															   withPredicate:predicate
+																	sortedBy:@"orderId"
+																   ascending:NO];
+	}
+	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog_One)
+	{
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", self.chanels.firstObject];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"

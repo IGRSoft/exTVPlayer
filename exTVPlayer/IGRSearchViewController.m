@@ -61,7 +61,7 @@
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
 				
-				[catalogViewController setChanel:self.searchText];
+				[catalogViewController setCatalog:self.searchText];
 			});
 		}
 		else
