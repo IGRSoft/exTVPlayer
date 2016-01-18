@@ -1,18 +1,19 @@
 //
-//  AppDelegate.m
+//  IGRAppDelegate.m
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 12/17/15.
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "IGRAppDelegate.h"
+#import "IGREntityExTrack.h"
 
-@interface AppDelegate ()
+@interface IGRAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation IGRAppDelegate
 
 static NSString * const kStoreMomdName = @"exTVPlayer.momd";
 static NSString * const kStoreName = @"exTVPlayer.sqlite";
@@ -23,6 +24,8 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
 	MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtPath:storeURL];
 	[MagicalRecordStack setDefaultStack:stack];
+	
+	[self resetNotDownloadedTracks];
 	
 	return YES;
 }
@@ -94,6 +97,42 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	}
 	
 	return storePath;
+}
+
+- (void)resetNotDownloadedTracks
+{
+	NSArray *tracks = [IGREntityExTrack MR_findByAttribute:@"dataStatus" withValue:@(IGRTrackDataStatus_Downloading)];
+	
+	if (tracks.count)
+	{
+		for (IGREntityExTrack *track in tracks)
+		{
+			track.dataStatus = @(IGRTrackDataStatus_Web);
+		}
+		
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+}
+
++ (NSURL *)videoFolder
+{
+	NSURL *destURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+															inDomain:NSUserDomainMask
+												   appropriateForURL:nil
+															  create:NO
+															   error:nil];
+	destURL = [destURL URLByAppendingPathComponent:@"SavedVideo"];
+	
+	NSFileManager *defaultManager = [NSFileManager defaultManager];
+	if (![defaultManager fileExistsAtPath:[destURL path]])
+	{
+		[defaultManager createDirectoryAtPath:[destURL path]
+				  withIntermediateDirectories:YES
+								   attributes:nil
+										error:NULL];
+	}
+	
+	return destURL;
 }
 
 @end

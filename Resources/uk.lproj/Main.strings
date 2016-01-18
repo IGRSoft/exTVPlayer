@@ -37,3 +37,9 @@
 
 /* Class = "UIButton"; */
 "BSf-Ny-vvZ.normalTitle" = "Показати Історію";
+
+/* Class = "UILabel"; */
+"ZLA-YR-nRS.text" = "Видалит усі збережені треки:";
+
+/* Class = "UIButton"; */
+"4cF-Tf-yT8.normalTitle" = "Очистити";

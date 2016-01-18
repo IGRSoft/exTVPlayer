@@ -13,3 +13,6 @@
 [submodule "Submodules/DACircularProgress"]
 	path = Submodules/DACircularProgress
 	url = https://github.com/danielamitay/DACircularProgress.git
+[submodule "Submodules/AFNetworking"]
+	path = Submodules/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git

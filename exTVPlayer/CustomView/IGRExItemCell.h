@@ -13,5 +13,7 @@
 
 @property (weak  , nonatomic) IBOutlet UILabel *title;
 @property (weak  , nonatomic) IBOutlet DACircularProgressView *trackStatus;
+@property (weak  , nonatomic) IBOutlet UIProgressView *saveProgress;
+@property (weak  , nonatomic) IBOutlet UIImageView *savedIcon;
 
 @end

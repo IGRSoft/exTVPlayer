@@ -2,8 +2,8 @@
 //  IGREntityExTrack+CoreDataProperties.m
 //  exTVPlayer
 //
-//  Created by Vitalii Parovishnyk on 12/19/15.
-//  Copyright © 2015 IGR Software. All rights reserved.
+//  Created by Vitalii Parovishnyk on 1/17/16.
+//  Copyright © 2016 IGR Software. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -13,11 +13,13 @@
 
 @implementation IGREntityExTrack (CoreDataProperties)
 
-@dynamic location;
+@dynamic dataStatus;
+@dynamic localName;
 @dynamic name;
+@dynamic orderId;
 @dynamic position;
 @dynamic status;
-@dynamic orderId;
+@dynamic webPath;
 @dynamic catalog;
 
 @end

@@ -44,18 +44,20 @@
 	
 	__block NSUInteger orderId = 0;
 	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
-		NSString *title = [[node child:@"title"] text];
-		NSString *location = [[node child:@"location"] text];
 		
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"location == %@ AND catalog = %@", location, catalog];
+		NSString *title = [[node child:@"title"] text];
+		NSString *webPath = [[node child:@"location"] text];
+		
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
 		IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
 		
 		if (!track)
 		{
 			track = [IGREntityExTrack MR_createEntity];
-			track.location = location;
+			track.webPath = webPath;
 			track.name = title;
 			track.status = @(IGRTrackState_New);
+			track.dataStatus = @(IGRTrackDataStatus_Web);
 			track.position = @(0.0);
 			track.catalog = catalog;
 			track.orderId = @(orderId);
@@ -77,6 +79,7 @@
 		NSParameterAssert(xmlDocument.isValid);
 		
 		[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
+			
 			NSString *imgUrl = [node text];
 			imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
 			catalog.imgUrl = imgUrl;
@@ -126,6 +129,7 @@
 	videoCatalog.name = title;
 	
 	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
+		
 		NSString *title = [[node child:@"title"] text];
 		NSString *itemId = [[node child:@"guid"] text];
 		
@@ -206,6 +210,7 @@
 			NSParameterAssert(xmlDocument.isValid);
 			
 			[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
+				
 				NSString *imgUrl = [node text];
 				imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
 				catalog.imgUrl = imgUrl;

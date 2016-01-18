@@ -6,9 +6,12 @@
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "IGRBaseViewController.h"
 
+@class IGREntityExTrack;
+
 @interface IGRSettingsViewController : IGRBaseViewController
+
++ (void)removeSavedTrack:(IGREntityExTrack *)aTrack;
 
 @end

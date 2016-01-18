@@ -37,3 +37,9 @@
 
 /* Class = "UIButton"; */
 "BSf-Ny-vvZ.normalTitle" = "Show History";
+
+/* Class = "UILabel"; */
+"ZLA-YR-nRS.text" = "Remove All Saved Tracks:";
+
+/* Class = "UIButton"; */
+"4cF-Tf-yT8.normalTitle" = "Clean";

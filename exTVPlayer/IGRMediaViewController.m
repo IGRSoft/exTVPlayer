@@ -8,6 +8,7 @@
 
 #import "IGRMediaViewController.h"
 #import "IGRMediaProgressView.h"
+#import "IGRAppDelegate.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -178,9 +179,22 @@
 	IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
 	
 	self.titleLabel.text = track.name;
-	NSURL *url = [NSURL URLWithString:track.location];
 	
-	_mediaplayer.media = [VLCMedia mediaWithURL:url];
+	NSURL *url = [NSURL URLWithString:track.webPath];
+	if (track.localName.length)
+	{
+		url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:track.localName];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]])
+		{
+			url = [NSURL URLWithString:track.webPath];
+			track.localName = nil;
+			track.dataStatus = @(IGRTrackDataStatus_Web);
+		}
+	}
+	else
+	{
+		_mediaplayer.media = [VLCMedia mediaWithURL:url];
+	}
 	
 	[_mediaplayer setPosition:track.position.floatValue];
 	[_mediaplayer play];

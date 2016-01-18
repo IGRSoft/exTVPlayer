@@ -8,24 +8,28 @@
 
 #import "IGRCatalogViewController.h"
 #import "IGRMediaViewController.h"
+#import "IGRSettingsViewController.h"
 
 #import "IGREXParser.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
 #import "IGRExItemCell.h"
 #import "DACircularProgressView.h"
+#import "IGRDownloadManager.h"
 
-@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate>
+@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
 @property (weak, nonatomic) IBOutlet UIButton *favoritButton;
 
-@property (copy, nonatomic) NSString *catalogId;
+@property (copy, nonatomic  ) NSString *catalogId;
 @property (strong, nonatomic) IGREntityExCatalog *catalog;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (assign, nonatomic) BOOL needUpdateSelection;
+
+@property (strong, nonatomic) IGRDownloadManager *downloadManager;
 
 - (IBAction)onTouchFavorit:(id)sender;
 
@@ -42,6 +46,8 @@
 													 withValue:_catalogId];
 	
 	self.catalog.viewedTimestamp = [NSDate date];
+	
+	self.downloadManager = [IGRDownloadManager defaultInstance];
 }
 
 - (void)viewDidLoad
@@ -68,14 +74,27 @@
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
 	}
 	
+	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+										  initWithTarget:self action:@selector(handleLongPress:)];
+	lpgr.minimumPressDuration = 1.0; //seconds
+	lpgr.delegate = self;
+	[self.tableView addGestureRecognizer:lpgr];
+	
 	[self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	[self.downloadManager removeAllProgresses];
+	
 	if ([MR_DEFAULT_CONTEXT hasChanges])
 	{
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+	
+	for (UIGestureRecognizer *gr in self.tableView.gestureRecognizers)
+	{
+		[self.tableView removeGestureRecognizer:gr];
 	}
 }
 
@@ -204,7 +223,15 @@
 	{
 		trackPosition = 1.0;
 	}
+	
 	cell.trackStatus.progress = 1.0 - trackPosition;
+	cell.savedIcon.hidden = ![track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Local)];
+	cell.saveProgress.hidden = ![track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)];
+	
+	if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
+	{
+		//[self.downloadManager updateProgress:cell.saveProgress forTrack:track];
+	}
 }
 
 #pragma mark - Fetched results controller
@@ -223,4 +250,88 @@
 	return _fetchedResultsController;
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+	if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+	{
+		NSIndexPath *indexPath = nil;
+		for (indexPath in [self.tableView indexPathsForVisibleRows])
+		{
+			IGRExItemCell *trackCell = (IGRExItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+			if (trackCell.isHighlighted)
+			{
+				UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Tracks Options", @"")
+																			  message:@""
+																	   preferredStyle:UIAlertControllerStyleActionSheet];
+
+				IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
+				UIAlertAction* action = nil;
+				
+				__weak typeof(self) weak = self;
+				if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)])
+				{
+					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Save Track", @"")
+													  style:UIAlertActionStyleDefault
+													handler:^(UIAlertAction * action) {
+														
+														[weak.downloadManager startDownloadTrack:track
+																					withProgress:trackCell.saveProgress];
+														trackCell.saveProgress.hidden = NO;
+														
+														[view dismissViewControllerAnimated:YES completion:nil];
+														
+													}];
+				}
+				else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
+				{
+					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Downloading...", @"")
+													  style:UIAlertActionStyleDefault
+													handler:^(UIAlertAction * action) {
+														
+														[view dismissViewControllerAnimated:YES completion:nil];
+														
+													}];
+				}
+				else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Local)])
+				{
+					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove Track", @"")
+													  style:UIAlertActionStyleDefault
+													handler:^(UIAlertAction * action) {
+														
+														[IGRSettingsViewController removeSavedTrack:track];
+														
+														[view dismissViewControllerAnimated:YES completion:nil];
+														
+													}];
+				}
+				
+				[view addAction:action];
+				
+				UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+																 style:UIAlertActionStyleCancel
+															   handler:^(UIAlertAction * action)
+										 {
+											 [view dismissViewControllerAnimated:YES completion:nil];
+										 }];
+				
+				
+				[view addAction:cancel];
+				[self presentViewController:view animated:YES completion:nil];
+				
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+					
+					[trackCell setHighlighted:YES];
+				});
+				
+				break;
+			}
+			else
+			{
+				indexPath = nil;
+			}
+		}
+	}
+}
 @end

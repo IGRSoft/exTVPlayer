@@ -349,20 +349,21 @@
 		NSIndexPath *indexPath = nil;
 		for (indexPath in [self.catalogs indexPathsForVisibleItems])
 		{
-			IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:indexPath];
-			if (catalog.isHighlighted)
+			IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:indexPath];
+			if (catalogCell.isHighlighted)
 			{
-				NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
+				NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+															  inSection:(indexPath.row + indexPath.section)];
 				IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 				
-				entityatalog.isFavorit = @(!catalog.favorit);
-				[catalog setFavorit:[entityatalog.isFavorit boolValue]];
+				entityatalog.isFavorit = @(!catalogCell.favorit);
+				[catalogCell setFavorit:[entityatalog.isFavorit boolValue]];
 				
 				self.lastSelectedItem = indexPath;
 				
 				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 					
-					[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+					[catalogCell setHighlighted:YES];
 				});
 				
 				break;

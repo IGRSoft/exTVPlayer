@@ -217,12 +217,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-U9-ZGd" customClass="DACircularProgressView">
-                                                    <rect key="frame" x="30" y="20" width="25" height="25"/>
+                                                    <rect key="frame" x="30" y="18" width="30" height="30"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="t77-KM-akm">
+                                                    <rect key="frame" x="1864" y="19" width="32" height="32"/>
+                                                </imageView>
+                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KSn-Vq-sro">
+                                                    <rect key="frame" x="0.0" y="60" width="1920" height="10"/>
+                                                </progressView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="saveProgress" destination="KSn-Vq-sro" id="UsJ-bB-aDk"/>
+                                            <outlet property="savedIcon" destination="t77-KM-akm" id="mmP-ZI-Dj4"/>
                                             <outlet property="title" destination="zgm-jF-CHu" id="dRf-QE-rC9"/>
                                             <outlet property="trackStatus" destination="Q8P-U9-ZGd" id="SCG-eW-rvW"/>
                                             <segue destination="xDf-oz-I9d" kind="show" identifier="playPlaylistPosition" id="cq6-lq-HAb"/>
@@ -487,6 +495,18 @@
                                     <action selector="onChangeHistorySize:" destination="VoP-1A-waA" eventType="primaryActionTriggered" id="EIa-Ql-Xi7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cF-Tf-yT8">
+                                <rect key="frame" x="982" y="626" width="400" height="86"/>
+                                <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Clean"/>
+                                <state key="focused">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCleenAllSavedTracks:" destination="VoP-1A-waA" eventType="primaryActionTriggered" id="4gN-VT-IdJ"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Main Catalog:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yis-TA-ANo">
                                 <rect key="frame" x="20" y="295" width="921" height="75"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
@@ -523,6 +543,12 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remove All Saved Tracks:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLA-YR-nRS">
+                                <rect key="frame" x="20" y="626" width="921" height="86"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -545,10 +571,11 @@
         <image name="favorit" width="48" height="48"/>
         <image name="favorit-off" width="48" height="48"/>
         <image name="history" width="48" height="48"/>
+        <image name="save" width="32" height="32"/>
         <image name="search" width="48" height="48"/>
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qbP-pN-dRE"/>
+        <segue reference="4Q3-pp-UYR"/>
     </inferredMetricsTieBreakers>
 </document>

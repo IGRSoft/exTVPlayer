@@ -28,6 +28,13 @@ typedef NS_ENUM(NSUInteger, IGRTrackState)
 	IGRTrackState_Done
 };
 
+typedef NS_ENUM(NSUInteger, IGRTrackDataStatus)
+{
+	IGRTrackDataStatus_Web = 0,
+	IGRTrackDataStatus_Downloading,
+	IGRTrackDataStatus_Local
+};
+
 typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 {
 	IGRVideoCategory_Rus = 23775,

@@ -7,6 +7,8 @@
 //
 
 #import "IGRSettingsViewController.h"
+#import "IGRAppDelegate.h"
+#import "IGREntityExTrack.h"
 
 @interface IGRSettingsViewController ()
 
@@ -220,6 +222,31 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 {
 	[self updateSettingsFor:IGRSettingsType_History];
 	[self updateViewForSettings:IGRSettingsType_History from:sender];
+}
+
+- (IBAction)onCleenAllSavedTracks:(id)sender
+{
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"localName != ''"];
+	NSArray *tracks = [IGREntityExTrack MR_findAllWithPredicate:predicate];
+	
+	for (IGREntityExTrack *track in tracks)
+	{
+		[IGRSettingsViewController removeSavedTrack:track];
+	}
+}
+
++ (void)removeSavedTrack:(IGREntityExTrack *)aTrack
+{
+	NSURL *url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:aTrack.localName];
+	NSFileManager *defaultManager = [NSFileManager defaultManager];
+	
+	if ([defaultManager fileExistsAtPath:[url path]])
+	{
+		[defaultManager removeItemAtURL:url error:nil];
+	}
+	
+	aTrack.localName = nil;
+	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
 }
 
 @end
