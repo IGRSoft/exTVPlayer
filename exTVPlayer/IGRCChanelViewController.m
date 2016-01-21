@@ -58,6 +58,11 @@
 	[self.view addSubview:self.noContentLabel];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	self.needHighlightCell = YES;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -70,7 +75,7 @@
 	
 	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
 	
-	if (catalog)
+	if (self.needHighlightCell && catalog)
 	{
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
 		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];

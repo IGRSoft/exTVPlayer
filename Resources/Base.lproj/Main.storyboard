@@ -90,38 +90,6 @@
             </objects>
             <point key="canvasLocation" x="-1712" y="-2197"/>
         </scene>
-        <!--Favorites-->
-        <scene sceneID="izi-ft-RNo">
-            <objects>
-                <viewController id="D7A-Lb-odv" customClass="IGRFavoritsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fN3-rR-NRT"/>
-                        <viewControllerLayoutGuide type="bottom" id="ieq-24-Qs4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gak-qz-bu8">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wl-9z-G0c">
-                                <rect key="frame" x="694" y="497" width="531" height="86"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Show Favorits"/>
-                                <connections>
-                                    <segue destination="fJe-F3-V2o" kind="show" identifier="showFavoritChanels" id="PmK-TX-jcP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="favorit" id="d7E-Y7-Lny"/>
-                    <connections>
-                        <outlet property="showFavoritsButton" destination="6wl-9z-G0c" id="VGC-Mg-yVx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vBH-3s-NMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1712" y="-914"/>
-        </scene>
         <!--Search-->
         <scene sceneID="Ucp-Oj-AOC">
             <objects>
@@ -173,15 +141,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="140"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.85882352939999995" green="0.85882352939999995" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" red="0.074509803920000006" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.074509803920000006" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Qjz-u1-D4V" kind="relationship" relationship="viewControllers" id="p3Y-8M-hNl"/>
-                        <segue destination="D7A-Lb-odv" kind="relationship" relationship="viewControllers" id="dJo-9G-9XJ"/>
-                        <segue destination="Rrn-MF-ArD" kind="relationship" relationship="viewControllers" id="Fi7-EI-LY9"/>
-                        <segue destination="XMQ-EY-ncb" kind="relationship" relationship="viewControllers" id="RIk-61-4gV"/>
-                        <segue destination="VoP-1A-waA" kind="relationship" relationship="viewControllers" id="Hzw-Tg-QMO"/>
+                        <segue destination="Qjz-u1-D4V" kind="relationship" relationship="viewControllers" id="7Rc-qU-aQS"/>
+                        <segue destination="opN-g4-gtU" kind="relationship" relationship="viewControllers" id="wtQ-Dt-ON8"/>
+                        <segue destination="Rrn-MF-ArD" kind="relationship" relationship="viewControllers" id="keh-E7-s68"/>
+                        <segue destination="Ei1-QZ-D5D" kind="relationship" relationship="viewControllers" id="8my-SO-cWU"/>
+                        <segue destination="VoP-1A-waA" kind="relationship" relationship="viewControllers" id="Vh4-1f-PJP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="brU-IS-rQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -412,38 +380,6 @@
             </objects>
             <point key="canvasLocation" x="4749" y="374"/>
         </scene>
-        <!--History-->
-        <scene sceneID="Oyh-u1-gdJ">
-            <objects>
-                <viewController id="XMQ-EY-ncb" customClass="IGRHistoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WGg-be-rAa"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Fw-UK-wOW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Vq-Rk-Yij">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSf-Ny-vvZ">
-                                <rect key="frame" x="694" y="497" width="531" height="86"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Show History"/>
-                                <connections>
-                                    <segue destination="fJe-F3-V2o" kind="show" identifier="showHistoryChanels" id="nlx-MM-lnS"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="History" image="history" id="YMC-Rl-ePT"/>
-                    <connections>
-                        <outlet property="showHistoryButton" destination="BSf-Ny-vvZ" id="CFY-a5-4Sa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q7O-XQ-oKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1680" y="1678"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="877-pD-wss">
             <objects>
@@ -565,6 +501,172 @@
             </objects>
             <point key="canvasLocation" x="-1690" y="2950"/>
         </scene>
+        <!--Favorites-->
+        <scene sceneID="27E-rY-9zC">
+            <objects>
+                <collectionViewController id="opN-g4-gtU" customClass="IGRFavoritsViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hLr-xy-ngI">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="10" id="MI5-9a-Oax">
+                            <size key="itemSize" width="420" height="600"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRCatalogCell" id="Bgh-lq-8oj" customClass="IGRCatalogCell">
+                                <rect key="frame" x="20" y="20" width="420" height="600"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7BR-eq-Uag">
+                                            <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-qR-9wl">
+                                                    <rect key="frame" x="35" y="8" width="350" height="432"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHi-hP-uGK">
+                                                    <rect key="frame" x="8" y="448" width="404" height="144"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                                    <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="98X-9K-5Jb">
+                                                    <rect key="frame" x="178" y="192" width="64" height="64"/>
+                                                    <color key="color" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="favorit-off" translatesAutoresizingMaskIntoConstraints="NO" id="Oa4-ae-QIR">
+                                                    <rect key="frame" x="364" y="8" width="48" height="48"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="backgroundView" destination="7BR-eq-Uag" id="X7c-0Z-NRT"/>
+                                    <outlet property="image" destination="Zre-qR-9wl" id="B4Z-KV-nrB"/>
+                                    <outlet property="isFavorit" destination="Oa4-ae-QIR" id="gaR-Pp-Gq1"/>
+                                    <outlet property="progress" destination="98X-9K-5Jb" id="1yv-u4-zeB"/>
+                                    <outlet property="title" destination="XHi-hP-uGK" id="ale-tA-d7R"/>
+                                    <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="jKU-aj-G2k"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="opN-g4-gtU" id="R5i-Su-JgY"/>
+                            <outlet property="delegate" destination="opN-g4-gtU" id="Ox2-aS-stg"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorit" id="ovC-LA-2kI"/>
+                    <connections>
+                        <outlet property="catalogs" destination="hLr-xy-ngI" id="WPO-Uk-VVb"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fHa-qh-3eo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1680" y="-905"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="hUG-Yq-Hdt">
+            <objects>
+                <collectionViewController id="Ei1-QZ-D5D" customClass="IGRHistoryViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xMM-us-ZLD">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="10" id="GAU-fA-xPV">
+                            <size key="itemSize" width="420" height="600"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRCatalogCell" id="WEQ-Pl-s8I" customClass="IGRCatalogCell">
+                                <rect key="frame" x="20" y="20" width="420" height="600"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ft-5C-daf">
+                                            <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxA-lZ-cyc">
+                                                    <rect key="frame" x="35" y="8" width="350" height="432"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQj-OZ-UBJ">
+                                                    <rect key="frame" x="8" y="448" width="404" height="144"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                                    <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="V4d-EY-Fho">
+                                                    <rect key="frame" x="178" y="192" width="64" height="64"/>
+                                                    <color key="color" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="favorit-off" translatesAutoresizingMaskIntoConstraints="NO" id="kq8-qN-4p7">
+                                                    <rect key="frame" x="364" y="8" width="48" height="48"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="backgroundView" destination="8ft-5C-daf" id="Zxa-ea-FwD"/>
+                                    <outlet property="image" destination="pxA-lZ-cyc" id="THc-FB-RoE"/>
+                                    <outlet property="isFavorit" destination="kq8-qN-4p7" id="OEB-pO-2bz"/>
+                                    <outlet property="progress" destination="V4d-EY-Fho" id="Yl4-xQ-HIL"/>
+                                    <outlet property="title" destination="bQj-OZ-UBJ" id="Oho-FF-uah"/>
+                                    <segue destination="WAl-RG-hb9" kind="show" identifier="openCatalog" id="aUR-Ax-IOr"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Ei1-QZ-D5D" id="5Nf-lo-Is7"/>
+                            <outlet property="delegate" destination="Ei1-QZ-D5D" id="ofh-TC-OPk"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="History" image="history" id="g4F-jd-P2F"/>
+                    <connections>
+                        <outlet property="catalogs" destination="xMM-us-ZLD" id="YZl-jE-VK6"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QmT-86-nZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1680" y="1623"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ArrowDown" width="50" height="50"/>
@@ -577,6 +679,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Q3-pp-UYR"/>
+        <segue reference="qbP-pN-dRE"/>
+        <segue reference="aUR-Ax-IOr"/>
     </inferredMetricsTieBreakers>
 </document>

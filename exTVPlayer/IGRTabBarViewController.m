@@ -7,11 +7,8 @@
 //
 
 #import "IGRTabBarViewController.h"
-#import "IGRBaseViewController.h"
 
 @interface IGRTabBarViewController () <UITabBarControllerDelegate, UIGestureRecognizerDelegate>
-
-@property (nonatomic, assign) BOOL allowCustomAction;
 
 @end
 
@@ -22,22 +19,15 @@
 	[super viewDidLoad];
 	
 	self.delegate = self;
-	self.allowCustomAction = NO;
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(IGRBaseViewController *)viewController
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-	if (self.allowCustomAction)
-	{
-		self.allowCustomAction = NO;
-		[viewController callCustomAction];
-	}
+
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(nullable id)sender
 {
-	self.allowCustomAction = YES;
-	
 	return YES;
 }
 

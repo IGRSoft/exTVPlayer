@@ -6,8 +6,8 @@
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 
-#import "IGRBaseViewController.h"
+#import "IGRCChanelViewController.h"
 
-@interface IGRHistoryViewController : IGRBaseViewController
+@interface IGRHistoryViewController : IGRCChanelViewController
 
 @end

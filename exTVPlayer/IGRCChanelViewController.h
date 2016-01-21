@@ -17,4 +17,6 @@
 - (void)showFavorites;
 - (void)showHistory;
 
+@property (nonatomic, assign) BOOL needHighlightCell;
+
 @end
