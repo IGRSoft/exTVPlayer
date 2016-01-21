@@ -68,9 +68,9 @@
 		[self onTouchFavorit:nil];
 	}
 	
-	if ([[self.fetchedResultsController sections] count])
+	if ((self.fetchedResultsController).sections.count)
 	{
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
 	}
 	
@@ -87,7 +87,7 @@
 {
 	[self.downloadManager removeAllProgresses];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
+	if (MR_DEFAULT_CONTEXT.hasChanges)
 	{
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 	}
@@ -106,7 +106,7 @@
 
 - (UIView *)preferredFocusedView
 {
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 	
 	return [self.tableView cellForRowAtIndexPath:indexPath];
 }
@@ -116,7 +116,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canFocusRowAtIndexPath:(NSIndexPath *)aIndexPath
 {
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self.catalog.latestViewedTrack integerValue]];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 	
 	if (self.needUpdateSelection)
 	{
@@ -156,7 +156,7 @@
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
-			[catalogViewController setPlaylist:[self.fetchedResultsController sections]
+			[catalogViewController setPlaylist:(self.fetchedResultsController).sections
 									  position:self.tableView.indexPathForSelectedRow.section];
 		});
 	}
@@ -168,10 +168,10 @@
 	{
 		if (sender)
 		{
-			self.catalog.isFavorit = @(![self.catalog.isFavorit boolValue]);
+			self.catalog.isFavorit = @(!(self.catalog.isFavorit).boolValue);
 		}
 		
-		UIImage *image = [self.catalog.isFavorit boolValue] ?	[UIImage imageNamed:@"favorit-on"] :
+		UIImage *image = (self.catalog.isFavorit).boolValue ?	[UIImage imageNamed:@"favorit-on"] :
 																[UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
 	}
@@ -182,13 +182,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return [[self.fetchedResultsController sections] count];
+	return (self.fetchedResultsController).sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-	return [sectionInfo numberOfObjects];
+	id <NSFetchedResultsSectionInfo> sectionInfo = (self.fetchedResultsController).sections[section];
+	return sectionInfo.numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -196,7 +196,7 @@
 	IGRExItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IGRExItemCell" forIndexPath:indexPath];
 	[self configureCell:cell atIndexPath:indexPath];
 	
-	if (indexPath == [[tableView indexPathsForVisibleRows] lastObject])
+	if (indexPath == tableView.indexPathsForVisibleRows.lastObject)
 	{
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			self.needUpdateSelection = NO;
@@ -257,7 +257,7 @@
 	if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
 	{
 		NSIndexPath *indexPath = nil;
-		for (indexPath in [self.tableView indexPathsForVisibleRows])
+		for (indexPath in (self.tableView).indexPathsForVisibleRows)
 		{
 			IGRExItemCell *trackCell = (IGRExItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 			if (trackCell.isHighlighted)

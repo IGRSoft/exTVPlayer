@@ -75,7 +75,7 @@
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
 		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
-		[catalog setFavorit:[entityatalog.isFavorit boolValue]];
+		catalog.favorit = (entityatalog.isFavorit).boolValue;
 		[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
 	}
 }
@@ -202,7 +202,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	NSUInteger count = [[self.fetchedResultsController sections] count];
+	NSUInteger count = (self.fetchedResultsController).sections.count;
 	if (self.chanelMode == IGRChanelMode_History)
 	{
 		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
@@ -226,7 +226,7 @@
 	[cell.image sd_setImageWithURL:[NSURL URLWithString:catalog.imgUrl]
 				  placeholderImage:nil];
 	
-	[cell setFavorit:[catalog.isFavorit boolValue]];
+	cell.favorit = (catalog.isFavorit).boolValue;
 	
 	return cell;
 }
@@ -357,7 +357,7 @@
 				IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 				
 				entityatalog.isFavorit = @(!catalogCell.favorit);
-				[catalogCell setFavorit:[entityatalog.isFavorit boolValue]];
+				catalogCell.favorit = (entityatalog.isFavorit).boolValue;
 				
 				self.lastSelectedItem = indexPath;
 				

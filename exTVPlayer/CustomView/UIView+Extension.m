@@ -14,17 +14,17 @@
 
 - (void)setBorderColor:(UIColor *)borderColor
 {
-	[self.layer setBorderColor:borderColor.CGColor];
+	(self.layer).borderColor = borderColor.CGColor;
 }
 
 - (void)setBorderWidth:(CGFloat)borderWidth
 {
-	[self.layer setBorderWidth:borderWidth];
+	(self.layer).borderWidth = borderWidth;
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius
 {
-	[self.layer setCornerRadius:cornerRadius];
+	(self.layer).cornerRadius = cornerRadius;
 }
 
 @end

@@ -195,7 +195,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 		return [evaluatedObject[@"value"] isEqualToNumber:settingsId];
 	}];
 	
-	NSString *settingsString = [[settingsData filteredArrayUsingPredicate:predicate] firstObject][@"name"];
+	NSString *settingsString = [settingsData filteredArrayUsingPredicate:predicate].firstObject[@"name"];
 	
 	[sender setTitle:settingsString forState:UIControlStateNormal];
 }
@@ -240,7 +240,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	NSURL *url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:aTrack.localName];
 	NSFileManager *defaultManager = [NSFileManager defaultManager];
 	
-	if ([defaultManager fileExistsAtPath:[url path]])
+	if ([defaultManager fileExistsAtPath:url.path])
 	{
 		[defaultManager removeItemAtURL:url error:nil];
 	}

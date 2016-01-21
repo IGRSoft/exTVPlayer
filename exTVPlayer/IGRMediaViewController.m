@@ -89,7 +89,7 @@
 	
 	[self playCurrentTrack];
 	
-	UIGestureRecognizer *gr = [[self.view gestureRecognizers] firstObject];
+	UIGestureRecognizer *gr = (self.view).gestureRecognizers.firstObject;
 	gr.allowedPressTypes = @[@(UIPressTypeLeftArrow), @(UIPressTypeRightArrow), @(UIPressTypePlayPause), @(UIPressTypeMenu)];
 }
 
@@ -111,7 +111,7 @@
 		
 		if (_mediaplayer.media)
 		{
-			IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
+			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
 			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
 			{
 				track.status = @(IGRTrackState_Half);
@@ -176,7 +176,7 @@
 - (void)playCurrentTrack
 {
 	/* create a media object and give it to the player */
-	IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
+	IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
 	
 	self.titleLabel.text = track.name;
 	
@@ -184,7 +184,7 @@
 	if (track.localName.length)
 	{
 		url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:track.localName];
-		if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]])
+		if (![[NSFileManager defaultManager] fileExistsAtPath:url.path])
 		{
 			url = [NSURL URLWithString:track.webPath];
 			track.localName = nil;
@@ -196,7 +196,7 @@
 		_mediaplayer.media = [VLCMedia mediaWithURL:url];
 	}
 	
-	[_mediaplayer setPosition:track.position.floatValue];
+	_mediaplayer.position = track.position.floatValue;
 	[_mediaplayer play];
 		
 	if (track.position.floatValue > 0.02 && track.position.floatValue < 0.98)
@@ -261,7 +261,7 @@
 
 - (void)setMediaPosition:(CGFloat)newPos
 {
-	[_mediaplayer setPosition:newPos];
+	_mediaplayer.position = newPos;
 	
 	self.updatingPosition = NO;
 }
@@ -408,7 +408,7 @@
 															   else
 															   {
 																   weak.mediaplayer.videoCropGeometry = NULL;
-																   weak.mediaplayer.videoAspectRatio = (char *)[action.title UTF8String];
+																   weak.mediaplayer.videoAspectRatio = (char *)(action.title).UTF8String;
 															   }
 															   
 															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
@@ -487,9 +487,9 @@
 	}
 	else
 	{
-		if (fabs([_idleTimer.fireDate timeIntervalSinceNow]) < 5.0)
+		if (fabs((_idleTimer.fireDate).timeIntervalSinceNow) < 5.0)
 		{
-			[_idleTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:5.0]];
+			_idleTimer.fireDate = [NSDate dateWithTimeIntervalSinceNow:5.0];
 		}
 	}
 }
@@ -532,7 +532,7 @@
 		if (!self.skipState)
 		{
 			self.skipState = YES;
-			IGREntityExTrack *track = [[self.playlist[self.currentTrack] objects] firstObject];
+			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
 			track.position = @(0.0);
 			track.status = @(IGRTrackState_Done);
 			
@@ -673,7 +673,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	CGFloat position = [_mediaplayer position];
+	CGFloat position = _mediaplayer.position;
 	[self.mediaProgressView setTimePosition:position];
 	
 	if (position > 1.0)
@@ -681,18 +681,18 @@
 		[_mediaplayer stop];
 	}
 	
-	[self.mediaProgressView setRemainingTime:[[_mediaplayer remainingTime] stringValue]];
-	[self.mediaProgressView setTime:[[_mediaplayer time] stringValue]];
+	[self.mediaProgressView setRemainingTime:_mediaplayer.remainingTime.stringValue];
+	[self.mediaProgressView setTime:_mediaplayer.time.stringValue];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
-	if ([_mediaplayer isPlaying])
+	if (_mediaplayer.playing)
 	{
 		[_mediaplayer pause];
 	}
 	
-	self.needResumeVideo = [_mediaplayer isPlaying];
+	self.needResumeVideo = _mediaplayer.playing;
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification

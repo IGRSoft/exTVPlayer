@@ -39,14 +39,14 @@
 	
 	NSParameterAssert(xmlDocument.isValid);
 	
-	NSString *title = [[xmlDocument child:@"title"] text];
+	NSString *title = [xmlDocument child:@"title"].text;
 	catalog.name = title;
 	
 	__block NSUInteger orderId = 0;
 	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
 		
-		NSString *title = [[node child:@"title"] text];
-		NSString *webPath = [[node child:@"location"] text];
+		NSString *title = [node child:@"title"].text;
+		NSString *webPath = [node child:@"location"].text;
 		
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
 		IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
@@ -99,8 +99,8 @@
 		
 		[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
 			
-			NSString *imgUrl = [node text];
-			imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
+			NSString *imgUrl = node.text;
+			imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
 			catalog.imgUrl = imgUrl;
 		}];
 	}
@@ -115,7 +115,7 @@
 	
 	if (!anAsync)
 	{
-		if ([MR_DEFAULT_CONTEXT hasChanges])
+		if (MR_DEFAULT_CONTEXT.hasChanges)
 		{
 			[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 		}
@@ -147,13 +147,13 @@
 	
 	NSParameterAssert(xmlDocument.isValid);
 	
-	NSString *title = [[[xmlDocument child:@"channel"] child:@"title"] text];
+	NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
 	videoCatalog.name = title;
 	
 	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
 		
-		NSString *title = [[node child:@"title"] text];
-		NSString *itemId = [[node child:@"guid"] text];
+		NSString *title = [node child:@"title"].text;
+		NSString *itemId = [node child:@"guid"].text;
 		
 		IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
 		chanel.name = title;
@@ -162,7 +162,7 @@
 	
 	videoCatalog.timestamp = [NSDate date];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
+	if (MR_DEFAULT_CONTEXT.hasChanges)
 	{
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 	}
@@ -192,7 +192,7 @@
 	
 	NSParameterAssert(xmlDocument.isValid);
 	
-	NSString *title = [[[xmlDocument child:@"channel"] child:@"title"] text];
+	NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
 	chanel.name = title;
 	
 	NSMutableArray *items = [NSMutableArray array];
@@ -208,8 +208,8 @@
 	
 	for (RXMLElement *node in [items reverseObjectEnumerator])
 	{
-		NSString *title = [[node child:@"title"] text];
-		NSString *itemId = [[node child:@"guid"] text];
+		NSString *title = [node child:@"title"].text;
+		NSString *itemId = [node child:@"guid"].text;
 		
 		IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
 		
@@ -233,8 +233,8 @@
 			
 			[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
 				
-				NSString *imgUrl = [node text];
-				imgUrl = [[imgUrl componentsSeparatedByString:@"?"] firstObject];
+				NSString *imgUrl = node.text;
+				imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
 				catalog.imgUrl = imgUrl;
 			}];
 		}
@@ -246,7 +246,7 @@
 	
 	chanel.timestamp = [NSDate date];
 	
-	if ([MR_DEFAULT_CONTEXT hasChanges])
+	if (MR_DEFAULT_CONTEXT.hasChanges)
 	{
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 	}

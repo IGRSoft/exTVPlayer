@@ -11,7 +11,7 @@
 
 @interface IGRBaseViewController : UIViewController
 
-- (IGREntityAppSettings*)appSettings;
+@property (nonatomic, readonly, strong) IGREntityAppSettings *appSettings;
 
 - (void)callCustomAction;
 

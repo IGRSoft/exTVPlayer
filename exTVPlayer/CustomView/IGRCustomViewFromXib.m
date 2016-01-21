@@ -16,13 +16,13 @@
 
 @implementation IGRCustomViewFromXib
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)
 	{
 		NSString *className = NSStringFromClass([self class]);
-		_customView = [[[NSBundle mainBundle] loadNibNamed:className owner:self options:nil] firstObject];
+		_customView = [[NSBundle mainBundle] loadNibNamed:className owner:self options:nil].firstObject;
 		
 		[self addSubview:_customView];
 		

@@ -24,7 +24,7 @@
 - (void)setTimePosition:(CGFloat)aPosition;
 - (void)setNextTimePosition:(CGFloat)aPosition;
 
-- (CGFloat)progress;
+@property (nonatomic, readonly) CGFloat progress;
 
 - (void)processNewPosition;
 

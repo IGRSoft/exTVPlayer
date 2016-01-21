@@ -25,7 +25,7 @@
 	
 	_isHighlighted = highlighted;
 	
-	[super setHighlighted:highlighted];
+	super.highlighted = highlighted;
 }
 
 - (void)setFavorit:(BOOL)isFavorit

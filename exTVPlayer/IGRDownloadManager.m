@@ -73,7 +73,7 @@ static NSString * const kIGRKeyProgress = @"progress";
 																	   destination:^NSURL *(NSURL *targetPath, NSURLResponse *response)
 	{
 		NSURL *destURL = [IGRAppDelegate videoFolder];
-		destURL = [destURL URLByAppendingPathComponent:[response suggestedFilename]];
+		destURL = [destURL URLByAppendingPathComponent:response.suggestedFilename];
 		
 		return destURL;
 	}
@@ -81,7 +81,7 @@ static NSString * const kIGRKeyProgress = @"progress";
 	{
 		NSLog(@"File downloaded to: %@", filePath);
 		
-		aTrack.localName = [filePath lastPathComponent];
+		aTrack.localName = filePath.lastPathComponent;
 		aTrack.dataStatus = @(IGRTrackDataStatus_Local);
 		[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
 		

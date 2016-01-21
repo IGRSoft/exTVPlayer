@@ -12,7 +12,7 @@
 
 - (void)setHighlighted:(BOOL)highlighted
 {
-	[super setHighlighted:highlighted];
+	super.highlighted = highlighted;
 	
 	UIColor *cellColor = highlighted ?  [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000] :
 										[UIColor whiteColor];
@@ -23,7 +23,7 @@
 						  delay:0
 						options:(UIViewAnimationOptionAllowUserInteraction)
 					 animations:^{
-						 [self.backgroundView setBackgroundColor:cellColor];
+						 (self.backgroundView).backgroundColor = cellColor;
 						 self.title.textColor = textColor;
 					 }
 					 completion:nil];
