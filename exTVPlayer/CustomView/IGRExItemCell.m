@@ -16,7 +16,7 @@
 	self.trackStatus.thicknessRatio = 1.0;
 	self.trackStatus.clockwiseProgress = NO;
 	self.trackStatus.trackTintColor = [UIColor colorWithRed:0.999 green:1.000 blue:0.895 alpha:1.000];
-	self.trackStatus.progressTintColor  = [UIColor colorWithRed:0.500 green:0.675 blue:1.000 alpha:1.000];
+	self.trackStatus.progressTintColor  = [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000];
 	
 	self.savedIcon.hidden = YES;
 }

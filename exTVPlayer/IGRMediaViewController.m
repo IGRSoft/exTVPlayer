@@ -191,11 +191,8 @@
 			track.dataStatus = @(IGRTrackDataStatus_Web);
 		}
 	}
-	else
-	{
-		_mediaplayer.media = [VLCMedia mediaWithURL:url];
-	}
 	
+	_mediaplayer.media = [VLCMedia mediaWithURL:url];
 	_mediaplayer.position = track.position.floatValue;
 	[_mediaplayer play];
 		
