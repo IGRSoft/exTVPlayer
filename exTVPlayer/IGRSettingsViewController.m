@@ -55,7 +55,8 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 					@{@"value": @(IGRVideoBufferSize_3mb),	@"name": NSLocalizedString(@"VideoBufferSize_3mb", nil)},
 					@{@"value": @(IGRVideoBufferSize_5mb),	@"name": NSLocalizedString(@"VideoBufferSize_5mb", nil)},
 					@{@"value": @(IGRVideoBufferSize_10mb),	@"name": NSLocalizedString(@"VideoBufferSize_10mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_20mb),	@"name": NSLocalizedString(@"VideoBufferSize_20mb", nil)}
+					@{@"value": @(IGRVideoBufferSize_20mb),	@"name": NSLocalizedString(@"VideoBufferSize_20mb", nil)},
+					@{@"value": @(IGRVideoBufferSize_50mb),	@"name": NSLocalizedString(@"VideoBufferSize_50mb", nil)}
 					];
 	
 	self.history = @[@{@"value": @(IGRHistorySize_5),	@"name": @(IGRHistorySize_5).stringValue},

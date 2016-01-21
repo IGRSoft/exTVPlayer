@@ -28,6 +28,8 @@
 
 "VideoBufferSize_20mb" = "20 Мб";
 
+"VideoBufferSize_50mb" = "50 Мб";
+
 "No_Content" = "Нет контента для этого каталога";
 
 "SourceType_RSS" = "RSS";

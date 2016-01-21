@@ -28,6 +28,8 @@
 
 "VideoBufferSize_20mb" = "20 MB";
 
+"VideoBufferSize_50mb" = "50 MB";
+
 "No_Content" = "There is no content for this catalog";
 
 "SourceType_RSS" = "RSS";
