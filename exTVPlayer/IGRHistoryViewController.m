@@ -28,10 +28,13 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated
+{	
+	[super viewDidAppear:animated];
+}
+
+- (void)endAppearanceTransition
 {
 	self.needHighlightCell = NO;
-	
-	[super viewDidAppear:animated];
 }
 
 @end

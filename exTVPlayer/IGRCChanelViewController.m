@@ -202,6 +202,21 @@
 	}
 }
 
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+{
+	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
+	{
+		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+			
+			[obj setHighlighted:NO];
+		}];
+	}
+	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] && [context.nextFocusedView isKindOfClass:[IGRCatalogCell class]])
+	{
+		[(IGRCatalogCell *)context.nextFocusedView setHighlighted:YES];
+	}
+}
+
 #pragma mark - UICollectionViewDataSource
 #pragma mark -
 

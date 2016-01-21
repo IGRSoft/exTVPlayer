@@ -29,9 +29,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	self.needHighlightCell = NO;
-	
 	[super viewDidAppear:animated];
+}
+
+- (void)endAppearanceTransition
+{
+	self.needHighlightCell = NO;
 }
 
 @end

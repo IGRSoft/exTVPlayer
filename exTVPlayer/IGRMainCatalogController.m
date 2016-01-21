@@ -99,7 +99,6 @@
 	{
 		[(IGRChanelCell *)context.nextFocusedView setHighlighted:YES];
 	}
-		
 }
 
 #pragma mark - Navigation
