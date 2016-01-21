@@ -8,7 +8,7 @@
 
 @interface IGREXParser : NSObject
 
-+ (BOOL)parseCatalogContent:(NSString *)aCatalogId;
++ (BOOL)parseCatalogContent:(NSString *)aCatalogId async:(BOOL)anAsync;
 + (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId;
 + (void)parseChanelContent:(NSString *)aChanelId;
 

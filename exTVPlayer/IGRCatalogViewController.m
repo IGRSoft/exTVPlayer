@@ -40,7 +40,7 @@
 - (void)setCatalogId:(NSString *)aCatalogId
 {
 	_catalogId = aCatalogId;
-	[IGREXParser parseCatalogContent:aCatalogId];
+	[IGREXParser parseCatalogContent:aCatalogId async:NO];
 	
 	self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
 													 withValue:_catalogId];

@@ -15,7 +15,7 @@
 
 @implementation IGREXParser
 
-+ (BOOL)parseCatalogContent:(NSString *)aCatalogId
++ (BOOL)parseCatalogContent:(NSString *)aCatalogId async:(BOOL)anAsync
 {
 	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																			withValue:aCatalogId];
@@ -53,18 +53,33 @@
 		
 		if (!track)
 		{
-			[MR_DEFAULT_CONTEXT MR_obtainPermanentIDsForObjects:@[catalog]];
-			[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext)
+			if (anAsync)
 			{
-				IGREntityExTrack *track = [IGREntityExTrack MR_createEntityInContext:localContext];
+				[MR_DEFAULT_CONTEXT MR_obtainPermanentIDsForObjects:@[catalog]];
+				[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext)
+				 {
+					 IGREntityExTrack *track = [IGREntityExTrack MR_createEntityInContext:localContext];
+					 track.webPath = webPath;
+					 track.name = title;
+					 track.status = @(IGRTrackState_New);
+					 track.dataStatus = @(IGRTrackDataStatus_Web);
+					 track.position = @(0.0);
+					 track.catalog = [catalog MR_inContext:localContext];
+					 track.orderId = @(orderId);
+				 }];
+			}
+			else
+			{
+				IGREntityExTrack *track = [IGREntityExTrack MR_createEntity];
 				track.webPath = webPath;
 				track.name = title;
 				track.status = @(IGRTrackState_New);
 				track.dataStatus = @(IGRTrackDataStatus_Web);
 				track.position = @(0.0);
-				track.catalog = [catalog MR_inContext:localContext];
+				track.catalog = catalog;
 				track.orderId = @(orderId);
-			}];
+			}
+			
 		}
 		++orderId;
 	}];
@@ -97,6 +112,14 @@
 	}
 	
 	catalog.timestamp = [NSDate date];
+	
+	if (!anAsync)
+	{
+		if ([MR_DEFAULT_CONTEXT hasChanges])
+		{
+			[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+		}
+	}
 	
 	return YES;
 }

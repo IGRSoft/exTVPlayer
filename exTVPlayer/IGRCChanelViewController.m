@@ -129,7 +129,7 @@
 	self.chanelMode = IGRChanelMode_Catalog_One;
 	
 	_chanels = [NSMutableArray arrayWithObject:aCatalog];
-	[IGREXParser parseCatalogContent:aCatalog];
+	[IGREXParser parseCatalogContent:aCatalog async:NO];
 }
 
 - (void)setSearchResult:(NSString *)aSearchRequest
@@ -154,7 +154,7 @@
 		
 		[weak.chanels enumerateObjectsUsingBlock:^(NSString * _Nonnull chanel, NSUInteger idx, BOOL * _Nonnull stop) {
 			
-			if ([IGREXParser parseCatalogContent:chanel] || (idx + 1) == count)
+			if ([IGREXParser parseCatalogContent:chanel async:YES] || (idx + 1) == count)
 			{
 				dispatch_sync(dispatch_get_main_queue(), ^{
 					
