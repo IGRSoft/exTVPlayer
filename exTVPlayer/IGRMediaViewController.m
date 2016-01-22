@@ -196,7 +196,8 @@
 		
 	if (track.position.floatValue > 0.02 && track.position.floatValue < 0.98)
 	{
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		CGFloat timeInterval = [track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)] ? 3.0 : 0.3;
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			
 			[self setMediaPosition:track.position.floatValue];
 		});

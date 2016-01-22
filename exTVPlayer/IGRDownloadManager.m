@@ -52,7 +52,9 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 	return self;
 }
 
-- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack withProgress:(nonnull UIProgressView *)aProgress compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
+- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack
+			  withProgress:(nonnull UIProgressView *)aProgress
+			compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
 	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
 	
@@ -70,7 +72,15 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 	
 	__weak typeof(self) weak = self;
 	NSURLSessionDownloadTask *downloadTask = [self.manager downloadTaskWithRequest:request
-																		  progress:nil
+																		  progress:^(NSProgress * _Nonnull downloadProgress)
+	{
+		NSMutableDictionary *downloadObject = [weak downloadObjectForTrack:aTrack];
+		UIProgressView *progress = downloadObject[kIGRKeyProgress];
+		if (![progress isEqual:[NSNull null]] && !progress.observedProgress)
+		{
+			progress.observedProgress = downloadProgress;
+		}
+	}
 																	   destination:^NSURL *(NSURL *targetPath, NSURLResponse *response)
 	{
 		NSURL *destURL = [IGRAppDelegate videoFolder];
@@ -113,12 +123,13 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 		downloadObject[kIGRKeyCompleate] = compleateBlock;
 	}
 	[self.downloads addObject:downloadObject];
-	[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO];
 	
 	[downloadTask resume];
 }
 
-- (void)updateProgress:(nullable UIProgressView *)aProgress forTrack:(nonnull IGREntityExTrack *)aTrack compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
+- (void)updateProgress:(nullable UIProgressView *)aProgress
+			  forTrack:(nonnull IGREntityExTrack *)aTrack
+		compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
 	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
 	
@@ -129,13 +140,12 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 			downloadObject[kIGRKeyCompleate] = compleateBlock;
 		}
 		
-//		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
-//		
-//		if (oldProgress != aProgress)
-//		{
-//			NSURLSessionDownloadTask *downloadTask = downloadObject[kIGRKeyTask];
-//			[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO];
-//		}
+		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
+		
+		if (oldProgress != aProgress)
+		{
+			downloadObject[kIGRKeyProgress] = aProgress;
+		}
 	}
 }
 
@@ -155,19 +165,6 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 {
 	for (NSMutableDictionary *downloadObject in self.downloads)
 	{
-		NSURLSessionDownloadTask *downloadTask = downloadObject[kIGRKeyTask];
-		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
-		
-		if (![oldProgress isEqual:[NSNull null]])
-		{
-			@try {
-				[downloadTask removeObserver:oldProgress forKeyPath:@"state"];
-				[downloadTask removeObserver:oldProgress forKeyPath:@"countOfBytesReceived"];
-			}
-			@catch (NSException * __unused exception) {}
-
-		}
-		
 		downloadObject[kIGRKeyProgress] = [NSNull null];
 		downloadObject[kIGRKeyCompleate] = [NSNull null];
 	}
