@@ -25,7 +25,7 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 	
 	if (catalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 1)
+		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 15)
 		{
 			return NO; //skip update
 		}
@@ -133,7 +133,7 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 1)
+		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 15)
 		{
 			return; //skip update
 		}
@@ -178,7 +178,7 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 																		 withValue:aChanelId];
 	if (chanel.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < 1)
+		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < 15)
 		{
 			return; //skip update
 		}
@@ -311,7 +311,7 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 
 + (NSInteger)hoursBetweenCurrwntDate:(NSDate *)aDate
 {
-	NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+	NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitMinute
 																   fromDate:aDate
 																	 toDate:[NSDate date]
 																	options:0];
