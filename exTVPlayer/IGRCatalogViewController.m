@@ -338,6 +338,10 @@ static const CGFloat reloadTime = 0.3;
 														
 														[IGRSettingsViewController removeSavedTrack:track];
 														
+														dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+															[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+														});
+														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
 													}];

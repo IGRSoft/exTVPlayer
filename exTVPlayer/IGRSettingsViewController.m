@@ -238,16 +238,20 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 
 + (void)removeSavedTrack:(IGREntityExTrack *)aTrack
 {
-	NSURL *url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:aTrack.localName];
-	NSFileManager *defaultManager = [NSFileManager defaultManager];
-	
-	if ([defaultManager fileExistsAtPath:url.path])
+	if (aTrack.localName)
 	{
-		[defaultManager removeItemAtURL:url error:nil];
+		NSURL *url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:aTrack.localName];
+		NSFileManager *defaultManager = [NSFileManager defaultManager];
+		
+		if ([defaultManager fileExistsAtPath:url.path])
+		{
+			[defaultManager removeItemAtURL:url error:nil];
+		}
 	}
 	
 	aTrack.localName = nil;
 	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
+	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 }
 
 @end

@@ -77,9 +77,7 @@
 												 name:kapplicationDidBecomeActive
 											   object:nil];
 	
-	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-	NSString *cacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.videoBufferSize];
-	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:@[cacheOption]];
+	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:[self defaultVLCOptions]];
 	_mediaplayer.delegate = self;
 	_mediaplayer.drawable = self.movieView;
 	
@@ -276,6 +274,32 @@
 		
 		self.mediaProgressView.hidden = self.titlePanel.hidden = controlsHidden;
 	}];
+}
+
+- (NSArray *)defaultVLCOptions
+{
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+	NSString *fileCacheOption = [NSString stringWithFormat:@"--file-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
+	NSString *discCacheOption = [NSString stringWithFormat:@"--disc-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
+	NSString *liveCacheOption = [NSString stringWithFormat:@"--live-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
+	NSString *networkCacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.videoBufferSize];
+	
+	NSArray *vlcParams = @[@"--no-color",
+						   @"--no-osd",
+						   @"--no-video-title-show",
+						   @"--no-stats",
+						   @"--no-snapshot-preview",
+#ifndef NOSCARYCODECS
+						   @"--avcodec-fast",
+#endif
+						   @"--text-renderer=freetype",
+						   @"--avi-index=3",
+						   @"--extraintf=ios_dialog_provider",
+						   fileCacheOption,
+						   discCacheOption,
+						   liveCacheOption,
+						   networkCacheOption];
+	return vlcParams;
 }
 
 #pragma mark - Trak Properties
