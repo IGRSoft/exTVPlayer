@@ -13,6 +13,9 @@
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
 
+static NSString * const kMainServer = @"http://www.ex.ua";
+static NSString * const kAdditionalServer = @"http://rover.info";
+
 @implementation IGREXParser
 
 + (BOOL)parseCatalogContent:(NSString *)aCatalogId async:(BOOL)anAsync
@@ -30,7 +33,7 @@
 	
 	NSError *error = nil;
 	NSStringEncoding encoding;
-	NSString *xspfUrl = [NSString stringWithFormat:@"http://www.ex.ua/playlist/%@.xspf", aCatalogId];
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/playlist/%@.xspf", kMainServer, aCatalogId];
 	NSString *xspfString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:xspfUrl]
 													  usedEncoding:&encoding
 															 error:&error];
@@ -88,7 +91,7 @@
 	{
 		NSError *error = nil;
 		NSStringEncoding encoding;
-		NSString *rrsUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aCatalogId];
+		NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aCatalogId];
 		NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
 														 usedEncoding:&encoding
 																error:&error];
@@ -138,7 +141,7 @@
 	
 	NSError *error = nil;
 	NSStringEncoding encoding;
-	NSString *xspfUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aVideoCatalogId];
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aVideoCatalogId];
 	NSString *xspfString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:xspfUrl]
 													  usedEncoding:&encoding
 															 error:&error];
@@ -183,7 +186,7 @@
 	
 	NSError *error = nil;
 	NSStringEncoding encoding;
-	NSString *rrsUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", aChanelId];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aChanelId];
 	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
 													  usedEncoding:&encoding
 															 error:&error];
@@ -222,7 +225,7 @@
 		{
 			NSError *error = nil;
 			NSStringEncoding encoding;
-			NSString *rrsUrl = [NSString stringWithFormat:@"http://www.ex.ua/rss/%@", itemId];
+			NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, itemId];
 			NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
 															 usedEncoding:&encoding
 																	error:&error];
@@ -256,7 +259,7 @@
 {
 	NSError *error = nil;
 	NSStringEncoding encoding;
-	NSString *rrsUrl = [NSString stringWithFormat:@"http://rover.info/r_video_search?s=%@&p=%@", aSearchText, @(aPage)];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?s=%@&p=%@", kAdditionalServer, aSearchText, @(aPage)];
 	if (aCatalog > 0)
 	{
 		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", @(aCatalog)];
@@ -285,7 +288,7 @@
 {
 	NSError *error = nil;
 	NSStringEncoding encoding;
-	NSString *rrsUrl = [NSString stringWithFormat:@"http://rover.info/r_video_search?original_id=%@&p=%@", aCatalog, @(aPage)];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?original_id=%@&p=%@", kAdditionalServer, aCatalog, @(aPage)];
 	rrsUrl = [rrsUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 	
 	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]

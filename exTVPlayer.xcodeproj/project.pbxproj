@@ -435,12 +435,12 @@
 		A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRSearchViewController.m; sourceTree = "<group>"; };
 		A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSettingsViewController.h; sourceTree = "<group>"; };
 		A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRSettingsViewController.m; sourceTree = "<group>"; };
-		A58F66F31C47C51800D7518B /* IGRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRBaseViewController.h; sourceTree = "<group>"; };
-		A58F66F41C47C51800D7518B /* IGRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRBaseViewController.m; sourceTree = "<group>"; };
+		A58F66F31C47C51800D7518B /* IGRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGRBaseViewController.h; path = ../IGRBaseViewController.h; sourceTree = "<group>"; };
+		A58F66F41C47C51800D7518B /* IGRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGRBaseViewController.m; path = ../IGRBaseViewController.m; sourceTree = "<group>"; };
 		A58F66F61C47C9F300D7518B /* IGRFavoritsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRFavoritsViewController.h; sourceTree = "<group>"; };
 		A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRFavoritsViewController.m; sourceTree = "<group>"; };
-		A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTabBarViewController.h; sourceTree = "<group>"; };
-		A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTabBarViewController.m; sourceTree = "<group>"; };
+		A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGRTabBarViewController.h; path = ../IGRTabBarViewController.h; sourceTree = "<group>"; };
+		A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGRTabBarViewController.m; path = ../IGRTabBarViewController.m; sourceTree = "<group>"; };
 		A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRHistoryViewController.h; sourceTree = "<group>"; };
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -765,14 +765,11 @@
 		A569ED6C1C25B062004EF247 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
-				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
-				A569ED691C25889C004EF247 /* IGRChanelCell.h */,
-				A569ED6A1C25889C004EF247 /* IGRChanelCell.m */,
-				A569ED701C25D683004EF247 /* IGRCatalogCell.h */,
-				A569ED711C25D683004EF247 /* IGRCatalogCell.m */,
-				A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */,
-				A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */,
+				A583B89A1C525613002B0BE9 /* Cells */,
+				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
+				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
+				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
+				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
 				A581C5B01C346E430016D086 /* IGRMediaProgressView.h */,
 				A581C5B11C346E430016D086 /* IGRMediaProgressView.m */,
 				A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */,
@@ -804,6 +801,47 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A583B8981C525514002B0BE9 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */,
+				A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */,
+				A58F66F61C47C9F300D7518B /* IGRFavoritsViewController.h */,
+				A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */,
+				A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */,
+				A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */,
+				A58F66ED1C47C33400D7518B /* IGRSearchViewController.h */,
+				A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */,
+				A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */,
+				A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		A583B8991C52553D002B0BE9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */,
+				A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		A583B89A1C525613002B0BE9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
+				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
+				A569ED691C25889C004EF247 /* IGRChanelCell.h */,
+				A569ED6A1C25889C004EF247 /* IGRChanelCell.m */,
+				A569ED701C25D683004EF247 /* IGRCatalogCell.h */,
+				A569ED711C25D683004EF247 /* IGRCatalogCell.m */,
+				A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */,
+				A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		A5868B9F1C4A9CD20037D401 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,10 +867,10 @@
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
-				A5E81BD91C22B72D00EABFC5 /* exTVPlayer */,
+				A5E81BD91C22B72D00EABFC5 /* Sources */,
 				A51F38301C22C50A00F6080A /* Submodules */,
-				A51F38771C230F6A00F6080A /* Frameworks */,
 				A5E81BF11C22B7A500EABFC5 /* Resources */,
+				A51F38771C230F6A00F6080A /* Frameworks */,
 				A5E81BD81C22B72D00EABFC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -845,28 +883,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A5E81BD91C22B72D00EABFC5 /* exTVPlayer */ = {
+		A5E81BD91C22B72D00EABFC5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				A51F388D1C23191B00F6080A /* Database */,
 				A51F385E1C22F2BD00F6080A /* Helpers */,
 				A569ED6C1C25B062004EF247 /* CustomView */,
+				A583B8981C525514002B0BE9 /* Tabs */,
+				A583B8991C52553D002B0BE9 /* Managers */,
 				A5E81BDD1C22B72D00EABFC5 /* IGRAppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */,
-				A58F670D1C47E90900D7518B /* IGRHistoryViewController.h */,
-				A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */,
-				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
-				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
-				A58F66F61C47C9F300D7518B /* IGRFavoritsViewController.h */,
-				A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */,
-				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
-				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
-				A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */,
-				A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */,
-				A58F66ED1C47C33400D7518B /* IGRSearchViewController.h */,
-				A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */,
-				A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */,
-				A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */,
 				A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */,
 				A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
@@ -874,9 +900,8 @@
 				A51F386E1C23091200F6080A /* IGRMediaViewController.h */,
 				A51F386F1C23091200F6080A /* IGRMediaViewController.m */,
 				A5E81BDA1C22B72D00EABFC5 /* Supporting Files */,
-				A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */,
-				A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */,
 			);
+			name = Sources;
 			path = exTVPlayer;
 			sourceTree = "<group>";
 		};
