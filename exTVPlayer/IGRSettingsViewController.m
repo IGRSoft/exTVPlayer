@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 - (void)updateSettingsFor:(IGRSettingsType)aSettingsType
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *settingsId = @0;
+	NSNumber *settingsId = nil;
 	NSArray *settingsData = nil;
 	
 	switch (aSettingsType)
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 - (void)updateViewForSettings:(IGRSettingsType)aSettingsType from:(UIButton *)sender
 {
 	IGREntityAppSettings *settings = [self appSettings];
-	NSNumber *settingsId = @0;
+	NSNumber *settingsId = nil;
 	NSArray *settingsData = nil;
 	
 	switch (aSettingsType)

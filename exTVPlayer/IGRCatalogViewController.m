@@ -85,6 +85,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	[ super viewWillDisappear:animated];
+	
 	[self.downloadManager removeAllProgresses];
 	
 	if (MR_DEFAULT_CONTEXT.hasChanges)

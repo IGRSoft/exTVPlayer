@@ -61,6 +61,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	self.needHighlightCell = YES;
+	
+	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
