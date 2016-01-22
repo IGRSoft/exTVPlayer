@@ -17,6 +17,8 @@
 #import "DACircularProgressView.h"
 #import "IGRDownloadManager.h"
 
+static const CGFloat reloadTime = 0.3;
+
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -195,12 +197,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	IGRExItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IGRExItemCell" forIndexPath:indexPath];
+	static NSString *cellIdentifier = @"IGRExItemCell";
+	IGRExItemCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+	
+	if (!cell)
+	{
+		cell = [[IGRExItemCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+									reuseIdentifier:cellIdentifier];
+	}
+	
 	[self configureCell:cell atIndexPath:indexPath];
 	
 	if (indexPath == tableView.indexPathsForVisibleRows.lastObject)
 	{
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			self.needUpdateSelection = NO;
 		});
 	}
@@ -232,7 +242,16 @@
 	
 	if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
 	{
-		//[self.downloadManager updateProgress:cell.saveProgress forTrack:track];
+		__weak typeof(self) weak = self;
+		__weak typeof(indexPath) weakIndexPath = indexPath;
+		
+		[self.downloadManager updateProgress:cell.saveProgress forTrack:track compleateBlock:^{
+			
+			if (weakIndexPath)
+			{
+				[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+			}
+		}];
 	}
 }
 
@@ -272,6 +291,7 @@
 				UIAlertAction* action = nil;
 				
 				__weak typeof(self) weak = self;
+				__weak typeof(indexPath) weakIndexPath = indexPath;
 				if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)])
 				{
 					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Save Track", @"")
@@ -279,7 +299,13 @@
 													handler:^(UIAlertAction * action) {
 														
 														[weak.downloadManager startDownloadTrack:track
-																					withProgress:trackCell.saveProgress];
+																					withProgress:trackCell.saveProgress compleateBlock:^(void) {
+																						
+																						if (weakIndexPath)
+																						{
+																							[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+																						}
+																					}];
 														trackCell.saveProgress.hidden = NO;
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
@@ -288,9 +314,17 @@
 				}
 				else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
 				{
-					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Downloading...", @"")
+					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel Download", @"")
 													  style:UIAlertActionStyleDefault
 													handler:^(UIAlertAction * action) {
+														
+														[weak.downloadManager cancelDownloadTrack:track];
+														if (weakIndexPath)
+														{
+															dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+																[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+															});
+														}
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
@@ -322,7 +356,7 @@
 				[view addAction:cancel];
 				[self presentViewController:view animated:YES completion:nil];
 				
-				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 					
 					[trackCell setHighlighted:YES];
 				});

@@ -8,13 +8,15 @@
 
 @class IGREntityExTrack;
 
+typedef void (^IGRDownloadManagerCompleateBlock)(void);
+
 @interface IGRDownloadManager : NSObject
 
-+ (instancetype)defaultInstance;
++ (nonnull instancetype)defaultInstance;
 
-- (void)startDownloadTrack:(IGREntityExTrack *)aTrack withProgress:(UIProgressView *)aProgress;
-- (void)updateProgress:(UIProgressView *)aProgress forTrack:(IGREntityExTrack *)aTrack;
-
+- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack withProgress:(nonnull UIProgressView *)aProgress compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
+- (void)updateProgress:(nullable UIProgressView *)aProgress forTrack:(nonnull IGREntityExTrack *)aTrack compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
+- (void)cancelDownloadTrack:(nonnull IGREntityExTrack *)aTrack;
 - (void)removeAllProgresses;
 
 @end

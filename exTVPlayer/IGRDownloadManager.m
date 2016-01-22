@@ -20,13 +20,14 @@
 
 @end
 
-static NSString * const kIGRKeyWebUrl	= @"webUrl";
-static NSString * const kIGRKeyTask		= @"task";
-static NSString * const kIGRKeyProgress = @"progress";
+static NSString * const kIGRKeyWebUrl	 = @"webUrl";
+static NSString * const kIGRKeyTask		 = @"task";
+static NSString * const kIGRKeyProgress  = @"progress";
+static NSString * const kIGRKeyCompleate = @"compleate";
 
 @implementation IGRDownloadManager
 
-+ (instancetype)defaultInstance
++ (nonnull instancetype)defaultInstance
 {
 	static IGRDownloadManager *sharedInstance = nil;
 	static dispatch_once_t onceToken;
@@ -37,7 +38,7 @@ static NSString * const kIGRKeyProgress = @"progress";
 	return sharedInstance;
 }
 
-- (instancetype)init
+- (nonnull instancetype)init
 {
 	self = [super init];
 	if(self)
@@ -51,7 +52,7 @@ static NSString * const kIGRKeyProgress = @"progress";
 	return self;
 }
 
-- (void)startDownloadTrack:(IGREntityExTrack *)aTrack withProgress:(UIProgressView *)aProgress
+- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack withProgress:(nonnull UIProgressView *)aProgress compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
 	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
 	
@@ -79,19 +80,27 @@ static NSString * const kIGRKeyProgress = @"progress";
 	}
 																 completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error)
 	{
-		NSLog(@"File downloaded to: %@", filePath);
-		
-		aTrack.localName = filePath.lastPathComponent;
-		aTrack.dataStatus = @(IGRTrackDataStatus_Local);
-		[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
-		
-		NSMutableDictionary *downloadObject = [weak downloadObjectForTrack:aTrack];
-		
-		if (downloadObject != nil)
+		if (!error)
 		{
-			[weak.downloads removeObject:downloadObject];
+			NSLog(@"File downloaded to: %@", filePath);
+			
+			aTrack.localName = filePath.lastPathComponent;
+			aTrack.dataStatus = @(IGRTrackDataStatus_Local);
+			[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
+			
+			NSMutableDictionary *downloadObject = [weak downloadObjectForTrack:aTrack];
+			
+			if (downloadObject != nil)
+			{
+				[weak.downloads removeObject:downloadObject];
+			}
+			
+			IGRDownloadManagerCompleateBlock block = downloadObject[kIGRKeyCompleate];
+			if (![block isEqual:[NSNull null]])
+			{
+				block();
+			}
 		}
-		
 	}];
 	
 	downloadObject = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -99,27 +108,47 @@ static NSString * const kIGRKeyProgress = @"progress";
 										   aTrack.webPath, kIGRKeyWebUrl,
 										   aProgress, kIGRKeyProgress, nil];
 	
+	if (compleateBlock)
+	{
+		downloadObject[kIGRKeyCompleate] = compleateBlock;
+	}
 	[self.downloads addObject:downloadObject];
-	[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO
-	 ];
+	[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO];
 	
 	[downloadTask resume];
 }
 
-- (void)updateProgress:(UIProgressView *)aProgress forTrack:(IGREntityExTrack *)aTrack
+- (void)updateProgress:(nullable UIProgressView *)aProgress forTrack:(nonnull IGREntityExTrack *)aTrack compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
 	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
 	
 	if (downloadObject != nil)
 	{
-		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
-		
-		if (oldProgress != aProgress)
+		if (compleateBlock)
 		{
-			NSURLSessionDownloadTask *downloadTask = downloadObject[kIGRKeyTask];
-			[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO];
+			downloadObject[kIGRKeyCompleate] = compleateBlock;
 		}
+		
+//		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
+//		
+//		if (oldProgress != aProgress)
+//		{
+//			NSURLSessionDownloadTask *downloadTask = downloadObject[kIGRKeyTask];
+//			[aProgress setProgressWithDownloadProgressOfTask:downloadTask animated:NO];
+//		}
 	}
+}
+
+- (void)cancelDownloadTrack:(nonnull IGREntityExTrack *)aTrack
+{
+	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
+	NSURLSessionDownloadTask *downloadTask = downloadObject[kIGRKeyTask];
+	
+	[self.downloads removeObject:downloadObject];
+	[downloadTask cancel];
+	
+	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
+	[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
 }
 
 - (void)removeAllProgresses
@@ -140,6 +169,7 @@ static NSString * const kIGRKeyProgress = @"progress";
 		}
 		
 		downloadObject[kIGRKeyProgress] = [NSNull null];
+		downloadObject[kIGRKeyCompleate] = [NSNull null];
 	}
 }
 
