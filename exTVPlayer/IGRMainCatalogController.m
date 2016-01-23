@@ -48,7 +48,10 @@
 	{
 		self.lastVideoCatalog = langId;
 		
-		[IGREXParser parseVideoCatalogContent:langId.stringValue];
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			
+			[IGREXParser parseVideoCatalogContent:langId.stringValue];
+		});
 		
 		_fetchedResultsController = nil;
 		self.lastSelectedItem = nil;
