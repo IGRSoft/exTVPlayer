@@ -280,10 +280,11 @@
 - (NSArray *)defaultVLCOptions
 {
 	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-	NSString *fileCacheOption = [NSString stringWithFormat:@"--file-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
-	NSString *discCacheOption = [NSString stringWithFormat:@"--disc-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
-	NSString *liveCacheOption = [NSString stringWithFormat:@"--live-caching=%@", @(settings.videoBufferSize.floatValue / 3.0)];
-	NSString *networkCacheOption = [NSString stringWithFormat:@"--network-caching=%@", settings.videoBufferSize];
+	CGFloat cacheSize = settings.videoBufferSize.floatValue * 10.0;
+	NSString *fileCacheOption = [NSString stringWithFormat:@"--file-caching=%@", @(cacheSize / 3.0)];
+	NSString *discCacheOption = [NSString stringWithFormat:@"--disc-caching=%@", @(cacheSize / 3.0)];
+	NSString *liveCacheOption = [NSString stringWithFormat:@"--live-caching=%@", @(cacheSize / 3.0)];
+	NSString *networkCacheOption = [NSString stringWithFormat:@"--network-caching=%@", @(cacheSize)];
 	
 	NSArray *vlcParams = @[@"--no-color",
 						   @"--no-osd",
