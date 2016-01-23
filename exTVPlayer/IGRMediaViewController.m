@@ -595,8 +595,8 @@
 	}
 	
 	UIPress *press = presses.anyObject;
-	NSInteger deltaTouchTime = press.timestamp - self.latestPressTimestamp;
-	NSInteger timeLimit = CLOCKS_PER_SEC * 500; //0.5s
+	NSTimeInterval deltaTouchTime = [NSDate timeIntervalSinceReferenceDate] - self.latestPressTimestamp;
+	NSTimeInterval timeLimit = 0.5; //0.5s
 	
 	if (press.type == UIPressTypeSelect)
 	{
@@ -617,16 +617,28 @@
 	{
 		[self togglePlay];
 	}
-	else if (press.type == UIPressTypeLeftArrow && deltaTouchTime < timeLimit)
+	else if (press.type == UIPressTypeLeftArrow)
 	{
-		[self playPreviousTrack:nil];
+		if (deltaTouchTime < timeLimit)
+		{
+			[self playPreviousTrack:nil];
+		}
+		else
+		{
+			self.latestPressTimestamp = [NSDate timeIntervalSinceReferenceDate];
+		}
 	}
-	else if (press.type == UIPressTypeRightArrow && deltaTouchTime < timeLimit)
+	else if (press.type == UIPressTypeRightArrow)
 	{
-		[self playNextTrack:nil];
+		if (deltaTouchTime < timeLimit)
+		{
+			[self playNextTrack:nil];
+		}
+		else
+		{
+			self.latestPressTimestamp = [NSDate timeIntervalSinceReferenceDate];
+		}
 	}
-	
-	self.latestPressTimestamp = press.timestamp;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
