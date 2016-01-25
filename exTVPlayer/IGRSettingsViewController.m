@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	self.languagesCategory = @[
 					   @{@"value": @(IGRVideoCategory_Rus), @"name": @"Русский"},
 					   @{@"value": @(IGRVideoCategory_Ukr), @"name": @"Укрїнський"},
-					   @{@"value": @(IGRVideoCategory_Eng), @"name": @"Ennglish"},
+					   @{@"value": @(IGRVideoCategory_Eng), @"name": @"English"},
 					   @{@"value": @(IGRVideoCategory_Esp), @"name": @"Española"},
 					   @{@"value": @(IGRVideoCategory_De),  @"name": @"Deutsch"},
 					   @{@"value": @(IGRVideoCategory_Pl),  @"name": @"Polskie"}
