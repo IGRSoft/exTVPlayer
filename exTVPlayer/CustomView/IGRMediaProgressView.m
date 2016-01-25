@@ -33,6 +33,9 @@
 		_progressWidth = self.progressView.bounds.size.width;
 		_progressOffset = self.lineView.bounds.size.width;
 		
+		_remainingTimeLabel.textColor = _timeLabel.textColor = IGR_DARKCOLOR;
+		_progressView.progressTintColor = IGR_LIGHTBLUECOLOR;
+		
 		_updatingPosition = NO;
 	}
 	

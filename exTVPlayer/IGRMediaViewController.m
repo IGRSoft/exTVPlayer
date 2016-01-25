@@ -61,6 +61,8 @@
 	self.trakProperiesStatus = IGRTrackProperties_None;
 	self.mediaProgressView.delegate = self;
 	self.latestPressTimestamp = 0.0;
+	
+	self.titleLabel.textColor = IGR_DARKCOLOR;
 }
 
 - (void)viewDidAppear:(BOOL)animated
