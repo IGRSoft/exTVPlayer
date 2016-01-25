@@ -282,7 +282,7 @@
                                                     <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wqW-Wp-agY">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wqW-Wp-agY">
                                                     <rect key="frame" x="178" y="192" width="64" height="64"/>
                                                     <color key="color" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
@@ -535,7 +535,7 @@
                                                     <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="98X-9K-5Jb">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="98X-9K-5Jb">
                                                     <rect key="frame" x="178" y="192" width="64" height="64"/>
                                                     <color key="color" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
@@ -618,7 +618,7 @@
                                                     <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="V4d-EY-Fho">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="V4d-EY-Fho">
                                                     <rect key="frame" x="178" y="192" width="64" height="64"/>
                                                     <color key="color" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>

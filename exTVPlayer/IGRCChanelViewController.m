@@ -154,7 +154,7 @@
 		_chanels = [NSMutableArray arrayWithObject:aChanel];
 		[IGREXParser parseChanelContent:aChanel compleateBlock:^(NSArray *items) {
 			
-			[weak.fetchedResultsController performFetch:nil];
+			weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
 			[weak showParsingProgress:NO];
 			
 			[weak.catalogs reloadData];
