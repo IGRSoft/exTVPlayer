@@ -10,15 +10,15 @@
 #import "IGRMediaProgressView.h"
 #import "IGRAppDelegate.h"
 
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import <TVVLCKit/TVVLCKit.h>
+//#import <AVFoundation/AVFoundation.h>
+//#import <MediaPlayer/MediaPlayer.h>
+//#import <TVVLCKit/TVVLCKit.h>
 
 #import "IGREntityExTrack.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityAppSettings.h"
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate, VLCMediaPlayerDelegate, IGRMediaProgressDelegate>
+@interface IGRMediaViewController () <UIGestureRecognizerDelegate, /*VLCMediaPlayerDelegate,*/ IGRMediaProgressDelegate>
 {
 	NSTimer *_idleTimer;
 }
@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *titlePanel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
+//@property (strong, nonatomic) VLCMediaPlayer *mediaplayer;
 @property (strong, nonatomic) NSArray *playlist;
 @property (assign, nonatomic) NSInteger currentTrack;
 
@@ -79,13 +79,13 @@
 												 name:kapplicationDidBecomeActive
 											   object:nil];
 	
-	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:[self defaultVLCOptions]];
-	_mediaplayer.delegate = self;
-	_mediaplayer.drawable = self.movieView;
-	
-	/* listen for notifications from the player */
-	[_mediaplayer addObserver:self forKeyPath:@"time" options:0 context:nil];
-	[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
+//	_mediaplayer = [[VLCMediaPlayer alloc] initWithOptions:[self defaultVLCOptions]];
+//	_mediaplayer.delegate = self;
+//	_mediaplayer.drawable = self.movieView;
+//	
+//	/* listen for notifications from the player */
+//	[_mediaplayer addObserver:self forKeyPath:@"time" options:0 context:nil];
+//	[_mediaplayer addObserver:self forKeyPath:@"remainingTime" options:0 context:nil];
 	
 	[self playCurrentTrack];
 	
@@ -97,36 +97,36 @@
 {
 	[super viewWillDisappear:animated];
 	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	if (_mediaplayer)
-	{
-		@try {
-			[_mediaplayer removeObserver:self forKeyPath:@"time"];
-			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
-		}
-		@catch (NSException *exception) {
-			NSLog(@"we weren't an observer yet");
-		}
-		
-		if (_mediaplayer.media)
-		{
-			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
-			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
-			{
-				track.status = @(IGRTrackState_Half);
-				track.position = @(_mediaplayer.position);
-			}
-			
-			track.catalog.latestViewedTrack = @(self.currentTrack);
-			[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-			
-			self.skipState = YES;
-			[_mediaplayer stop];
-		}
-		
-		_mediaplayer = nil;
-	}
+//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+//	
+//	if (_mediaplayer)
+//	{
+//		@try {
+//			[_mediaplayer removeObserver:self forKeyPath:@"time"];
+//			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
+//		}
+//		@catch (NSException *exception) {
+//			NSLog(@"we weren't an observer yet");
+//		}
+//		
+//		if (_mediaplayer.media)
+//		{
+//			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
+//			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
+//			{
+//				track.status = @(IGRTrackState_Half);
+//				track.position = @(_mediaplayer.position);
+//			}
+//			
+//			track.catalog.latestViewedTrack = @(self.currentTrack);
+//			[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+//			
+//			self.skipState = YES;
+//			[_mediaplayer stop];
+//		}
+//		
+//		_mediaplayer = nil;
+//	}
 	
 	[self invalidateTimer];
 }
@@ -192,10 +192,15 @@
 		}
 	}
 	
-	_mediaplayer.media = [VLCMedia mediaWithURL:url];
-	_mediaplayer.position = track.position.floatValue;
-	[_mediaplayer play];
-		
+//	_mediaplayer.media = [VLCMedia mediaWithURL:url];
+//	_mediaplayer.position = track.position.floatValue;
+//	[_mediaplayer play];
+	
+	AVPlayer *player = [[AVPlayer alloc] initWithURL:url];
+	
+	self.player = player;
+	[player play];
+	
 	if (track.position.floatValue > 0.02 && track.position.floatValue < 0.98)
 	{
 		CGFloat timeInterval = [track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)] ? 3.0 : 0.3;
@@ -218,14 +223,14 @@
 
 - (void)togglePlay
 {
-	if (_mediaplayer.isPlaying)
-	{
-		[_mediaplayer pause];
-	}
-	else
-	{
-		[_mediaplayer play];
-	}
+//	if (_mediaplayer.isPlaying)
+//	{
+//		[_mediaplayer pause];
+//	}
+//	else
+//	{
+//		[_mediaplayer play];
+//	}
 }
 
 - (void)closePlayback
@@ -259,7 +264,7 @@
 
 - (void)setMediaPosition:(CGFloat)newPos
 {
-	_mediaplayer.position = newPos;
+	//_mediaplayer.position = newPos;
 	
 	self.updatingPosition = NO;
 }
@@ -314,10 +319,10 @@
 	{
 		self.trakProperiesStatus = IGRTrackProperties_InConfiguration;
 		
-		if (_mediaplayer.isPlaying)
-		{
-			[_mediaplayer pause];
-		}
+//		if (_mediaplayer.isPlaying)
+//		{
+//			[_mediaplayer pause];
+//		}
 		
 		UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Track Properties", @"")
 																	  message:@""
@@ -373,129 +378,129 @@
 
 - (void)showAudioTrackProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Audio Tracks", @"")
-																  message:@""
-														   preferredStyle:UIAlertControllerStyleActionSheet];
-	
-	__weak typeof(self) weak = self;
-	for (NSUInteger i = 0; i < _mediaplayer.numberOfAudioTracks; ++i)
-	{
-		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:_mediaplayer.audioTrackNames[i]
-															 style:UIAlertActionStyleDefault
-														   handler:^(UIAlertAction * action) {
-															   //Do some thing here
-															   int audioTrackPosition = (int)[weak.mediaplayer.audioTrackNames indexOfObject:action.title];
-															   
-															   weak.mediaplayer.currentAudioTrackIndex = audioTrackPosition;
-															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-															   
-															   [view dismissViewControllerAnimated:YES completion:nil];
-															   
-														   }];
-		
-		[view addAction:audioTrack];
-	}
-	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
-													 style:UIAlertActionStyleCancel
-												   handler:^(UIAlertAction * action)
-							 {
-								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-								 
-								 [view dismissViewControllerAnimated:YES completion:nil];
-							 }];
-	
-	
-	[view addAction:cancel];
-	[self presentViewController:view animated:YES completion:nil];
+//	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Audio Tracks", @"")
+//																  message:@""
+//														   preferredStyle:UIAlertControllerStyleActionSheet];
+//	
+//	__weak typeof(self) weak = self;
+//	for (NSUInteger i = 0; i < _mediaplayer.numberOfAudioTracks; ++i)
+//	{
+//		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:_mediaplayer.audioTrackNames[i]
+//															 style:UIAlertActionStyleDefault
+//														   handler:^(UIAlertAction * action) {
+//															   //Do some thing here
+//															   int audioTrackPosition = (int)[weak.mediaplayer.audioTrackNames indexOfObject:action.title];
+//															   
+//															   weak.mediaplayer.currentAudioTrackIndex = audioTrackPosition;
+//															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//															   
+//															   [view dismissViewControllerAnimated:YES completion:nil];
+//															   
+//														   }];
+//		
+//		[view addAction:audioTrack];
+//	}
+//	
+//	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+//													 style:UIAlertActionStyleCancel
+//												   handler:^(UIAlertAction * action)
+//							 {
+//								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//								 
+//								 [view dismissViewControllerAnimated:YES completion:nil];
+//							 }];
+//	
+//	
+//	[view addAction:cancel];
+//	[self presentViewController:view animated:YES completion:nil];
 }
 
 - (void)showVideoAspectRatiosProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Video Aspect Ratios", @"")
-																  message:@""
-														   preferredStyle:UIAlertControllerStyleActionSheet];
-	
-	__weak typeof(self) weak = self;
-	for (NSUInteger i = 0; i < self.aspectRatios.count; ++i)
-	{
-		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:self.aspectRatios[i]
-															 style:UIAlertActionStyleDefault
-														   handler:^(UIAlertAction * action) {
-															   //Do some thing here
-															   int aspectRatioPosition = (int)[self.aspectRatios indexOfObject:action.title];
-															   
-															   if (aspectRatioPosition == 0)
-															   {
-																   weak.mediaplayer.videoAspectRatio = NULL;
-																   weak.mediaplayer.videoCropGeometry = NULL;
-															   }
-															   else
-															   {
-																   weak.mediaplayer.videoCropGeometry = NULL;
-																   weak.mediaplayer.videoAspectRatio = (char *)(action.title).UTF8String;
-															   }
-															   
-															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-															   
-															   [view dismissViewControllerAnimated:YES completion:nil];
-															   
-														   }];
-		
-		[view addAction:audioTrack];
-	}
-	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
-													 style:UIAlertActionStyleCancel
-												   handler:^(UIAlertAction * action)
-							 {
-								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-								 
-								 [view dismissViewControllerAnimated:YES completion:nil];
-							 }];
-	
-	
-	[view addAction:cancel];
-	[self presentViewController:view animated:YES completion:nil];
+//	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Video Aspect Ratios", @"")
+//																  message:@""
+//														   preferredStyle:UIAlertControllerStyleActionSheet];
+//	
+//	__weak typeof(self) weak = self;
+//	for (NSUInteger i = 0; i < self.aspectRatios.count; ++i)
+//	{
+//		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:self.aspectRatios[i]
+//															 style:UIAlertActionStyleDefault
+//														   handler:^(UIAlertAction * action) {
+//															   //Do some thing here
+//															   int aspectRatioPosition = (int)[self.aspectRatios indexOfObject:action.title];
+//															   
+//															   if (aspectRatioPosition == 0)
+//															   {
+//																   weak.mediaplayer.videoAspectRatio = NULL;
+//																   weak.mediaplayer.videoCropGeometry = NULL;
+//															   }
+//															   else
+//															   {
+//																   weak.mediaplayer.videoCropGeometry = NULL;
+//																   weak.mediaplayer.videoAspectRatio = (char *)(action.title).UTF8String;
+//															   }
+//															   
+//															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//															   
+//															   [view dismissViewControllerAnimated:YES completion:nil];
+//															   
+//														   }];
+//		
+//		[view addAction:audioTrack];
+//	}
+//	
+//	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+//													 style:UIAlertActionStyleCancel
+//												   handler:^(UIAlertAction * action)
+//							 {
+//								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//								 
+//								 [view dismissViewControllerAnimated:YES completion:nil];
+//							 }];
+//	
+//	
+//	[view addAction:cancel];
+//	[self presentViewController:view animated:YES completion:nil];
 }
 
 - (void)showSubtitlesProperties
 {
-	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subtitles", @"")
-																  message:@""
-														   preferredStyle:UIAlertControllerStyleActionSheet];
-	
-	__weak typeof(self) weak = self;
-	for (NSUInteger i = 0; i < _mediaplayer.numberOfSubtitlesTracks; ++i)
-	{
-		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:_mediaplayer.videoSubTitlesNames[i]
-															 style:UIAlertActionStyleDefault
-														   handler:^(UIAlertAction * action) {
-															   //Do some thing here
-															   int subTitlePosition = (int)[weak.mediaplayer.videoSubTitlesNames indexOfObject:action.title];
-															   
-															   weak.mediaplayer.currentVideoSubTitleIndex = subTitlePosition;
-															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-															   
-															   [view dismissViewControllerAnimated:YES completion:nil];
-															   
-														   }];
-		
-		[view addAction:audioTrack];
-	}
-	
-	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
-													 style:UIAlertActionStyleCancel
-												   handler:^(UIAlertAction * action)
-							 {
-								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
-								 
-								 [view dismissViewControllerAnimated:YES completion:nil];
-							 }];
-	
-	
-	[view addAction:cancel];
-	[self presentViewController:view animated:YES completion:nil];
+//	UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subtitles", @"")
+//																  message:@""
+//														   preferredStyle:UIAlertControllerStyleActionSheet];
+//	
+//	__weak typeof(self) weak = self;
+//	for (NSUInteger i = 0; i < _mediaplayer.numberOfSubtitlesTracks; ++i)
+//	{
+//		UIAlertAction* audioTrack = [UIAlertAction actionWithTitle:_mediaplayer.videoSubTitlesNames[i]
+//															 style:UIAlertActionStyleDefault
+//														   handler:^(UIAlertAction * action) {
+//															   //Do some thing here
+//															   int subTitlePosition = (int)[weak.mediaplayer.videoSubTitlesNames indexOfObject:action.title];
+//															   
+//															   weak.mediaplayer.currentVideoSubTitleIndex = subTitlePosition;
+//															   weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//															   
+//															   [view dismissViewControllerAnimated:YES completion:nil];
+//															   
+//														   }];
+//		
+//		[view addAction:audioTrack];
+//	}
+//	
+//	UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
+//													 style:UIAlertActionStyleCancel
+//												   handler:^(UIAlertAction * action)
+//							 {
+//								 weak.trakProperiesStatus = IGRTrackProperties_Setuped;
+//								 
+//								 [view dismissViewControllerAnimated:YES completion:nil];
+//							 }];
+//	
+//	
+//	[view addAction:cancel];
+//	[self presentViewController:view animated:YES completion:nil];
 }
 
 #pragma mark - Timer
@@ -541,44 +546,44 @@
 
 #pragma mark - VLCMediaPlayerDelegate
 
-- (void)mediaPlayerStateChanged:(NSNotification *)aNotification
-{
-	VLCMediaPlayer *mediaplayer = aNotification.object;
-	VLCMediaPlayerState currentState = mediaplayer.state;
-	
-	/* distruct view controller on error */
-	if (currentState == VLCMediaPlayerStateError)
-	{
-		[self performSelector:@selector(closePlayback) withObject:nil afterDelay:2.0];
-	}
-	/* or if playback ended */
-	else if (currentState == VLCMediaPlayerStateEnded || currentState == VLCMediaPlayerStateStopped)
-	{
-		if (!self.skipState)
-		{
-			self.skipState = YES;
-			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
-			track.position = @(0.0);
-			track.status = @(IGRTrackState_Done);
-			
-			[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
-		}
-	}
-	else if (currentState == VLCMediaPlayerStatePlaying)
-	{
-	}
-	else if (currentState == VLCMediaPlayerStatePaused)
-	{
-	}
-}
-
-- (void)mediaPlayerTimeChanged:(NSNotification *)aNotification
-{
-	if (self.trakProperiesStatus == IGRTrackProperties_None)
-	{
-		self.trakProperiesStatus = IGRTrackProperties_Setuped;
-	}
-}
+//- (void)mediaPlayerStateChanged:(NSNotification *)aNotification
+//{
+//	VLCMediaPlayer *mediaplayer = aNotification.object;
+//	VLCMediaPlayerState currentState = mediaplayer.state;
+//	
+//	/* distruct view controller on error */
+//	if (currentState == VLCMediaPlayerStateError)
+//	{
+//		[self performSelector:@selector(closePlayback) withObject:nil afterDelay:2.0];
+//	}
+//	/* or if playback ended */
+//	else if (currentState == VLCMediaPlayerStateEnded || currentState == VLCMediaPlayerStateStopped)
+//	{
+//		if (!self.skipState)
+//		{
+//			self.skipState = YES;
+//			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
+//			track.position = @(0.0);
+//			track.status = @(IGRTrackState_Done);
+//			
+//			[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
+//		}
+//	}
+//	else if (currentState == VLCMediaPlayerStatePlaying)
+//	{
+//	}
+//	else if (currentState == VLCMediaPlayerStatePaused)
+//	{
+//	}
+//}
+//
+//- (void)mediaPlayerTimeChanged:(NSNotification *)aNotification
+//{
+//	if (self.trakProperiesStatus == IGRTrackProperties_None)
+//	{
+//		self.trakProperiesStatus = IGRTrackProperties_Setuped;
+//	}
+//}
 
 #pragma mark - IGRMediaProgressDelegate
 
@@ -604,14 +609,14 @@
 	{
 		[self togglePlay];
 		
-		if (_mediaplayer.isPlaying && !self.mediaProgressView.hidden)
-		{
-			//do nothing
-		}
-		else
-		{
-			[self toggleControlsVisible];
-		}
+//		if (_mediaplayer.isPlaying && !self.mediaProgressView.hidden)
+//		{
+//			//do nothing
+//		}
+//		else
+//		{
+//			[self toggleControlsVisible];
+//		}
 		
 		[self resetIdleTimer];
 	}
@@ -708,36 +713,36 @@
 
 #pragma mark - KVO
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	CGFloat position = _mediaplayer.position;
-	[self.mediaProgressView setTimePosition:position];
-	
-	if (position > 1.0)
-	{
-		[_mediaplayer stop];
-	}
-	
-	[self.mediaProgressView setRemainingTime:_mediaplayer.remainingTime.stringValue];
-	[self.mediaProgressView setTime:_mediaplayer.time.stringValue];
-}
-
-- (void)applicationWillResignActive:(NSNotification *)aNotification
-{
-	if (_mediaplayer.playing)
-	{
-		[_mediaplayer pause];
-	}
-	
-	self.needResumeVideo = _mediaplayer.playing;
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)aNotification
-{
-	if (self.needResumeVideo)
-	{
-		[_mediaplayer play];
-	}
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//	CGFloat position = _mediaplayer.position;
+//	[self.mediaProgressView setTimePosition:position];
+//	
+//	if (position > 1.0)
+//	{
+//		[_mediaplayer stop];
+//	}
+//	
+//	[self.mediaProgressView setRemainingTime:_mediaplayer.remainingTime.stringValue];
+//	[self.mediaProgressView setTime:_mediaplayer.time.stringValue];
+//}
+//
+//- (void)applicationWillResignActive:(NSNotification *)aNotification
+//{
+//	if (_mediaplayer.playing)
+//	{
+//		[_mediaplayer pause];
+//	}
+//	
+//	self.needResumeVideo = _mediaplayer.playing;
+//}
+//
+//- (void)applicationDidBecomeActive:(NSNotification *)aNotification
+//{
+//	if (self.needResumeVideo)
+//	{
+//		[_mediaplayer play];
+//	}
+//}
 
 @end

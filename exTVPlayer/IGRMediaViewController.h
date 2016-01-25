@@ -6,6 +6,8 @@
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 
+@import AVKit;
+
 typedef NS_ENUM(NSUInteger, IGRTrackProperties)
 {
 	IGRTrackProperties_None = 0,
@@ -13,7 +15,7 @@ typedef NS_ENUM(NSUInteger, IGRTrackProperties)
 	IGRTrackProperties_InConfiguration
 };
 
-@interface IGRMediaViewController : UIViewController
+@interface IGRMediaViewController : AVPlayerViewController
 
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition;
 

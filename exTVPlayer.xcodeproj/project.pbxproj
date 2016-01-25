@@ -14,7 +14,6 @@
 		A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38721C230F3800F6080A /* AVFoundation.framework */; };
 		A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38781C230F8100F6080A /* MediaPlayer.framework */; };
-		A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38401C22C56A00F6080A /* libTVVLCKit.a */; };
 		A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F387F1C2314A700F6080A /* OpenGLES.framework */; };
 		A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38811C23153A00F6080A /* QuartzCore.framework */; };
 		A51F38871C23156B00F6080A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F38831C23156B00F6080A /* CoreAudio.framework */; };
@@ -106,41 +105,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A51F38391C22C56A00F6080A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = MobileVLCKit;
-		};
-		A51F383B1C22C56A00F6080A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7D8939271B500D1C008F2B14;
-			remoteInfo = DynamicMobileVLCKit;
-		};
-		A51F383D1C22C56A00F6080A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7D89394E1B500DBC008F2B14;
-			remoteInfo = StaticLibVLC;
-		};
-		A51F383F1C22C56A00F6080A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7D1329591BA304D900BE647E;
-			remoteInfo = TVVLCKit;
-		};
-		A51F38411C22C57900F6080A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7D1329581BA304D900BE647E;
-			remoteInfo = TVVLCKit;
-		};
 		A569EE031C25D8FD004EF247 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
@@ -264,7 +228,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MobileVLCKit.xcodeproj; sourceTree = "<group>"; };
 		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
 		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
 		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
@@ -474,7 +437,6 @@
 				A51F388A1C23156B00F6080A /* CoreVideo.framework in Frameworks */,
 				A51F38821C23153A00F6080A /* QuartzCore.framework in Frameworks */,
 				A51F38801C2314A700F6080A /* OpenGLES.framework in Frameworks */,
-				A51F387A1C23124000F6080A /* libTVVLCKit.a in Frameworks */,
 				A51F38791C230F8100F6080A /* MediaPlayer.framework in Frameworks */,
 				A51F38731C230F3800F6080A /* AVFoundation.framework in Frameworks */,
 			);
@@ -520,28 +482,8 @@
 				A569ED731C25D8FC004EF247 /* SDWebImage */,
 				A51F3B6A1C23223900F6080A /* MagicalRecord */,
 				A51F38651C22F4DA00F6080A /* RaptureXML */,
-				A51F38311C22C54500F6080A /* VLCKit */,
 			);
 			path = Submodules;
-			sourceTree = "<group>";
-		};
-		A51F38311C22C54500F6080A /* VLCKit */ = {
-			isa = PBXGroup;
-			children = (
-				A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */,
-			);
-			path = VLCKit;
-			sourceTree = "<group>";
-		};
-		A51F38331C22C56A00F6080A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A51F383A1C22C56A00F6080A /* libMobileVLCKit.a */,
-				A51F383C1C22C56A00F6080A /* DynamicMobileVLCKit.framework */,
-				A51F383E1C22C56A00F6080A /* libStaticLibVLC.a */,
-				A51F38401C22C56A00F6080A /* libTVVLCKit.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A51F385E1C22F2BD00F6080A /* Helpers */ = {
@@ -954,7 +896,6 @@
 			);
 			dependencies = (
 				A569EE0E1C25D927004EF247 /* PBXTargetDependency */,
-				A51F38421C22C57900F6080A /* PBXTargetDependency */,
 				A569EE121C25D935004EF247 /* PBXTargetDependency */,
 				A5868D0E1C4A9D170037D401 /* PBXTargetDependency */,
 			);
@@ -997,10 +938,6 @@
 					ProjectRef = A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */;
 				},
 				{
-					ProductGroup = A51F38331C22C56A00F6080A /* Products */;
-					ProjectRef = A51F38321C22C56A00F6080A /* MobileVLCKit.xcodeproj */;
-				},
-				{
 					ProductGroup = A569EDB61C25D8FD004EF247 /* Products */;
 					ProjectRef = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
 				},
@@ -1013,34 +950,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A51F383A1C22C56A00F6080A /* libMobileVLCKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMobileVLCKit.a;
-			remoteRef = A51F38391C22C56A00F6080A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A51F383C1C22C56A00F6080A /* DynamicMobileVLCKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DynamicMobileVLCKit.framework;
-			remoteRef = A51F383B1C22C56A00F6080A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A51F383E1C22C56A00F6080A /* libStaticLibVLC.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libStaticLibVLC.a;
-			remoteRef = A51F383D1C22C56A00F6080A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A51F38401C22C56A00F6080A /* libTVVLCKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTVVLCKit.a;
-			remoteRef = A51F383F1C22C56A00F6080A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A569EE041C25D8FD004EF247 /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1229,11 +1138,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A51F38421C22C57900F6080A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TVVLCKit;
-			targetProxy = A51F38411C22C57900F6080A /* PBXContainerItemProxy */;
-		};
 		A569EE0E1C25D927004EF247 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "WebImage tvOS";

@@ -202,7 +202,7 @@
                                             <outlet property="savedIcon" destination="t77-KM-akm" id="mmP-ZI-Dj4"/>
                                             <outlet property="title" destination="zgm-jF-CHu" id="dRf-QE-rC9"/>
                                             <outlet property="trackStatus" destination="Q8P-U9-ZGd" id="SCG-eW-rvW"/>
-                                            <segue destination="xDf-oz-I9d" kind="show" identifier="playPlaylistPosition" id="cq6-lq-HAb"/>
+                                            <segue destination="hOz-gM-pkf" kind="show" identifier="playPlaylistPosition" id="grU-pA-wih"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -330,6 +330,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Peb-2b-ufw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2225" y="-914"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="C4U-V9-EVd">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="hOz-gM-pkf" customClass="IGRMediaViewController" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XNV-7Y-cd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4749" y="-851"/>
         </scene>
         <!--Media View Controller-->
         <scene sceneID="K56-Ut-ovB">
