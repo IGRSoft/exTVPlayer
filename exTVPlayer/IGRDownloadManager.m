@@ -106,7 +106,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 			}
 			
 			IGRDownloadManagerCompleateBlock block = downloadObject[kIGRKeyCompleate];
-			if (![block isEqual:[NSNull null]])
+			if (block && ![block isEqual:[NSNull null]])
 			{
 				block();
 			}
