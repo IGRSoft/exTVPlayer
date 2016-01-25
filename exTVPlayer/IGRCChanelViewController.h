@@ -14,9 +14,6 @@
 - (void)setCatalog:(NSString *)aCatalog;
 - (void)setSearchResult:(NSString *)aSearchRequest;
 
-- (void)showFavorites;
-- (void)showHistory;
-
 @property (nonatomic, assign) BOOL needHighlightCell;
 
 @end

@@ -15,6 +15,9 @@
 #import "MagicalRecord.h"
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
 
+#define IGR_LIGHTBLUECOLOR [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000]
+#define IGR_DARKBLUECOLOR [UIColor colorWithRed:0.020 green:0.200 blue:0.520 alpha:1.000]
+
 typedef NS_ENUM(NSUInteger, IGRSourceType)
 {
 	IGRSourceType_RSS		= 0,
@@ -75,3 +78,4 @@ typedef NS_ENUM(NSUInteger, IGRChanelMode)
 
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
 static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";
+

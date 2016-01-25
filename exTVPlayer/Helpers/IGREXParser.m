@@ -12,13 +12,20 @@
 #import "IGREntityExChanel.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
+#import <AFNetworking/AFNetworking.h>
 
 static NSString * const kMainServer = @"http://www.ex.ua";
 static NSString * const kAdditionalServer = @"http://rover.info";
 
+static AFURLSessionManager *__xmlManager = nil;
+static AFURLSessionManager *__imageManager = nil;
+
+typedef void (^IGREXParserDownloadCompleateBlock)(RXMLElement *xmlDocument);
+
 @implementation IGREXParser
 
-+ (BOOL)parseCatalogContent:(NSString *)aCatalogId async:(BOOL)anAsync
++ (void)parseCatalogContent:(nonnull NSString *)aCatalogId
+			 compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
 	IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																			withValue:aCatalogId];
@@ -27,107 +34,89 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 	{
 		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 15)
 		{
-			return NO; //skip update
+			aCompleateBlock(nil);
+			return; //skip update
 		}
 	}
 	
-	NSError *error = nil;
-	NSStringEncoding encoding;
 	NSString *xspfUrl = [NSString stringWithFormat:@"%@/playlist/%@.xspf", kMainServer, aCatalogId];
-	NSString *xspfString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:xspfUrl]
-													  usedEncoding:&encoding
-															 error:&error];
-	
-	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:xspfString encoding:NSUTF8StringEncoding];
-	
-	NSParameterAssert(xmlDocument.isValid);
-	
-	NSString *title = [xmlDocument child:@"title"].text;
-	catalog.name = title;
-	
-	__block NSUInteger orderId = 0;
-	[xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
-		
-		NSString *title = [node child:@"title"].text;
-		NSString *webPath = [node child:@"location"].text;
-		
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
-		IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
-		
-		if (!track)
-		{
-			if (anAsync)
-			{
-				[MR_DEFAULT_CONTEXT MR_obtainPermanentIDsForObjects:@[catalog]];
-				[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext)
+	[self downloadXMLFrom:xspfUrl
+		   compleateBlock:^(RXMLElement *xmlDocument)
+	 {
+		 NSParameterAssert(xmlDocument.isValid);
+		 
+		 if (xmlDocument)
+		 {
+			 NSString *title = [xmlDocument child:@"title"].text;
+			 catalog.name = title;
+			 
+			 __block NSUInteger orderId = 0;
+			 [xmlDocument iterate:@"trackList.track" usingBlock:^(RXMLElement *node) {
+				 
+				 NSString *title = [node child:@"title"].text;
+				 NSString *webPath = [node child:@"location"].text;
+				 
+				 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
+				 IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
+				 
+				 if (!track)
 				 {
-					 IGREntityExTrack *track = [IGREntityExTrack MR_createEntityInContext:localContext];
+					 IGREntityExTrack *track = [IGREntityExTrack MR_createEntity];
 					 track.webPath = webPath;
 					 track.name = title;
 					 track.status = @(IGRTrackState_New);
 					 track.dataStatus = @(IGRTrackDataStatus_Web);
 					 track.position = @(0.0);
-					 track.catalog = [catalog MR_inContext:localContext];
+					 track.catalog = catalog;
 					 track.orderId = @(orderId);
-				 }];
-			}
-			else
-			{
-				IGREntityExTrack *track = [IGREntityExTrack MR_createEntity];
-				track.webPath = webPath;
-				track.name = title;
-				track.status = @(IGRTrackState_New);
-				track.dataStatus = @(IGRTrackDataStatus_Web);
-				track.position = @(0.0);
-				track.catalog = catalog;
-				track.orderId = @(orderId);
-			}
-			
-		}
-		++orderId;
-	}];
-	
-	if (!catalog.imgUrl)
-	{
-		NSError *error = nil;
-		NSStringEncoding encoding;
-		NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aCatalogId];
-		NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
-														 usedEncoding:&encoding
-																error:&error];
-		
-		RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
-		
-		NSParameterAssert(xmlDocument.isValid);
-		
-		[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
-			
-			NSString *imgUrl = node.text;
-			imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
-			catalog.imgUrl = imgUrl;
-		}];
-	}
-	
-	if ([catalog.orderId isEqualToNumber:@0])
-	{
-		NSInteger orderId = [[IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"] integerValue];
-		catalog.orderId = @(++orderId);
-	}
-	
-	catalog.timestamp = [NSDate date];
-	
-	if (!anAsync)
-	{
-		if (MR_DEFAULT_CONTEXT.hasChanges)
-		{
-			[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-		}
-	}
-	
-	return YES;
+				 }
+				 ++orderId;
+			 }];
+			 
+			 if (!catalog.imgUrl)
+			 {
+				 NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aCatalogId];
+				 [self downloadImageXMLFrom:rrsUrl
+						compleateBlock:^(RXMLElement *xmlDocument)
+				  {
+					  NSParameterAssert(xmlDocument.isValid);
+					  
+					  if (xmlDocument)
+					  {
+						  [xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
+							  
+							  NSString *imgUrl = node.text;
+							  imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
+							  catalog.imgUrl = imgUrl;
+						  }];
+						  
+						  if (MR_DEFAULT_CONTEXT.hasChanges)
+						  {
+							  [MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+						  }
+					  }
+				  }];
+			 }
+			 
+			 catalog.timestamp = [NSDate date];
+			 if ([catalog.orderId isEqualToNumber:@0])
+			 {
+				 NSInteger orderId = [[IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"] integerValue];
+				 catalog.orderId = @(++orderId);
+			 }
+			 
+			 if (MR_DEFAULT_CONTEXT.hasChanges)
+			 {
+				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+			 }
+			 
+			 aCompleateBlock(@[catalog]);
+		 }
+	 }];
 }
 
-+ (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId
++ (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
+				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
 	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																						   withValue:aVideoCatalogId];
@@ -135,44 +124,47 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 	{
 		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 15)
 		{
+			aCompleateBlock(nil);
 			return; //skip update
 		}
 	}
 	
-	NSError *error = nil;
-	NSStringEncoding encoding;
 	NSString *xspfUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aVideoCatalogId];
-	NSString *xspfString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:xspfUrl]
-													  usedEncoding:&encoding
-															 error:&error];
 	
-	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:xspfString encoding:NSUTF8StringEncoding];
-	
-	NSParameterAssert(xmlDocument.isValid);
-	
-	NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
-	videoCatalog.name = title;
-	
-	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
-		
-		NSString *title = [node child:@"title"].text;
-		NSString *itemId = [node child:@"guid"].text;
-		
-		IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
-		chanel.name = title;
-		chanel.videoCatalog = videoCatalog;
-	}];
-	
-	videoCatalog.timestamp = [NSDate date];
-	
-	if (MR_DEFAULT_CONTEXT.hasChanges)
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
-
+	[self downloadXMLFrom:xspfUrl
+		   compleateBlock:^(RXMLElement *xmlDocument)
+	 {
+		 NSParameterAssert(xmlDocument.isValid);
+		 
+		 if (xmlDocument)
+		 {
+			 NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
+			 videoCatalog.name = title;
+			 
+			 [xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
+				 
+				 NSString *title = [node child:@"title"].text;
+				 NSString *itemId = [node child:@"guid"].text;
+				 
+				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+				 chanel.name = title;
+				 chanel.videoCatalog = videoCatalog;
+			 }];
+			 
+			 videoCatalog.timestamp = [NSDate date];
+			 
+			 if (MR_DEFAULT_CONTEXT.hasChanges)
+			 {
+				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+			 }
+			 
+			 aCompleateBlock(@[videoCatalog]);
+		 }
+	 }];
 }
 
-+ (void)parseChanelContent:(NSString *)aChanelId
++ (void)parseChanelContent:(nonnull NSString *)aChanelId
+			compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
 	IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
 																		 withValue:aChanelId];
@@ -180,133 +172,214 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 	{
 		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < 15)
 		{
+			aCompleateBlock(nil);
 			return; //skip update
 		}
 	}
 	
-	NSError *error = nil;
-	NSStringEncoding encoding;
 	NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aChanelId];
-	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
-													  usedEncoding:&encoding
-															 error:&error];
-	
-	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
-	
-	NSParameterAssert(xmlDocument.isValid);
-	
-	NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
-	chanel.name = title;
-	
-	NSMutableArray *items = [NSMutableArray array];
-	[xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
-		
-		[items addObject:node];
-	}];
-	
-	NSInteger itemsCount = items.count - 1;
-	
-	NSNumber *lastId = [IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"];
-	__block NSUInteger orderId = lastId.integerValue;
-	
-	for (RXMLElement *node in [items reverseObjectEnumerator])
-	{
-		NSString *title = [node child:@"title"].text;
-		NSString *itemId = [node child:@"guid"].text;
-		
-		IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
-		
-		if (catalog.orderId.integerValue == (orderId - itemsCount--))
-		{
-			continue; //same position;
-		}
-		
-		if (!catalog.imgUrl)
-		{
-			NSError *error = nil;
-			NSStringEncoding encoding;
-			NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, itemId];
-			NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
-															 usedEncoding:&encoding
-																	error:&error];
-			
-			RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
-			
-			NSParameterAssert(xmlDocument.isValid);
-			
-			[xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
-				
-				NSString *imgUrl = node.text;
-				imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
-				catalog.imgUrl = imgUrl;
-			}];
-		}
-		catalog.name = title;
-		catalog.chanel = chanel;
-		
-		catalog.orderId = @(orderId++);
-	}
-	
-	chanel.timestamp = [NSDate date];
-	
-	if (MR_DEFAULT_CONTEXT.hasChanges)
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	[self downloadXMLFrom:rrsUrl
+		   compleateBlock:^(RXMLElement *xmlDocument)
+	 {
+		 NSParameterAssert(xmlDocument.isValid);
+		 
+		 if (xmlDocument)
+		 {
+			 NSString *title = [[xmlDocument child:@"channel"] child:@"title"].text;
+			 chanel.name = title;
+			 
+			 NSMutableArray *items = [NSMutableArray array];
+			 [xmlDocument iterate:@"channel.item" usingBlock:^(RXMLElement *node) {
+				 
+				 [items addObject:node];
+			 }];
+			 
+			 NSInteger itemsCount = items.count - 1;
+			 
+			 NSNumber *lastId = [IGREntityExCatalog MR_findLargestValueForAttribute:@"orderId"];
+			 __block NSUInteger orderId = lastId.integerValue;
+			 
+			 for (RXMLElement *node in [items reverseObjectEnumerator])
+			 {
+				 NSString *title = [node child:@"title"].text;
+				 NSString *itemId = [node child:@"guid"].text;
+				 
+				 IGREntityExCatalog *catalog = [IGREntityExCatalog MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+				 
+				 if (catalog.orderId.integerValue == (orderId - itemsCount--))
+				 {
+					 continue; //same position;
+				 }
+				 
+				 if (!catalog.imgUrl)
+				 {
+					 NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, itemId];
+					 [self downloadImageXMLFrom:rrsUrl
+								 compleateBlock:^(RXMLElement *xmlDocument)
+					  {
+						  NSParameterAssert(xmlDocument.isValid);
+						  
+						  if (xmlDocument)
+						  {
+							  [xmlDocument iterate:@"channel.image.url" usingBlock:^(RXMLElement *node) {
+								  
+								  NSString *imgUrl = node.text;
+								  imgUrl = [imgUrl componentsSeparatedByString:@"?"].firstObject;
+								  catalog.imgUrl = imgUrl;
+							  }];
+							  
+							  if (MR_DEFAULT_CONTEXT.hasChanges)
+							  {
+								  [MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+							  }
+						  }
+					  }];
+				 }
+				 catalog.name = title;
+				 catalog.chanel = chanel;
+				 
+				 catalog.orderId = @(orderId++);
+			 }
+			 
+			 chanel.timestamp = [NSDate date];
+			 
+			 if (MR_DEFAULT_CONTEXT.hasChanges)
+			 {
+				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+			 }
+			 
+			 aCompleateBlock(@[chanel]);
+		 }
+	 }];
 }
 
-+ (NSArray *)parseLiveSearchContent:(NSString *)aSearchText page:(NSUInteger)aPage catalog:(NSInteger)aCatalog
++ (void)parseLiveSearchContent:(nonnull NSString *)aSearchText
+						  page:(NSUInteger)aPage
+					   catalog:(NSInteger)aCatalog
+				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	NSError *error = nil;
-	NSStringEncoding encoding;
 	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?s=%@&p=%@", kAdditionalServer, aSearchText, @(aPage)];
 	if (aCatalog > 0)
 	{
 		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", @(aCatalog)];
 	}
 	rrsUrl = [rrsUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-
-	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
-													 usedEncoding:&encoding
-															error:&error];
 	
-	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
-	
-	NSParameterAssert(xmlDocument.isValid);
-	
-	NSMutableArray *items = [NSMutableArray array];
-	[xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
-		
-		NSString *catalogId = [node attribute:@"id"];
-		[items addObject:catalogId];
-	}];
-	
-	return items;
+	[self downloadXMLFrom:rrsUrl
+		   compleateBlock:^(RXMLElement *xmlDocument)
+	 {
+		 NSParameterAssert(xmlDocument.isValid);
+		 
+		 NSMutableArray *items = [NSMutableArray array];
+		 if (xmlDocument)
+		 {
+			 [xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
+				 
+				 NSString *catalogId = [node attribute:@"id"];
+				 [items addObject:catalogId];
+			 }];
+		 }
+		 
+		 aCompleateBlock(items);
+	 }];
 }
 
-+ (NSArray *)parseLiveCatalog:(NSString *)aCatalog page:(NSUInteger)aPage
++ (void)parseLiveCatalog:(nonnull NSString *)aCatalog
+					page:(NSUInteger)aPage
+		  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	NSError *error = nil;
-	NSStringEncoding encoding;
 	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?original_id=%@&p=%@", kAdditionalServer, aCatalog, @(aPage)];
 	rrsUrl = [rrsUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 	
-	NSString *rrsString = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:rrsUrl]
-													 usedEncoding:&encoding
-															error:&error];
+	[self downloadXMLFrom:rrsUrl
+		   compleateBlock:^(RXMLElement *xmlDocument)
+	 {
+		 NSParameterAssert(xmlDocument.isValid);
+		 
+		 NSMutableArray *items = [NSMutableArray array];
+		 if (xmlDocument)
+		 {
+			 [xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
+				 
+				 NSString *catalogId = [node attribute:@"id"];
+				 [items addObject:catalogId];
+			 }];
+		 }
+		 
+		 aCompleateBlock(items);
+	 }];
+}
+
++ (void)downloadXMLFrom:(nonnull NSString *)aUrl
+		 compleateBlock:(nonnull IGREXParserDownloadCompleateBlock)aCompleateBlock
+{
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aUrl]];
 	
-	RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLString:rrsString encoding:NSUTF8StringEncoding];
-	
-	NSParameterAssert(xmlDocument.isValid);
-	
-	NSMutableArray *items = [NSMutableArray array];
-	[xmlDocument iterate:@"object" usingBlock:^(RXMLElement *node) {
+	if (!__xmlManager)
+	{
+		NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+		sessionConfiguration.HTTPMaximumConnectionsPerHost = 20;
 		
-		NSString *catalogId = [node attribute:@"id"];
-		[items addObject:catalogId];
-	}];
+		__xmlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
+		
+		AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
+		serializer.acceptableContentTypes = [NSSet setWithObjects:@"application/rss+xml",
+											 @"application/xspf+xml", @"text/xml", nil];
+		[__xmlManager setResponseSerializer:serializer];
+	}
 	
-	return items;
+	[[__xmlManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+		
+		if(!error)
+		{
+			RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLData:responseObject];
+			aCompleateBlock(xmlDocument);
+		}
+		else
+		{
+			NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+			NSLog(@"%@", errorStr);
+			
+			aCompleateBlock(nil);
+		}
+		
+	}] resume];
+}
+
++ (void)downloadImageXMLFrom:(nonnull NSString *)aUrl
+			  compleateBlock:(nonnull IGREXParserDownloadCompleateBlock)aCompleateBlock
+{
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aUrl]];
+	
+	if (!__imageManager)
+	{
+		NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:NSStringFromClass([IGREXParser class])];
+		sessionConfiguration.HTTPMaximumConnectionsPerHost = 10;
+		
+		__imageManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
+		
+		AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
+		serializer.acceptableContentTypes = [NSSet setWithObjects:@"application/rss+xml",
+											 @"application/xspf+xml", @"text/xml", nil];
+		[__imageManager setResponseSerializer:serializer];
+	}
+	
+	[[__imageManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+		
+		if(!error)
+		{
+			RXMLElement *xmlDocument = [[RXMLElement alloc] initFromXMLData:responseObject];
+			aCompleateBlock(xmlDocument);
+		}
+		else
+		{
+			NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+			NSLog(@"%@", errorStr);
+			
+			aCompleateBlock(nil);
+		}
+		
+	}] resume];
 }
 
 + (NSInteger)hoursBetweenCurrwntDate:(NSDate *)aDate
@@ -316,7 +389,7 @@ static NSString * const kAdditionalServer = @"http://rover.info";
 																	 toDate:[NSDate date]
 																	options:0];
 	
-	return components.hour;
+	return components.minute;
 }
 
 @end

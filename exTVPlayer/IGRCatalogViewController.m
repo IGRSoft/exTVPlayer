@@ -42,10 +42,14 @@ static const CGFloat reloadTime = 0.3;
 - (void)setCatalogId:(NSString *)aCatalogId
 {
 	_catalogId = aCatalogId;
-	[IGREXParser parseCatalogContent:aCatalogId async:NO];
-	
-	self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
-													 withValue:_catalogId];
+	__weak typeof(self) weak = self;
+	[IGREXParser parseCatalogContent:aCatalogId
+					  compleateBlock:^(NSArray *items) {
+		
+		self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
+														 withValue:_catalogId];
+		[weak.fetchedResultsController performFetch:nil];
+	}];
 	
 	self.catalog.viewedTimestamp = [NSDate date];
 	
@@ -67,10 +71,10 @@ static const CGFloat reloadTime = 0.3;
 	if (self.catalog)
 	{
 		self.catalogTitle.text = self.catalog.name;
-		[self onTouchFavorit:nil];
 	}
+	[self onTouchFavorit:nil];
 	
-	if ((self.fetchedResultsController).sections.count)
+	if ((self.fetchedResultsController).sections.count && ![self.catalog.latestViewedTrack isEqualToNumber:@0])
 	{
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
@@ -220,8 +224,7 @@ static const CGFloat reloadTime = 0.3;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	// Return NO if you do not want the specified item to be editable.
-	return YES;
+	return NO;
 }
 
 - (void)configureCell:(IGRExItemCell *)cell atIndexPath:(NSIndexPath *)indexPath

@@ -53,7 +53,7 @@
 {
 	if ([segue.identifier isEqualToString:@"openSearch"])
 	{
-		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
+		IGRCChanelViewController *chanelViewController = segue.destinationViewController;
 		
 		NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
 		NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.searchText];
@@ -61,14 +61,14 @@
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
 				
-				[catalogViewController setCatalog:self.searchText];
+				[chanelViewController setCatalog:self.searchText];
 			});
 		}
 		else
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
 				
-				[catalogViewController setSearchResult:self.searchText];
+				[chanelViewController setSearchResult:self.searchText];
 			});
 		}
 	}

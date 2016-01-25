@@ -445,6 +445,7 @@
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController_Private.h; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* IGRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRAppDelegate.h; sourceTree = "<group>"; };
@@ -893,6 +894,7 @@
 				A583B8991C52553D002B0BE9 /* Managers */,
 				A5E81BDD1C22B72D00EABFC5 /* IGRAppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */,
+				A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */,
 				A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */,
 				A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
