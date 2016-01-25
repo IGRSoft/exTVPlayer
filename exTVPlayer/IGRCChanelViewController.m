@@ -7,6 +7,8 @@
 //
 
 #import "IGRCChanelViewController.h"
+#import "IGRCChanelViewController_Private.h"
+
 #import "IGRCatalogViewController.h"
 
 #import "IGREntityExChanel.h"
@@ -20,19 +22,26 @@
 
 @interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic  ) IBOutlet UICollectionView *catalogs;
 @property (strong, nonatomic) UILabel *noContentLabel;
+@property (strong, nonatomic) UIActivityIndicatorView *parsingActivityIndicator;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSMutableArray<NSString*> *chanels;
-
+@property (weak,   nonatomic) IBOutlet UICollectionView *catalogs;
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
 
-@property (assign, nonatomic) IGRChanelMode chanelMode;
+@property (strong, nonatomic) NSMutableArray<NSString*> *chanels;
 
 @property (copy,   nonatomic) NSString *liveSearchRequest;
 @property (copy,   nonatomic) NSString *liveChanel;
 @property (assign, nonatomic) NSInteger livePage;
+
+@property (assign, nonatomic) NSUInteger catalogCount;
+
+@property (assign, nonatomic) BOOL hasSomeData;
+@property (assign, nonatomic) BOOL updateInProgress;
+@property (assign, nonatomic) BOOL waitingDoneUpdate;
+
+@property (strong, nonatomic) NSTimer *refreshTimer;
+@property (assign, atomic   ) BOOL needRefresh;
 
 @end
 
@@ -56,11 +65,29 @@
 	self.noContentLabel.hidden = YES;
 	
 	[self.view addSubview:self.noContentLabel];
+	
+	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
+									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	
+	self.parsingActivityIndicator.color = IGR_DARKBLUECOLOR;
+	self.parsingActivityIndicator.center = self.view.center;
+	self.parsingActivityIndicator.hidden = YES;
+	self.parsingActivityIndicator.hidesWhenStopped = YES;
+	
+	[self.view addSubview:self.parsingActivityIndicator];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	self.needHighlightCell = YES;
+	self.updateInProgress = NO;
+	self.waitingDoneUpdate = NO;
+	
+	self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1
+												  target:self
+												selector:@selector(refreshTimerExceeded)
+												userInfo:nil
+												 repeats:YES];
 	
 	[super viewWillAppear:animated];
 }
@@ -79,7 +106,8 @@
 	
 	if (self.needHighlightCell && catalog)
 	{
-		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+													  inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
 		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
 		catalog.favorit = (entityatalog.isFavorit).boolValue;
@@ -89,9 +117,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
 		
 		[obj setSelected:NO];
+		[obj setHighlighted:NO];
 	}];
 	
 	for (UIGestureRecognizer *gr in self.catalogs.gestureRecognizers)
@@ -112,22 +141,36 @@
 
 - (void)setChanel:(NSString *)aChanel
 {
+	self.onceToken = 0;
+	
 	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
 
-	self.chanelMode = [settings.sourceType isEqualToNumber:@(IGRSourceType_RSS)] ? IGRChanelMode_Catalog : IGRChanelMode_Catalog_Live;
+	self.chanelMode = [settings.sourceType isEqualToNumber:@(IGRSourceType_RSS)] ? IGRChanelMode_Catalog :
+																				   IGRChanelMode_Catalog_Live;
 	
 	if (self.chanelMode == IGRChanelMode_Catalog)
 	{
+		__weak typeof(self) weak = self;
 		_chanels = [NSMutableArray arrayWithObject:aChanel];
-		[IGREXParser parseChanelContent:aChanel];
+		[IGREXParser parseChanelContent:aChanel compleateBlock:^(NSArray *items) {
+			
+			weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
+			[weak showParsingProgress:NO];
+			
+			[weak.catalogs reloadData];
+		}];
 	}
 	else
 	{
 		_liveChanel = aChanel;
 		_livePage = 0;
-		_chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage]];
-		
-		[self asyncUpdate];
+		__weak typeof(self) weak = self;
+		[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage compleateBlock:^(NSArray *items) {
+			
+			NSUInteger startPosition = weak.chanels.count;
+			weak.chanels = [NSMutableArray arrayWithArray:items];
+			[weak asyncUpdateFromPosition:startPosition];
+		}];
 	}
 }
 
@@ -135,8 +178,12 @@
 {
 	self.chanelMode = IGRChanelMode_Catalog_One;
 	
+	__weak typeof(self) weak = self;
 	_chanels = [NSMutableArray arrayWithObject:aCatalog];
-	[IGREXParser parseCatalogContent:aCatalog async:NO];
+	[IGREXParser parseCatalogContent:aCatalog compleateBlock:^(NSArray *items) {
+		
+		[weak.fetchedResultsController performFetch:nil];
+	}];
 }
 
 - (void)setSearchResult:(NSString *)aSearchRequest
@@ -146,44 +193,101 @@
 	
 	_liveChanel = @"0";
 	_livePage = 0;
-	_chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveSearchContent:self.liveSearchRequest
-																			 page:self.livePage
-																		  catalog:self.liveChanel.integerValue]];
-	
-	[self asyncUpdate];
-}
-
-- (void)asyncUpdate
-{
-	NSUInteger count = self.chanels.count;
 	__weak typeof(self) weak = self;
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		
-		[weak.chanels enumerateObjectsUsingBlock:^(NSString * _Nonnull chanel, NSUInteger idx, BOOL * _Nonnull stop) {
+	[IGREXParser parseLiveSearchContent:self.liveSearchRequest
+								   page:self.livePage
+								catalog:self.liveChanel.integerValue
+						 compleateBlock:^(NSArray *items) {
+							 
+							 NSUInteger startPosition = weak.chanels.count;
+							 weak.chanels = [NSMutableArray arrayWithArray:items];
+							 [weak asyncUpdateFromPosition:startPosition];
+						 }];
+}
+
+- (void)asyncUpdateFromPosition:(NSUInteger)startPosition
+{
+	self.updateInProgress = YES;
+	
+	NSUInteger count = self.chanels.count;
+	__block NSUInteger position = startPosition;
+	__block NSUInteger parsePosition = 0;
+	__weak typeof(self) weak = self;
+	
+	NSArray *chanelsRange = [self.chanels subarrayWithRange:NSMakeRange(startPosition, count - startPosition)];
+	
+	if (chanelsRange.count)
+	{
+		[chanelsRange enumerateObjectsUsingBlock:^(NSString * _Nonnull chanel, NSUInteger idx, BOOL * _Nonnull stop) {
 			
-			if ([IGREXParser parseCatalogContent:chanel async:YES] || (idx + 1) == count)
+			[IGREXParser parseCatalogContent:chanel
+							  compleateBlock:^(NSArray *items)
 			{
-				dispatch_sync(dispatch_get_main_queue(), ^{
+				weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
+				if ((parsePosition != 0 && (parsePosition % 20) == 0) || (parsePosition + 1) == count)
+				{
+					weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
 					
-					[weak.fetchedResultsController performFetch:nil];
-					[weak.catalogs reloadData];
-				});
-			}
+					if (position == startPosition)
+					{
+						[weak showParsingProgress:NO];
+						weak.needRefresh = YES;
+					}
+					else
+					{
+						weak.needRefresh = YES;
+					}
+					
+					IGRCatalogCell *catalogCell = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
+					[catalogCell setHighlighted:YES];
+					
+					position = startPosition + parsePosition;
+				}
+				
+				if ((++parsePosition + 1) == count)
+				{
+					weak.updateInProgress = NO;
+				}
+			}];
 		}];
-	});
-}
-
-- (void)showFavorites
-{
-	self.chanelMode = IGRChanelMode_Favorites;
-}
-
-- (void)showHistory
-{
-	self.chanelMode = IGRChanelMode_History;
+	}
+	else
+	{
+		[weak showParsingProgress:NO];
+	}
 }
 
 #pragma mark - Privat
+
+- (void)showParsingProgress:(BOOL)show
+{
+	if (self.hasSomeData)
+	{
+		[self.parsingActivityIndicator stopAnimating];
+		self.noContentLabel.hidden = YES;
+	}
+	else
+	{
+		if (show)
+		{
+			[self.parsingActivityIndicator startAnimating];
+		}
+		else
+		{
+			[self.parsingActivityIndicator stopAnimating];
+			self.noContentLabel.hidden = NO;
+		}
+	}
+}
+
+- (void)refreshTimerExceeded
+{
+	if (self.needRefresh)
+	{
+		[self.catalogs reloadData];
+		_needRefresh = NO;
+	}
+}
 
 #pragma mark - Navigation
 
@@ -208,12 +312,13 @@
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
 	{
-		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
 			
 			[obj setHighlighted:NO];
 		}];
 	}
-	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] && [context.nextFocusedView isKindOfClass:[IGRCatalogCell class]])
+	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")]
+			 && [context.nextFocusedView isKindOfClass:[IGRCatalogCell class]])
 	{
 		[(IGRCatalogCell *)context.nextFocusedView setHighlighted:YES];
 	}
@@ -224,22 +329,29 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	NSUInteger count = (self.fetchedResultsController).sections.count;
+	self.catalogCount = (self.fetchedResultsController).sections.count;
+	
+	dispatch_once(&_onceToken, ^{
+		
+		self.hasSomeData = self.catalogCount > 0;
+		[self showParsingProgress:YES];
+	});
+	
 	if (self.chanelMode == IGRChanelMode_History)
 	{
 		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-		count = MIN(settings.historySize.integerValue, count);
+		self.catalogCount = MIN(settings.historySize.integerValue, self.catalogCount);
 	}
 	
-	self.noContentLabel.hidden = count > 0;
-	
-	return count;
+	return self.catalogCount;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+				  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	IGRCatalogCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRCatalogCell" forIndexPath:indexPath];
+	IGRCatalogCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRCatalogCell"
+																	 forIndexPath:indexPath];
 	
 	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
 	IGREntityExCatalog *catalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
@@ -269,6 +381,8 @@
 	if ([nextFocusedCell isKindOfClass:[IGRCatalogCell class]])
 	{
 		[nextFocusedCell setHighlighted:YES];
+		
+		self.lastSelectedItem = [self.catalogs indexPathForCell:nextFocusedCell];
 	}
 	
 	return YES;
@@ -279,37 +393,74 @@
 	self.lastSelectedItem = indexPath;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView
+	   willDisplayCell:(UICollectionViewCell *)cell
+	forItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live)
 	{
-		if ((indexPath.row + indexPath.section) == (self.chanels.count - 1) && self.livePage >= 0)
+		if ((indexPath.row + indexPath.section) == (self.catalogCount - 10
+													) && self.livePage >= 0)
 		{
-			++self.livePage;
-			
-			NSArray *chanels = nil;
-			
-			if (self.chanelMode == IGRChanelMode_Search)
+			if (self.updateInProgress && self.waitingDoneUpdate)
 			{
-				chanels = [NSMutableArray arrayWithArray:[IGREXParser parseLiveSearchContent:self.liveSearchRequest
-																						 page:self.livePage
-																					  catalog:self.liveChanel.integerValue]];
+				return;
+			}
+			else if (!self.waitingDoneUpdate)
+			{
+				self.waitingDoneUpdate = YES;
+				[self tryUpdateData];
+			}
+		}
+	}
+}
+
+- (void)tryUpdateData
+{
+	if (self.updateInProgress)
+	{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			
+			[self tryUpdateData];
+		});
+	}
+	else
+	{
+		++self.livePage;
+		
+		__weak typeof(self) weak = self;
+		void (^updateChanels)(NSArray *) = ^(NSArray *items)
+		{
+			if (items.count)
+			{
+				NSUInteger startPosition = weak.catalogCount;
+				
+				[weak.chanels addObjectsFromArray:items];
+				weak.fetchedResultsController = nil;
+				weak.catalogCount = 0;
+				
+				[weak.fetchedResultsController performFetch:nil];
+				
+				[weak asyncUpdateFromPosition:startPosition];
 			}
 			else
 			{
-				chanels = [IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage];
+				weak.livePage = -1;
 			}
 			
-			if (chanels.count)
-			{
-				[_chanels addObjectsFromArray:chanels];
-				self.fetchedResultsController = nil;
-				[self asyncUpdate];
-			}
-			else
-			{
-				self.livePage = -1;
-			}
+			weak.waitingDoneUpdate = NO;
+		};
+		
+		if (self.chanelMode == IGRChanelMode_Search)
+		{
+			[IGREXParser parseLiveSearchContent:self.liveSearchRequest
+										   page:self.livePage
+										catalog:self.liveChanel.integerValue
+								 compleateBlock:updateChanels];
+		}
+		else
+		{
+			[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage compleateBlock:updateChanels];
 		}
 	}
 }
@@ -318,15 +469,12 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Favorites)
+	if (!self.chanels.count)
 	{
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
-															  withPredicate:predicate
-																   sortedBy:@"orderId"
-																  ascending:NO];
+		return nil;
 	}
-	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
+	
+	if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanels.firstObject];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
@@ -342,15 +490,8 @@
 																	sortedBy:@"orderId"
 																   ascending:NO];
 	}
-	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_History)
-	{
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"viewedTimestamp != nil"];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"viewedTimestamp"
-															   withPredicate:predicate
-																	sortedBy:@"viewedTimestamp"
-																   ascending:NO];
-	}
-	else if (_fetchedResultsController == nil && (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live))
+	else if (_fetchedResultsController == nil && (self.chanelMode == IGRChanelMode_Search ||
+												  self.chanelMode == IGRChanelMode_Catalog_Live))
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId IN %@", self.chanels];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"

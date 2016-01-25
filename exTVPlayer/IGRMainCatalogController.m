@@ -48,15 +48,15 @@
 	{
 		self.lastVideoCatalog = langId;
 		
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		__weak typeof(self) weak = self;
+		[IGREXParser parseVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray *items) {
 			
-			[IGREXParser parseVideoCatalogContent:langId.stringValue];
-		});
+			weak.fetchedResultsController = nil;
+			weak.lastSelectedItem = nil;
+			
+			[weak.chanels reloadData];
+		}];
 		
-		_fetchedResultsController = nil;
-		self.lastSelectedItem = nil;
-		
-		[self.chanels reloadData];
 	}
 	else if (self.lastSelectedItem)
 	{
@@ -66,9 +66,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRChanelCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		
 		[obj setSelected:NO];
+		[obj setHighlighted:NO];
 	}];
 	
 	[super viewWillDisappear:animated];

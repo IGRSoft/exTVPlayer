@@ -8,11 +8,24 @@
 
 @interface IGREXParser : NSObject
 
-+ (BOOL)parseCatalogContent:(NSString *)aCatalogId async:(BOOL)anAsync;
-+ (void)parseVideoCatalogContent:(NSString *)aVideoCatalogId;
-+ (void)parseChanelContent:(NSString *)aChanelId;
+typedef void (^IGREXParserCompleateBlock)(NSArray * _Nullable items);
 
-+ (NSArray *)parseLiveSearchContent:(NSString *)aSearchText page:(NSUInteger)aPage catalog:(NSInteger)aCatalog;
-+ (NSArray *)parseLiveCatalog:(NSString *)aCatalog page:(NSUInteger)aPage;
++ (void)parseCatalogContent:(nonnull NSString *)aCatalogId
+			 compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
+
++ (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
+				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
+
++ (void)parseChanelContent:(nonnull NSString *)aChanelId
+			compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
+
++ (void)parseLiveSearchContent:(nonnull NSString *)aSearchText
+						  page:(NSUInteger)aPage
+					   catalog:(NSInteger)aCatalog
+				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
+
++ (void)parseLiveCatalog:(nonnull NSString *)aCatalog
+					page:(NSUInteger)aPage
+		  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
 @end
