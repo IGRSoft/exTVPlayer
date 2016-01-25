@@ -1382,6 +1382,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1406,6 +1407,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
