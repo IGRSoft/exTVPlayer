@@ -154,7 +154,11 @@
 		_chanels = [NSMutableArray arrayWithObject:aChanel];
 		[IGREXParser parseChanelContent:aChanel compleateBlock:^(NSArray *items) {
 			
+<<<<<<< HEAD
 			[weak.fetchedResultsController performFetch:nil];
+=======
+			weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
+>>>>>>> 32e79f58337649e3210bfbaaf21aac77ffbb89dd
 			[weak showParsingProgress:NO];
 			
 			[weak.catalogs reloadData];
@@ -223,6 +227,10 @@
 			[IGREXParser parseCatalogContent:chanel
 							  compleateBlock:^(NSArray *items)
 			{
+<<<<<<< HEAD
+=======
+				weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
+>>>>>>> 32e79f58337649e3210bfbaaf21aac77ffbb89dd
 				if ((parsePosition != 0 && (parsePosition % 20) == 0) || (parsePosition + 1) == count)
 				{
 					weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
@@ -238,10 +246,14 @@
 					}
 					
 					IGRCatalogCell *catalogCell = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
+<<<<<<< HEAD
 					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 						
 						[catalogCell setHighlighted:YES];
 					});
+=======
+					[catalogCell setHighlighted:YES];
+>>>>>>> 32e79f58337649e3210bfbaaf21aac77ffbb89dd
 					
 					position = startPosition + parsePosition;
 				}
@@ -332,10 +344,17 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	self.catalogCount = (self.fetchedResultsController).sections.count;
+<<<<<<< HEAD
 	self.hasSomeData = self.catalogCount > 0;
 	
 	dispatch_once(&_onceToken, ^{
 		
+=======
+	
+	dispatch_once(&_onceToken, ^{
+		
+		self.hasSomeData = self.catalogCount > 0;
+>>>>>>> 32e79f58337649e3210bfbaaf21aac77ffbb89dd
 		[self showParsingProgress:YES];
 	});
 	
