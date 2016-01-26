@@ -19,6 +19,11 @@
 #define IGR_DARKBLUECOLOR [UIColor colorWithRed:0.020 green:0.200 blue:0.520 alpha:1.000]
 #define IGR_DARKCOLOR [UIColor colorWithWhite:0.100 alpha:1.000]
 
+#define PROXY_ENABLED 0
+static NSString * const kIGRProxyAddres = @"";
+static NSUInteger const kIGRProxyPort   = 0;
+static BOOL		  const kIGRProxyHTTPS  = 0;
+
 typedef NS_ENUM(NSUInteger, IGRSourceType)
 {
 	IGRSourceType_RSS		= 0,

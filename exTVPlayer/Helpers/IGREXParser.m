@@ -14,6 +14,10 @@
 #import "IGREntityExTrack.h"
 #import <AFNetworking/AFNetworking.h>
 
+#if (PROXY_ENABLED)
+#import <CFNetwork/CFNetwork.h>
+#endif
+
 static NSString * const kMainServer = @"http://www.ex.ua";
 static NSString * const kAdditionalServer = @"http://rover.info";
 
@@ -277,7 +281,14 @@ typedef void (^IGREXParserDownloadCompleateBlock)(RXMLElement *xmlDocument);
 	{
 		NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
 		sessionConfiguration.HTTPMaximumConnectionsPerHost = 20;
+
+#if (PROXY_ENABLED)
+		NSDictionary *proxyDict = @{[NSString stringWithFormat:@"HTTP%@Enable", kIGRProxyHTTPS ? @"S" : @""]: @YES,
+									[NSString stringWithFormat:@"HTTP%@Proxy", kIGRProxyHTTPS ? @"S" : @""] : kIGRProxyAddres,
+									[NSString stringWithFormat:@"HTTP%@Port", kIGRProxyHTTPS ? @"S" : @""] : @(kIGRProxyPort)};
 		
+		sessionConfiguration.connectionProxyDictionary = proxyDict;
+#endif
 		__xmlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
 		
 		AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
