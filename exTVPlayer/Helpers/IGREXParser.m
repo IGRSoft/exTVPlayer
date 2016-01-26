@@ -53,6 +53,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(RXMLElement *xmlDocument);
 				 
 				 NSString *title = [node attribute:@"name"];
 				 NSString *webPath = [node attribute:@"url"];
+				 NSInteger duration = [node attributeAsInt:@"duration"];
 				 
 				 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
 				 IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
@@ -67,7 +68,9 @@ typedef void (^IGREXParserDownloadCompleateBlock)(RXMLElement *xmlDocument);
 					 track.position = @(0.0);
 					 track.catalog = catalog;
 					 track.orderId = @(orderId);
+					 track.duration = @(duration);
 				 }
+				 
 				 ++orderId;
 			 }];
 			 
