@@ -334,59 +334,23 @@
         <!--AV Player View Controller-->
         <scene sceneID="C4U-V9-EVd">
             <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="hOz-gM-pkf" customClass="IGRMediaViewController" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XNV-7Y-cd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4749" y="-851"/>
-        </scene>
-        <!--Media View Controller-->
-        <scene sceneID="K56-Ut-ovB">
-            <objects>
-                <viewController id="xDf-oz-I9d" customClass="IGRMediaViewController" sceneMemberID="viewController">
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="hOz-gM-pkf" customClass="IGRMediaViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VhL-Vw-KTf"/>
-                        <viewControllerLayoutGuide type="bottom" id="g9R-q7-Qnw"/>
+                        <viewControllerLayoutGuide type="top" id="5vy-8i-QYZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="LHX-cJ-K3W"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RBz-Cr-Qf9">
+                    <view key="view" contentMode="scaleToFill" id="9uo-h9-GT1">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6yp-JQ-pIr">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RcV-rA-beM" customClass="IGRMediaProgressView">
-                                <rect key="frame" x="0.0" y="1006" width="1920" height="74"/>
-                                <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AK-q5-btt">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="83"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf2-sc-Zp5">
-                                        <rect key="frame" x="8" y="8" width="1904" height="54"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="ArrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="HMD-fJ-FBy">
-                                        <rect key="frame" x="935" y="45" width="50" height="50"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="mediaProgressView" destination="RcV-rA-beM" id="44I-uy-us4"/>
-                        <outlet property="movieView" destination="6yp-JQ-pIr" id="1Gc-m5-8lH"/>
-                        <outlet property="titleLabel" destination="Bf2-sc-Zp5" id="NYp-FI-kf4"/>
-                        <outlet property="titlePanel" destination="2AK-q5-btt" id="Ept-8K-bQJ"/>
-                        <outlet property="view" destination="RBz-Cr-Qf9" id="XYY-OE-pbf"/>
+                        <outlet property="gestureView" destination="9uo-h9-GT1" id="cVn-5t-ppd"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u7m-CU-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </avPlayerViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XNV-7Y-cd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4749" y="374"/>
+            <point key="canvasLocation" x="4773" y="374"/>
         </scene>
         <!--Settings-->
         <scene sceneID="877-pD-wss">
@@ -677,7 +641,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ArrowDown" width="50" height="50"/>
         <image name="catalog" width="48" height="48"/>
         <image name="favorit" width="48" height="48"/>
         <image name="favorit-off" width="48" height="48"/>

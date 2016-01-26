@@ -83,8 +83,6 @@
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
 		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
-		A581C5B21C346E430016D086 /* IGRMediaProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A581C5B11C346E430016D086 /* IGRMediaProgressView.m */; };
-		A581C5BC1C346E5A0016D086 /* IGRMediaProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */; };
 		A581C5BF1C3485A00016D086 /* IGRCustomViewFromXib.m in Sources */ = {isa = PBXBuildFile; fileRef = A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */; };
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -386,9 +384,6 @@
 		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTableViewCell.h; sourceTree = "<group>"; };
 		A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTableViewCell.m; sourceTree = "<group>"; };
-		A581C5B01C346E430016D086 /* IGRMediaProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRMediaProgressView.h; sourceTree = "<group>"; };
-		A581C5B11C346E430016D086 /* IGRMediaProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRMediaProgressView.m; sourceTree = "<group>"; };
-		A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGRMediaProgressView.xib; sourceTree = "<group>"; };
 		A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCustomViewFromXib.h; sourceTree = "<group>"; };
 		A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCustomViewFromXib.m; sourceTree = "<group>"; };
 		A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
@@ -713,9 +708,6 @@
 				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
 				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
 				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
-				A581C5B01C346E430016D086 /* IGRMediaProgressView.h */,
-				A581C5B11C346E430016D086 /* IGRMediaProgressView.m */,
-				A581C5BB1C346E5A0016D086 /* IGRMediaProgressView.xib */,
 				A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */,
 				A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */,
 				A58F671E1C4829E300D7518B /* UIView+Extension.h */,
@@ -1043,7 +1035,6 @@
 			files = (
 				A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */,
 				A569ECD31C24459E004EF247 /* Localizable.strings in Resources */,
-				A581C5BC1C346E5A0016D086 /* IGRMediaProgressView.xib in Resources */,
 				A569ECCD1C24455D004EF247 /* InfoPlist.strings in Resources */,
 				A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */,
 			);
@@ -1109,7 +1100,6 @@
 				A51F3BDC1C23223900F6080A /* NSManagedObject+MagicalRecord.m in Sources */,
 				A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */,
 				A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */,
-				A581C5B21C346E430016D086 /* IGRMediaProgressView.m in Sources */,
 				A569ED5D1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
 				A58F66F81C47C9F300D7518B /* IGRFavoritsViewController.m in Sources */,

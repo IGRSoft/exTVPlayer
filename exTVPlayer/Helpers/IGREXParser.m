@@ -167,26 +167,43 @@ typedef void (^IGREXParserDownloadCompleateBlock)(RXMLElement *xmlDocument);
 				 [items addObject:[node child:@"guid"].text];
 			 }];
 			 
-			 for (NSString *catalogId in items)
-			 {
-				 [IGREXParser parseCatalogContent:catalogId compleateBlock:^(NSArray * _Nullable items) {
-					 
-					 IGREntityExCatalog *catalog = items.firstObject;
-					 if (catalog)
-					 {
-						 catalog.chanel = chanel;
-					 }
-				 }];
-			 }
-			 
 			 chanel.timestamp = [NSDate date];
 			 
-			 if (MR_DEFAULT_CONTEXT.hasChanges)
+			 //    return_type (^blockName)(var_type) = ^return_type (var_type varName)
+			 void (^exitBlock)(IGREntityExChanel *) = ^void (IGREntityExChanel *chanel) {
+				 
+				 if (MR_DEFAULT_CONTEXT.hasChanges)
+				 {
+					 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+				 }
+				 
+				 aCompleateBlock(@[chanel]);
+			 };
+
+			 if (items.count)
 			 {
-				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+				 __block NSUInteger count = items.count;
+				 for (NSString *catalogId in items)
+				 {
+					 [IGREXParser parseCatalogContent:catalogId compleateBlock:^(NSArray * _Nullable items) {
+						 
+						 IGREntityExCatalog *catalog = items.firstObject;
+						 if (catalog)
+						 {
+							 catalog.chanel = chanel;
+						 }
+						 
+						 if (--count == 0)
+						 {
+							 exitBlock(chanel);
+						 }
+					 }];
+				 }
 			 }
-			 
-			 aCompleateBlock(@[chanel]);
+			 else
+			 {
+				 exitBlock(chanel);
+			 }
 		 }
 	 }];
 }
