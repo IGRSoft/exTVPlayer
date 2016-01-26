@@ -180,17 +180,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-jF-CHu">
-                                                    <rect key="frame" x="83" y="8" width="1813" height="50"/>
+                                                    <rect key="frame" x="83" y="8" width="1755" height="50"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.019607843137254902" green="0.19607843137254902" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8P-U9-ZGd" customClass="DACircularProgressView">
-                                                    <rect key="frame" x="30" y="17" width="36" height="36"/>
+                                                    <rect key="frame" x="30" y="19" width="34" height="33"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="t77-KM-akm">
-                                                    <rect key="frame" x="1864" y="19" width="32" height="32"/>
+                                                    <rect key="frame" x="1854" y="19" width="32" height="32"/>
                                                 </imageView>
                                                 <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KSn-Vq-sro">
                                                     <rect key="frame" x="0.0" y="60" width="1920" height="10"/>

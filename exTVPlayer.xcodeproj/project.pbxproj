@@ -76,7 +76,6 @@
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
 		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
-		A581C5BF1C3485A00016D086 /* IGRCustomViewFromXib.m in Sources */ = {isa = PBXBuildFile; fileRef = A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */; };
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
@@ -370,8 +369,6 @@
 		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTableViewCell.h; sourceTree = "<group>"; };
 		A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTableViewCell.m; sourceTree = "<group>"; };
-		A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCustomViewFromXib.h; sourceTree = "<group>"; };
-		A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCustomViewFromXib.m; sourceTree = "<group>"; };
 		A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
 		A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRDownloadManager.h; sourceTree = "<group>"; };
 		A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRDownloadManager.m; sourceTree = "<group>"; };
@@ -680,8 +677,6 @@
 				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
 				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
 				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
-				A581C5BD1C3485A00016D086 /* IGRCustomViewFromXib.h */,
-				A581C5BE1C3485A00016D086 /* IGRCustomViewFromXib.m */,
 				A58F671E1C4829E300D7518B /* UIView+Extension.h */,
 				A58F671F1C4829E300D7518B /* UIView+Extension.m */,
 			);
@@ -1055,7 +1050,6 @@
 				A51F3BE41C23223900F6080A /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
 				A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */,
 				A51F3BE21C23223900F6080A /* NSPersistentStore+MagicalRecord.m in Sources */,
-				A581C5BF1C3485A00016D086 /* IGRCustomViewFromXib.m in Sources */,
 				A51F3BEE1C23223900F6080A /* MagicalRecord+VersionInformation.m in Sources */,
 				A51F3BDD1C23223900F6080A /* NSManagedObject+MagicalRequests.m in Sources */,
 				A51F3BD51C23223900F6080A /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
