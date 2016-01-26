@@ -22,7 +22,6 @@
 @property (assign, nonatomic) IGREntityExTrack *currentTrack;
 @property (assign, nonatomic) NSInteger currentTrackPosition;
 
-@property (assign, nonatomic) IGRTrackProperties trakProperiesStatus;
 @property (assign, nonatomic) NSTimeInterval latestPressTimestamp;
 
 @property (assign, nonatomic) BOOL needResumeVideo;
@@ -41,25 +40,33 @@
 {
 	[super viewDidAppear:animated];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationWillResignActive:)
-												 name:kApplicationWillResignActive
-											   object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationDidBecomeActive:)
-												 name:kapplicationDidBecomeActive
-											   object:nil];
-	
 	AVPlayer *player = [[AVPlayer alloc] init];
 	self.delegate = self;
 	self.player = player;
 	
+	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+	
+	/* listen for notifications from the application */
+	[defaultCenter addObserver:self
+					  selector:@selector(applicationWillResignActive:)
+						  name:kApplicationWillResignActive
+						object:nil];
+	
+	[defaultCenter addObserver:self
+					  selector:@selector(applicationDidBecomeActive:)
+						  name:kapplicationDidBecomeActive
+						object:nil];
+	
 	/* listen for notifications from the player */
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(playFinished:)
-												 name:AVPlayerItemDidPlayToEndTimeNotification
-											   object:nil];
+	[defaultCenter addObserver:self
+					  selector:@selector(itemDidPlayToEndTime:)
+						  name:AVPlayerItemDidPlayToEndTimeNotification
+						object:nil];
+	
+	[defaultCenter addObserver:self
+					  selector:@selector(itemFailedToPlayToEnd:)
+						  name:AVPlayerItemFailedToPlayToEndTimeNotification
+						object:nil];
 	
 	[self playCurrentTrack];
 	
@@ -72,35 +79,21 @@
 	[super viewWillDisappear:animated];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-//	
-//	if (_mediaplayer)
-//	{
-//		@try {
-//			[_mediaplayer removeObserver:self forKeyPath:@"time"];
-//			[_mediaplayer removeObserver:self forKeyPath:@"remainingTime"];
-//		}
-//		@catch (NSException *exception) {
-//			NSLog(@"we weren't an observer yet");
-//		}
-//		
-//		if (_mediaplayer.media)
-//		{
-//			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
-//			if (_mediaplayer.position > 0.02 && _mediaplayer.position < 0.98)
-//			{
-//				track.status = @(IGRTrackState_Half);
-//				track.position = @(_mediaplayer.position);
-//			}
-//			
-//			track.catalog.latestViewedTrack = @(self.currentTrack);
-//			[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-//			
-//			self.skipState = YES;
-//			[_mediaplayer stop];
-//		}
-//		
-//		_mediaplayer = nil;
-//	}
+	
+	if (self.isPlaying)
+	{
+		[self.player pause];
+		
+		Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
+		if (currentTime > 60)
+		{
+			self.currentTrack.status = @(IGRTrackState_Half);
+			self.currentTrack.position = @(currentTime);
+		}
+		
+		self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
+		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,8 +106,8 @@
 
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition
 {
-	self.currentTrackPosition = aPosition;
 	self.tracks = aPlayList;
+	self.currentTrackPosition = aPosition;
 }
 
 #pragma mark - Privat
@@ -129,6 +122,7 @@
 		NSURL *url = [NSURL URLWithString:track.webPath];
 		if (track.localName.length)
 		{
+			//check downloaded files
 			url = [[IGRAppDelegate videoFolder] URLByAppendingPathComponent:track.localName];
 			if (![[NSFileManager defaultManager] fileExistsAtPath:url.path])
 			{
@@ -186,13 +180,9 @@
 	[self.player replaceCurrentItemWithPlayerItem:item];
 	[self.player play];
 	
-	if (self.currentTrack.position.floatValue > 0.02)
-	{
-		CMTime time = CMTimeMakeWithSeconds(self.currentTrack.position.floatValue, 1);
-		[self.player seekToTime:time];
-	}
-	
-	self.trakProperiesStatus = IGRTrackProperties_None;
+	Float64 lastPosition = MIN(0, self.currentTrack.position.floatValue - 10.0); //run back 10 sec
+	CMTime time = CMTimeMakeWithSeconds(lastPosition, 1);
+	[self.player seekToTime:time];
 }
 
 - (void)closePlayback
@@ -205,70 +195,10 @@
 	return self.player.rate != 0 && !self.player.error;
 }
 
-#pragma mark - NSNotification
-
-- (void)playFinished:(NSNotification*)nstification
-{
-	[self playNextTrack:nil];
-}
-
-#pragma mark - AVPlayerViewControllerDelegate
-
-- (void)playerViewController:(AVPlayerViewController *)playerViewController didPresentInterstitialTimeRange:(AVInterstitialTimeRange *)interstitial
-{
-	
-}
-
-#pragma mark - VLCMediaPlayerDelegate
-
-//- (void)mediaPlayerStateChanged:(NSNotification *)aNotification
-//{
-//	VLCMediaPlayer *mediaplayer = aNotification.object;
-//	VLCMediaPlayerState currentState = mediaplayer.state;
-//	
-//	/* distruct view controller on error */
-//	if (currentState == VLCMediaPlayerStateError)
-//	{
-//		[self performSelector:@selector(closePlayback) withObject:nil afterDelay:2.0];
-//	}
-//	/* or if playback ended */
-//	else if (currentState == VLCMediaPlayerStateEnded || currentState == VLCMediaPlayerStateStopped)
-//	{
-//		if (!self.skipState)
-//		{
-//			self.skipState = YES;
-//			IGREntityExTrack *track = [self.playlist[self.currentTrack] objects].firstObject;
-//			track.position = @(0.0);
-//			track.status = @(IGRTrackState_Done);
-//			
-//			[self performSelector:@selector(playNextTrack:) withObject:nil afterDelay:1.0];
-//		}
-//	}
-//	else if (currentState == VLCMediaPlayerStatePlaying)
-//	{
-//	}
-//	else if (currentState == VLCMediaPlayerStatePaused)
-//	{
-//	}
-//}
-//
-//- (void)mediaPlayerTimeChanged:(NSNotification *)aNotification
-//{
-//	if (self.trakProperiesStatus == IGRTrackProperties_None)
-//	{
-//		self.trakProperiesStatus = IGRTrackProperties_Setuped;
-//	}
-//}
-
 #pragma mark - Touches
 
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
-//	if (self.trakProperiesStatus == IGRTrackProperties_None)
-//	{
-//		return;
-//	}
-	
 	[super pressesEnded:presses withEvent:event];
 	
 	UIPress *press = presses.anyObject;
@@ -299,29 +229,25 @@
 	}
 }
 
-#pragma mark - KVO
+#pragma mark - NSNotificationCenter
 
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//{
-//	CGFloat position = _mediaplayer.position;
-//	[self.mediaProgressView setTimePosition:position];
-//	
-//	if (position > 1.0)
-//	{
-//		[_mediaplayer stop];
-//	}
-//	
-//	[self.mediaProgressView setRemainingTime:_mediaplayer.remainingTime.stringValue];
-//	[self.mediaProgressView setTime:_mediaplayer.time.stringValue];
-//}
-//
+- (void)itemDidPlayToEndTime:(NSNotification*)nstification
+{
+	self.currentTrack.status = @(IGRTrackState_Done);
+	self.currentTrack.position = @(0.0);
+	
+	[self playNextTrack:nil];
+}
+
+- (void)itemFailedToPlayToEnd:(NSNotification*)nstification
+{
+	[self playNextTrack:nil];
+}
+
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
 	self.needResumeVideo = self.isPlaying;
-	if (self.isPlaying)
-	{
-		[self.player pause];
-	}
+	[self.player pause];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification

@@ -231,9 +231,15 @@ static const CGFloat reloadTime = 0.3;
 {
 	IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	
-	cell.title.text = track.name;
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+	[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[numberFormatter setMinimumIntegerDigits:2];
+	NSString *positionString = [numberFormatter stringFromNumber:@(track.orderId.integerValue + 1)];
+	NSString *title = [NSString stringWithFormat:@"[%@] %@", positionString, track.name];
 	
-	CGFloat trackPosition = track.position.floatValue;
+	cell.title.text = title;
+	
+	CGFloat trackPosition = track.position.floatValue / track.duration.floatValue;
 	if (track.status.integerValue == IGRTrackState_Done)
 	{
 		trackPosition = 1.0;
