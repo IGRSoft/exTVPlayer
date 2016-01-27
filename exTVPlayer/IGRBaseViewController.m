@@ -23,7 +23,6 @@
 	{
 		settings = [IGREntityAppSettings MR_createEntity];
 		settings.videoLanguageId	= @(IGRVideoCategory_Rus);
-		settings.videoBufferSize	= @(IGRVideoBufferSize_5mb);
 		settings.historySize		= @(IGRHistorySize_10);
 		settings.sourceType			= @(IGRSourceType_RSS);
 		

@@ -55,16 +55,6 @@ typedef NS_ENUM(NSUInteger, IGRVideoCategory)
 	IGRVideoCategory_Pl  = 968815
 };
 
-typedef NS_ENUM(NSUInteger, IGRVideoBufferSize)
-{
-	IGRVideoBufferSize_1mb	= 1024,
-	IGRVideoBufferSize_3mb	= 3096,
-	IGRVideoBufferSize_5mb	= 5120,
-	IGRVideoBufferSize_10mb	= 10240,
-	IGRVideoBufferSize_20mb	= 20480,
-	IGRVideoBufferSize_50mb	= 51200
-};
-
 typedef NS_ENUM(NSUInteger, IGRHistorySize)
 {
 	IGRHistorySize_5	= 5,

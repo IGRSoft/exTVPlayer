@@ -10,7 +10,6 @@
 		A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
 		A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
-		A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38671C22F4DA00F6080A /* RXMLElement.m */; };
 		A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A51F3B0D1C231EE700F6080A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51F3B0C1C231EE700F6080A /* CoreData.framework */; };
 		A51F3BD01C23223900F6080A /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B6F1C23223900F6080A /* MagicalImportFunctions.m */; };
@@ -276,8 +275,6 @@
 		A51F38471C22D3E600F6080A /* IGRExItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRExItemCell.m; sourceTree = "<group>"; };
 		A51F385F1C22F2FA00F6080A /* IGREXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREXParser.h; sourceTree = "<group>"; };
 		A51F38601C22F2FA00F6080A /* IGREXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXParser.m; sourceTree = "<group>"; };
-		A51F38661C22F4DA00F6080A /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
-		A51F38671C22F4DA00F6080A /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
 		A51F386E1C23091200F6080A /* IGRMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRMediaViewController.h; sourceTree = "<group>"; };
 		A51F386F1C23091200F6080A /* IGRMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRMediaViewController.m; sourceTree = "<group>"; };
 		A51F387B1C2312AA00F6080A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -507,7 +504,6 @@
 				A5F3720C1C282FD500AB1395 /* DACircularProgress */,
 				A569ED731C25D8FC004EF247 /* SDWebImage */,
 				A51F3B6A1C23223900F6080A /* MagicalRecord */,
-				A51F38651C22F4DA00F6080A /* RaptureXML */,
 			);
 			path = Submodules;
 			sourceTree = "<group>";
@@ -519,16 +515,6 @@
 				A51F38601C22F2FA00F6080A /* IGREXParser.m */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		A51F38651C22F4DA00F6080A /* RaptureXML */ = {
-			isa = PBXGroup;
-			children = (
-				A51F38661C22F4DA00F6080A /* RXMLElement.h */,
-				A51F38671C22F4DA00F6080A /* RXMLElement.m */,
-			);
-			name = RaptureXML;
-			path = RaptureXML/RaptureXML;
 			sourceTree = "<group>";
 		};
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
@@ -1183,7 +1169,6 @@
 				A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */,
 				A569ED601C257CA7004EF247 /* IGREntityExVideoCatalog.m in Sources */,
 				A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */,
-				A51F38681C22F4DA00F6080A /* RXMLElement.m in Sources */,
 				A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */,
 				A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */,
 				A51F3BDC1C23223900F6080A /* NSManagedObject+MagicalRecord.m in Sources */,

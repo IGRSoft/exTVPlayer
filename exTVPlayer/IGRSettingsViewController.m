@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sourceButton;
 @property (weak, nonatomic) IBOutlet UIButton *languageCategoryButton;
-@property (weak, nonatomic) IBOutlet UIButton *videoBufferButton;
 @property (weak, nonatomic) IBOutlet UIButton *historySizeButton;
 
 @property (strong, nonatomic) NSArray *sources;
@@ -28,7 +27,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 {
 	IGRSettingsType_Source	= 0,
 	IGRSettingsType_LanguageCategory,
-	IGRSettingsType_Cache,
 	IGRSettingsType_History
 };
 
@@ -50,15 +48,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 					   @{@"value": @(IGRVideoCategory_Pl),  @"name": @"Polskie"}
 					   ];
 	
-	self.caches = @[
-					@{@"value": @(IGRVideoBufferSize_1mb),	@"name": NSLocalizedString(@"VideoBufferSize_1mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_3mb),	@"name": NSLocalizedString(@"VideoBufferSize_3mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_5mb),	@"name": NSLocalizedString(@"VideoBufferSize_5mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_10mb),	@"name": NSLocalizedString(@"VideoBufferSize_10mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_20mb),	@"name": NSLocalizedString(@"VideoBufferSize_20mb", nil)},
-					@{@"value": @(IGRVideoBufferSize_50mb),	@"name": NSLocalizedString(@"VideoBufferSize_50mb", nil)}
-					];
-	
 	self.history = @[@{@"value": @(IGRHistorySize_5),	@"name": @(IGRHistorySize_5).stringValue},
 					 @{@"value": @(IGRHistorySize_10),	@"name": @(IGRHistorySize_10).stringValue},
 					 @{@"value": @(IGRHistorySize_20),	@"name": @(IGRHistorySize_20).stringValue},
@@ -69,7 +58,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	
 	[self updateViewForSettings:IGRSettingsType_Source from:self.sourceButton];
 	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:self.languageCategoryButton];
-	[self updateViewForSettings:IGRSettingsType_Cache from:self.videoBufferButton];
 	[self updateViewForSettings:IGRSettingsType_History from:self.historySizeButton];
 }
 
@@ -104,12 +92,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settingsData = self.languagesCategory;
 		}
 			break;
-		case IGRSettingsType_Cache:
-		{
-			settingsId = settings.videoBufferSize;
-			settingsData = self.caches;
-		}
-			break;
 		case IGRSettingsType_History:
 		{
 			settingsId = settings.historySize;
@@ -142,11 +124,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settings.videoLanguageId = newSettings[@"value"];
 		}
 			break;
-		case IGRSettingsType_Cache:
-		{
-			settings.videoBufferSize = newSettings[@"value"];
-		}
-			break;
 		case IGRSettingsType_History:
 		{
 			settings.historySize = newSettings[@"value"];
@@ -177,12 +154,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settingsData = self.languagesCategory;
 		}
 			break;
-		case IGRSettingsType_Cache:
-		{
-			settingsId = settings.videoBufferSize;
-			settingsData = self.caches;
-		}
-			break;
 		case IGRSettingsType_History:
 		{
 			settingsId = settings.historySize;
@@ -211,12 +182,6 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 {
 	[self updateSettingsFor:IGRSettingsType_LanguageCategory];
 	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:sender];
-}
-
-- (IBAction)onChangeCache:(id)sender
-{
-	[self updateSettingsFor:IGRSettingsType_Cache];
-	[self updateViewForSettings:IGRSettingsType_Cache from:sender];
 }
 
 - (IBAction)onChangeHistorySize:(id)sender
