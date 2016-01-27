@@ -177,7 +177,7 @@
 	[self.player replaceCurrentItemWithPlayerItem:item];
 	[self.player play];
 	
-	Float64 lastPosition = MIN(0, self.currentTrack.position.floatValue - 10.0); //run back 10 sec
+	Float64 lastPosition = MAX(0, self.currentTrack.position.floatValue - 10.0); //run back 10 sec
 	CMTime time = CMTimeMakeWithSeconds(lastPosition, 1);
 	[self.player seekToTime:time];
 }
