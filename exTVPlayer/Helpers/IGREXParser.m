@@ -211,12 +211,69 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	 }];
 }
 
++ (void)parseLiveVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
+					  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
+{
+	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+																						   withValue:aVideoCatalogId];
+	if (videoCatalog.timestamp)
+	{
+		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 15)
+		{
+			aCompleateBlock(nil);
+			return; //skip update
+		}
+	}
+	
+	NSString *lang = @"en";
+	switch (aVideoCatalogId.integerValue)
+	{
+		case IGRVideoCategory_Rus:
+			lang = @"ru";
+			break;
+		case IGRVideoCategory_Ukr:
+			lang = @"uk";
+			break;
+		default:
+			lang = @"en";
+			break;
+	}
+	
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/r_video_index?lang=%@", kMainServer, lang];
+	
+	[self downloadXMLFrom:xspfUrl
+		   compleateBlock:^(ONOXMLElement *xmlDocument)
+	 {
+		 if (xmlDocument)
+		 {
+			 [xmlDocument enumerateElementsWithXPath:@"//object" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+				 
+				 NSString *title = [element firstChildWithTag:@"title"].stringValue;
+				 NSString *itemId = [element firstChildWithTag:@"id"].stringValue;
+				 
+				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+				 chanel.name = title;
+				 chanel.videoCatalog = videoCatalog;
+			 }];
+			 
+			 videoCatalog.timestamp = [NSDate date];
+			 
+			 if (MR_DEFAULT_CONTEXT.hasChanges)
+			 {
+				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+			 }
+		 }
+		 
+		 aCompleateBlock(@[videoCatalog]);
+	 }];
+}
+
 + (void)parseLiveSearchContent:(nullable NSString *)aSearchText
 						  page:(NSUInteger)aPage
 					   catalog:(nullable NSString *)aCatalog
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?p=%@", kMainServer, @(aPage)];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?p=%@&per=20", kMainServer, @(aPage)];
 	if (aCatalog.length > 0)
 	{
 		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", aCatalog];
