@@ -56,8 +56,16 @@
 		A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
 		A560A45D1C57D2820027D064 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45C1C57D2820027D064 /* AVKit.framework */; };
 		A560A45F1C57D2900027D064 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45E1C57D2900027D064 /* CFNetwork.framework */; };
-		A569ECCD1C24455D004EF247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A569ECCF1C24455D004EF247 /* InfoPlist.strings */; };
-		A569ECD31C24459E004EF247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A569ECD51C24459E004EF247 /* Localizable.strings */; };
+		A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
+		A5654E231C5947820000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
+		A5654E241C5947820000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
+		A5654E251C5947820000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E161C5947820000D882 /* Main.storyboard */; };
+		A5654E271C5947820000D882 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5654E1C1C5947820000D882 /* Info.plist */; };
+		A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
+		A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
+		A5654E2D1C59493E0000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
+		A5654E371C5949BE0000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E311C5949740000D882 /* Main.storyboard */; };
+		A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */; };
 		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
 		A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
 		A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
@@ -91,7 +99,6 @@
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
 		A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
-		A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF31C22B7A500EABFC5 /* Main.storyboard */; };
 		A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
 /* End PBXBuildFile section */
 
@@ -376,17 +383,23 @@
 		A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
 		A560A45C1C57D2820027D064 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A560A45E1C57D2900027D064 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		A569ECCC1C244528004EF247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		A569ECCE1C24455D004EF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A569ECD01C244561004EF247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A569ECD41C24459E004EF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A569ECD61C2445A0004EF247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A569ECD71C2445C0004EF247 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		A569ECD81C2445C0004EF247 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A569ECD91C2445C0004EF247 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A569ECDA1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
-		A569ECDB1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A569ECDC1C2445CE004EF247 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5654DAD1C59452B0000D882 /* exTVPlayer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "exTVPlayer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5654DD91C5946F50000D882 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5654E131C5947820000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5654E151C5947820000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5654E171C5947820000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5654E181C5947820000D882 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5654E191C5947820000D882 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5654E1C1C5947820000D882 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5654E1D1C5947820000D882 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5654E1E1C5947820000D882 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5654E201C5947820000D882 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5654E211C5947820000D882 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5654E281C5947D20000D882 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		A5654E291C5947D60000D882 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		A5654E2A1C5947D90000D882 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
+		A5654E301C5949740000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A5654E321C5949740000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
 		A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityAppSettings.m; sourceTree = "<group>"; };
 		A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityAppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -437,20 +450,25 @@
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController_Private.h; sourceTree = "<group>"; };
-		A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exTVPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5E81BD71C22B72D00EABFC5 /* exTVPlayer-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "exTVPlayer-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E81BDD1C22B72D00EABFC5 /* IGRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRAppDelegate.h; sourceTree = "<group>"; };
 		A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRAppDelegate.m; sourceTree = "<group>"; };
 		A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRMainCatalogController.h; sourceTree = "<group>"; };
 		A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRMainCatalogController.m; sourceTree = "<group>"; };
 		A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5E81BF41C22B7A500EABFC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A5E81BF71C22B7A500EABFC5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
 		A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5654DAA1C59452B0000D882 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5E81BD41C22B72D00EABFC5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -710,6 +728,27 @@
 			path = MagicalRecordStack;
 			sourceTree = "<group>";
 		};
+		A5654DD81C5946F50000D882 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */,
+				A5654E311C5949740000D882 /* Main.storyboard */,
+				A5654DD91C5946F50000D882 /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		A5654E111C5947820000D882 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A5654E121C5947820000D882 /* InfoPlist.strings */,
+				A5654E141C5947820000D882 /* Localizable.strings */,
+				A5654E161C5947820000D882 /* Main.storyboard */,
+				A5654E1C1C5947820000D882 /* Info.plist */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
 		A569ED6C1C25B062004EF247 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,7 +881,8 @@
 		A5E81BD81C22B72D00EABFC5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */,
+				A5E81BD71C22B72D00EABFC5 /* exTVPlayer-tvOS.app */,
+				A5654DAD1C59452B0000D882 /* exTVPlayer-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -882,11 +922,9 @@
 		A5E81BF11C22B7A500EABFC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A5654E111C5947820000D882 /* tvOS */,
+				A5654DD81C5946F50000D882 /* iOS */,
 				A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */,
-				A5E81BF31C22B7A500EABFC5 /* Main.storyboard */,
-				A5E81BF71C22B7A500EABFC5 /* Info.plist */,
-				A569ECCF1C24455D004EF247 /* InfoPlist.strings */,
-				A569ECD51C24459E004EF247 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -904,9 +942,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5E81BD61C22B72D00EABFC5 /* exTVPlayer */ = {
+		A5654DAC1C59452B0000D882 /* exTVPlayer-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5E81BEE1C22B72D00EABFC5 /* Build configuration list for PBXNativeTarget "exTVPlayer" */;
+			buildConfigurationList = A5654DD61C59452B0000D882 /* Build configuration list for PBXNativeTarget "exTVPlayer-iOS" */;
+			buildPhases = (
+				A5654DA91C59452B0000D882 /* Sources */,
+				A5654DAA1C59452B0000D882 /* Frameworks */,
+				A5654DAB1C59452B0000D882 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "exTVPlayer-iOS";
+			productName = exTVPlayer2;
+			productReference = A5654DAD1C59452B0000D882 /* exTVPlayer-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A5E81BD61C22B72D00EABFC5 /* exTVPlayer-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5E81BEE1C22B72D00EABFC5 /* Build configuration list for PBXNativeTarget "exTVPlayer-tvOS" */;
 			buildPhases = (
 				A5E81BD31C22B72D00EABFC5 /* Sources */,
 				A5E81BD41C22B72D00EABFC5 /* Frameworks */,
@@ -921,9 +976,9 @@
 				A5868D0E1C4A9D170037D401 /* PBXTargetDependency */,
 				A57A12F41C59029500504350 /* PBXTargetDependency */,
 			);
-			name = exTVPlayer;
+			name = "exTVPlayer-tvOS";
 			productName = exTVPlayer;
-			productReference = A5E81BD71C22B72D00EABFC5 /* exTVPlayer.app */;
+			productReference = A5E81BD71C22B72D00EABFC5 /* exTVPlayer-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -935,6 +990,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "IGR Software";
 				TargetAttributes = {
+					A5654DAC1C59452B0000D882 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					A5E81BD61C22B72D00EABFC5 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DMP42GVPJ3;
@@ -970,7 +1028,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				A5E81BD61C22B72D00EABFC5 /* exTVPlayer */,
+				A5E81BD61C22B72D00EABFC5 /* exTVPlayer-tvOS */,
+				A5654DAC1C59452B0000D882 /* exTVPlayer-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1105,20 +1164,41 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A5654DAB1C59452B0000D882 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */,
+				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
+				A5654E2D1C59493E0000D882 /* Assets.xcassets in Resources */,
+				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
+				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5E81BD51C22B72D00EABFC5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */,
-				A569ECD31C24459E004EF247 /* Localizable.strings in Resources */,
-				A569ECCD1C24455D004EF247 /* InfoPlist.strings in Resources */,
-				A5E81BF91C22B7A500EABFC5 /* Main.storyboard in Resources */,
+				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
+				A5654E271C5947820000D882 /* Info.plist in Resources */,
+				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
+				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5654DA91C59452B0000D882 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5E81BD31C22B72D00EABFC5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1225,35 +1305,51 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A569ECCF1C24455D004EF247 /* InfoPlist.strings */ = {
+		A5654E121C5947820000D882 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A569ECCE1C24455D004EF247 /* Base */,
-				A569ECD01C244561004EF247 /* en */,
-				A569ECD81C2445C0004EF247 /* ru */,
-				A569ECDB1C2445CE004EF247 /* uk */,
+				A5654E131C5947820000D882 /* Base */,
+				A5654E181C5947820000D882 /* en */,
+				A5654E1D1C5947820000D882 /* ru */,
+				A5654E201C5947820000D882 /* uk */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		A569ECD51C24459E004EF247 /* Localizable.strings */ = {
+		A5654E141C5947820000D882 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A569ECD41C24459E004EF247 /* Base */,
-				A569ECD61C2445A0004EF247 /* en */,
-				A569ECD91C2445C0004EF247 /* ru */,
-				A569ECDC1C2445CE004EF247 /* uk */,
+				A5654E151C5947820000D882 /* Base */,
+				A5654E191C5947820000D882 /* en */,
+				A5654E1E1C5947820000D882 /* ru */,
+				A5654E211C5947820000D882 /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		A5E81BF31C22B7A500EABFC5 /* Main.storyboard */ = {
+		A5654E161C5947820000D882 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A5E81BF41C22B7A500EABFC5 /* Base */,
-				A569ECCC1C244528004EF247 /* en */,
-				A569ECD71C2445C0004EF247 /* ru */,
-				A569ECDA1C2445CE004EF247 /* uk */,
+				A5654E171C5947820000D882 /* Base */,
+				A5654E281C5947D20000D882 /* en */,
+				A5654E291C5947D60000D882 /* ru */,
+				A5654E2A1C5947D90000D882 /* uk */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5654E301C5949740000D882 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A5654E311C5949740000D882 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5654E321C5949740000D882 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1261,6 +1357,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A5654DC41C59452B0000D882 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5654DC51C59452B0000D882 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A5E81BEC1C22B72D00EABFC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1346,7 +1478,7 @@
 					/usr/include/libxml2,
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -1371,7 +1503,7 @@
 					/usr/include/libxml2,
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -1387,6 +1519,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5654DD61C59452B0000D882 /* Build configuration list for PBXNativeTarget "exTVPlayer-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5654DC41C59452B0000D882 /* Debug */,
+				A5654DC51C59452B0000D882 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A5E81BD21C22B72D00EABFC5 /* Build configuration list for PBXProject "exTVPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1396,7 +1536,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5E81BEE1C22B72D00EABFC5 /* Build configuration list for PBXNativeTarget "exTVPlayer" */ = {
+		A5E81BEE1C22B72D00EABFC5 /* Build configuration list for PBXNativeTarget "exTVPlayer-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5E81BEF1C22B72D00EABFC5 /* Debug */,

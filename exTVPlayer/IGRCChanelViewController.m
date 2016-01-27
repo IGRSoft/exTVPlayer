@@ -183,6 +183,7 @@
 	[IGREXParser parseCatalogContent:aCatalog compleateBlock:^(NSArray *items) {
 		
 		[weak.fetchedResultsController performFetch:nil];
+		[weak.catalogs reloadData];
 	}];
 }
 
