@@ -19,8 +19,30 @@
 #import <CFNetwork/CFNetwork.h>
 #endif
 
-static NSString * const kMainServer = @"http://www.ex.ua";
-static NSString * const kAdditionalServer = @"http://rover.info";
+const NSUInteger kPrefixLength = 7;
+unichar kPrefix[kPrefixLength] = {0x68, 0x74, 0x74, 0x70, 0x3A,
+								  0x2F, 0x2F};
+
+const NSUInteger kServerLength = 5;
+unichar kServer[kServerLength] = {0x65, 0x78, 0x2E, 0x75, 0x61};
+
+const NSUInteger kRSSLength = 3;
+unichar kRSS[kRSSLength] = {0x72, 0x73, 0x73};
+
+const NSUInteger kViewLength = 12;
+unichar kView[kViewLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
+							  0x65, 0x6F, 0x5F, 0x76, 0x69,
+							  0x65, 0x77};
+
+const NSUInteger kMainCatalogLength = 13;
+unichar kMainCatalog[kMainCatalogLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
+											0x65, 0x6F, 0x5F, 0x69, 0x6E,
+											0x64, 0x65, 0x78};
+
+const NSUInteger kSearchLength = 14;
+unichar kSearch[kSearchLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
+								  0x65, 0x6F, 0x5F, 0x73, 0x65,
+								  0x61, 0x72, 0x63, 0x68};
 
 static AFURLSessionManager *__xmlManager = nil;
 
@@ -43,7 +65,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		}
 	}
 	
-	NSString *xspfUrl = [NSString stringWithFormat:@"%@/r_video_view/%@", kMainServer, aCatalogId];
+	NSString *command = [NSString stringWithCharacters:kView length:kViewLength];
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/%@/%@", [self serverAddress], command, aCatalogId];
 	[self downloadXMLFrom:xspfUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
 	 {
@@ -109,7 +132,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		}
 	}
 	
-	NSString *xspfUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aVideoCatalogId];
+	NSString *command = [NSString stringWithCharacters:kRSS length:kRSSLength];
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/%@/%@", [self serverAddress], command, aVideoCatalogId];
 	
 	[self downloadXMLFrom:xspfUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
@@ -155,7 +179,9 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		}
 	}
 	
-	NSString *rrsUrl = [NSString stringWithFormat:@"%@/rss/%@", kMainServer, aChanelId];
+	NSString *command = [NSString stringWithCharacters:kRSS length:kRSSLength];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@/%@", [self serverAddress], command, aChanelId];
+	
 	[self downloadXMLFrom:rrsUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
 	 {
@@ -239,7 +265,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			break;
 	}
 	
-	NSString *xspfUrl = [NSString stringWithFormat:@"%@/r_video_index?lang=%@", kMainServer, lang];
+	NSString *command = [NSString stringWithCharacters:kMainCatalog length:kMainCatalogLength];
+	NSString *xspfUrl = [NSString stringWithFormat:@"%@/%@?lang=%@", [self serverAddress], command, lang];
 	
 	[self downloadXMLFrom:xspfUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
@@ -273,7 +300,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 					   catalog:(nullable NSString *)aCatalog
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	NSString *rrsUrl = [NSString stringWithFormat:@"%@/r_video_search?p=%@&per=20", kMainServer, @(aPage)];
+	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=20", [self serverAddress], command, @(aPage)];
 	if (aCatalog.length > 0)
 	{
 		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", aCatalog];
@@ -355,6 +383,15 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		}
 		
 	}] resume];
+}
+
++ (NSString *)serverAddress
+{
+	NSString *prefix = [NSString stringWithCharacters:kPrefix length:kPrefixLength];
+	NSString *server = [NSString stringWithCharacters:kServer length:kServerLength];
+	NSString *mainServer = [NSString stringWithFormat:@"%@%@", prefix, server];
+	
+	return mainServer;
 }
 
 + (NSInteger)hoursBetweenCurrwntDate:(NSDate *)aDate
