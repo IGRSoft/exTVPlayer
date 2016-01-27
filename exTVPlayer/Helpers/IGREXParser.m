@@ -301,7 +301,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
 	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
-	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=20", [self serverAddress], command, @(aPage)];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=100", [self serverAddress], command, @(aPage)];
 	if (aCatalog.length > 0)
 	{
 		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", aCatalog];
