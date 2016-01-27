@@ -95,49 +95,18 @@
 		A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A5654E541C5964EE0000D882 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
-		A5654E561C59650E0000D882 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B6F1C23223900F6080A /* MagicalImportFunctions.m */; };
-		A5654E571C59650E0000D882 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B711C23223900F6080A /* NSAttributeDescription+MagicalDataImport.m */; };
-		A5654E581C59650E0000D882 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B731C23223900F6080A /* NSEntityDescription+MagicalDataImport.m */; };
-		A5654E591C59650E0000D882 /* NSNumber+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B751C23223900F6080A /* NSNumber+MagicalDataImport.m */; };
-		A5654E5A1C59650E0000D882 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B771C23223900F6080A /* NSObject+MagicalDataImport.m */; };
-		A5654E5B1C59650E0000D882 /* NSRelationshipDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B791C23223900F6080A /* NSRelationshipDescription+MagicalDataImport.m */; };
-		A5654E5C1C59650E0000D882 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B7B1C23223900F6080A /* NSString+MagicalDataImport.m */; };
-		A5654E5D1C59650E0000D882 /* NSFetchedResultsController+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B7D1C23223900F6080A /* NSFetchedResultsController+MagicalFetching.m */; };
-		A5654E5E1C5965140000D882 /* NSManagedObject+MagicalAggregation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B801C23223900F6080A /* NSManagedObject+MagicalAggregation.m */; };
-		A5654E5F1C5965140000D882 /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B821C23223900F6080A /* NSManagedObject+MagicalDataImport.m */; };
-		A5654E601C5965140000D882 /* NSManagedObject+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B841C23223900F6080A /* NSManagedObject+MagicalFetching.m */; };
-		A5654E611C5965140000D882 /* NSManagedObject+MagicalFinders.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B861C23223900F6080A /* NSManagedObject+MagicalFinders.m */; };
-		A5654E621C5965140000D882 /* NSManagedObject+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B881C23223900F6080A /* NSManagedObject+MagicalRecord.m */; };
-		A5654E631C5965140000D882 /* NSManagedObject+MagicalRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8A1C23223900F6080A /* NSManagedObject+MagicalRequests.m */; };
-		A5654E641C59651E0000D882 /* NSManagedObjectContext+MagicalObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8D1C23223900F6080A /* NSManagedObjectContext+MagicalObserving.m */; };
-		A5654E651C59651E0000D882 /* NSManagedObjectContext+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8F1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m */; };
-		A5654E661C59651E0000D882 /* NSManagedObjectContext+MagicalSaves.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B911C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m */; };
-		A5654E671C59651E0000D882 /* NSManagedObjectModel+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B931C23223900F6080A /* NSManagedObjectModel+MagicalRecord.m */; };
-		A5654E681C59651E0000D882 /* NSPersistentStore+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B951C23223900F6080A /* NSPersistentStore+MagicalRecord.m */; };
-		A5654E691C5965230000D882 /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B991C23223900F6080A /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m */; };
-		A5654E6A1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9B1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m */; };
-		A5654E6B1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9D1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalManualMigrations.m */; };
-		A5654E6C1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9F1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalRecord.m */; };
-		A5654E6D1C5965290000D882 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA21C23223900F6080A /* NSArray+MagicalRecord.m */; };
-		A5654E6E1C5965290000D882 /* NSDictionary+MagicalRecordAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA41C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m */; };
-		A5654E6F1C5965290000D882 /* NSError+MagicalRecordErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA61C23223900F6080A /* NSError+MagicalRecordErrorHandling.m */; };
-		A5654E701C59652D0000D882 /* MagicalMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA81C23223900F6080A /* MagicalMigrationManager.m */; };
-		A5654E711C5965360000D882 /* MagicalRecord+Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAB1C23223900F6080A /* MagicalRecord+Actions.m */; };
-		A5654E721C5965360000D882 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAD1C23223900F6080A /* MagicalRecord+Options.m */; };
-		A5654E731C5965360000D882 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAF1C23223900F6080A /* MagicalRecord+Setup.m */; };
-		A5654E741C5965360000D882 /* MagicalRecord+VersionInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB11C23223900F6080A /* MagicalRecord+VersionInformation.m */; };
-		A5654E751C5965360000D882 /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB41C23223900F6080A /* MagicalRecordInternal.m */; };
-		A5654E761C5965360000D882 /* MagicalRecordShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB81C23223900F6080A /* MagicalRecordShorthand.m */; };
-		A5654E771C59653C0000D882 /* AutoMigratingMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BBC1C23223900F6080A /* AutoMigratingMagicalRecordStack.m */; };
-		A5654E781C59653C0000D882 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BBE1C23223900F6080A /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m */; };
-		A5654E791C59653C0000D882 /* ClassicSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC01C23223900F6080A /* ClassicSQLiteMagicalRecordStack.m */; };
-		A5654E7A1C59653C0000D882 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC21C23223900F6080A /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m */; };
-		A5654E7B1C59653C0000D882 /* InMemoryMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC41C23223900F6080A /* InMemoryMagicalRecordStack.m */; };
-		A5654E7C1C59653C0000D882 /* MagicalRecordStack+Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC61C23223900F6080A /* MagicalRecordStack+Actions.m */; };
-		A5654E7D1C59653C0000D882 /* MagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC91C23223900F6080A /* MagicalRecordStack.m */; };
-		A5654E7E1C59653C0000D882 /* ManuallyMigratingMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCB1C23223900F6080A /* ManuallyMigratingMagicalRecordStack.m */; };
-		A5654E7F1C59653C0000D882 /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCD1C23223900F6080A /* SQLiteMagicalRecordStack.m */; };
-		A5654E801C59653C0000D882 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */; };
+		A5654E941C5965FF0000D882 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E11C59027A00504350 /* Ono.framework */; };
+		A5654E951C5965FF0000D882 /* Ono.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E11C59027A00504350 /* Ono.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5654E981C5965FF0000D882 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868CFE1C4A9CD30037D401 /* AFNetworking.framework */; };
+		A5654E991C5965FF0000D882 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868CFE1C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5654E9C1C5965FF0000D882 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0A1C25D8FD004EF247 /* WebImage.framework */; };
+		A5654E9D1C5965FF0000D882 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0A1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5654EA71C5967680000D882 /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
+		A5654ECE1C59683F0000D882 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EC51C59682D0000D882 /* MagicalRecord.framework */; };
+		A5654ECF1C59683F0000D882 /* MagicalRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EC51C59682D0000D882 /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA11C5966090000D882 /* CoreData.framework */; };
+		A5654EDC1C596A7C0000D882 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA51C5966230000D882 /* AVKit.framework */; };
+		A5654EDD1C596A7C0000D882 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA31C5966160000D882 /* CFNetwork.framework */; };
 		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
 		A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
 		A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
@@ -175,6 +144,69 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A5654E961C5965FF0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F82D394D1AA6199E00DAC057;
+			remoteInfo = "Ono iOS";
+		};
+		A5654E9A1C5965FF0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 299522381BBF104D00859F49;
+			remoteInfo = "AFNetworking iOS";
+		};
+		A5654E9E1C5965FF0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A2CADFE1AB4BB5300B6BC39;
+			remoteInfo = WebImage;
+		};
+		A5654EC41C59682D0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9053F55A19E0244C00137362;
+			remoteInfo = "MagicalRecord for iOS";
+		};
+		A5654EC61C59682D0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9053F56419E0244C00137362;
+			remoteInfo = "MagicalRecord for iOS Tests";
+		};
+		A5654EC81C59682D0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C779107F17E63C8900D20ACF;
+			remoteInfo = "MagicalRecord for OS X";
+		};
+		A5654ECA1C59682D0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 909BBC7E18E03FCB007BA3F1;
+			remoteInfo = "MagicalRecord for OS X Tests";
+		};
+		A5654ECC1C59682D0000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C7CF97AB17498414008D9D13;
+			remoteInfo = "libMagicalRecord for iOS";
+		};
+		A5654ED01C5968400000D882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9053F55919E0244C00137362;
+			remoteInfo = "MagicalRecord for iOS";
+		};
 		A569EE031C25D8FD004EF247 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */;
@@ -332,6 +364,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A5654EA01C5965FF0000D882 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5654ECF1C59683F0000D882 /* MagicalRecord.framework in Embed Frameworks */,
+				A5654E9D1C5965FF0000D882 /* WebImage.framework in Embed Frameworks */,
+				A5654E951C5965FF0000D882 /* Ono.framework in Embed Frameworks */,
+				A5654E991C5965FF0000D882 /* AFNetworking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A569EE131C25D935004EF247 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -356,8 +402,6 @@
 		A51F38601C22F2FA00F6080A /* IGREXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXParser.m; sourceTree = "<group>"; };
 		A51F386E1C23091200F6080A /* IGRMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRMediaViewController.h; sourceTree = "<group>"; };
 		A51F386F1C23091200F6080A /* IGRMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRMediaViewController.m; sourceTree = "<group>"; };
-		A51F387B1C2312AA00F6080A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		A51F387D1C2313C100F6080A /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		A51F3B0C1C231EE700F6080A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A51F3B6E1C23223900F6080A /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		A51F3B6F1C23223900F6080A /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
@@ -472,6 +516,10 @@
 		A5654E2A1C5947D90000D882 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		A5654E301C5949740000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5654E321C5949740000D882 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5654EA11C5966090000D882 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		A5654EA31C5966160000D882 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		A5654EA51C5966230000D882 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MagicalRecord.xcodeproj; path = Submodules/MagicalRecord/MagicalRecord.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
 		A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityAppSettings.m; sourceTree = "<group>"; };
 		A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityAppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -538,6 +586,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */,
+				A5654EDD1C596A7C0000D882 /* CFNetwork.framework in Frameworks */,
+				A5654ECE1C59683F0000D882 /* MagicalRecord.framework in Frameworks */,
+				A5654E9C1C5965FF0000D882 /* WebImage.framework in Frameworks */,
+				A5654EDC1C596A7C0000D882 /* AVKit.framework in Frameworks */,
+				A5654E941C5965FF0000D882 /* Ono.framework in Frameworks */,
+				A5654E981C5965FF0000D882 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,11 +665,8 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A560A45E1C57D2900027D064 /* CFNetwork.framework */,
-				A560A45C1C57D2820027D064 /* AVKit.framework */,
-				A51F3B0C1C231EE700F6080A /* CoreData.framework */,
-				A51F387D1C2313C100F6080A /* libiconv.tbd */,
-				A51F387B1C2312AA00F6080A /* libc++.tbd */,
+				A5654ED91C596A0C0000D882 /* iOS */,
+				A5654ED21C5969DC0000D882 /* tvOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -631,6 +683,7 @@
 		A51F3B6A1C23223900F6080A /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
+				A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */,
 				A51F3B6B1C23223900F6080A /* Categories */,
 				A51F3BA71C23223900F6080A /* MagicalMigrationManager.h */,
 				A51F3BA81C23223900F6080A /* MagicalMigrationManager.m */,
@@ -819,6 +872,38 @@
 				A5654E1C1C5947820000D882 /* Info.plist */,
 			);
 			path = tvOS;
+			sourceTree = "<group>";
+		};
+		A5654EBD1C59682C0000D882 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5654EC51C59682D0000D882 /* MagicalRecord.framework */,
+				A5654EC71C59682D0000D882 /* MagicalRecord for iOS Tests.xctest */,
+				A5654EC91C59682D0000D882 /* MagicalRecord.framework */,
+				A5654ECB1C59682D0000D882 /* MagicalRecord for OS X Tests.xctest */,
+				A5654ECD1C59682D0000D882 /* libMagicalRecord.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5654ED21C5969DC0000D882 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A560A45E1C57D2900027D064 /* CFNetwork.framework */,
+				A560A45C1C57D2820027D064 /* AVKit.framework */,
+				A51F3B0C1C231EE700F6080A /* CoreData.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		A5654ED91C596A0C0000D882 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A5654EA51C5966230000D882 /* AVKit.framework */,
+				A5654EA31C5966160000D882 /* CFNetwork.framework */,
+				A5654EA11C5966090000D882 /* CoreData.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		A569ED6C1C25B062004EF247 /* CustomView */ = {
@@ -1021,10 +1106,15 @@
 				A5654DA91C59452B0000D882 /* Sources */,
 				A5654DAA1C59452B0000D882 /* Frameworks */,
 				A5654DAB1C59452B0000D882 /* Resources */,
+				A5654EA01C5965FF0000D882 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5654E971C5965FF0000D882 /* PBXTargetDependency */,
+				A5654E9B1C5965FF0000D882 /* PBXTargetDependency */,
+				A5654E9F1C5965FF0000D882 /* PBXTargetDependency */,
+				A5654ED11C5968400000D882 /* PBXTargetDependency */,
 			);
 			name = "exTVPlayer-iOS";
 			productName = exTVPlayer2;
@@ -1064,6 +1154,7 @@
 				TargetAttributes = {
 					A5654DAC1C59452B0000D882 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = DMP42GVPJ3;
 					};
 					A5E81BD61C22B72D00EABFC5 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1090,6 +1181,10 @@
 					ProjectRef = A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */;
 				},
 				{
+					ProductGroup = A5654EBD1C59682C0000D882 /* Products */;
+					ProjectRef = A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */;
+				},
+				{
 					ProductGroup = A57A12A31C59027A00504350 /* Products */;
 					ProjectRef = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
 				},
@@ -1107,6 +1202,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A5654EC51C59682D0000D882 /* MagicalRecord.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MagicalRecord.framework;
+			remoteRef = A5654EC41C59682D0000D882 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A5654EC71C59682D0000D882 /* MagicalRecord for iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MagicalRecord for iOS Tests.xctest";
+			remoteRef = A5654EC61C59682D0000D882 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A5654EC91C59682D0000D882 /* MagicalRecord.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MagicalRecord.framework;
+			remoteRef = A5654EC81C59682D0000D882 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A5654ECB1C59682D0000D882 /* MagicalRecord for OS X Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MagicalRecord for OS X Tests.xctest";
+			remoteRef = A5654ECA1C59682D0000D882 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A5654ECD1C59682D0000D882 /* libMagicalRecord.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMagicalRecord.a;
+			remoteRef = A5654ECC1C59682D0000D882 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A569EE041C25D8FD004EF247 /* libSDWebImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1267,78 +1397,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5654E801C59653C0000D882 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */,
-				A5654E781C59653C0000D882 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */,
-				A5654E6B1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */,
-				A5654E6F1C5965290000D882 /* NSError+MagicalRecordErrorHandling.m in Sources */,
-				A5654E751C5965360000D882 /* MagicalRecordInternal.m in Sources */,
 				A5654E491C5964CF0000D882 /* NSManagedObject+MRExtensions.m in Sources */,
 				A5654E441C5964CF0000D882 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */,
-				A5654E6C1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */,
-				A5654E681C59651E0000D882 /* NSPersistentStore+MagicalRecord.m in Sources */,
-				A5654E621C5965140000D882 /* NSManagedObject+MagicalRecord.m in Sources */,
-				A5654E731C5965360000D882 /* MagicalRecord+Setup.m in Sources */,
-				A5654E6A1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
 				A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */,
 				A5654E541C5964EE0000D882 /* main.m in Sources */,
-				A5654E561C59650E0000D882 /* MagicalImportFunctions.m in Sources */,
 				A5654E451C5964CF0000D882 /* IGREntityExTrack.m in Sources */,
 				A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */,
 				A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
 				A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */,
-				A5654E591C59650E0000D882 /* NSNumber+MagicalDataImport.m in Sources */,
 				A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */,
-				A5654E571C59650E0000D882 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
-				A5654E761C5965360000D882 /* MagicalRecordShorthand.m in Sources */,
-				A5654E661C59651E0000D882 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				A5654EA71C5967680000D882 /* exTVPlayer.xcdatamodeld in Sources */,
 				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
 				A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */,
-				A5654E711C5965360000D882 /* MagicalRecord+Actions.m in Sources */,
 				A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */,
 				A5654E411C5964B70000D882 /* IGRMainCatalogController.m in Sources */,
 				A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */,
 				A5654E421C5964CF0000D882 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
-				A5654E5C1C59650E0000D882 /* NSString+MagicalDataImport.m in Sources */,
-				A5654E791C59653C0000D882 /* ClassicSQLiteMagicalRecordStack.m in Sources */,
-				A5654E581C59650E0000D882 /* NSEntityDescription+MagicalDataImport.m in Sources */,
-				A5654E691C5965230000D882 /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
 				A5654E391C5964850000D882 /* IGREXParser.m in Sources */,
 				A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */,
-				A5654E5E1C5965140000D882 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */,
-				A5654E721C5965360000D882 /* MagicalRecord+Options.m in Sources */,
-				A5654E7E1C59653C0000D882 /* ManuallyMigratingMagicalRecordStack.m in Sources */,
-				A5654E7F1C59653C0000D882 /* SQLiteMagicalRecordStack.m in Sources */,
-				A5654E651C59651E0000D882 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */,
-				A5654E7C1C59653C0000D882 /* MagicalRecordStack+Actions.m in Sources */,
 				A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
-				A5654E6E1C5965290000D882 /* NSDictionary+MagicalRecordAdditions.m in Sources */,
 				A5654E3B1C5964940000D882 /* IGRBaseViewController.m in Sources */,
-				A5654E5D1C59650E0000D882 /* NSFetchedResultsController+MagicalFetching.m in Sources */,
-				A5654E6D1C5965290000D882 /* NSArray+MagicalRecord.m in Sources */,
-				A5654E771C59653C0000D882 /* AutoMigratingMagicalRecordStack.m in Sources */,
-				A5654E741C5965360000D882 /* MagicalRecord+VersionInformation.m in Sources */,
 				A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */,
 				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
-				A5654E5A1C59650E0000D882 /* NSObject+MagicalDataImport.m in Sources */,
-				A5654E5F1C5965140000D882 /* NSManagedObject+MagicalDataImport.m in Sources */,
-				A5654E611C5965140000D882 /* NSManagedObject+MagicalFinders.m in Sources */,
-				A5654E601C5965140000D882 /* NSManagedObject+MagicalFetching.m in Sources */,
 				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
-				A5654E631C5965140000D882 /* NSManagedObject+MagicalRequests.m in Sources */,
-				A5654E7B1C59653C0000D882 /* InMemoryMagicalRecordStack.m in Sources */,
 				A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */,
 				A5654E3A1C59648F0000D882 /* IGRTabBarViewController.m in Sources */,
-				A5654E641C59651E0000D882 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
-				A5654E5B1C59650E0000D882 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
-				A5654E7A1C59653C0000D882 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */,
-				A5654E671C59651E0000D882 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */,
-				A5654E701C59652D0000D882 /* MagicalMigrationManager.m in Sources */,
-				A5654E7D1C59653C0000D882 /* MagicalRecordStack.m in Sources */,
 				A5654E3E1C5964A30000D882 /* IGRFavoritsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1426,6 +1514,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A5654E971C5965FF0000D882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Ono iOS";
+			targetProxy = A5654E961C5965FF0000D882 /* PBXContainerItemProxy */;
+		};
+		A5654E9B1C5965FF0000D882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AFNetworking iOS";
+			targetProxy = A5654E9A1C5965FF0000D882 /* PBXContainerItemProxy */;
+		};
+		A5654E9F1C5965FF0000D882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WebImage;
+			targetProxy = A5654E9E1C5965FF0000D882 /* PBXContainerItemProxy */;
+		};
+		A5654ED11C5968400000D882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MagicalRecord for iOS";
+			targetProxy = A5654ED01C5968400000D882 /* PBXContainerItemProxy */;
+		};
 		A569EE0E1C25D927004EF247 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "WebImage tvOS";
@@ -1505,17 +1613,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1523,17 +1636,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1569,9 +1686,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
@@ -1603,8 +1720,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1615,7 +1732,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1624,13 +1740,10 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-lxml2",
-					"-lstdc++",
-					"-liconv",
-				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -1640,7 +1753,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1649,13 +1761,10 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-lxml2",
-					"-lstdc++",
-					"-liconv",
-				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -1670,6 +1779,7 @@
 				A5654DC51C59452B0000D882 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A5E81BD21C22B72D00EABFC5 /* Build configuration list for PBXProject "exTVPlayer" */ = {
 			isa = XCConfigurationList;

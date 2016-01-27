@@ -12,7 +12,12 @@
 #import <CoreData/CoreData.h>
 #endif
 
+#if	TARGET_OS_TV
 #import "MagicalRecord.h"
+#else
+#import <MagicalRecord/MagicalRecord.h>
+#endif
+
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
 
 #define IGR_LIGHTBLUECOLOR [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000]
