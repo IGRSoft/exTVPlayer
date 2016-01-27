@@ -334,20 +334,7 @@
         <!--AV Player View Controller-->
         <scene sceneID="C4U-V9-EVd">
             <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="hOz-gM-pkf" customClass="IGRMediaViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5vy-8i-QYZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="LHX-cJ-K3W"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9uo-h9-GT1">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="gestureView" destination="9uo-h9-GT1" id="cVn-5t-ppd"/>
-                    </connections>
-                </avPlayerViewController>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="hOz-gM-pkf" customClass="IGRMediaViewController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNV-7Y-cd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4773" y="374"/>

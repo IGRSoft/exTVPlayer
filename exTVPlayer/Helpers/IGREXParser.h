@@ -19,9 +19,9 @@ typedef void (^IGREXParserCompleateBlock)(NSArray * _Nullable items);
 + (void)parseChanelContent:(nonnull NSString *)aChanelId
 			compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
-+ (void)parseLiveSearchContent:(nonnull NSString *)aSearchText
++ (void)parseLiveSearchContent:(nullable NSString *)aSearchText
 						  page:(NSUInteger)aPage
-					   catalog:(NSInteger)aCatalog
+					   catalog:(nullable NSString *)aCatalog
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
 + (void)parseLiveCatalog:(nonnull NSString *)aCatalog

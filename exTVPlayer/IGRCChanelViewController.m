@@ -196,7 +196,7 @@
 	__weak typeof(self) weak = self;
 	[IGREXParser parseLiveSearchContent:self.liveSearchRequest
 								   page:self.livePage
-								catalog:self.liveChanel.integerValue
+								catalog:self.liveChanel
 						 compleateBlock:^(NSArray *items) {
 							 
 							 NSUInteger startPosition = weak.chanels.count;
@@ -460,7 +460,7 @@
 		{
 			[IGREXParser parseLiveSearchContent:self.liveSearchRequest
 										   page:self.livePage
-										catalog:self.liveChanel.integerValue
+										catalog:self.liveChanel
 								 compleateBlock:updateChanels];
 		}
 		else

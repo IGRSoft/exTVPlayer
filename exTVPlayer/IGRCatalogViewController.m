@@ -19,7 +19,8 @@
 
 static const CGFloat reloadTime = 0.3;
 
-@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
+										UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;

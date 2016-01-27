@@ -76,6 +76,8 @@
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
 		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
+		A57A12F11C59029500504350 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; };
+		A57A12F21C59029500504350 /* Ono.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
@@ -144,6 +146,55 @@
 			remoteGlobalIDString = 00733A4B1BC487C000A5A117;
 			remoteInfo = "WebImage tvOS";
 		};
+		A57A12E01C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82D394E1AA6199E00DAC057;
+			remoteInfo = "Ono iOS";
+		};
+		A57A12E21C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82D39591AA6199E00DAC057;
+			remoteInfo = "Ono iOS Tests";
+		};
+		A57A12E41C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82D39701AA61A0B00DAC057;
+			remoteInfo = "Ono OS X";
+		};
+		A57A12E61C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82D397A1AA61A0B00DAC057;
+			remoteInfo = "Ono OS X Tests";
+		};
+		A57A12E81C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4EE94DC51C19BBC900F44894;
+			remoteInfo = "Ono tvOS";
+		};
+		A57A12EA1C59027A00504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4EE94DDD1C19BC1D00F44894;
+			remoteInfo = "Ono tvOS Tests";
+		};
+		A57A12F31C59029500504350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EE94DB91C19BBC900F44894;
+			remoteInfo = "Ono tvOS";
+		};
 		A5868CFD1C4A9CD30037D401 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */;
@@ -211,6 +262,7 @@
 			files = (
 				A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */,
 				A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */,
+				A57A12F21C59029500504350 /* Ono.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +421,7 @@
 		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTableViewCell.h; sourceTree = "<group>"; };
 		A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTableViewCell.m; sourceTree = "<group>"; };
+		A57A12A21C59027A00504350 /* Ono.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Ono.xcodeproj; sourceTree = "<group>"; };
 		A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
 		A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRDownloadManager.h; sourceTree = "<group>"; };
 		A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRDownloadManager.m; sourceTree = "<group>"; };
@@ -410,6 +463,7 @@
 				A51F3B0D1C231EE700F6080A /* CoreData.framework in Frameworks */,
 				A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */,
 				A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */,
+				A57A12F11C59029500504350 /* Ono.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +502,7 @@
 		A51F38301C22C50A00F6080A /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A57A12961C59027A00504350 /* Ono */,
 				A5868B9F1C4A9CD20037D401 /* AFNetworking */,
 				A5F3720C1C282FD500AB1395 /* DACircularProgress */,
 				A569ED731C25D8FC004EF247 /* SDWebImage */,
@@ -703,6 +758,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A57A12961C59027A00504350 /* Ono */ = {
+			isa = PBXGroup;
+			children = (
+				A57A12A21C59027A00504350 /* Ono.xcodeproj */,
+			);
+			path = Ono;
+			sourceTree = "<group>";
+		};
+		A57A12A31C59027A00504350 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A57A12E11C59027A00504350 /* Ono.framework */,
+				A57A12E31C59027A00504350 /* Ono iOS Tests.xctest */,
+				A57A12E51C59027A00504350 /* Ono.framework */,
+				A57A12E71C59027A00504350 /* Ono OS X Tests.xctest */,
+				A57A12E91C59027A00504350 /* Ono.framework */,
+				A57A12EB1C59027A00504350 /* Ono tvOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A583B8981C525514002B0BE9 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +933,7 @@
 				A569EE0E1C25D927004EF247 /* PBXTargetDependency */,
 				A569EE121C25D935004EF247 /* PBXTargetDependency */,
 				A5868D0E1C4A9D170037D401 /* PBXTargetDependency */,
+				A57A12F41C59029500504350 /* PBXTargetDependency */,
 			);
 			name = exTVPlayer;
 			productName = exTVPlayer;
@@ -895,6 +972,10 @@
 				{
 					ProductGroup = A5868BB31C4A9CD20037D401 /* Products */;
 					ProjectRef = A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */;
+				},
+				{
+					ProductGroup = A57A12A31C59027A00504350 /* Products */;
+					ProjectRef = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
 				},
 				{
 					ProductGroup = A569EDB61C25D8FD004EF247 /* Products */;
@@ -942,6 +1023,48 @@
 			fileType = wrapper.framework;
 			path = WebImage.framework;
 			remoteRef = A569EE0B1C25D8FD004EF247 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12E11C59027A00504350 /* Ono.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ono.framework;
+			remoteRef = A57A12E01C59027A00504350 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12E31C59027A00504350 /* Ono iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Ono iOS Tests.xctest";
+			remoteRef = A57A12E21C59027A00504350 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12E51C59027A00504350 /* Ono.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ono.framework;
+			remoteRef = A57A12E41C59027A00504350 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12E71C59027A00504350 /* Ono OS X Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Ono OS X Tests.xctest";
+			remoteRef = A57A12E61C59027A00504350 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12E91C59027A00504350 /* Ono.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ono.framework;
+			remoteRef = A57A12E81C59027A00504350 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A57A12EB1C59027A00504350 /* Ono tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Ono tvOS Tests.xctest";
+			remoteRef = A57A12EA1C59027A00504350 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A5868CFE1C4A9CD30037D401 /* AFNetworking.framework */ = {
@@ -1103,6 +1226,11 @@
 			isa = PBXTargetDependency;
 			name = "WebImage tvOS";
 			targetProxy = A569EE111C25D935004EF247 /* PBXContainerItemProxy */;
+		};
+		A57A12F41C59029500504350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Ono tvOS";
+			targetProxy = A57A12F31C59029500504350 /* PBXContainerItemProxy */;
 		};
 		A5868D0E1C4A9D170037D401 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

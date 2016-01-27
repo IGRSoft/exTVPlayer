@@ -69,9 +69,6 @@
 						object:nil];
 	
 	[self playCurrentTrack];
-	
-	UIGestureRecognizer *gr = self.gestureView.gestureRecognizers.firstObject;
-	gr.allowedPressTypes = @[@(UIPressTypeLeftArrow), @(UIPressTypeRightArrow)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -205,10 +202,21 @@
 	NSTimeInterval deltaTouchTime = [NSDate timeIntervalSinceReferenceDate] - self.latestPressTimestamp;
 	NSTimeInterval timeLimit = 0.5; //0.5s
 	
+	__weak typeof(self) weak = self;
+	void (^saveTrackTimePosition)(void) = ^void (void) {
+		
+		[weak.player pause];
+		Float64 currentTime = CMTimeGetSeconds(weak.player.currentTime);
+		weak.currentTrack.position = @(currentTime);
+		
+		[weak.gestureView becomeFirstResponder];
+	};
+
 	if (press.type == UIPressTypeLeftArrow)
 	{
 		if (deltaTouchTime < timeLimit)
 		{
+			saveTrackTimePosition();
 			[self playPreviousTrack:nil];
 		}
 		else
@@ -220,6 +228,7 @@
 	{
 		if (deltaTouchTime < timeLimit)
 		{
+			saveTrackTimePosition();
 			[self playNextTrack:nil];
 		}
 		else
