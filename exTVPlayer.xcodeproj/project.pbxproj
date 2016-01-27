@@ -60,10 +60,8 @@
 		A5654E231C5947820000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
 		A5654E241C5947820000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
 		A5654E251C5947820000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E161C5947820000D882 /* Main.storyboard */; };
-		A5654E271C5947820000D882 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5654E1C1C5947820000D882 /* Info.plist */; };
 		A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
 		A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
-		A5654E2D1C59493E0000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5654E371C5949BE0000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E311C5949740000D882 /* Main.storyboard */; };
 		A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */; };
 		A5654E391C5964850000D882 /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
@@ -82,7 +80,6 @@
 		A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */; };
 		A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */; };
 		A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */; };
-		A5654E491C5964CF0000D882 /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */; };
 		A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
 		A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
 		A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
@@ -107,6 +104,12 @@
 		A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA11C5966090000D882 /* CoreData.framework */; };
 		A5654EDC1C596A7C0000D882 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA51C5966230000D882 /* AVKit.framework */; };
 		A5654EDD1C596A7C0000D882 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654EA31C5966160000D882 /* CFNetwork.framework */; };
+		A5654F631C59715C0000D882 /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */; };
+		A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654F791C5972DA0000D882 /* AVFoundation.framework */; };
+		A5654F7C1C5972E70000D882 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654F7B1C5972E70000D882 /* AVFoundation.framework */; };
+		A5654F7D1C5973250000D882 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
+		A5654F981C5A0CFC0000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654F971C5A0CFC0000D882 /* Assets.xcassets */; };
+		A5654FC11C5A0DB80000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */; };
 		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
 		A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
 		A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
@@ -139,7 +142,6 @@
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
-		A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
 /* End PBXBuildFile section */
 
@@ -520,6 +522,10 @@
 		A5654EA31C5966160000D882 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		A5654EA51C5966230000D882 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MagicalRecord.xcodeproj; path = Submodules/MagicalRecord/MagicalRecord.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A5654F791C5972DA0000D882 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		A5654F7B1C5972E70000D882 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		A5654F971C5A0CFC0000D882 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
 		A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityAppSettings.m; sourceTree = "<group>"; };
 		A569ED4A1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGREntityAppSettings+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -576,7 +582,6 @@
 		A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRAppDelegate.m; sourceTree = "<group>"; };
 		A5E81BE01C22B72D00EABFC5 /* IGRMainCatalogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRMainCatalogController.h; sourceTree = "<group>"; };
 		A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRMainCatalogController.m; sourceTree = "<group>"; };
-		A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
 		A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -586,6 +591,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */,
 				A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */,
 				A5654EDD1C596A7C0000D882 /* CFNetwork.framework in Frameworks */,
 				A5654ECE1C59683F0000D882 /* MagicalRecord.framework in Frameworks */,
@@ -600,6 +606,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5654F7C1C5972E70000D882 /* AVFoundation.framework in Frameworks */,
 				A560A45F1C57D2900027D064 /* CFNetwork.framework in Frameworks */,
 				A560A45D1C57D2820027D064 /* AVKit.framework in Frameworks */,
 				A51F3B0D1C231EE700F6080A /* CoreData.framework in Frameworks */,
@@ -665,6 +672,7 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5654F7B1C5972E70000D882 /* AVFoundation.framework */,
 				A5654ED91C596A0C0000D882 /* iOS */,
 				A5654ED21C5969DC0000D882 /* tvOS */,
 			);
@@ -856,6 +864,7 @@
 		A5654DD81C5946F50000D882 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */,
 				A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */,
 				A5654E311C5949740000D882 /* Main.storyboard */,
 				A5654DD91C5946F50000D882 /* Info.plist */,
@@ -866,6 +875,7 @@
 		A5654E111C5947820000D882 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5654F971C5A0CFC0000D882 /* Assets.xcassets */,
 				A5654E121C5947820000D882 /* InfoPlist.strings */,
 				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E161C5947820000D882 /* Main.storyboard */,
@@ -899,6 +909,7 @@
 		A5654ED91C596A0C0000D882 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5654F791C5972DA0000D882 /* AVFoundation.framework */,
 				A5654EA51C5966230000D882 /* AVKit.framework */,
 				A5654EA31C5966160000D882 /* CFNetwork.framework */,
 				A5654EA11C5966090000D882 /* CoreData.framework */,
@@ -1081,7 +1092,6 @@
 			children = (
 				A5654E111C5947820000D882 /* tvOS */,
 				A5654DD81C5946F50000D882 /* iOS */,
-				A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1372,9 +1382,9 @@
 			files = (
 				A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */,
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
-				A5654E2D1C59493E0000D882 /* Assets.xcassets in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
 				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
+				A5654FC11C5A0DB80000D882 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1382,10 +1392,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E81BF81C22B7A500EABFC5 /* Assets.xcassets in Resources */,
 				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
-				A5654E271C5947820000D882 /* Info.plist in Resources */,
 				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
+				A5654F981C5A0CFC0000D882 /* Assets.xcassets in Resources */,
 				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1397,15 +1406,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5654E491C5964CF0000D882 /* NSManagedObject+MRExtensions.m in Sources */,
 				A5654E441C5964CF0000D882 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */,
+				A5654F7D1C5973250000D882 /* IGREntityAppSettings.m in Sources */,
 				A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */,
 				A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */,
 				A5654E541C5964EE0000D882 /* main.m in Sources */,
 				A5654E451C5964CF0000D882 /* IGREntityExTrack.m in Sources */,
 				A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */,
 				A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
+				A5654F631C59715C0000D882 /* NSManagedObject+MRExtensions.m in Sources */,
 				A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */,
 				A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */,
 				A5654EA71C5967680000D882 /* exTVPlayer.xcdatamodeld in Sources */,
@@ -1615,6 +1625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
 					"$(CONFIGURATION_BUILD_DIR)",
@@ -1637,6 +1648,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
 					"$(CONFIGURATION_BUILD_DIR)",
@@ -1689,7 +1701,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -1722,7 +1733,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1744,6 +1754,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -1765,6 +1776,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;

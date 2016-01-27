@@ -86,4 +86,9 @@
 	self.getListButton.enabled = self.searchText.length > 0;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	return [textField resignFirstResponder];
+}
+
 @end

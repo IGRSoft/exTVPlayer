@@ -293,9 +293,13 @@ static const CGFloat reloadTime = 0.3;
 			IGRExItemCell *trackCell = (IGRExItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 			if (trackCell.isHighlighted)
 			{
+				UIAlertControllerStyle style = UIAlertControllerStyleActionSheet;
+#if	TARGET_OS_IOS
+				style = UIAlertControllerStyleAlert;
+#endif
 				UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Tracks Options", @"")
 																			  message:@""
-																	   preferredStyle:UIAlertControllerStyleActionSheet];
+																	   preferredStyle:style];
 
 				IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
 				UIAlertAction* action = nil;

@@ -13,6 +13,8 @@
 #import "IGREntityExCatalog.h"
 #import "IGREntityAppSettings.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @interface IGRMediaViewController () <UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *gestureView;

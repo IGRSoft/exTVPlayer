@@ -618,7 +618,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Q3-pp-UYR"/>
         <segue reference="aUR-Ax-IOr"/>
+        <segue reference="qbP-pN-dRE"/>
     </inferredMetricsTieBreakers>
 </document>
