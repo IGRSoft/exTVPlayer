@@ -66,6 +66,78 @@
 		A5654E2D1C59493E0000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E81BF21C22B7A500EABFC5 /* Assets.xcassets */; };
 		A5654E371C5949BE0000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E311C5949740000D882 /* Main.storyboard */; };
 		A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */; };
+		A5654E391C5964850000D882 /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
+		A5654E3A1C59648F0000D882 /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
+		A5654E3B1C5964940000D882 /* IGRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F41C47C51800D7518B /* IGRBaseViewController.m */; };
+		A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
+		A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
+		A5654E3E1C5964A30000D882 /* IGRFavoritsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F71C47C9F300D7518B /* IGRFavoritsViewController.m */; };
+		A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */; };
+		A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */; };
+		A5654E411C5964B70000D882 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
+		A5654E421C5964CF0000D882 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
+		A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
+		A5654E441C5964CF0000D882 /* IGREntityExCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4F1C257CA7004EF247 /* IGREntityExCatalog+CoreDataProperties.m */; };
+		A5654E451C5964CF0000D882 /* IGREntityExTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED511C257CA7004EF247 /* IGREntityExTrack.m */; };
+		A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED531C257CA7004EF247 /* IGREntityExTrack+CoreDataProperties.m */; };
+		A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED551C257CA7004EF247 /* IGREntityExVideoCatalog.m */; };
+		A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED571C257CA7004EF247 /* IGREntityExVideoCatalog+CoreDataProperties.m */; };
+		A5654E491C5964CF0000D882 /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */; };
+		A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
+		A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
+		A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
+		A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
+		A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
+		A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
+		A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
+		A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */; };
+		A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
+		A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
+		A5654E541C5964EE0000D882 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
+		A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
+		A5654E561C59650E0000D882 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B6F1C23223900F6080A /* MagicalImportFunctions.m */; };
+		A5654E571C59650E0000D882 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B711C23223900F6080A /* NSAttributeDescription+MagicalDataImport.m */; };
+		A5654E581C59650E0000D882 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B731C23223900F6080A /* NSEntityDescription+MagicalDataImport.m */; };
+		A5654E591C59650E0000D882 /* NSNumber+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B751C23223900F6080A /* NSNumber+MagicalDataImport.m */; };
+		A5654E5A1C59650E0000D882 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B771C23223900F6080A /* NSObject+MagicalDataImport.m */; };
+		A5654E5B1C59650E0000D882 /* NSRelationshipDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B791C23223900F6080A /* NSRelationshipDescription+MagicalDataImport.m */; };
+		A5654E5C1C59650E0000D882 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B7B1C23223900F6080A /* NSString+MagicalDataImport.m */; };
+		A5654E5D1C59650E0000D882 /* NSFetchedResultsController+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B7D1C23223900F6080A /* NSFetchedResultsController+MagicalFetching.m */; };
+		A5654E5E1C5965140000D882 /* NSManagedObject+MagicalAggregation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B801C23223900F6080A /* NSManagedObject+MagicalAggregation.m */; };
+		A5654E5F1C5965140000D882 /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B821C23223900F6080A /* NSManagedObject+MagicalDataImport.m */; };
+		A5654E601C5965140000D882 /* NSManagedObject+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B841C23223900F6080A /* NSManagedObject+MagicalFetching.m */; };
+		A5654E611C5965140000D882 /* NSManagedObject+MagicalFinders.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B861C23223900F6080A /* NSManagedObject+MagicalFinders.m */; };
+		A5654E621C5965140000D882 /* NSManagedObject+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B881C23223900F6080A /* NSManagedObject+MagicalRecord.m */; };
+		A5654E631C5965140000D882 /* NSManagedObject+MagicalRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8A1C23223900F6080A /* NSManagedObject+MagicalRequests.m */; };
+		A5654E641C59651E0000D882 /* NSManagedObjectContext+MagicalObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8D1C23223900F6080A /* NSManagedObjectContext+MagicalObserving.m */; };
+		A5654E651C59651E0000D882 /* NSManagedObjectContext+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B8F1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m */; };
+		A5654E661C59651E0000D882 /* NSManagedObjectContext+MagicalSaves.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B911C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m */; };
+		A5654E671C59651E0000D882 /* NSManagedObjectModel+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B931C23223900F6080A /* NSManagedObjectModel+MagicalRecord.m */; };
+		A5654E681C59651E0000D882 /* NSPersistentStore+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B951C23223900F6080A /* NSPersistentStore+MagicalRecord.m */; };
+		A5654E691C5965230000D882 /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B991C23223900F6080A /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m */; };
+		A5654E6A1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9B1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m */; };
+		A5654E6B1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9D1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalManualMigrations.m */; };
+		A5654E6C1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3B9F1C23223900F6080A /* NSPersistentStoreCoordinator+MagicalRecord.m */; };
+		A5654E6D1C5965290000D882 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA21C23223900F6080A /* NSArray+MagicalRecord.m */; };
+		A5654E6E1C5965290000D882 /* NSDictionary+MagicalRecordAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA41C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m */; };
+		A5654E6F1C5965290000D882 /* NSError+MagicalRecordErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA61C23223900F6080A /* NSError+MagicalRecordErrorHandling.m */; };
+		A5654E701C59652D0000D882 /* MagicalMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BA81C23223900F6080A /* MagicalMigrationManager.m */; };
+		A5654E711C5965360000D882 /* MagicalRecord+Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAB1C23223900F6080A /* MagicalRecord+Actions.m */; };
+		A5654E721C5965360000D882 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAD1C23223900F6080A /* MagicalRecord+Options.m */; };
+		A5654E731C5965360000D882 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BAF1C23223900F6080A /* MagicalRecord+Setup.m */; };
+		A5654E741C5965360000D882 /* MagicalRecord+VersionInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB11C23223900F6080A /* MagicalRecord+VersionInformation.m */; };
+		A5654E751C5965360000D882 /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB41C23223900F6080A /* MagicalRecordInternal.m */; };
+		A5654E761C5965360000D882 /* MagicalRecordShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BB81C23223900F6080A /* MagicalRecordShorthand.m */; };
+		A5654E771C59653C0000D882 /* AutoMigratingMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BBC1C23223900F6080A /* AutoMigratingMagicalRecordStack.m */; };
+		A5654E781C59653C0000D882 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BBE1C23223900F6080A /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m */; };
+		A5654E791C59653C0000D882 /* ClassicSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC01C23223900F6080A /* ClassicSQLiteMagicalRecordStack.m */; };
+		A5654E7A1C59653C0000D882 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC21C23223900F6080A /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m */; };
+		A5654E7B1C59653C0000D882 /* InMemoryMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC41C23223900F6080A /* InMemoryMagicalRecordStack.m */; };
+		A5654E7C1C59653C0000D882 /* MagicalRecordStack+Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC61C23223900F6080A /* MagicalRecordStack+Actions.m */; };
+		A5654E7D1C59653C0000D882 /* MagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BC91C23223900F6080A /* MagicalRecordStack.m */; };
+		A5654E7E1C59653C0000D882 /* ManuallyMigratingMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCB1C23223900F6080A /* ManuallyMigratingMagicalRecordStack.m */; };
+		A5654E7F1C59653C0000D882 /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCD1C23223900F6080A /* SQLiteMagicalRecordStack.m */; };
+		A5654E801C59653C0000D882 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */; };
 		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
 		A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m */; };
 		A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED4D1C257CA7004EF247 /* IGREntityExCatalog.m */; };
@@ -1195,7 +1267,79 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5654E801C59653C0000D882 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */,
+				A5654E781C59653C0000D882 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */,
+				A5654E6B1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */,
+				A5654E6F1C5965290000D882 /* NSError+MagicalRecordErrorHandling.m in Sources */,
+				A5654E751C5965360000D882 /* MagicalRecordInternal.m in Sources */,
+				A5654E491C5964CF0000D882 /* NSManagedObject+MRExtensions.m in Sources */,
+				A5654E441C5964CF0000D882 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
+				A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */,
+				A5654E6C1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */,
+				A5654E681C59651E0000D882 /* NSPersistentStore+MagicalRecord.m in Sources */,
+				A5654E621C5965140000D882 /* NSManagedObject+MagicalRecord.m in Sources */,
+				A5654E731C5965360000D882 /* MagicalRecord+Setup.m in Sources */,
+				A5654E6A1C5965230000D882 /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
+				A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */,
+				A5654E541C5964EE0000D882 /* main.m in Sources */,
+				A5654E561C59650E0000D882 /* MagicalImportFunctions.m in Sources */,
+				A5654E451C5964CF0000D882 /* IGREntityExTrack.m in Sources */,
+				A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */,
+				A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
+				A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */,
+				A5654E591C59650E0000D882 /* NSNumber+MagicalDataImport.m in Sources */,
+				A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */,
+				A5654E571C59650E0000D882 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
+				A5654E761C5965360000D882 /* MagicalRecordShorthand.m in Sources */,
+				A5654E661C59651E0000D882 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
+				A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */,
+				A5654E711C5965360000D882 /* MagicalRecord+Actions.m in Sources */,
+				A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */,
+				A5654E411C5964B70000D882 /* IGRMainCatalogController.m in Sources */,
+				A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */,
+				A5654E421C5964CF0000D882 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
+				A5654E5C1C59650E0000D882 /* NSString+MagicalDataImport.m in Sources */,
+				A5654E791C59653C0000D882 /* ClassicSQLiteMagicalRecordStack.m in Sources */,
+				A5654E581C59650E0000D882 /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				A5654E691C5965230000D882 /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
+				A5654E391C5964850000D882 /* IGREXParser.m in Sources */,
+				A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */,
+				A5654E5E1C5965140000D882 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */,
+				A5654E721C5965360000D882 /* MagicalRecord+Options.m in Sources */,
+				A5654E7E1C59653C0000D882 /* ManuallyMigratingMagicalRecordStack.m in Sources */,
+				A5654E7F1C59653C0000D882 /* SQLiteMagicalRecordStack.m in Sources */,
+				A5654E651C59651E0000D882 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */,
+				A5654E7C1C59653C0000D882 /* MagicalRecordStack+Actions.m in Sources */,
+				A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
+				A5654E6E1C5965290000D882 /* NSDictionary+MagicalRecordAdditions.m in Sources */,
+				A5654E3B1C5964940000D882 /* IGRBaseViewController.m in Sources */,
+				A5654E5D1C59650E0000D882 /* NSFetchedResultsController+MagicalFetching.m in Sources */,
+				A5654E6D1C5965290000D882 /* NSArray+MagicalRecord.m in Sources */,
+				A5654E771C59653C0000D882 /* AutoMigratingMagicalRecordStack.m in Sources */,
+				A5654E741C5965360000D882 /* MagicalRecord+VersionInformation.m in Sources */,
+				A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */,
+				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
+				A5654E5A1C59650E0000D882 /* NSObject+MagicalDataImport.m in Sources */,
+				A5654E5F1C5965140000D882 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				A5654E611C5965140000D882 /* NSManagedObject+MagicalFinders.m in Sources */,
+				A5654E601C5965140000D882 /* NSManagedObject+MagicalFetching.m in Sources */,
+				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
+				A5654E631C5965140000D882 /* NSManagedObject+MagicalRequests.m in Sources */,
+				A5654E7B1C59653C0000D882 /* InMemoryMagicalRecordStack.m in Sources */,
+				A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */,
+				A5654E3A1C59648F0000D882 /* IGRTabBarViewController.m in Sources */,
+				A5654E641C59651E0000D882 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				A5654E5B1C59650E0000D882 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				A5654E7A1C59653C0000D882 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */,
+				A5654E671C59651E0000D882 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */,
+				A5654E701C59652D0000D882 /* MagicalMigrationManager.m in Sources */,
+				A5654E7D1C59653C0000D882 /* MagicalRecordStack.m in Sources */,
+				A5654E3E1C5964A30000D882 /* IGRFavoritsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
