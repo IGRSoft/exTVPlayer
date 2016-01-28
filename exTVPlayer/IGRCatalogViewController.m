@@ -35,6 +35,7 @@ static const CGFloat reloadTime = 0.3;
 @property (strong, nonatomic) IGRDownloadManager *downloadManager;
 
 - (IBAction)onTouchFavorit:(id)sender;
+- (IBAction)onTouchBack:(id)sender;
 
 @end
 
@@ -184,6 +185,11 @@ static const CGFloat reloadTime = 0.3;
 																[UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
 	}
+}
+
+- (IBAction)onTouchBack:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
