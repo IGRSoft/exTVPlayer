@@ -7,53 +7,6 @@
       "extent" : "full-screen",
       "minimum-system-version" : "9.0",
       "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "subtype" : "736h",
-      "filename" : "LaunchImage-ios.png",
-      "minimum-system-version" : "8.0",
-      "orientation" : "landscape",
-      "unassigned" : true,
-      "scale" : "3x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "filename" : "LaunchImage~iPhone4.png",
-      "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "subtype" : "retina4",
-      "filename" : "LaunchImage~iPhone5.png",
-      "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "filename" : "LaunchImage~iPad.png",
-      "minimum-system-version" : "7.0",
-      "orientation" : "landscape",
-      "unassigned" : true,
-      "scale" : "1x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "ipad",
-      "filename" : "LaunchImage~iPad@2x.png",
-      "minimum-system-version" : "7.0",
-      "orientation" : "landscape",
-      "unassigned" : true,
-      "scale" : "2x"
     }
   ],
   "info" : {
