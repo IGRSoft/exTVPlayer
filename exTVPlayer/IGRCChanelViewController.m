@@ -50,21 +50,59 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+#if	TARGET_OS_IOS
+	if ([self isMemberOfClass:[IGRCChanelViewController class]])
+	{
+		CGSize viewSize = self.view.frame.size;
+		
+		UINavigationBar *navbar = [[UINavigationBar alloc] initWithFrame:
+								   CGRectMake(0, 0, MAX(viewSize.width, viewSize.height), 75)];
+		[self.view addSubview:navbar];
+		
+		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"]
+																	   style:UIBarButtonItemStylePlain
+																	  target:self action:@selector(onTouchBack)];
+		
+		UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@""];
+		item.leftBarButtonItem = backButton;
+		
+		[navbar pushNavigationItem:item animated:NO];
+	}
+#endif
+	
     self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
 	
-	CGFloat w = 1000.0;
-	CGFloat h = 50.0;
-	CGRect labelRect = CGRectMake((self.view.bounds.size.width - w) * 0.5,
-								  (self.view.bounds.size.height - h) * 0.5, w, h);
+	CGFloat w = self.view.bounds.size.width;
+	CGFloat h = self.view.bounds.size.height;
+	CGRect labelRect = CGRectMake(0.0, 0.0, w, h);
+	
 	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
 	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
 	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
 	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];;
 	self.noContentLabel.textColor = [UIColor darkGrayColor];
 	self.noContentLabel.hidden = YES;
-	
+	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:self.noContentLabel];
+	
+	// Center horizontally
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.noContentLabel
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:0.0]];
+	
+	// Center vertically
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.noContentLabel
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
 	
 	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
 									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -293,6 +331,11 @@
 		[self.catalogs reloadData];
 		_needRefresh = NO;
 	}
+}
+
+- (void)onTouchBack
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation

@@ -79,20 +79,17 @@
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	if (self.isPlaying)
+	[self.player pause];
+	
+	Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
+	if (currentTime > 60)
 	{
-		[self.player pause];
-		
-		Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
-		if (currentTime > 60)
-		{
-			self.currentTrack.status = @(IGRTrackState_Half);
-			self.currentTrack.position = @(currentTime);
-		}
-		
-		self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
-		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+		self.currentTrack.status = @(IGRTrackState_Half);
+		self.currentTrack.position = @(currentTime);
 	}
+	
+	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
+	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 }
 
 - (void)didReceiveMemoryWarning

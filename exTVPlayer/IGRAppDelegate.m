@@ -57,8 +57,15 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 
 - (NSString *)copyDefaultStoreIfNecessary
 {
-	NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+	NSSearchPathDirectory dic = NSCachesDirectory;
+#if	TARGET_OS_IOS
+	dic = NSDocumentDirectory;
+#endif
+	
+	NSString *documentPath = NSSearchPathForDirectoriesInDomains(dic, NSUserDomainMask, YES).firstObject;
+#if	TARGET_OS_TV
 	documentPath = [documentPath stringByAppendingPathComponent:@"Documents"];
+#endif
 	
 	NSString *storePath = [documentPath stringByAppendingPathComponent:kStoreName];
 	
