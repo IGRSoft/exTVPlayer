@@ -25,6 +25,9 @@
 @property (strong, nonatomic) UILabel *noContentLabel;
 @property (strong, nonatomic) UIActivityIndicatorView *parsingActivityIndicator;
 
+@property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, nonatomic) UINavigationItem *navigationItem;
+
 @property (weak,   nonatomic) IBOutlet UICollectionView *catalogs;
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
 
@@ -50,21 +53,80 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+#if	TARGET_OS_IOS
+	if ([self isMemberOfClass:[IGRCChanelViewController class]])
+	{
+		CGSize viewSize = self.view.frame.size;
+		
+		self.navigationBar = [[UINavigationBar alloc] initWithFrame:
+								   CGRectMake(0, 0, viewSize.width, 70.0)];
+		self.navigationBar.translatesAutoresizingMaskIntoConstraints = NO;
+		
+		[self.view addSubview:self.navigationBar];
+		
+		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"]
+																	   style:UIBarButtonItemStylePlain
+																	  target:self action:@selector(onTouchBack:)];
+		
+		self.navigationItem = [[UINavigationItem alloc] initWithTitle:@""];
+		self.navigationItem.leftBarButtonItem = backButton;
+		
+		[self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
+		
+		NSDictionary *viewsDictionary = @{@"navigationBar":self.navigationBar};
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[navigationBar]|"
+																		  options:0
+																		  metrics:nil
+																			views:viewsDictionary]];
+		
+		// height view
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigationBar(==70)]"
+																				   options:0
+																				   metrics:nil
+																					 views:viewsDictionary]];
+	}
+	
+	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+										  initWithTarget:self action:@selector(handleLongPress:)];
+	lpgr.minimumPressDuration = 1.0; //seconds
+	lpgr.delegate = self;
+	[self.catalogs addGestureRecognizer:lpgr];
+
+#endif
+	
     self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
 	
-	CGFloat w = 1000.0;
-	CGFloat h = 50.0;
-	CGRect labelRect = CGRectMake((self.view.bounds.size.width - w) * 0.5,
-								  (self.view.bounds.size.height - h) * 0.5, w, h);
+	CGFloat w = self.view.bounds.size.width;
+	CGFloat h = self.view.bounds.size.height;
+	CGRect labelRect = CGRectMake(0.0, 0.0, w, h);
+	
 	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
 	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
 	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
 	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];;
 	self.noContentLabel.textColor = [UIColor darkGrayColor];
 	self.noContentLabel.hidden = YES;
-	
+	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:self.noContentLabel];
+	
+	// Center horizontally
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.noContentLabel
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:0.0]];
+	
+	// Center vertically
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.noContentLabel
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
 	
 	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
 									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -73,8 +135,27 @@
 	self.parsingActivityIndicator.center = self.view.center;
 	self.parsingActivityIndicator.hidden = YES;
 	self.parsingActivityIndicator.hidesWhenStopped = YES;
+	self.parsingActivityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
 	
 	[self.view addSubview:self.parsingActivityIndicator];
+	
+	// Center horizontally
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.parsingActivityIndicator
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:0.0]];
+	
+	// Center vertically
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.parsingActivityIndicator
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,18 +170,20 @@
 												userInfo:nil
 												 repeats:YES];
 	
+#if	TARGET_OS_TV
+	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+										  initWithTarget:self action:@selector(handleLongPress:)];
+	lpgr.minimumPressDuration = 1.0; //seconds
+	lpgr.delegate = self;
+	[self.catalogs addGestureRecognizer:lpgr];
+#endif
+	
 	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	
-	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-										  initWithTarget:self action:@selector(handleLongPress:)];
-	lpgr.minimumPressDuration = 1.0; //seconds
-	lpgr.delegate = self;
-	[self.catalogs addGestureRecognizer:lpgr];
 	
 	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
 	
@@ -111,22 +194,36 @@
 		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
 		catalog.favorit = (entityatalog.isFavorit).boolValue;
-		[[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+		[catalog setHighlighted:YES];
 	}
+	
+#if	TARGET_OS_IOS
+	if (catalog)
+	{
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+													  inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
+		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+		self.navigationItem.title = entityatalog.chanel.name;
+	}
+	
+	[self.catalogs becomeFirstResponder];
+#endif
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+#if	TARGET_OS_TV
+	for (UIGestureRecognizer *gr in self.catalogs.gestureRecognizers)
+	{
+		[self.catalogs removeGestureRecognizer:gr];
+	}
+#endif
+
 	[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
 		
 		[obj setSelected:NO];
 		[obj setHighlighted:NO];
 	}];
-	
-	for (UIGestureRecognizer *gr in self.catalogs.gestureRecognizers)
-	{
-		[self.catalogs removeGestureRecognizer:gr];
-	}
 	
 	[super viewWillDisappear:animated];
 }
@@ -135,6 +232,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+#if	TARGET_OS_IOS
+	for (UIGestureRecognizer *gr in self.catalogs.gestureRecognizers)
+	{
+		[self.catalogs removeGestureRecognizer:gr];
+	}
+#endif
 }
 
 #pragma mark - Public
@@ -293,6 +400,11 @@
 		[self.catalogs reloadData];
 		_needRefresh = NO;
 	}
+}
+
+- (IBAction)onTouchBack:(UIButton *)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation
@@ -532,7 +644,11 @@
 				
 				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 					
+#if TARGET_OS_TV
 					[catalogCell setHighlighted:YES];
+#else
+					[catalogCell setHighlighted:NO];
+#endif
 				});
 				
 				break;

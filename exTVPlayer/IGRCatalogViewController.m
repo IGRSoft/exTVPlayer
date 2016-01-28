@@ -20,11 +20,14 @@
 static const CGFloat reloadTime = 0.3;
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
-										UIGestureRecognizerDelegate>
+UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
-@property (weak, nonatomic) IBOutlet UIButton *favoritButton;
+@property (strong, nonatomic) IBOutlet UIButton *favoritButton;
+
+@property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, nonatomic) UINavigationItem *navigationItem;
 
 @property (copy, nonatomic  ) NSString *catalogId;
 @property (strong, nonatomic) IGREntityExCatalog *catalog;
@@ -35,7 +38,6 @@ static const CGFloat reloadTime = 0.3;
 @property (strong, nonatomic) IGRDownloadManager *downloadManager;
 
 - (IBAction)onTouchFavorit:(id)sender;
-- (IBAction)onTouchBack:(id)sender;
 
 @end
 
@@ -47,11 +49,11 @@ static const CGFloat reloadTime = 0.3;
 	__weak typeof(self) weak = self;
 	[IGREXParser parseCatalogContent:aCatalogId
 					  compleateBlock:^(NSArray *items) {
-		
-		self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
-														 withValue:_catalogId];
-		[weak.fetchedResultsController performFetch:nil];
-	}];
+						  
+						  self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
+																		   withValue:_catalogId];
+						  [weak.fetchedResultsController performFetch:nil];
+					  }];
 	
 	self.catalog.viewedTimestamp = [NSDate date];
 	
@@ -60,19 +62,72 @@ static const CGFloat reloadTime = 0.3;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+	
+#if	TARGET_OS_IOS
+	{
+		CGSize viewSize = self.view.frame.size;
+		
+		self.navigationBar = [[UINavigationBar alloc] initWithFrame:
+							  CGRectMake(0, 0, viewSize.width, 75.0)];
+		self.navigationBar.translatesAutoresizingMaskIntoConstraints = NO;
+		
+		[self.view addSubview:self.navigationBar];
+		
+		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"]
+																	   style:UIBarButtonItemStylePlain
+																	  target:self
+																	  action:@selector(onTouchBack:)];
+		
+		UIImage* favoritImageOff = [UIImage imageNamed:@"favorit-off"];
+		UIImage* favoritImageOn = [UIImage imageNamed:@"favorit-on"];
+		
+		CGRect favoritImageRect = CGRectMake(0, 0, favoritImageOff.size.width, favoritImageOff.size.height);
+		self.favoritButton = [[UIButton alloc] initWithFrame:favoritImageRect];
+		[self.favoritButton setBackgroundImage:favoritImageOff forState:UIControlStateNormal];
+		[self.favoritButton setBackgroundImage:favoritImageOn forState:UIControlStateSelected];
+		
+		[self.favoritButton addTarget:self action:@selector(onTouchFavorit:) forControlEvents:UIControlEventTouchUpInside];
+		[self.favoritButton setShowsTouchWhenHighlighted:YES];
+		
+		UIBarButtonItem *fvButton =[[UIBarButtonItem alloc] initWithCustomView:self.favoritButton];
+		
+		
+		self.navigationItem = [[UINavigationItem alloc] initWithTitle:@""];
+		self.navigationItem.leftBarButtonItem = backButton;
+		self.navigationItem.rightBarButtonItem = fvButton;
+		
+		[self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
+		
+		NSDictionary *viewsDictionary = @{@"navigationBar":self.navigationBar};
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[navigationBar]|"
+																		  options:0
+																		  metrics:nil
+																			views:viewsDictionary]];
+		
+		// height view
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigationBar(==75)]"
+																		  options:0
+																		  metrics:nil
+																			views:viewsDictionary]];
+	}
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-
+	
 	self.needUpdateSelection = YES;
 	
 	if (self.catalog)
 	{
+#if	TARGET_OS_IOS
+		self.navigationItem.title = self.catalog.name;
+#else
 		self.catalogTitle.text = self.catalog.name;
+#endif
 	}
 	[self onTouchFavorit:nil];
 	
@@ -110,8 +165,8 @@ static const CGFloat reloadTime = 0.3;
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
 
 - (UIView *)preferredFocusedView
@@ -181,13 +236,17 @@ static const CGFloat reloadTime = 0.3;
 			self.catalog.isFavorit = @(!(self.catalog.isFavorit).boolValue);
 		}
 		
+#if	TARGET_OS_IOS
+		self.favoritButton.selected = (self.catalog.isFavorit).boolValue;
+#else
 		UIImage *image = (self.catalog.isFavorit).boolValue ?	[UIImage imageNamed:@"favorit-on"] :
-																[UIImage imageNamed:@"favorit-off"];
+		[UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
+#endif
 	}
 }
 
-- (IBAction)onTouchBack:(id)sender
+- (IBAction)onTouchBack:(UIButton *)sender
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -306,7 +365,7 @@ static const CGFloat reloadTime = 0.3;
 				UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Tracks Options", @"")
 																			  message:@""
 																	   preferredStyle:style];
-
+				
 				IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
 				UIAlertAction* action = nil;
 				
@@ -381,10 +440,13 @@ static const CGFloat reloadTime = 0.3;
 				[self presentViewController:view animated:YES completion:nil];
 				
 				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-					
+#if TARGET_OS_TV
 					[trackCell setHighlighted:YES];
+#else
+					[trackCell setHighlighted:NO];
+#endif
 				});
-				
+
 				break;
 			}
 			else

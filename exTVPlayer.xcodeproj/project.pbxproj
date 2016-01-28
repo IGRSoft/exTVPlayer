@@ -1179,6 +1179,11 @@
 					A5654DAC1C59452B0000D882 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DMP42GVPJ3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					A5E81BD61C22B72D00EABFC5 = {
 						CreatedOnToolsVersion = 7.2;
