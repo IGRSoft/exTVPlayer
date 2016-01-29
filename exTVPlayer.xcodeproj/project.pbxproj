@@ -108,8 +108,8 @@
 		A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654F791C5972DA0000D882 /* AVFoundation.framework */; };
 		A5654F7C1C5972E70000D882 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5654F7B1C5972E70000D882 /* AVFoundation.framework */; };
 		A5654F7D1C5973250000D882 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
-		A5654F981C5A0CFC0000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654F971C5A0CFC0000D882 /* Assets.xcassets */; };
-		A5654FC11C5A0DB80000D882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */; };
+		A5654F981C5A0CFC0000D882 /* Assets-tvOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654F971C5A0CFC0000D882 /* Assets-tvOS.xcassets */; };
+		A5654FC11C5A0DB80000D882 /* Assets-iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5654FBF1C5A0D3B0000D882 /* Assets-iOS.xcassets */; };
 		A5654FD11C5A3F450000D882 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A5654FCF1C5A3F450000D882 /* iTunesArtwork */; };
 		A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = A5654FD01C5A3F450000D882 /* iTunesArtwork@2x */; };
 		A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED491C257CA7004EF247 /* IGREntityAppSettings.m */; };
@@ -526,8 +526,8 @@
 		A5654EBC1C59682C0000D882 /* MagicalRecord.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MagicalRecord.xcodeproj; path = Submodules/MagicalRecord/MagicalRecord.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A5654F791C5972DA0000D882 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		A5654F7B1C5972E70000D882 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		A5654F971C5A0CFC0000D882 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5654F971C5A0CFC0000D882 /* Assets-tvOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-tvOS.xcassets"; sourceTree = "<group>"; };
+		A5654FBF1C5A0D3B0000D882 /* Assets-iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-iOS.xcassets"; sourceTree = "<group>"; };
 		A5654FCF1C5A3F450000D882 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		A5654FD01C5A3F450000D882 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		A569ED481C257CA7004EF247 /* IGREntityAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityAppSettings.h; sourceTree = "<group>"; };
@@ -869,7 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				A5654FCE1C5A3F450000D882 /* iTunesArtwork */,
-				A5654FBF1C5A0D3B0000D882 /* Assets.xcassets */,
+				A5654FBF1C5A0D3B0000D882 /* Assets-iOS.xcassets */,
 				A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */,
 				A5654E311C5949740000D882 /* Main.storyboard */,
 				A5654DD91C5946F50000D882 /* Info.plist */,
@@ -880,7 +880,7 @@
 		A5654E111C5947820000D882 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				A5654F971C5A0CFC0000D882 /* Assets.xcassets */,
+				A5654F971C5A0CFC0000D882 /* Assets-tvOS.xcassets */,
 				A5654E121C5947820000D882 /* InfoPlist.strings */,
 				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E161C5947820000D882 /* Main.storyboard */,
@@ -1405,7 +1405,7 @@
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
 				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
-				A5654FC11C5A0DB80000D882 /* Assets.xcassets in Resources */,
+				A5654FC11C5A0DB80000D882 /* Assets-iOS.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1415,7 +1415,7 @@
 			files = (
 				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
 				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
-				A5654F981C5A0CFC0000D882 /* Assets.xcassets in Resources */,
+				A5654F981C5A0CFC0000D882 /* Assets-tvOS.xcassets in Resources */,
 				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1644,7 +1644,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1668,7 +1668,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
@@ -1762,7 +1762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1784,7 +1784,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
