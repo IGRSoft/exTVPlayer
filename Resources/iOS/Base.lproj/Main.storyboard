@@ -130,80 +130,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-OM-rII">
-                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-OM-rII">
+                                <rect key="frame" x="0.0" y="75" width="600" height="525"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.019607843140000001" green="0.20000000000000001" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="IGRExItemCell" rowHeight="50" id="56N-Xq-8CQ" customClass="IGRExItemCell">
                                         <rect key="frame" x="0.0" y="40" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="56N-Xq-8CQ" id="xD7-Wl-ZKv">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJY-86-Trw">
-                                                    <rect key="frame" x="40" y="4" width="68" height="42"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="42" id="A7v-0a-De9"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="40" y="15.5" width="496" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCl-2R-O9T" customClass="DACircularProgressView">
                                                     <rect key="frame" x="8" y="13" width="24" height="24"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="Ev4-oh-lMW"/>
-                                                        <constraint firstAttribute="height" constant="24" id="SvV-B0-4JK"/>
+                                                        <constraint firstAttribute="width" constant="24" id="abO-LH-U0X"/>
                                                     </constraints>
                                                 </view>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7EG-Z1-IEB">
-                                                    <rect key="frame" x="0.0" y="47" width="600" height="10"/>
-                                                </progressView>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="MmM-4b-lpd">
-                                                    <rect key="frame" x="574" y="17" width="16" height="16"/>
+                                                    <rect key="frame" x="560" y="17" width="16" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="fwb-Ey-Age"/>
-                                                        <constraint firstAttribute="width" constant="16" id="mVB-YO-oEm"/>
+                                                        <constraint firstAttribute="width" constant="16" id="cag-cs-7j9"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qA0-Pp-DIY" customClass="DALabeledCircularProgressView">
+                                                    <rect key="frame" x="546" y="3" width="42" height="42"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="gZb-56-9pM"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="7EG-Z1-IEB" firstAttribute="leading" secondItem="xD7-Wl-ZKv" secondAttribute="leading" id="0p5-aR-oN7"/>
-                                                <constraint firstAttribute="trailing" secondItem="7EG-Z1-IEB" secondAttribute="trailing" id="4Vk-3k-Lbb"/>
-                                                <constraint firstAttribute="bottom" secondItem="vJY-86-Trw" secondAttribute="bottom" constant="4" id="BUw-1u-hPF"/>
-                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="top" priority="750" constant="17" id="Bvv-Gb-g9E"/>
-                                                <constraint firstItem="KCl-2R-O9T" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="top" constant="13" id="Rd9-wX-lZC"/>
-                                                <constraint firstItem="KCl-2R-O9T" firstAttribute="leading" secondItem="xD7-Wl-ZKv" secondAttribute="leading" constant="8" id="YRf-8U-IGD"/>
-                                                <constraint firstAttribute="trailing" secondItem="MmM-4b-lpd" secondAttribute="trailing" priority="750" constant="10" id="da9-fN-S9r"/>
-                                                <constraint firstItem="7EG-Z1-IEB" firstAttribute="leading" secondItem="xD7-Wl-ZKv" secondAttribute="leading" id="elu-r0-Hwu"/>
-                                                <constraint firstItem="7EG-Z1-IEB" firstAttribute="top" secondItem="KCl-2R-O9T" secondAttribute="bottom" constant="10" id="g55-24-xgu"/>
-                                                <constraint firstItem="vJY-86-Trw" firstAttribute="leading" secondItem="KCl-2R-O9T" secondAttribute="trailing" constant="8" id="hIe-Re-lQF"/>
-                                                <constraint firstAttribute="trailing" secondItem="7EG-Z1-IEB" secondAttribute="trailing" id="kuh-cL-bJ6"/>
-                                                <constraint firstItem="vJY-86-Trw" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="top" constant="4" id="mXx-H0-fdf"/>
-                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="leading" secondItem="vJY-86-Trw" secondAttribute="trailing" priority="250" constant="8" id="ncA-hC-UOI"/>
-                                                <constraint firstItem="vJY-86-Trw" firstAttribute="leading" secondItem="KCl-2R-O9T" secondAttribute="trailing" constant="8" id="ycl-ub-arU"/>
-                                                <constraint firstItem="7EG-Z1-IEB" firstAttribute="top" secondItem="KCl-2R-O9T" secondAttribute="bottom" constant="2" id="zmJ-AS-Zqm"/>
-                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="leading" secondItem="vJY-86-Trw" secondAttribute="trailing" priority="250" constant="8" id="zqs-7y-vem"/>
+                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="leading" secondItem="vJY-86-Trw" secondAttribute="trailing" constant="24" id="0ey-am-YWD"/>
+                                                <constraint firstItem="KCl-2R-O9T" firstAttribute="leading" secondItem="xD7-Wl-ZKv" secondAttribute="leading" constant="8" id="4u7-3z-kcl"/>
+                                                <constraint firstItem="qA0-Pp-DIY" firstAttribute="centerY" secondItem="xD7-Wl-ZKv" secondAttribute="centerY" id="EMh-hZ-B5K"/>
+                                                <constraint firstItem="vJY-86-Trw" firstAttribute="leading" secondItem="KCl-2R-O9T" secondAttribute="trailing" constant="8" id="KLS-h0-0M0"/>
+                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="centerY" secondItem="vJY-86-Trw" secondAttribute="centerY" id="Lqy-P1-17C"/>
+                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="centerY" secondItem="KCl-2R-O9T" secondAttribute="centerY" id="RS5-Gt-IYh"/>
+                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="centerY" secondItem="xD7-Wl-ZKv" secondAttribute="centerY" id="Xk0-sc-E4T"/>
+                                                <constraint firstAttribute="trailing" secondItem="qA0-Pp-DIY" secondAttribute="trailing" constant="12" id="bKl-dW-JLz"/>
+                                                <constraint firstItem="qA0-Pp-DIY" firstAttribute="leading" secondItem="vJY-86-Trw" secondAttribute="trailing" constant="10" id="cFl-vY-tBd"/>
+                                                <constraint firstItem="KCl-2R-O9T" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="topMargin" constant="5" id="f4R-IQ-kis"/>
+                                                <constraint firstItem="qA0-Pp-DIY" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="topMargin" constant="-5" id="mbx-Go-kNF"/>
+                                                <constraint firstItem="MmM-4b-lpd" firstAttribute="top" secondItem="xD7-Wl-ZKv" secondAttribute="topMargin" constant="9" id="rQn-DJ-Zje"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="0p5-aR-oN7"/>
-                                                    <exclude reference="kuh-cL-bJ6"/>
-                                                    <exclude reference="zmJ-AS-Zqm"/>
-                                                </mask>
-                                            </variation>
-                                            <variation key="widthClass=regular">
-                                                <mask key="constraints">
-                                                    <include reference="0p5-aR-oN7"/>
-                                                    <include reference="kuh-cL-bJ6"/>
-                                                    <include reference="zmJ-AS-Zqm"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="saveProgress" destination="7EG-Z1-IEB" id="XgE-2X-wD1"/>
+                                            <outlet property="saveProgress" destination="qA0-Pp-DIY" id="WrZ-ys-xhc"/>
                                             <outlet property="savedIcon" destination="MmM-4b-lpd" id="VGp-39-T5t"/>
                                             <outlet property="title" destination="vJY-86-Trw" id="mXp-UX-3nZ"/>
                                             <outlet property="trackStatus" destination="KCl-2R-O9T" id="qp8-nk-Tp2"/>
@@ -219,10 +201,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ppf-ch-APt">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="puT-F2-LWx"/>
+                                    <constraint firstAttribute="height" constant="75" id="puT-F2-LWx"/>
                                 </constraints>
                             </view>
                         </subviews>

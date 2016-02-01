@@ -104,7 +104,7 @@
 	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
 	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
 	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
-	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];;
+	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 	self.noContentLabel.textColor = [UIColor darkGrayColor];
 	self.noContentLabel.hidden = YES;
 	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;

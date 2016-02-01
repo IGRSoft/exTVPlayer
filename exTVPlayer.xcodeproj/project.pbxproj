@@ -141,6 +141,8 @@
 		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
+		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
+		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
@@ -579,6 +581,8 @@
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController_Private.h; sourceTree = "<group>"; };
 		A5E81BD71C22B72D00EABFC5 /* exTVPlayer-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "exTVPlayer-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E81BDB1C22B72D00EABFC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1113,6 +1117,8 @@
 		A5F3720C1C282FD500AB1395 /* DACircularProgress */ = {
 			isa = PBXGroup;
 			children = (
+				A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */,
+				A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */,
 				A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */,
 				A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */,
 			);
@@ -1443,6 +1449,7 @@
 				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
 				A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */,
 				A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */,
+				A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */,
 				A5654E411C5964B70000D882 /* IGRMainCatalogController.m in Sources */,
 				A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */,
 				A5654E421C5964CF0000D882 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
@@ -1499,6 +1506,7 @@
 				A51F3BDF1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
 				A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */,
+				A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */,
 				A51F3BE41C23223900F6080A /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
 				A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */,
 				A51F3BE21C23223900F6080A /* NSPersistentStore+MagicalRecord.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "IGRExItemCell.h"
 #import "DACircularProgressView.h"
+#import "DALabeledCircularProgressView.h"
 
 @implementation IGRExItemCell
 
@@ -17,6 +18,16 @@
 	self.trackStatus.clockwiseProgress = NO;
 	self.trackStatus.trackTintColor = IGR_YELLOWCOLOR;
 	self.trackStatus.progressTintColor  = IGR_DARKBLUECOLOR;
+	
+	
+	self.saveProgress.roundedCorners = NO;
+	self.saveProgress.progressTintColor = IGR_DARKBLUECOLOR;
+	
+	CGFloat r, g, b;
+	[IGR_DARKBLUECOLOR getRed:&r green:&g blue:&b alpha:nil];
+	self.saveProgress.trackTintColor = [UIColor colorWithRed:r green:r blue:b alpha:0.3];
+	self.saveProgress.progressLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+	self.saveProgress.progressLabel.textColor = IGR_DARKBLUECOLOR;
 	
 	self.savedIcon.hidden = YES;
 }

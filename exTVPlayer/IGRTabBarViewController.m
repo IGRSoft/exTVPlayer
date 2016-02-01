@@ -19,6 +19,8 @@
 	[super viewDidLoad];
 	
 	self.delegate = self;
+	
+	[[UITabBar appearance] setTintColor:IGR_LIGHTBLUECOLOR];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController

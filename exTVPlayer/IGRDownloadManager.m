@@ -10,6 +10,7 @@
 #import "IGRAppDelegate.h"
 
 #import "IGREntityExTrack.h"
+#import "DALabeledCircularProgressView.h"
 
 #import <AFNetworking/AFNetworking.h>
 
@@ -53,7 +54,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 }
 
 - (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack
-			  withProgress:(nonnull UIProgressView *)aProgress
+			  withProgress:(nonnull DALabeledCircularProgressView *)aProgress
 			compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
 	NSMutableDictionary *downloadObject = [self downloadObjectForTrack:aTrack];
@@ -75,10 +76,19 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 																		  progress:^(NSProgress * _Nonnull downloadProgress)
 	{
 		NSMutableDictionary *downloadObject = [weak downloadObjectForTrack:aTrack];
-		UIProgressView *progress = downloadObject[kIGRKeyProgress];
-		if (![progress isEqual:[NSNull null]] && !progress.observedProgress)
+		DALabeledCircularProgressView *progress = downloadObject[kIGRKeyProgress];
+		if (![progress isEqual:[NSNull null]])
 		{
-			progress.observedProgress = downloadProgress;
+			CGFloat value = (CGFloat)downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
+			dispatch_async(dispatch_get_main_queue(), ^{
+				
+				[progress setProgress:value animated:YES];
+				NSInteger intValue = value * 100;
+				progress.progressLabel.text = [NSString stringWithFormat:@"%@", @(intValue)];
+	
+				[progress.progressLabel setNeedsDisplay];
+				[progress setNeedsDisplay];
+			});
 		}
 	}
 																	   destination:^NSURL *(NSURL *targetPath, NSURLResponse *response)
@@ -127,7 +137,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 	[downloadTask resume];
 }
 
-- (void)updateProgress:(nullable UIProgressView *)aProgress
+- (void)updateProgress:(nullable DALabeledCircularProgressView *)aProgress
 			  forTrack:(nonnull IGREntityExTrack *)aTrack
 		compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock
 {
@@ -140,7 +150,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 			downloadObject[kIGRKeyCompleate] = compleateBlock;
 		}
 		
-		UIProgressView *oldProgress = downloadObject[kIGRKeyProgress];
+		DALabeledCircularProgressView *oldProgress = downloadObject[kIGRKeyProgress];
 		
 		if (oldProgress != aProgress)
 		{

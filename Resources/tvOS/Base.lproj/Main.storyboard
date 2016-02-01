@@ -190,15 +190,16 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="t77-KM-akm">
-                                                    <rect key="frame" x="1854" y="19" width="32" height="32"/>
+                                                    <rect key="frame" x="1840" y="19" width="32" height="32"/>
                                                 </imageView>
-                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KSn-Vq-sro">
-                                                    <rect key="frame" x="0.0" y="60" width="1920" height="10"/>
-                                                </progressView>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAB-J6-whV" customClass="DALabeledCircularProgressView">
+                                                    <rect key="frame" x="1826" y="5" width="60" height="60"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="saveProgress" destination="KSn-Vq-sro" id="UsJ-bB-aDk"/>
+                                            <outlet property="saveProgress" destination="dAB-J6-whV" id="EBg-QU-IJw"/>
                                             <outlet property="savedIcon" destination="t77-KM-akm" id="mmP-ZI-Dj4"/>
                                             <outlet property="title" destination="zgm-jF-CHu" id="dRf-QE-rC9"/>
                                             <outlet property="trackStatus" destination="Q8P-U9-ZGd" id="SCG-eW-rvW"/>

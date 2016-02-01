@@ -7,6 +7,7 @@
 //
 
 @class IGREntityExTrack;
+@class DALabeledCircularProgressView;
 
 typedef void (^IGRDownloadManagerCompleateBlock)(void);
 
@@ -14,8 +15,8 @@ typedef void (^IGRDownloadManagerCompleateBlock)(void);
 
 + (nonnull instancetype)defaultInstance;
 
-- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack withProgress:(nonnull UIProgressView *)aProgress compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
-- (void)updateProgress:(nullable UIProgressView *)aProgress forTrack:(nonnull IGREntityExTrack *)aTrack compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
+- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack withProgress:(nonnull DALabeledCircularProgressView *)aProgress compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
+- (void)updateProgress:(nullable DALabeledCircularProgressView *)aProgress forTrack:(nonnull IGREntityExTrack *)aTrack compleateBlock:(nullable IGRDownloadManagerCompleateBlock)compleateBlock;
 - (void)cancelDownloadTrack:(nonnull IGREntityExTrack *)aTrack;
 - (void)removeAllProgresses;
 

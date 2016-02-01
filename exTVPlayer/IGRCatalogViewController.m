@@ -16,6 +16,7 @@
 #import "IGRExItemCell.h"
 #import "DACircularProgressView.h"
 #import "IGRDownloadManager.h"
+#import "DALabeledCircularProgressView.h"
 
 static const CGFloat reloadTime = 0.3;
 
@@ -136,12 +137,14 @@ UIGestureRecognizerDelegate>
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
 	}
-	
+
+#if	TARGET_OS_TV
 	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
 										  initWithTarget:self action:@selector(handleLongPress:)];
 	lpgr.minimumPressDuration = 1.0; //seconds
 	lpgr.delegate = self;
 	[self.tableView addGestureRecognizer:lpgr];
+#endif
 	
 	[self.tableView reloadData];
 }
@@ -157,10 +160,12 @@ UIGestureRecognizerDelegate>
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 	}
 	
+#if	TARGET_OS_TV
 	for (UIGestureRecognizer *gr in self.tableView.gestureRecognizers)
 	{
 		[self.tableView removeGestureRecognizer:gr];
 	}
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -290,7 +295,7 @@ UIGestureRecognizerDelegate>
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return NO;
+	return YES;
 }
 
 - (void)configureCell:(IGRExItemCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -329,6 +334,62 @@ UIGestureRecognizerDelegate>
 		}];
 	}
 }
+
+#pragma mark UITableViewRowAction
+
+#if	TARGET_OS_IOS
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	IGREntityExTrack *track = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	
+	__weak typeof(self) weak = self;
+	IGRExItemCell *trackCell = (IGRExItemCell *)[tableView cellForRowAtIndexPath:indexPath];
+	UITableViewRowAction *actionSaveTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+																		  title:NSLocalizedString(@"Save Track", @"")
+																		handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+	{
+		[weak.tableView setEditing:NO animated:YES];
+		[weak startDownloadTrack:track
+						withCell:trackCell
+					  onPosition:indexPath];
+	}];
+	
+	UITableViewRowAction *actionCancelDownload = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+																					title:NSLocalizedString(@"Cancel Download", @"")
+																				  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+	{
+		[weak.tableView setEditing:NO animated:YES];
+		[weak cancelDownloadTrack:track onPosition:indexPath];
+	}];
+	
+	UITableViewRowAction *actionRemoveDownloadedTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+																						   title:NSLocalizedString(@"Remove Track", @"")
+																						 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+	{
+		[weak.tableView setEditing:NO animated:YES];
+		[weak removeSavedTrack:track onPosition:indexPath];
+	}];
+	
+	actionSaveTrack.backgroundColor = IGR_LIGHTBLUECOLOR;
+	actionCancelDownload.backgroundColor = IGR_LIGHTBLUECOLOR;
+	actionRemoveDownloadedTrack.backgroundColor = IGR_LIGHTBLUECOLOR;
+	
+	if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)])
+	{
+		return @[actionSaveTrack];
+	}
+	else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
+	{
+		return @[actionCancelDownload];
+	}
+	else
+	{
+		return @[actionRemoveDownloadedTrack];
+	}
+	
+	return @[];
+}
+#endif
 
 #pragma mark - Fetched results controller
 
@@ -377,15 +438,9 @@ UIGestureRecognizerDelegate>
 													  style:UIAlertActionStyleDefault
 													handler:^(UIAlertAction * action) {
 														
-														[weak.downloadManager startDownloadTrack:track
-																					withProgress:trackCell.saveProgress compleateBlock:^(void) {
-																						
-																						if (weakIndexPath)
-																						{
-																							[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-																						}
-																					}];
-														trackCell.saveProgress.hidden = NO;
+														[weak startDownloadTrack:track
+																		withCell:trackCell
+																	  onPosition:weakIndexPath];
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
@@ -397,29 +452,19 @@ UIGestureRecognizerDelegate>
 													  style:UIAlertActionStyleDefault
 													handler:^(UIAlertAction * action) {
 														
-														[weak.downloadManager cancelDownloadTrack:track];
-														if (weakIndexPath)
-														{
-															dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-																[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-															});
-														}
+														[weak cancelDownloadTrack:track onPosition:weakIndexPath];
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
 													}];
 				}
-				else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Local)])
+				else
 				{
 					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove Track", @"")
 													  style:UIAlertActionStyleDefault
 													handler:^(UIAlertAction * action) {
 														
-														[IGRSettingsViewController removeSavedTrack:track];
-														
-														dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-															[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-														});
+														[weak removeSavedTrack:track onPosition:weakIndexPath];
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
@@ -456,4 +501,47 @@ UIGestureRecognizerDelegate>
 		}
 	}
 }
+
+- (void)startDownloadTrack:(nonnull IGREntityExTrack *)aTrack
+				  withCell:(nonnull IGRExItemCell *)aTrackCell
+				onPosition:(nullable NSIndexPath *)aIndexPath
+{
+	[self.downloadManager startDownloadTrack:aTrack
+								withProgress:aTrackCell.saveProgress compleateBlock:^(void) {
+									
+									if (aIndexPath)
+									{
+										[self.tableView reloadRowsAtIndexPaths:@[aIndexPath]
+															  withRowAnimation:UITableViewRowAnimationNone];
+									}
+								}];
+	
+	aTrackCell.saveProgress.hidden = NO;
+}
+
+- (void)cancelDownloadTrack:(nonnull IGREntityExTrack *)aTrack
+				 onPosition:(nullable NSIndexPath *)aIndexPat
+{
+	[self.downloadManager cancelDownloadTrack:aTrack];
+	if (aIndexPat)
+	{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			[self.tableView reloadRowsAtIndexPaths:@[aIndexPat] withRowAnimation:UITableViewRowAnimationNone];
+		});
+	}
+}
+
+- (void)removeSavedTrack:(nonnull IGREntityExTrack *)aTrack
+			  onPosition:(nullable NSIndexPath *)aIndexPat
+{
+	[IGRSettingsViewController removeSavedTrack:aTrack];
+	
+	if (aIndexPat)
+	{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			[self.tableView reloadRowsAtIndexPaths:@[aIndexPat] withRowAnimation:UITableViewRowAnimationNone];
+		});
+	}
+}
+
 @end
