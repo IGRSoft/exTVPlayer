@@ -393,6 +393,12 @@
 	}
 }
 
+- (void)reloadData
+{
+	[self.fetchedResultsController performFetch:nil];
+	[self.catalogs reloadData];
+}
+
 - (void)refreshTimerExceeded
 {
 	if (self.needRefresh)

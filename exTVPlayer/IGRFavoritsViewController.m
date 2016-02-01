@@ -24,6 +24,7 @@
     [super viewWillAppear:animated];
 	
 	[self showFavorites];
+	[self reloadData];
 }
 
 - (void)didReceiveMemoryWarning

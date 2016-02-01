@@ -23,6 +23,8 @@
 	[super viewWillAppear:animated];
 	
 	[self showHistory];
+	
+	[self reloadData];
 }
 
 - (void)didReceiveMemoryWarning

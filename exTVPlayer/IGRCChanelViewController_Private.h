@@ -15,5 +15,6 @@
 @property (assign, nonatomic) dispatch_once_t onceToken;
 
 - (void)showParsingProgress:(BOOL)show;
+- (void)reloadData;
 
 @end
