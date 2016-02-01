@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "Remove All Saved Tracks:"; ObjectID = "2j0-bj-bnN"; */
+"2j0-bj-bnN.text" = "Видалит усі збережені треки:";
+
+/* Class = "UILabel"; text = "History Size:"; ObjectID = "BaO-5O-61m"; */
+"BaO-5O-61m.text" = "Розмір історії:";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "DOY-tP-EoZ"; */
+"DOY-tP-EoZ.title" = "Пошук";
+
+/* Class = "UITabBarItem"; title = "History"; ObjectID = "Dlu-QD-6Cc"; */
+"Dlu-QD-6Cc.title" = "Історія";
+
+/* Class = "UIButton"; normalTitle = "Clean"; ObjectID = "WTF-SF-SQy"; */
+"WTF-SF-SQy.normalTitle" = "Очистити";
+
+/* Class = "UILabel"; text = "Main Catalog:"; ObjectID = "fKA-Tv-Mbe"; */
+"fKA-Tv-Mbe.text" = "Головний каталог:";
+
+/* Class = "UIButton"; normalTitle = "Get list of tracks"; ObjectID = "mkK-rQ-ily"; */
+"mkK-rQ-ily.normalTitle" = "Отримати список треків";
+
+/* Class = "UITextField"; placeholder = "Catalog ID or Title name"; ObjectID = "paM-6j-vOq"; */
+"paM-6j-vOq.placeholder" = "Номер каталога чи назва";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "phH-z7-4yu"; */
+"phH-z7-4yu.title" = "Вибрані";
+
+/* Class = "UILabel"; text = "Source:"; ObjectID = "sbf-YI-CCe"; */
+"sbf-YI-CCe.text" = "Джерело:";
+
+/* Class = "UITabBarItem"; title = "Catalogs"; ObjectID = "tTg-oT-xAF"; */
+"tTg-oT-xAF.title" = "Каталог";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "wsG-AE-RRN"; */
+"wsG-AE-RRN.title" = "Налаштування";

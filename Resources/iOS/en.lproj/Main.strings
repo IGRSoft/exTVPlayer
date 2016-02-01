@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "Remove All Saved Tracks:"; ObjectID = "2j0-bj-bnN"; */
+"2j0-bj-bnN.text" = "Remove All Saved Tracks:";
+
+/* Class = "UILabel"; text = "History Size:"; ObjectID = "BaO-5O-61m"; */
+"BaO-5O-61m.text" = "History Size:";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "DOY-tP-EoZ"; */
+"DOY-tP-EoZ.title" = "Search";
+
+/* Class = "UITabBarItem"; title = "History"; ObjectID = "Dlu-QD-6Cc"; */
+"Dlu-QD-6Cc.title" = "History";
+
+/* Class = "UIButton"; normalTitle = "Clean"; ObjectID = "WTF-SF-SQy"; */
+"WTF-SF-SQy.normalTitle" = "Clean";
+
+/* Class = "UILabel"; text = "Main Catalog:"; ObjectID = "fKA-Tv-Mbe"; */
+"fKA-Tv-Mbe.text" = "Main Catalog:";
+
+/* Class = "UIButton"; normalTitle = "Get list of tracks"; ObjectID = "mkK-rQ-ily"; */
+"mkK-rQ-ily.normalTitle" = "Get list of tracks";
+
+/* Class = "UITextField"; placeholder = "Catalog ID or Title name"; ObjectID = "paM-6j-vOq"; */
+"paM-6j-vOq.placeholder" = "Catalog ID or Title name";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "phH-z7-4yu"; */
+"phH-z7-4yu.title" = "Favorites";
+
+/* Class = "UILabel"; text = "Source:"; ObjectID = "sbf-YI-CCe"; */
+"sbf-YI-CCe.text" = "Source:";
+
+/* Class = "UITabBarItem"; title = "Catalogs"; ObjectID = "tTg-oT-xAF"; */
+"tTg-oT-xAF.title" = "Catalogs";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "wsG-AE-RRN"; */
+"wsG-AE-RRN.title" = "Settings";

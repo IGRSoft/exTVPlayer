@@ -197,17 +197,7 @@
 		[catalog setHighlighted:YES];
 	}
 	
-#if	TARGET_OS_IOS
-	if (catalog)
-	{
-		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
-													  inSection:(self.lastSelectedItem.row + self.lastSelectedItem.section)];
-		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
-		self.navigationItem.title = entityatalog.chanel.name;
-	}
-	
-	[self.catalogs becomeFirstResponder];
-#endif
+	[self updateTitleCorCatalog];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -265,6 +255,8 @@
 			[weak showParsingProgress:NO];
 			
 			[weak.catalogs reloadData];
+			
+			[weak updateTitleCorCatalog];
 		}];
 	}
 	else
@@ -276,7 +268,10 @@
 			
 			NSUInteger startPosition = weak.chanels.count;
 			weak.chanels = [NSMutableArray arrayWithArray:items];
+			
 			[weak asyncUpdateFromPosition:startPosition];
+			
+			[weak updateTitleCorCatalog];
 		}];
 	}
 }
@@ -291,6 +286,8 @@
 		
 		[weak.fetchedResultsController performFetch:nil];
 		[weak.catalogs reloadData];
+		
+		[weak updateTitleCorCatalog];
 	}];
 }
 
@@ -406,6 +403,25 @@
 		[self.catalogs reloadData];
 		_needRefresh = NO;
 	}
+}
+
+- (void)updateTitleCorCatalog
+{
+#if	TARGET_OS_IOS
+	__weak typeof(self) weak = self;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		
+		IGRCatalogCell *catalog = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+		if (catalog)
+		{
+			NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+														  inSection:(weak.lastSelectedItem.row + weak.lastSelectedItem.section)];
+			IGREntityExCatalog *entityatalog = [weak.fetchedResultsController objectAtIndexPath:dbIndexPath];
+			weak.navigationItem.title = entityatalog.chanel.name;
+		}
+	});
+	
+#endif
 }
 
 - (IBAction)onTouchBack:(UIButton *)sender
