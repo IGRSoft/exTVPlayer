@@ -1,9 +1,10 @@
 EX Player
 =========
-[![Platform](https://img.shields.io/badge/platform-tvOS-lightgrey.svg?style=flat)](http://www.apple.com/tv/)
+[![Platform](https://img.shields.io/badge/platform-tvOS-lightgrey.svg?style=flat)](http://www.apple.com/tv/) [![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](http://www.apple.com/ios/)
+
 [![License](https://img.shields.io/badge/license-LGPL%202.1-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/lgpl-2.1.html)
 
-EX Player allow you watch video from EX.UA site on Apple TV 4G (with tvOS).
+EX Player allow you watch video from EX.UA site on Apple TV 4G (with tvOS) and for all iPads, iPhones and iPods Touch with iOS 8.0+.
  
 **You can:**
 * Watch video from any Languages and any Category;
