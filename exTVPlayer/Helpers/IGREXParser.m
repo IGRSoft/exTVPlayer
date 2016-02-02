@@ -87,7 +87,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 				 
 				 if (!track)
 				 {
-					 IGREntityExTrack *track = [IGREntityExTrack MR_createEntity];
+					 track = [IGREntityExTrack MR_createEntity];
 					 track.name = title;
 					 track.status = @(IGRTrackState_New);
 					 track.dataStatus = @(IGRTrackDataStatus_Web);
