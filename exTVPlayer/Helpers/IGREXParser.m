@@ -82,13 +82,12 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 				 NSString *webPath = [element valueForAttribute:@"url"];
 				 NSInteger duration = [[element valueForAttribute:@"duration"] integerValue];
 				 
-				 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"webPath == %@ AND catalog = %@", webPath, catalog];
+				 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@ AND catalog = %@", title, catalog];
 				 IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
 				 
 				 if (!track)
 				 {
 					 IGREntityExTrack *track = [IGREntityExTrack MR_createEntity];
-					 track.webPath = webPath;
 					 track.name = title;
 					 track.status = @(IGRTrackState_New);
 					 track.dataStatus = @(IGRTrackDataStatus_Web);
@@ -97,6 +96,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 					 track.orderId = @(orderId);
 					 track.duration = @(duration);
 				 }
+				 track.webPath = webPath;
 				 
 				 ++orderId;
 			 }];
