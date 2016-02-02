@@ -24,6 +24,7 @@ static const CGFloat reloadTime = 0.3;
 UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
 @property (strong, nonatomic) IBOutlet UIButton *favoritButton;
 
@@ -68,13 +69,10 @@ UIGestureRecognizerDelegate>
 	
 #if	TARGET_OS_IOS
 	{
-		CGSize viewSize = self.view.frame.size;
-		
-		self.navigationBar = [[UINavigationBar alloc] initWithFrame:
-							  CGRectMake(0, 0, viewSize.width, 75.0)];
+		self.navigationBar = [[UINavigationBar alloc] initWithFrame:self.navigationView.frame];
 		self.navigationBar.translatesAutoresizingMaskIntoConstraints = NO;
 		
-		[self.view addSubview:self.navigationBar];
+		[self.navigationView addSubview:self.navigationBar];
 		
 		UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"]
 																	   style:UIBarButtonItemStylePlain
@@ -101,17 +99,34 @@ UIGestureRecognizerDelegate>
 		
 		[self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
 		
-		NSDictionary *viewsDictionary = @{@"navigationBar":self.navigationBar};
-		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[navigationBar]|"
-																		  options:0
-																		  metrics:nil
-																			views:viewsDictionary]];
-		
-		// height view
-		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigationBar(==75)]"
-																		  options:0
-																		  metrics:nil
-																			views:viewsDictionary]];
+		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationBar
+															  attribute:NSLayoutAttributeTop
+															  relatedBy:NSLayoutRelationEqual
+																 toItem:self.navigationView
+															  attribute:NSLayoutAttributeTop
+															 multiplier:1.0
+															   constant:0.0]];
+		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationView
+																		attribute:NSLayoutAttributeBottom
+																		relatedBy:NSLayoutRelationEqual
+																		   toItem:self.navigationBar
+																		attribute:NSLayoutAttributeBottom
+																	   multiplier:1.0
+																		 constant:0.0]];
+		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationBar
+																		attribute:NSLayoutAttributeLeading
+																		relatedBy:NSLayoutRelationEqual
+																		   toItem:self.navigationView
+																		attribute:NSLayoutAttributeLeading
+																	   multiplier:1.0
+																		 constant:0.0]];
+		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationView
+																		attribute:NSLayoutAttributeTrailing
+																		relatedBy:NSLayoutRelationEqual
+																		   toItem:self.navigationBar
+																		attribute:NSLayoutAttributeTrailing
+																	   multiplier:1.0
+																		 constant:0.0]];
 	}
 #endif
 }
