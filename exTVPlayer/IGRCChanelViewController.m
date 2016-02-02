@@ -408,10 +408,18 @@
 - (void)updateTitleCorCatalog
 {
 #if	TARGET_OS_IOS
+	
+	if (self.navigationItem.title.length)
+	{
+		return;
+	}
+	
+	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+	
 	__weak typeof(self) weak = self;
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((catalog != nil) ? 0.0 : 0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		
-		IGRCatalogCell *catalog = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+		IGRCatalogCell *catalog = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
 		if (catalog)
 		{
 			NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
