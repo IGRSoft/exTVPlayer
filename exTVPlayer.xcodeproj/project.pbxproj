@@ -54,6 +54,7 @@
 		A51F3BF91C23223900F6080A /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCD1C23223900F6080A /* SQLiteMagicalRecordStack.m */; };
 		A51F3BFA1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */; };
 		A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
+		A55901F31C60D64C007D49E4 /* SDiOSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = A55901C41C60D64C007D49E4 /* SDiOSVersion.m */; };
 		A560A45D1C57D2820027D064 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45C1C57D2820027D064 /* AVKit.framework */; };
 		A560A45F1C57D2900027D064 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45E1C57D2900027D064 /* CFNetwork.framework */; };
 		A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
@@ -503,6 +504,8 @@
 		A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteWithSavingContextMagicalRecordStack.m; sourceTree = "<group>"; };
 		A51F3BFB1C23245000F6080A /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
+		A55901C31C60D64C007D49E4 /* SDiOSVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDiOSVersion.h; path = SDVersion/SDiOSVersion/SDiOSVersion.h; sourceTree = "<group>"; };
+		A55901C41C60D64C007D49E4 /* SDiOSVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDiOSVersion.m; path = SDVersion/SDiOSVersion/SDiOSVersion.m; sourceTree = "<group>"; };
 		A560A45C1C57D2820027D064 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A560A45E1C57D2900027D064 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A5654DAD1C59452B0000D882 /* exTVPlayer-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "exTVPlayer-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -662,6 +665,7 @@
 		A51F38301C22C50A00F6080A /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A55901BD1C60D64C007D49E4 /* SDVersion */,
 				A57A12961C59027A00504350 /* Ono */,
 				A5868B9F1C4A9CD20037D401 /* AFNetworking */,
 				A5F3720C1C282FD500AB1395 /* DACircularProgress */,
@@ -870,6 +874,15 @@
 				A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */,
 			);
 			path = MagicalRecordStack;
+			sourceTree = "<group>";
+		};
+		A55901BD1C60D64C007D49E4 /* SDVersion */ = {
+			isa = PBXGroup;
+			children = (
+				A55901C31C60D64C007D49E4 /* SDiOSVersion.h */,
+				A55901C41C60D64C007D49E4 /* SDiOSVersion.m */,
+			);
+			path = SDVersion;
 			sourceTree = "<group>";
 		};
 		A5654DD81C5946F50000D882 /* iOS */ = {
@@ -1450,6 +1463,7 @@
 				A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */,
 				A5654EA71C5967680000D882 /* exTVPlayer.xcdatamodeld in Sources */,
 				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
+				A55901F31C60D64C007D49E4 /* SDiOSVersion.m in Sources */,
 				A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */,
 				A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */,
 				A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */,

@@ -14,6 +14,10 @@
 
 #import "IGRChanelCell.h"
 
+#if	TARGET_OS_IOS
+#import "SDiOSVersion.h"
+#endif
+
 @interface IGRMainCatalogController () <NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *chanels;
@@ -162,6 +166,47 @@
 {
 	self.lastSelectedItem = indexPath;
 }
+
+#if	TARGET_OS_IOS
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+						layout:(UICollectionViewLayout*)collectionViewLayout
+		insetForSectionAtIndex:(NSInteger)section
+{
+	CGFloat left = 10.0;
+	CGFloat right = 10.0;
+	
+	switch ([SDiOSVersion deviceSize])
+	{
+		case Screen3Dot5inch:
+		case Screen4inch:
+		{
+			left = 10.0;
+			right = 10.0;
+		}
+			break;
+		case Screen5Dot5inch:
+		{
+			left = 35.0;
+			right = 35.0;
+		}
+			break;
+		case Screen4Dot7inch:
+		{
+			left = 35.0;
+			right = 35.0;
+		}
+			break;
+		case UnknownSize:
+		{
+			left = 35.0;
+			right = 35.0;
+		}
+			break;
+	}
+	
+	return UIEdgeInsetsMake(10.0, left, 10.0, right);
+}
+#endif
 
 #pragma mark - Fetched results controller
 

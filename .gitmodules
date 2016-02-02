@@ -13,3 +13,6 @@
 [submodule "Submodules/Ono"]
 	path = Submodules/Ono
 	url = https://github.com/tviu/Ono.git
+[submodule "Submodules/SDVersion"]
+	path = Submodules/SDVersion
+	url = https://github.com/sebyddd/SDVersion.git

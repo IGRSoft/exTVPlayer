@@ -20,6 +20,10 @@
 #import "IGREXParser.h"
 #import <WebImage/WebImage.h>
 
+#if	TARGET_OS_IOS
+#import "SDiOSVersion.h"
+#endif
+
 @interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UILabel *noContentLabel;
@@ -562,6 +566,52 @@
 		}
 	}
 }
+
+#if	TARGET_OS_IOS
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+						layout:(UICollectionViewLayout*)collectionViewLayout
+		insetForSectionAtIndex:(NSInteger)section
+{
+	CGFloat left = 20.0;
+	CGFloat right = 20.0;
+	
+	switch ([SDiOSVersion deviceSize])
+	{
+		case Screen3Dot5inch:
+		{
+			left = 10.0;
+			right = 10.0;
+		}
+			break;
+		case Screen4inch:
+		{
+			left = 15.0;
+			right = 15.0;
+		}
+			break;
+		case Screen4Dot7inch:
+		{
+			left = 30.0;
+			right = 30.0;
+		}
+			break;
+		case Screen5Dot5inch:
+		{
+			left = 40.0;
+			right = 40.0;
+		}
+			break;
+		case UnknownSize:
+		{
+			left = 25.0;
+			right = 25.0;
+		}
+			break;
+	}
+	
+	return UIEdgeInsetsMake(10.0, left, 10.0, right);
+}
+#endif
 
 - (void)tryUpdateData
 {
