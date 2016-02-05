@@ -58,6 +58,21 @@
 {
     [super viewDidLoad];
 
+	self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
+	
+	CGFloat w = self.view.bounds.size.width;
+	CGFloat h = self.view.bounds.size.height;
+	CGRect labelRect = CGRectMake(0.0, 0.0, w, h);
+	
+	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
+	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
+	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
+	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+	self.noContentLabel.textColor = [UIColor darkGrayColor];
+	self.noContentLabel.hidden = YES;
+	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addSubview:self.noContentLabel];
+	
 #if	TARGET_OS_IOS
 	if ([self isMemberOfClass:[IGRCChanelViewController class]])
 	{
@@ -97,23 +112,6 @@
 	lpgr.delegate = self;
 	[self.catalogs addGestureRecognizer:lpgr];
 
-#endif
-	
-    self.lastSelectedItem = [NSIndexPath indexPathForRow:0 inSection:0];
-	
-	CGFloat w = self.view.bounds.size.width;
-	CGFloat h = self.view.bounds.size.height;
-	CGRect labelRect = CGRectMake(0.0, 0.0, w, h);
-	
-	self.noContentLabel = [[UILabel alloc] initWithFrame:labelRect];
-	self.noContentLabel.text = NSLocalizedString(@"No_Content", nil);
-	self.noContentLabel.textAlignment = NSTextAlignmentCenter;
-	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-	self.noContentLabel.textColor = [UIColor darkGrayColor];
-	self.noContentLabel.hidden = YES;
-	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.view addSubview:self.noContentLabel];
-	
 	// Center horizontally
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.noContentLabel
 														  attribute:NSLayoutAttributeCenterX
@@ -160,6 +158,7 @@
 														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
