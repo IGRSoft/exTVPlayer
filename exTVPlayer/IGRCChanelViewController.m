@@ -168,7 +168,7 @@
 	self.updateInProgress = NO;
 	self.waitingDoneUpdate = NO;
 	
-	self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1
+	self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:2
 												  target:self
 												selector:@selector(refreshTimerExceeded)
 												userInfo:nil
@@ -350,24 +350,24 @@
 					
 					IGRCatalogCell *catalogCell = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
 
-					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 						
+						[weak deselectVisibleCells];
 						[catalogCell setHighlighted:YES];
 					});
 					
 					position = startPosition + parsePosition;
 				}
 				
-				if ((++parsePosition + 1) == count)
-				{
-					weak.updateInProgress = NO;
-				}
+				++parsePosition;
 			}];
 		}];
+		
+		self.updateInProgress = NO;
 	}
 	else
 	{
-		[weak showParsingProgress:NO];
+		[self showParsingProgress:NO];
 	}
 }
 
@@ -407,6 +407,14 @@
 		[self.catalogs reloadData];
 		_needRefresh = NO;
 	}
+}
+
+- (void)deselectVisibleCells
+{
+	[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
+		
+		[obj setHighlighted:NO];
+	}];
 }
 
 - (void)updateTitleCorCatalog
@@ -464,14 +472,12 @@
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
 	{
-		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
-			
-			[obj setHighlighted:NO];
-		}];
+		[self deselectVisibleCells];
 	}
 	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")]
 			 && [context.nextFocusedView isKindOfClass:[IGRCatalogCell class]])
 	{
+		[self deselectVisibleCells];
 		[(IGRCatalogCell *)context.nextFocusedView setHighlighted:YES];
 	}
 }
@@ -495,6 +501,29 @@
 		self.catalogCount = MIN(settings.historySize.integerValue, self.catalogCount);
 	}
 	
+	if (self.catalogCount)
+	{
+		__weak typeof(self) weak = self;
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			
+			if (weak.needHighlightCell)
+			{
+				weak.needHighlightCell = NO;
+				IGRCatalogCell *catalog = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
+				
+				if (catalog)
+				{
+					NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+																  inSection:section];
+					IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+					
+					catalog.favorit = (entityatalog.isFavorit).boolValue;
+					[catalog setHighlighted:YES];
+				}
+			}
+		});
+		
+	}
 	return self.catalogCount;
 }
 
@@ -551,7 +580,7 @@
 {
 	if (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live)
 	{
-		if ((indexPath.row + indexPath.section) == (self.catalogCount - 10
+		if ((indexPath.row + indexPath.section) == (self.catalogCount - 4
 													) && self.livePage >= 0)
 		{
 			if (self.updateInProgress && self.waitingDoneUpdate)

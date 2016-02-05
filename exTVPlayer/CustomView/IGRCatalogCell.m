@@ -11,15 +11,52 @@
 @interface IGRCatalogCell ()
 
 @property (weak  , nonatomic) IBOutlet UIImageView *isFavorit;
+@property (assign, nonatomic) BOOL skipHighlight;
 
 @end
 
 @implementation IGRCatalogCell
 
+- (id)initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self)
+	{
+		[self initializeLabel];
+	}
+	
+	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	self = [super initWithCoder:aDecoder];
+	if (self)
+	{
+		[self initializeLabel];
+	}
+	
+	return self;
+}
+
+
+#pragma mark - Internal methods
+
+- (void)initializeLabel
+{
+	self.skipHighlight = NO;
+}
+
+- (void)prepareForReuse
+{
+	//self.skipHighlight = _isHighlighted;
+}
+
 - (void)setHighlighted:(BOOL)highlighted
 {
-	if (_isHighlighted == highlighted)
+	if (_isHighlighted == highlighted || self.skipHighlight)
 	{
+		self.skipHighlight = NO;
 		return;
 	}
 	
