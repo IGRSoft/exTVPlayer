@@ -11,4 +11,9 @@
 
 @implementation IGRChanelCell
 
+- (void)setSelected:(BOOL)selected
+{
+	
+}
+
 @end

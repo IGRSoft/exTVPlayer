@@ -164,7 +164,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+#if	TARGET_OS_TV
 	self.needHighlightCell = YES;
+#else
+	self.needHighlightCell = NO;
+#endif
 	self.updateInProgress = NO;
 	self.waitingDoneUpdate = NO;
 	
@@ -347,7 +351,7 @@
 					{
 						weak.needRefresh = YES;
 					}
-					
+#if	TARGET_OS_TV
 					IGRCatalogCell *catalogCell = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
 
 					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -355,7 +359,7 @@
 						[weak deselectVisibleCells];
 						[catalogCell setHighlighted:YES];
 					});
-					
+#endif
 					position = startPosition + parsePosition;
 				}
 				
@@ -468,6 +472,7 @@
 	}
 }
 
+#if	TARGET_OS_TV
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
@@ -481,6 +486,7 @@
 		[(IGRCatalogCell *)context.nextFocusedView setHighlighted:YES];
 	}
 }
+#endif
 
 #pragma mark - UICollectionViewDataSource
 #pragma mark -
@@ -500,7 +506,8 @@
 		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
 		self.catalogCount = MIN(settings.historySize.integerValue, self.catalogCount);
 	}
-	
+
+#if	TARGET_OS_TV
 	if (self.catalogCount)
 	{
 		__weak typeof(self) weak = self;
@@ -522,8 +529,9 @@
 				}
 			}
 		});
-		
 	}
+#endif
+	
 	return self.catalogCount;
 }
 
@@ -549,6 +557,7 @@
 #pragma mark - UICollectionViewDelegate
 #pragma mark -
 
+#if	TARGET_OS_TV
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
 	IGRCatalogCell *previouslyFocusedCell = (IGRCatalogCell *)context.previouslyFocusedView;
@@ -568,6 +577,7 @@
 	
 	return YES;
 }
+#endif
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -64,7 +64,9 @@
 	}
 	else if (self.lastSelectedItem)
 	{
+#if	TARGET_OS_TV
 		[[self.chanels cellForItemAtIndexPath:self.lastSelectedItem] setHighlighted:YES];
+#endif
 	}
 }
 
@@ -94,6 +96,7 @@
 
 #pragma mark - Privat
 
+#if	TARGET_OS_TV
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
@@ -108,6 +111,7 @@
 		[(IGRChanelCell *)context.nextFocusedView setHighlighted:YES];
 	}
 }
+#endif
 
 #pragma mark - Navigation
 
@@ -151,6 +155,7 @@
 #pragma mark - UICollectionViewDelegate
 #pragma mark -
 
+#if	TARGET_OS_TV
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
 	IGRChanelCell *previouslyFocusedCell = (IGRChanelCell *)context.previouslyFocusedView;
@@ -161,6 +166,7 @@
 	
 	return YES;
 }
+#endif
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -162,6 +162,12 @@ UIGestureRecognizerDelegate>
 #endif
 	
 	[self.tableView reloadData];
+
+#if	TARGET_OS_IOS
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
+	IGRExItemCell *trackCell = (IGRExItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+	trackCell.highlighted = YES;
+#endif
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -404,6 +410,15 @@ UIGestureRecognizerDelegate>
 	
 	return @[];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[self.tableView.visibleCells enumerateObjectsUsingBlock:^(IGRExItemCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		[obj setHighlighted:NO];
+	}];
+}
+
 #endif
 
 #pragma mark - Fetched results controller
