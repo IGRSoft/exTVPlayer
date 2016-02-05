@@ -204,8 +204,6 @@
 		catalog.favorit = (entityatalog.isFavorit).boolValue;
 		[catalog setHighlighted:YES];
 	}
-	
-	[self updateTitleCorCatalog];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -253,6 +251,9 @@
 	self.chanelMode = [settings.sourceType isEqualToNumber:@(IGRSourceType_RSS)] ? IGRChanelMode_Catalog :
 																				   IGRChanelMode_Catalog_Live;
 	
+	IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstByAttribute:@"itemId" withValue:aChanel];
+	[self updateTitleCorCatalog:chanel.name];
+	
 	if (self.chanelMode == IGRChanelMode_Catalog)
 	{
 		__weak typeof(self) weak = self;
@@ -263,8 +264,6 @@
 			[weak showParsingProgress:NO];
 			
 			[weak.catalogs reloadData];
-			
-			[weak updateTitleCorCatalog];
 		}];
 	}
 	else
@@ -278,8 +277,6 @@
 			weak.chanels = [NSMutableArray arrayWithArray:items];
 			
 			[weak asyncUpdateFromPosition:startPosition];
-			
-			[weak updateTitleCorCatalog];
 		}];
 	}
 }
@@ -294,8 +291,6 @@
 		
 		[weak.fetchedResultsController performFetch:nil];
 		[weak.catalogs reloadData];
-		
-		[weak updateTitleCorCatalog];
 	}];
 }
 
@@ -351,15 +346,7 @@
 					{
 						weak.needRefresh = YES;
 					}
-#if	TARGET_OS_TV
-					IGRCatalogCell *catalogCell = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
 
-					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-						
-						[weak deselectVisibleCells];
-						[catalogCell setHighlighted:YES];
-					});
-#endif
 					position = startPosition + parsePosition;
 				}
 				
@@ -410,6 +397,16 @@
 	{
 		[self.catalogs reloadData];
 		_needRefresh = NO;
+		
+		[self deselectVisibleCells];
+#if	TARGET_OS_TV
+		IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+		
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			
+			[catalogCell setHighlighted:YES];
+		});
+#endif
 	}
 }
 
@@ -421,7 +418,7 @@
 	}];
 }
 
-- (void)updateTitleCorCatalog
+- (void)updateTitleCorCatalog:(NSString *)aTitle
 {
 #if	TARGET_OS_IOS
 	
@@ -430,20 +427,7 @@
 		return;
 	}
 	
-	IGRCatalogCell *catalog = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
-	
-	__weak typeof(self) weak = self;
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((catalog != nil) ? 0.0 : 0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		
-		IGRCatalogCell *catalog = (IGRCatalogCell *)[weak.catalogs cellForItemAtIndexPath:weak.lastSelectedItem];
-		if (catalog)
-		{
-			NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
-														  inSection:(weak.lastSelectedItem.row + weak.lastSelectedItem.section)];
-			IGREntityExCatalog *entityatalog = [weak.fetchedResultsController objectAtIndexPath:dbIndexPath];
-			weak.navigationItem.title = entityatalog.chanel.name;
-		}
-	});
+	self.navigationItem.title = aTitle;
 	
 #endif
 }
@@ -570,6 +554,7 @@
 	
 	if ([nextFocusedCell isKindOfClass:[IGRCatalogCell class]])
 	{
+		[self deselectVisibleCells];
 		[nextFocusedCell setHighlighted:YES];
 		
 		self.lastSelectedItem = [self.catalogs indexPathForCell:nextFocusedCell];
