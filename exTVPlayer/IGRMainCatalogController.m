@@ -97,16 +97,18 @@
 #pragma mark - Privat
 
 #if	TARGET_OS_TV
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context
+	   withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
 	{
-		[self.chanels.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRChanelCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 			
 			[obj setHighlighted:NO];
 		}];
 	}
-	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] && [context.nextFocusedView isKindOfClass:[IGRChanelCell class]])
+	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] &&
+			 [context.nextFocusedView isKindOfClass:[IGRChanelCell class]])
 	{
 		[(IGRChanelCell *)context.nextFocusedView setHighlighted:YES];
 	}
@@ -121,7 +123,8 @@
 	{
 		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
 		
-		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(self.chanels.indexPathsForSelectedItems.firstObject.row + self.chanels.indexPathsForSelectedItems.firstObject.section)];
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+													  inSection:(self.chanels.indexPathsForSelectedItems.firstObject.row + self.chanels.indexPathsForSelectedItems.firstObject.section)];
 		IGREntityExChanel *chanel = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -139,10 +142,11 @@
     return (self.fetchedResultsController).sections.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+				  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	IGRChanelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRChanelCell" forIndexPath:indexPath];
+	IGRChanelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRChanelCell"
+																	forIndexPath:indexPath];
 	
 	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
 	IGREntityExChanel *track = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];

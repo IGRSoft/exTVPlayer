@@ -19,6 +19,8 @@
 #import <CFNetwork/CFNetwork.h>
 #endif
 
+static const NSInteger kUpdatedLimitMinutes = 15;
+
 const NSUInteger kPrefixLength = 7;
 unichar kPrefix[kPrefixLength] = {0x68, 0x74, 0x74, 0x70, 0x3A,
 								  0x2F, 0x2F};
@@ -58,7 +60,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	
 	if (catalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < 15)
+		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -76,7 +78,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 catalog.imgUrl = [[xmlDocument firstChildWithTag:@"picture"] valueForAttribute:@"url"];
 			 __block NSUInteger orderId = 0;
 			 
-			 [xmlDocument enumerateElementsWithXPath:@"//file_list/file" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+			 [xmlDocument enumerateElementsWithXPath:@"//file_list/file"
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 				 
 				 NSString *title = [element valueForAttribute:@"name"];
 				 NSString *webPath = [element valueForAttribute:@"url"];
@@ -121,11 +124,13 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 + (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
+	BOOL lock = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://igrsoft.com/wp-content/explayer/lock"]].bytes > 0;
+	
 	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 15)
+		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -143,12 +148,17 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 NSString *title = [[xmlDocument firstChildWithTag:@"channel"] firstChildWithTag:@"title"].stringValue;
 			 videoCatalog.name = title;
 			 
-			 [xmlDocument enumerateElementsWithXPath:@"//channel/item" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+			 [xmlDocument enumerateElementsWithXPath:@"//channel/item"
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 				 
 				 NSString *title = [element firstChildWithTag:@"title"].stringValue;
 				 NSString *itemId = [element firstChildWithTag:@"guid"].stringValue;
 				 
-				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+				if (lock && [[self blockedIDs] containsObject:itemId])
+					return;
+											  
+				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																					  withValue:itemId];
 				 chanel.name = title;
 				 chanel.videoCatalog = videoCatalog;
 			 }];
@@ -172,7 +182,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																		 withValue:aChanelId];
 	if (chanel.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < 15)
+		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -191,7 +201,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 NSMutableArray *items = [NSMutableArray array];
 			 
-			 [xmlDocument enumerateElementsWithXPath:@"//channel/item" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+			 [xmlDocument enumerateElementsWithXPath:@"//channel/item"
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 				 
 				 [items addObject:[element firstChildWithTag:@"guid"].stringValue];
 			 }];
@@ -244,7 +255,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < 15)
+		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -273,12 +284,14 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	 {
 		 if (xmlDocument)
 		 {
-			 [xmlDocument enumerateElementsWithXPath:@"//object" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+			 [xmlDocument enumerateElementsWithXPath:@"//object"
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 				 
 				 NSString *title = [element firstChildWithTag:@"title"].stringValue;
 				 NSString *itemId = [element firstChildWithTag:@"id"].stringValue;
 				 
-				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId" withValue:itemId];
+				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																					  withValue:itemId];
 				 chanel.name = title;
 				 chanel.videoCatalog = videoCatalog;
 			 }];
@@ -318,7 +331,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		 NSMutableArray *items = [NSMutableArray array];
 		 if (xmlDocument)
 		 {
-			 [xmlDocument enumerateElementsWithXPath:@"//object" usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+			 [xmlDocument enumerateElementsWithXPath:@"//object"
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
 				 
 				 NSString *catalogId = [element valueForAttribute:@"id"];
 				 [items addObject:catalogId];
@@ -364,7 +378,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		[__xmlManager setResponseSerializer:serializer];
 	}
 	
-	[[__xmlManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+	[[__xmlManager dataTaskWithRequest:request
+					 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 		
 		if(!error)
 		{
@@ -402,6 +417,16 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																	options:0];
 	
 	return components.minute;
+}
+
++ (NSArray *)blockedIDs
+{
+	return @[@"2", @"70538", @"1988", @"422546", @"1989", @"73427589", @"7513588", @"607160", @"1991", //RUS
+			 @"82470", @"82473", @"82480", @"82484", @"82489", //UA
+			 @"82316", @"82325", @"82329", @"82333", //EN
+			 @"188005", @"188015", @"Películas", //ESP
+			 @"45234", @"45252", @"45256", @"45253", //DE
+			 @"969014", @"969016", @"969022" /*PL*/];
 }
 
 @end
