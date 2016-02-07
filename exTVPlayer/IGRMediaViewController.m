@@ -46,8 +46,6 @@
 	self.delegate = self;
 	self.player = player;
 	
-	self.showsPlaybackControls = YES;
-	
 	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 	
 	/* listen for notifications from the application */
