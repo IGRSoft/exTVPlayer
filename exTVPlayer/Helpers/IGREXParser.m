@@ -124,7 +124,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 + (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	BOOL lock = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://igrsoft.com/wp-content/explayer/lock"]].bytes > 0;
+	BOOL lock = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
 	
 	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																						   withValue:aVideoCatalogId];

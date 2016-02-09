@@ -81,3 +81,4 @@ typedef NS_ENUM(NSUInteger, IGRChanelMode)
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
 static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";
 
+static NSString * const kIGRLock = @"https://igrsoft.com/wp-content/explayer/lock";
