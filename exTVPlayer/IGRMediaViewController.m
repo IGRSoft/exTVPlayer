@@ -48,7 +48,7 @@
 	self.player = player;
 	
 	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-	
+#if	TARGET_OS_TV
 	/* listen for notifications from the application */
 	[defaultCenter addObserver:self
 					  selector:@selector(applicationWillResignActive:)
@@ -59,7 +59,7 @@
 					  selector:@selector(applicationDidBecomeActive:)
 						  name:kapplicationDidBecomeActive
 						object:nil];
-	
+#endif
 	/* listen for notifications from the player */
 	[defaultCenter addObserver:self
 					  selector:@selector(itemDidPlayToEndTime:)
@@ -255,6 +255,7 @@
 	[self playNextTrack:nil];
 }
 
+#if	TARGET_OS_TV
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
 	self.needResumeVideo = self.isPlaying;
@@ -268,5 +269,6 @@
 		[self.player play];
 	}
 }
+#endif
 
 @end
