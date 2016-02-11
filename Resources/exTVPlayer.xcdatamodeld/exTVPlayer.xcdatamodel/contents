@@ -3,6 +3,7 @@
     <entity name="AppSettings" representedClassName="IGREntityAppSettings" syncable="YES">
         <attribute name="historySize" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastPlayedCatalog" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="removPlayedSavedTracks" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="sourceType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="videoLanguageId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -43,7 +44,7 @@
         <relationship name="chanels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExChanel" inverseName="videoCatalog" inverseEntity="ExChanel" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AppSettings" positionX="-738" positionY="-318" width="128" height="105"/>
+        <element name="AppSettings" positionX="-738" positionY="-318" width="128" height="120"/>
         <element name="ExCatalog" positionX="-479" positionY="-139" width="128" height="195"/>
         <element name="ExChanel" positionX="-504" positionY="-349" width="128" height="120"/>
         <element name="ExTrack" positionX="-272" positionY="-252" width="128" height="180"/>

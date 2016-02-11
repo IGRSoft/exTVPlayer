@@ -14,16 +14,21 @@
 #import "IGREntityExChanel.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
+#import "IGREntityAppSettings.h"
 
 #if (PROXY_ENABLED)
 #import <CFNetwork/CFNetwork.h>
 #endif
 
-static const NSInteger kUpdatedLimitMinutes = 15;
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+
+static const NSInteger kUpdatedLimitMinutes = 1;
+static BOOL _isLocked = NO;
 
 const NSUInteger kPrefixLength = 7;
-unichar kPrefix[kPrefixLength] = {0x68, 0x74, 0x74, 0x70, 0x3A,
-								  0x2F, 0x2F};
+unichar kPrefix[kPrefixLength] =	{0x68, 0x74, 0x74, 0x70, 0x3A,
+									 0x2F, 0x2F};
 
 const NSUInteger kServerLength = 5;
 unichar kServer[kServerLength] = {0x65, 0x78, 0x2E, 0x75, 0x61};
@@ -32,9 +37,9 @@ const NSUInteger kRSSLength = 3;
 unichar kRSS[kRSSLength] = {0x72, 0x73, 0x73};
 
 const NSUInteger kViewLength = 12;
-unichar kView[kViewLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
-							  0x65, 0x6F, 0x5F, 0x76, 0x69,
-							  0x65, 0x77};
+unichar kView[kViewLength] =	{0x72, 0x5F, 0x76, 0x69, 0x64,
+								 0x65, 0x6F, 0x5F, 0x76, 0x69,
+								 0x65, 0x77};
 
 const NSUInteger kMainCatalogLength = 13;
 unichar kMainCatalog[kMainCatalogLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
@@ -42,15 +47,28 @@ unichar kMainCatalog[kMainCatalogLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
 											0x64, 0x65, 0x78};
 
 const NSUInteger kSearchLength = 14;
-unichar kSearch[kSearchLength] = {0x72, 0x5F, 0x76, 0x69, 0x64,
-								  0x65, 0x6F, 0x5F, 0x73, 0x65,
-								  0x61, 0x72, 0x63, 0x68};
+unichar kSearch[kSearchLength] =	{0x72, 0x5F, 0x76, 0x69, 0x64,
+									 0x65, 0x6F, 0x5F, 0x73, 0x65,
+									 0x61, 0x72, 0x63, 0x68};
 
 static AFURLSessionManager *__xmlManager = nil;
 
 typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 
 @implementation IGREXParser
+
++ (void)initialize
+{
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+	if ([settings.videoLanguageId isEqualToNumber:@(IGRVideoCategory_Ukr)])
+	{
+		_isLocked = NO;
+	}
+	else
+	{
+		_isLocked = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
+	}
+}
 
 + (void)parseCatalogContent:(nonnull NSString *)aCatalogId
 			 compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
@@ -79,30 +97,31 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 __block NSUInteger orderId = 0;
 			 
 			 [xmlDocument enumerateElementsWithXPath:@"//file_list/file"
-										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-				 
-				 NSString *title = [element valueForAttribute:@"name"];
-				 NSString *webPath = [element valueForAttribute:@"url"];
-				 NSInteger duration = [[element valueForAttribute:@"duration"] integerValue];
-				 
-				 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@ AND catalog = %@", title, catalog];
-				 IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
-				 
-				 if (!track)
-				 {
-					 track = [IGREntityExTrack MR_createEntity];
-					 track.name = title;
-					 track.status = @(IGRTrackState_New);
-					 track.dataStatus = @(IGRTrackDataStatus_Web);
-					 track.position = @(0.0);
-					 track.catalog = catalog;
-					 track.orderId = @(orderId);
-					 track.duration = @(duration);
-				 }
-				 track.webPath = webPath;
-				 
-				 ++orderId;
-			 }];
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
+			  {
+				  
+				  NSString *title = [element valueForAttribute:@"name"];
+				  NSString *webPath = [element valueForAttribute:@"url"];
+				  NSInteger duration = [[element valueForAttribute:@"duration"] integerValue];
+				  
+				  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@ AND catalog = %@", title, catalog];
+				  IGREntityExTrack *track = [IGREntityExTrack MR_findFirstWithPredicate:predicate];
+				  
+				  if (!track)
+				  {
+					  track = [IGREntityExTrack MR_createEntity];
+					  track.name = title;
+					  track.status = @(IGRTrackState_New);
+					  track.dataStatus = @(IGRTrackDataStatus_Web);
+					  track.position = @(0.0);
+					  track.catalog = catalog;
+					  track.orderId = @(orderId);
+					  track.duration = @(duration);
+				  }
+				  track.webPath = webPath;
+				  
+				  ++orderId;
+			  }];
 			 
 			 catalog.timestamp = [NSDate date];
 			 if ([catalog.orderId isEqualToNumber:@0])
@@ -124,8 +143,6 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 + (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	BOOL lock = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
-	
 	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
@@ -149,19 +166,22 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 videoCatalog.name = title;
 			 
 			 [xmlDocument enumerateElementsWithXPath:@"//channel/item"
-										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-				 
-				 NSString *title = [element firstChildWithTag:@"title"].stringValue;
-				 NSString *itemId = [element firstChildWithTag:@"guid"].stringValue;
-				 
-				if (lock && [[self blockedIDs] containsObject:itemId])
-					return;
-											  
-				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
-																					  withValue:itemId];
-				 chanel.name = title;
-				 chanel.videoCatalog = videoCatalog;
-			 }];
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
+			  {
+				  
+				  NSString *title = [element firstChildWithTag:@"title"].stringValue;
+				  NSString *itemId = [element firstChildWithTag:@"guid"].stringValue;
+				  
+				  if (_isLocked && [[self blockedIDs] containsObject:itemId])
+				  {
+					  return;
+				  }
+				  
+				  IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																					   withValue:itemId];
+				  chanel.name = title;
+				  chanel.videoCatalog = videoCatalog;
+			  }];
 			 
 			 videoCatalog.timestamp = [NSDate date];
 			 
@@ -203,9 +223,9 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 [xmlDocument enumerateElementsWithXPath:@"//channel/item"
 										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-				 
-				 [items addObject:[element firstChildWithTag:@"guid"].stringValue];
-			 }];
+											  
+											  [items addObject:[element firstChildWithTag:@"guid"].stringValue];
+										  }];
 			 
 			 chanel.timestamp = [NSDate date];
 			 
@@ -219,7 +239,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 				 
 				 aCompleateBlock(@[chanel]);
 			 };
-
+			 
 			 if (items.count)
 			 {
 				 __block NSUInteger count = items.count;
@@ -285,16 +305,17 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		 if (xmlDocument)
 		 {
 			 [xmlDocument enumerateElementsWithXPath:@"//object"
-										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-				 
-				 NSString *title = [element firstChildWithTag:@"title"].stringValue;
-				 NSString *itemId = [element firstChildWithTag:@"id"].stringValue;
-				 
-				 IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
-																					  withValue:itemId];
-				 chanel.name = title;
-				 chanel.videoCatalog = videoCatalog;
-			 }];
+										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
+			  {
+				  
+				  NSString *title = [element firstChildWithTag:@"title"].stringValue;
+				  NSString *itemId = [element firstChildWithTag:@"id"].stringValue;
+				  
+				  IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																					   withValue:itemId];
+				  chanel.name = title;
+				  chanel.videoCatalog = videoCatalog;
+			  }];
 			 
 			 videoCatalog.timestamp = [NSDate date];
 			 
@@ -333,10 +354,10 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		 {
 			 [xmlDocument enumerateElementsWithXPath:@"//object"
 										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
-				 
-				 NSString *catalogId = [element valueForAttribute:@"id"];
-				 [items addObject:catalogId];
-			 }];
+											  
+											  NSString *catalogId = [element valueForAttribute:@"id"];
+											  [items addObject:catalogId];
+										  }];
 		 }
 		 
 		 aCompleateBlock(items);
@@ -362,7 +383,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	{
 		NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
 		sessionConfiguration.HTTPMaximumConnectionsPerHost = 20;
-
+		
 #if (PROXY_ENABLED)
 		NSDictionary *proxyDict = @{[NSString stringWithFormat:@"HTTP%@Enable", kIGRProxyHTTPS ? @"S" : @""]: @YES,
 									[NSString stringWithFormat:@"HTTP%@Proxy", kIGRProxyHTTPS ? @"S" : @""] : kIGRProxyAddres,
@@ -379,25 +400,26 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	}
 	
 	[[__xmlManager dataTaskWithRequest:request
-					 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-		
-		if(!error)
-		{
-			ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
+					 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+	  {
+		  
+		  if(!error)
+		  {
+			  ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
 #if DEBUG
-			NSLog(@"%@", document.rootElement);
+			  NSLog(@"%@", document.rootElement);
 #endif
-			aCompleateBlock(document.rootElement);
-		}
-		else
-		{
-			NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-			NSLog(@"%@", errorStr);
-			
-			aCompleateBlock(nil);
-		}
-		
-	}] resume];
+			  aCompleateBlock(document.rootElement);
+		  }
+		  else
+		  {
+			  NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+			  NSLog(@"%@", errorStr);
+			  
+			  aCompleateBlock(nil);
+		  }
+		  
+	  }] resume];
 }
 
 + (NSString *)serverAddress

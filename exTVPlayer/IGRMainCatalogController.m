@@ -37,6 +37,9 @@
 {
 	[super viewDidLoad];
 	
+	// create settings
+	[self appSettings];
+	
 	self.chanels.backgroundColor = [UIColor clearColor];
 	self.lastSelectedItem = nil;
 }

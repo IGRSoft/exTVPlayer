@@ -22,9 +22,10 @@
 	if (!settings)
 	{
 		settings = [IGREntityAppSettings MR_createEntity];
-		settings.videoLanguageId	= @(IGRVideoCategory_Rus);
-		settings.historySize		= @(IGRHistorySize_10);
-		settings.sourceType			= @(IGRSourceType_RSS);
+		settings.videoLanguageId		= @([self currentCountry]);
+		settings.historySize			= @(IGRHistorySize_10);
+		settings.sourceType				= @(IGRSourceType_RSS);
+		settings.removPlayedSavedTracks	= @(YES);
 		
 		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	}
@@ -35,6 +36,36 @@
 - (void)callCustomAction
 {
 
+}
+
+- (IGRVideoCategory)currentCountry
+{
+	NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+	NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+	
+	IGRVideoCategory currentCountry = IGRVideoCategory_Eng;
+	if ([countryCode isEqualToString:@"UA"])
+	{
+		currentCountry = IGRVideoCategory_Ukr;
+	}
+	else if ([countryCode isEqualToString:@"RU"])
+	{
+		currentCountry = IGRVideoCategory_Rus;
+	}
+	else if ([countryCode isEqualToString:@"PL"])
+	{
+		currentCountry = IGRVideoCategory_Pl;
+	}
+	else if ([countryCode isEqualToString:@"ES"])
+	{
+		currentCountry = IGRVideoCategory_Esp;
+	}
+	else if ([countryCode isEqualToString:@"DE"])
+	{
+		currentCountry = IGRVideoCategory_De;
+	}
+	
+	return currentCountry;
 }
 
 @end

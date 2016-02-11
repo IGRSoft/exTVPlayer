@@ -12,6 +12,7 @@
 #import "IGREntityExTrack.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityAppSettings.h"
+#import "IGRSettingsViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -243,6 +244,8 @@
 {
 	self.currentTrack.status = @(IGRTrackState_Done);
 	self.currentTrack.position = @(0.0);
+	
+	[IGRSettingsViewController removeSavedTrack:self.currentTrack];
 	
 	[self playNextTrack:nil];
 }

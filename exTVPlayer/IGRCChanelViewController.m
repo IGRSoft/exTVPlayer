@@ -70,10 +70,23 @@
 	self.noContentLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 	self.noContentLabel.textColor = [UIColor darkGrayColor];
 	self.noContentLabel.hidden = YES;
-	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	
 	[self.view addSubview:self.noContentLabel];
 	
+	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
+									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	
+	self.parsingActivityIndicator.color = IGR_DARKBLUECOLOR;
+	self.parsingActivityIndicator.center = self.view.center;
+	self.parsingActivityIndicator.hidesWhenStopped = YES;
+	[self.parsingActivityIndicator stopAnimating];
+	[self.view addSubview:self.parsingActivityIndicator];
+	
 #if	TARGET_OS_IOS
+	
+	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	self.parsingActivityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+	
 	if ([self isMemberOfClass:[IGRCChanelViewController class]])
 	{
 		CGSize viewSize = self.view.frame.size;
@@ -129,17 +142,6 @@
 														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
-	
-	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
-									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	
-	self.parsingActivityIndicator.color = IGR_DARKBLUECOLOR;
-	self.parsingActivityIndicator.center = self.view.center;
-	self.parsingActivityIndicator.hidden = YES;
-	self.parsingActivityIndicator.hidesWhenStopped = YES;
-	self.parsingActivityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	[self.view addSubview:self.parsingActivityIndicator];
 	
 	// Center horizontally
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.parsingActivityIndicator

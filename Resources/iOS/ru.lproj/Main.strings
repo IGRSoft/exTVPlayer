@@ -34,3 +34,6 @@
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "wsG-AE-RRN"; */
 "wsG-AE-RRN.title" = "Настройки";
+
+/* Class = "UILabel"; */
+"Xtf-bC-Jfa.text" = "Удалять проигранные сохраненные треки:";

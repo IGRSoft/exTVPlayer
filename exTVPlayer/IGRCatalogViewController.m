@@ -100,12 +100,12 @@ UIGestureRecognizerDelegate>
 		[self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
 		
 		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationBar
-															  attribute:NSLayoutAttributeTop
-															  relatedBy:NSLayoutRelationEqual
-																 toItem:self.navigationView
-															  attribute:NSLayoutAttributeTop
-															 multiplier:1.0
-															   constant:0.0]];
+																		attribute:NSLayoutAttributeTop
+																		relatedBy:NSLayoutRelationEqual
+																		   toItem:self.navigationView
+																		attribute:NSLayoutAttributeTop
+																	   multiplier:1.0
+																		 constant:0.0]];
 		[self.navigationView addConstraint:[NSLayoutConstraint constraintWithItem:self.navigationView
 																		attribute:NSLayoutAttributeBottom
 																		relatedBy:NSLayoutRelationEqual
@@ -152,7 +152,7 @@ UIGestureRecognizerDelegate>
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
 	}
-
+	
 #if	TARGET_OS_TV
 	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
 										  initWithTarget:self action:@selector(handleLongPress:)];
@@ -162,7 +162,7 @@ UIGestureRecognizerDelegate>
 #endif
 	
 	[self.tableView reloadData];
-
+	
 #if	TARGET_OS_IOS
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:(self.catalog.latestViewedTrack).integerValue];
 	IGRExItemCell *trackCell = (IGRExItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -366,30 +366,30 @@ UIGestureRecognizerDelegate>
 	__weak typeof(self) weak = self;
 	IGRExItemCell *trackCell = (IGRExItemCell *)[tableView cellForRowAtIndexPath:indexPath];
 	UITableViewRowAction *actionSaveTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-																		  title:NSLocalizedString(@"Save Track", @"")
-																		handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-	{
-		[weak.tableView setEditing:NO animated:YES];
-		[weak startDownloadTrack:track
-						withCell:trackCell
-					  onPosition:indexPath];
-	}];
+																			   title:NSLocalizedString(@"Save Track", @"")
+																			 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+											 {
+												 [weak.tableView setEditing:NO animated:YES];
+												 [weak startDownloadTrack:track
+																 withCell:trackCell
+															   onPosition:indexPath];
+											 }];
 	
 	UITableViewRowAction *actionCancelDownload = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
 																					title:NSLocalizedString(@"Cancel Download", @"")
 																				  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-	{
-		[weak.tableView setEditing:NO animated:YES];
-		[weak cancelDownloadTrack:track onPosition:indexPath];
-	}];
+												  {
+													  [weak.tableView setEditing:NO animated:YES];
+													  [weak cancelDownloadTrack:track onPosition:indexPath];
+												  }];
 	
 	UITableViewRowAction *actionRemoveDownloadedTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
 																						   title:NSLocalizedString(@"Remove Track", @"")
 																						 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-	{
-		[weak.tableView setEditing:NO animated:YES];
-		[weak removeSavedTrack:track onPosition:indexPath];
-	}];
+														 {
+															 [weak.tableView setEditing:NO animated:YES];
+															 [weak removeSavedTrack:track onPosition:indexPath];
+														 }];
 	
 	actionSaveTrack.backgroundColor = IGR_LIGHTBLUECOLOR;
 	actionCancelDownload.backgroundColor = IGR_LIGHTBLUECOLOR;
@@ -466,42 +466,88 @@ UIGestureRecognizerDelegate>
 				{
 					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Save Track", @"")
 													  style:UIAlertActionStyleDefault
-													handler:^(UIAlertAction * action) {
-														
-														[weak startDownloadTrack:track
-																		withCell:trackCell
-																	  onPosition:weakIndexPath];
-														
-														[view dismissViewControllerAnimated:YES completion:nil];
-														
-													}];
+													handler:^(UIAlertAction * action)
+							  {
+								  
+								  [weak startDownloadTrack:track
+												  withCell:trackCell
+												onPosition:weakIndexPath];
+								  
+								  [view dismissViewControllerAnimated:YES completion:nil];
+								  
+							  }];
 				}
 				else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
 				{
 					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel Download", @"")
 													  style:UIAlertActionStyleDefault
-													handler:^(UIAlertAction * action) {
-														
-														[weak cancelDownloadTrack:track onPosition:weakIndexPath];
-														
-														[view dismissViewControllerAnimated:YES completion:nil];
-														
-													}];
+													handler:^(UIAlertAction * action)
+							  {
+								  
+								  [weak cancelDownloadTrack:track onPosition:weakIndexPath];
+								  
+								  [view dismissViewControllerAnimated:YES completion:nil];
+								  
+							  }];
 				}
 				else
 				{
 					action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove Track", @"")
 													  style:UIAlertActionStyleDefault
-													handler:^(UIAlertAction * action) {
+													handler:^(UIAlertAction * action)
+							  {
+								  
+								  [weak removeSavedTrack:track onPosition:weakIndexPath];
+								  
+								  [view dismissViewControllerAnimated:YES completion:nil];
+								  
+							  }];
+				}
+				
+				[view addAction:action];
+				
+				UIAlertAction *markPlayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark sa Played", @"")
+																			style:UIAlertActionStyleDefault
+																		  handler:^(UIAlertAction * action)
+													{
 														
-														[weak removeSavedTrack:track onPosition:weakIndexPath];
+														track.status = @(IGRTrackState_Done);
+														track.position = @0;
+														
+														[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 														
 														[view dismissViewControllerAnimated:YES completion:nil];
 														
 													}];
-				}
 				
-				[view addAction:action];
+				UIAlertAction *markUnplayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark sa Unplayed", @"")
+																		   style:UIAlertActionStyleDefault
+																		 handler:^(UIAlertAction * action)
+													  {
+														  
+														  track.status = @(IGRTrackState_New);
+														  track.position = @0;
+														  
+														  [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+														  
+														  [view dismissViewControllerAnimated:YES completion:nil];
+														  
+													  }];
+				
+				switch (track.status.integerValue)
+				{
+					case IGRTrackState_New:
+						[view addAction:markPlayedAction];
+						break;
+						
+					case IGRTrackState_Half:
+						[view addAction:markPlayedAction];
+						[view addAction:markUnplayedAction];
+						break;
+					case IGRTrackState_Done:
+						[view addAction:markUnplayedAction];
+						break;
+				}
 				
 				UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"")
 																 style:UIAlertActionStyleCancel
@@ -521,7 +567,7 @@ UIGestureRecognizerDelegate>
 					[trackCell setHighlighted:NO];
 #endif
 				});
-
+				
 				break;
 			}
 			else

@@ -15,11 +15,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *sourceButton;
 @property (weak, nonatomic) IBOutlet UIButton *languageCategoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *historySizeButton;
+@property (weak, nonatomic) IBOutlet UIButton *removePlayedSavedTracksButton;
 
 @property (strong, nonatomic) NSArray *sources;
 @property (strong, nonatomic) NSArray *languagesCategory;
 @property (strong, nonatomic) NSArray *caches;
 @property (strong, nonatomic) NSArray *history;
+@property (strong, nonatomic) NSArray *savedTrackOptions;
 
 @end
 
@@ -27,7 +29,8 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 {
 	IGRSettingsType_Source	= 0,
 	IGRSettingsType_LanguageCategory,
-	IGRSettingsType_History
+	IGRSettingsType_History,
+	IGRSettingsType_RemovePlayedSavedTracks
 };
 
 @implementation IGRSettingsViewController
@@ -54,11 +57,17 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 					 @{@"value": @(IGRHistorySize_50),	@"name": @(IGRHistorySize_50).stringValue}
 					];
 	
+	self.savedTrackOptions = @[
+					 @{@"value": @YES,	@"name": NSLocalizedString(@"YES", nil)},
+					 @{@"value": @NO,	@"name": NSLocalizedString(@"NO", nil)}
+					 ];
+	
 	[super viewDidLoad];
 	
 	[self updateViewForSettings:IGRSettingsType_Source from:self.sourceButton];
 	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:self.languageCategoryButton];
 	[self updateViewForSettings:IGRSettingsType_History from:self.historySizeButton];
+	[self updateViewForSettings:IGRSettingsType_RemovePlayedSavedTracks from:self.removePlayedSavedTracksButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -98,6 +107,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settingsData = self.history;
 		}
 			break;
+		case IGRSettingsType_RemovePlayedSavedTracks:
+		{
+			settingsId = settings.removPlayedSavedTracks;
+			settingsData = self.savedTrackOptions;
+		}
+			break;
 	}
 	
 	NSUInteger pos = [settingsData indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -129,6 +144,11 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settings.historySize = newSettings[@"value"];
 		}
 			break;
+		case IGRSettingsType_RemovePlayedSavedTracks:
+		{
+			settings.removPlayedSavedTracks = newSettings[@"value"];
+		}
+			break;
 	}
 	
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
@@ -158,6 +178,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 		{
 			settingsId = settings.historySize;
 			settingsData = self.history;
+		}
+			break;
+		case IGRSettingsType_RemovePlayedSavedTracks:
+		{
+			settingsId = settings.removPlayedSavedTracks;
+			settingsData = self.savedTrackOptions;
 		}
 			break;
 	}
@@ -199,6 +225,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	{
 		[IGRSettingsViewController removeSavedTrack:track];
 	}
+}
+
+- (IBAction)onRemovePlayedSavedTracks:(id)sender
+{
+	[self updateSettingsFor:IGRSettingsType_RemovePlayedSavedTracks];
+	[self updateViewForSettings:IGRSettingsType_RemovePlayedSavedTracks from:sender];
 }
 
 + (void)removeSavedTrack:(IGREntityExTrack *)aTrack

@@ -40,3 +40,6 @@
 
 /* Class = "UIButton"; */
 "4cF-Tf-yT8.normalTitle" = "Очистити";
+
+/* Class = "UILabel"; */
+"Vew-up-fRn.text" = "Видалит проігранні збережені треки:";

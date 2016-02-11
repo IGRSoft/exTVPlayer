@@ -2,7 +2,7 @@
 //  IGREntityAppSettings+CoreDataProperties.m
 //  exTVPlayer
 //
-//  Created by Vitalii Parovishnyk on 1/27/16.
+//  Created by Vitalii Parovishnyk on 2/11/16.
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,5 +17,6 @@
 @dynamic lastPlayedCatalog;
 @dynamic sourceType;
 @dynamic videoLanguageId;
+@dynamic removPlayedSavedTracks;
 
 @end

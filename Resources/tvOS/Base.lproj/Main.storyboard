@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCl-Mt-BxA">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCl-Mt-BxA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Catalogs-->
@@ -428,6 +428,24 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6f-hg-bjs">
+                                <rect key="frame" x="982" y="617" width="400" height="86"/>
+                                <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="YES"/>
+                                <state key="focused">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCleenAllSavedTracks:" destination="VoP-1A-waA" eventType="primaryActionTriggered" id="A1m-dQ-I6I"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remove Played Saved Tracks:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vew-up-fRn">
+                                <rect key="frame" x="20" y="617" width="921" height="86"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.94954605670000003" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -435,6 +453,7 @@
                     <connections>
                         <outlet property="historySizeButton" destination="c7S-sO-oe9" id="yPU-11-Bvk"/>
                         <outlet property="languageCategoryButton" destination="5zU-Zk-16A" id="ngo-mh-0rD"/>
+                        <outlet property="removePlayedSavedTracksButton" destination="Y6f-hg-bjs" id="QWr-6T-A8e"/>
                         <outlet property="sourceButton" destination="0Ep-W2-r7G" id="Ngl-NM-DXY"/>
                     </connections>
                 </viewController>
@@ -620,6 +639,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Q3-pp-UYR"/>
-        <segue reference="aUR-Ax-IOr"/>
+        <segue reference="stc-s6-1Oz"/>
     </inferredMetricsTieBreakers>
 </document>
