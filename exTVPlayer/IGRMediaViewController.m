@@ -180,6 +180,9 @@
 	Float64 lastPosition = MAX(0, self.currentTrack.position.floatValue - 10.0); //run back 10 sec
 	CMTime time = CMTimeMakeWithSeconds(lastPosition, 1);
 	[self.player seekToTime:time];
+	
+	//self.showsPlaybackControls = NO;
+	
 }
 
 - (void)closePlayback
