@@ -182,7 +182,6 @@
 	[self.player seekToTime:time];
 	
 	//self.showsPlaybackControls = NO;
-	
 }
 
 - (void)closePlayback
