@@ -7,6 +7,8 @@
 //
 
 #import "IGREXParser.h"
+#import "IGRCountryParser.h"
+
 #import <Ono/Ono.h>
 #import <AFNetworking/AFNetworking.h>
 
@@ -14,7 +16,6 @@
 #import "IGREntityExChanel.h"
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
-#import "IGREntityAppSettings.h"
 
 #if (PROXY_ENABLED)
 #import <CFNetwork/CFNetwork.h>
@@ -58,8 +59,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 {
 #if (APP_STORE)
 	{
-		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
-		if ([settings.videoLanguageId isEqualToNumber:@(IGRVideoCategory_Ukr)])
+		if ([IGRCountryParser currentCountry] == IGRVideoCategory_Ukr)
 		{
 			_isLocked = NO;
 		}

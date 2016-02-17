@@ -54,6 +54,8 @@
 		A51F3BF91C23223900F6080A /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCD1C23223900F6080A /* SQLiteMagicalRecordStack.m */; };
 		A51F3BFA1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */; };
 		A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
+		A53A17C81C74D23C0005898D /* IGRCountryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A53A17C71C74D23C0005898D /* IGRCountryParser.m */; };
+		A53A17C91C74D23C0005898D /* IGRCountryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A53A17C71C74D23C0005898D /* IGRCountryParser.m */; };
 		A55901F31C60D64C007D49E4 /* SDiOSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = A55901C41C60D64C007D49E4 /* SDiOSVersion.m */; };
 		A560A45D1C57D2820027D064 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45C1C57D2820027D064 /* AVKit.framework */; };
 		A560A45F1C57D2900027D064 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45E1C57D2900027D064 /* CFNetwork.framework */; };
@@ -504,6 +506,8 @@
 		A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteWithSavingContextMagicalRecordStack.m; sourceTree = "<group>"; };
 		A51F3BFB1C23245000F6080A /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
+		A53A17C61C74D23C0005898D /* IGRCountryParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCountryParser.h; sourceTree = "<group>"; };
+		A53A17C71C74D23C0005898D /* IGRCountryParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCountryParser.m; sourceTree = "<group>"; };
 		A55901C31C60D64C007D49E4 /* SDiOSVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDiOSVersion.h; path = SDVersion/SDiOSVersion/SDiOSVersion.h; sourceTree = "<group>"; };
 		A55901C41C60D64C007D49E4 /* SDiOSVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDiOSVersion.m; path = SDVersion/SDiOSVersion/SDiOSVersion.m; sourceTree = "<group>"; };
 		A560A45C1C57D2820027D064 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -680,6 +684,8 @@
 			children = (
 				A51F385F1C22F2FA00F6080A /* IGREXParser.h */,
 				A51F38601C22F2FA00F6080A /* IGREXParser.m */,
+				A53A17C61C74D23C0005898D /* IGRCountryParser.h */,
+				A53A17C71C74D23C0005898D /* IGRCountryParser.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1477,6 +1483,7 @@
 				A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
 				A5654E3B1C5964940000D882 /* IGRBaseViewController.m in Sources */,
 				A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */,
+				A53A17C91C74D23C0005898D /* IGRCountryParser.m in Sources */,
 				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
 				A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */,
@@ -1563,6 +1570,7 @@
 				A569ED621C257CA7004EF247 /* NSManagedObject+MRExtensions.m in Sources */,
 				A51F3BF11C23223900F6080A /* AutoMigratingMagicalRecordStack.m in Sources */,
 				A51F3BEF1C23223900F6080A /* MagicalRecordInternal.m in Sources */,
+				A53A17C81C74D23C0005898D /* IGRCountryParser.m in Sources */,
 				A51F3BE51C23223900F6080A /* NSPersistentStoreCoordinator+MagicalManualMigrations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
