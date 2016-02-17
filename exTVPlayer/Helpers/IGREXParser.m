@@ -20,9 +20,6 @@
 #import <CFNetwork/CFNetwork.h>
 #endif
 
-#import <ifaddrs.h>
-#import <arpa/inet.h>
-
 static const NSInteger kUpdatedLimitMinutes = 1;
 static BOOL _isLocked = NO;
 
