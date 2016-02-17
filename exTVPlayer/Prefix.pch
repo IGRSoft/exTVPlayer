@@ -18,6 +18,8 @@
 #import <MagicalRecord/MagicalRecord.h>
 #endif
 
+#define APP_STORE 0
+
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
 
 #define IGR_LIGHTBLUECOLOR [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000]
