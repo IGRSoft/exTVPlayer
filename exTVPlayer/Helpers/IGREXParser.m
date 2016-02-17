@@ -58,7 +58,15 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 {
 #if (APP_STORE)
 	{
-		_isLocked = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
+		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+		if ([settings.videoLanguageId isEqualToNumber:@(IGRVideoCategory_Ukr)])
+		{
+			_isLocked = NO;
+		}
+		else
+		{
+			_isLocked = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
+		}
 	}
 #else
 	{
