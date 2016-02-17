@@ -18,7 +18,7 @@
 #import <MagicalRecord/MagicalRecord.h>
 #endif
 
-#define APP_STORE 1
+#define APP_STORE 0
 
 #define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
 
