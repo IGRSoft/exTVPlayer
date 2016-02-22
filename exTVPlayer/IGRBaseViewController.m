@@ -27,7 +27,15 @@
 		settings.historySize			= @(IGRHistorySize_10);
 		settings.sourceType				= @(IGRSourceType_RSS);
 		settings.removPlayedSavedTracks	= @(YES);
+		settings.seekBack				= @(IGRSeekBack_10);
 		
+		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	}
+	
+	// migration to v2
+	if (settings.seekBack == nil)
+	{
+		settings.seekBack	= @(IGRSeekBack_10);
 		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	}
 	

@@ -80,6 +80,16 @@ typedef NS_ENUM(NSUInteger, IGRChanelMode)
 	IGRChanelMode_Search
 };
 
+typedef NS_ENUM(NSUInteger, IGRSeekBack)
+{
+	IGRSeekBack_0		= 0,
+	IGRSeekBack_5		= 5,
+	IGRSeekBack_10		= 10,
+	IGRSeekBack_15		= 15,
+	IGRSeekBack_30		= 30,
+	IGRSeekBack_60		= 60,
+};
+
 static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
 static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";
 

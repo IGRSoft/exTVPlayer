@@ -16,9 +16,11 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
+static CGFloat const kSeekDelay = 0.1;
 
-@property (strong, nonatomic) IBOutlet UIView *gestureView;
+static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControllerContext;
+
+@interface IGRMediaViewController () <UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray *tracks;
 @property (strong, nonatomic) NSArray *playlist;
@@ -29,6 +31,11 @@
 
 @property (assign, nonatomic) BOOL needResumeVideo;
 @property (assign, nonatomic) BOOL isPlaying;
+@property (assign, nonatomic) BOOL isReadyToPlay;
+
+@property (strong, nonatomic) NSDate *seekStartTime;
+@property (assign, nonatomic) Float64 seekStartPosition;
+@property (assign, nonatomic) NSInteger seekCount;
 
 @end
 
@@ -44,6 +51,9 @@
 	[super viewDidAppear:animated];
 	
 	AVPlayer *player = [[AVPlayer alloc] init];
+#if	TARGET_OS_IOS
+	player.allowsExternalPlayback = YES;
+#endif
 	self.delegate = self;
 	self.player = player;
 	
@@ -70,6 +80,17 @@
 					  selector:@selector(itemFailedToPlayToEnd:)
 						  name:AVPlayerItemFailedToPlayToEndTimeNotification
 						object:nil];
+
+#if	TARGET_OS_IOS
+	[defaultCenter addObserver:self
+					  selector:@selector(itemTimeJumped:)
+						  name:AVPlayerItemTimeJumpedNotification
+						object:nil];
+#endif
+	
+	self.seekStartTime = nil;
+	self.seekCount = 0;
+	self.seekStartPosition = 0;
 	
 	[self playCurrentTrack];
 }
@@ -91,6 +112,9 @@
 	
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	
+	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
+	[self removePlayerItemObservers:item];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,6 +164,9 @@
 {
 	if ((self.currentTrackPosition + 1) < self.playlist.count)
 	{
+		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
+		[self removePlayerItemObservers:item];
+		
 		++self.currentTrackPosition;
 		[self playCurrentTrack];
 	}
@@ -153,6 +180,9 @@
 {
 	if ((self.currentTrackPosition - 1) >= 0)
 	{
+		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
+		[self removePlayerItemObservers:item];
+		
 		--self.currentTrackPosition;
 		[self playCurrentTrack];
 	}
@@ -173,15 +203,14 @@
 {
 	[self updatePlaylist];
 	
+	self.isReadyToPlay = NO;
+	self.showsPlaybackControls = NO;
+	
 	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
+	[self addPlayerItemObservers:item];
+	
 	[self.player replaceCurrentItemWithPlayerItem:item];
 	[self.player play];
-	
-	Float64 lastPosition = MAX(0, self.currentTrack.position.floatValue - 10.0); //run back 10 sec
-	CMTime time = CMTimeMakeWithSeconds(lastPosition, 1);
-	[self.player seekToTime:time];
-	
-	//self.showsPlaybackControls = NO;
 }
 
 - (void)closePlayback
@@ -210,8 +239,6 @@
 		[weak.player pause];
 		Float64 currentTime = CMTimeGetSeconds(weak.player.currentTime);
 		weak.currentTrack.position = @(currentTime);
-		
-		[weak.gestureView becomeFirstResponder];
 	};
 
 	if (press.type == UIPressTypeLeftArrow)
@@ -242,7 +269,7 @@
 
 #pragma mark - NSNotificationCenter
 
-- (void)itemDidPlayToEndTime:(NSNotification*)nstification
+- (void)itemDidPlayToEndTime:(NSNotification*)aNotification
 {
 	self.currentTrack.status = @(IGRTrackState_Done);
 	self.currentTrack.position = @(0.0);
@@ -252,9 +279,56 @@
 	[self playNextTrack:nil];
 }
 
-- (void)itemFailedToPlayToEnd:(NSNotification*)nstification
+- (void)itemFailedToPlayToEnd:(NSNotification*)aNotification
 {
 	[self playNextTrack:nil];
+}
+
+- (void)itemTimeJumped:(NSNotification*)aNotification
+{
+	if (!self.isReadyToPlay)
+	{
+		return;
+	}
+	
+	++self.seekCount;
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(tryPlayNext) object:nil];
+	
+	if (self.seekStartTime == nil)
+	{
+		self.seekStartPosition = CMTimeGetSeconds(self.player.currentTime);
+		self.seekStartTime = [NSDate date];
+	}
+	
+	[self performSelector:@selector(tryPlayNext) withObject:nil afterDelay:kSeekDelay];
+}
+
+- (void)tryPlayNext
+{
+	NSDate *currentTime = [NSDate date];
+	NSTimeInterval executionTime = [currentTime timeIntervalSinceDate:self.seekStartTime];
+	executionTime -= kSeekDelay;
+	
+	if (executionTime < kSeekDelay && self.seekCount > 1 /*need ignore pause/resume */)
+	{
+		Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
+		
+		if (currentTime - self.seekStartPosition > 0)
+		{
+			[self playNextTrack:nil];
+			NSLog(@"playNextTrack");
+		}
+		else if (currentTime - self.seekStartPosition < 0)
+		{
+			[self playPreviousTrack:nil];
+			NSLog(@"playPreviousTrack");
+		}
+	}
+	
+	self.seekStartTime = nil;
+	self.seekCount = 0;
+	self.seekStartPosition = 0;
 }
 
 #if	TARGET_OS_TV
@@ -272,5 +346,93 @@
 	}
 }
 #endif
+
+#pragma mark - Observer Response
+
+- (void)addPlayerItemObservers:(AVPlayerItem *)playerItem
+{
+	[playerItem addObserver:self
+				 forKeyPath:NSStringFromSelector(@selector(status))
+					options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+					context:IGRMediaViewControllerContext];
+}
+
+- (void)removePlayerItemObservers:(AVPlayerItem *)playerItem
+{
+	[playerItem cancelPendingSeeks];
+	
+	@try
+	{
+		[playerItem removeObserver:self
+						forKeyPath:NSStringFromSelector(@selector(status))
+						   context:IGRMediaViewControllerContext];
+	}
+	@catch (NSException *exception)
+	{
+		NSLog(@"Exception removing observer: %@", exception);
+	}
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary *)change
+					   context:(void *)context
+{
+	if (context == IGRMediaViewControllerContext)
+	{
+		AVPlayerStatus newStatus = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+		AVPlayerStatus oldStatus = [[change objectForKey:NSKeyValueChangeOldKey] integerValue];
+		
+		if (newStatus != oldStatus)
+		{
+			switch (newStatus)
+			{
+				case AVPlayerItemStatusUnknown:
+				{
+					NSLog(@"Video player Status Unknown");
+					break;
+				}
+				case AVPlayerItemStatusReadyToPlay:
+				{
+					IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+					Float64 lastPosition = MAX(0.0, self.currentTrack.position.floatValue - settings.seekBack.floatValue);
+					
+					__weak typeof(self) weak = self;
+					void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
+						
+						weak.showsPlaybackControls = YES;
+						
+						dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+							
+							weak.isReadyToPlay = YES;
+						});
+					};
+					
+					if (lastPosition > 0.0)
+					{
+						CMTime time = CMTimeMakeWithSeconds(lastPosition, 1);
+						
+						[self.player seekToTime:time completionHandler:seekCompletionHandler];
+					}
+					else
+					{
+						seekCompletionHandler(YES);
+					}
+					
+					break;
+				}
+				case AVPlayerItemStatusFailed:
+				{
+					NSLog(@"Video player Status Failed: player item error = %@", self.player.currentItem.error);
+					NSLog(@"Video player Status Failed: player error = %@", self.player.error);
+					
+					[self closePlayback];
+					
+					break;
+				}
+			}
+		}
+	}
+}
 
 @end

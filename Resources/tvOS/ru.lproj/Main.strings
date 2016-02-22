@@ -43,3 +43,6 @@
 
 /* Class = "UILabel"; */
 "Vew-up-fRn.text" = "Удалять проигранные сохраненные треки:";
+
+/* Class = "UILabel"; */
+"tvo-oY-ymg.text" = "Отматывать трек назад на:";

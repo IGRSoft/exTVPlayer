@@ -16,12 +16,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *languageCategoryButton;
 @property (weak, nonatomic) IBOutlet UIButton *historySizeButton;
 @property (weak, nonatomic) IBOutlet UIButton *removePlayedSavedTracksButton;
+@property (weak, nonatomic) IBOutlet UIButton *seekBackButton;
 
 @property (strong, nonatomic) NSArray *sources;
 @property (strong, nonatomic) NSArray *languagesCategory;
 @property (strong, nonatomic) NSArray *caches;
 @property (strong, nonatomic) NSArray *history;
 @property (strong, nonatomic) NSArray *savedTrackOptions;
+@property (strong, nonatomic) NSArray *seekBack;
 
 @end
 
@@ -30,7 +32,8 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	IGRSettingsType_Source	= 0,
 	IGRSettingsType_LanguageCategory,
 	IGRSettingsType_History,
-	IGRSettingsType_RemovePlayedSavedTracks
+	IGRSettingsType_RemovePlayedSavedTracks,
+	IGRSettingsType_SeekBack
 };
 
 @implementation IGRSettingsViewController
@@ -62,12 +65,27 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 					 @{@"value": @NO,	@"name": NSLocalizedString(@"NO", nil)}
 					 ];
 	
+	self.seekBack = @[@{@"value": @(IGRSeekBack_0),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_0), NSLocalizedString(@"Sec", nil)]},
+					  @{@"value": @(IGRSeekBack_5),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_5), NSLocalizedString(@"Sec", nil)]},
+					  @{@"value": @(IGRSeekBack_10),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_10), NSLocalizedString(@"Sec", nil)]},
+					  @{@"value": @(IGRSeekBack_15),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_15), NSLocalizedString(@"Sec", nil)]},
+					  @{@"value": @(IGRSeekBack_30),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_30), NSLocalizedString(@"Sec", nil)]},
+					  @{@"value": @(IGRSeekBack_60),
+						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_60), NSLocalizedString(@"Sec", nil)]},
+					 ];
+	
 	[super viewDidLoad];
 	
 	[self updateViewForSettings:IGRSettingsType_Source from:self.sourceButton];
 	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:self.languageCategoryButton];
 	[self updateViewForSettings:IGRSettingsType_History from:self.historySizeButton];
 	[self updateViewForSettings:IGRSettingsType_RemovePlayedSavedTracks from:self.removePlayedSavedTracksButton];
+	[self updateViewForSettings:IGRSettingsType_SeekBack from:self.seekBackButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,6 +131,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settingsData = self.savedTrackOptions;
 		}
 			break;
+		case IGRSettingsType_SeekBack:
+		{
+			settingsId = settings.seekBack;
+			settingsData = self.seekBack;
+		}
+			break;
 	}
 	
 	NSUInteger pos = [settingsData indexOfObjectPassingTest:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -147,6 +171,11 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 		case IGRSettingsType_RemovePlayedSavedTracks:
 		{
 			settings.removPlayedSavedTracks = newSettings[@"value"];
+		}
+			break;
+		case IGRSettingsType_SeekBack:
+		{
+			settings.seekBack = newSettings[@"value"];
 		}
 			break;
 	}
@@ -186,6 +215,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			settingsData = self.savedTrackOptions;
 		}
 			break;
+		case IGRSettingsType_SeekBack:
+		{
+			settingsId = settings.seekBack;
+			settingsData = self.seekBack;
+		}
+			break;
 	}
 	
 	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary * _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
@@ -214,6 +249,12 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 {
 	[self updateSettingsFor:IGRSettingsType_History];
 	[self updateViewForSettings:IGRSettingsType_History from:sender];
+}
+
+- (IBAction)onChangeSeekBack:(id)sender
+{
+	[self updateSettingsFor:IGRSettingsType_SeekBack];
+	[self updateViewForSettings:IGRSettingsType_SeekBack from:sender];
 }
 
 - (IBAction)onCleenAllSavedTracks:(id)sender

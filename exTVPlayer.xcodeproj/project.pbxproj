@@ -403,6 +403,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "exTVPlayer-2.xcdatamodel"; sourceTree = "<group>"; };
 		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
 		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
 		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
@@ -1876,9 +1877,10 @@
 		A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */,
 				A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */,
 			);
-			currentVersion = A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */;
+			currentVersion = A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */;
 			name = exTVPlayer.xcdatamodeld;
 			path = ../../Resources/exTVPlayer.xcdatamodeld;
 			sourceTree = "<group>";
