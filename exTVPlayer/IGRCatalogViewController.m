@@ -51,13 +51,17 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 - (void)setCatalogId:(NSString *)aCatalogId
 {
 	_catalogId = aCatalogId;
+	[self.tableView reloadData];
+	
 	__weak typeof(self) weak = self;
 	[IGREXParser parseCatalogContent:aCatalogId
 					  compleateBlock:^(NSArray *items) {
 						  
-						  self.catalog = [IGREntityExCatalog MR_findFirstByAttribute:@"itemId"
-																		   withValue:_catalogId];
-						  [weak.fetchedResultsController performFetch:nil];
+						  weak.catalog = [items firstObject];
+						  if (_fetchedResultsController)
+						  {
+							  [weak.fetchedResultsController performFetch:nil];
+						  }
 					  }];
 	
 	self.catalog.viewedTimestamp = [NSDate date];
@@ -435,7 +439,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-	if (_fetchedResultsController == nil)
+	if (_fetchedResultsController == nil && self.catalogId.length)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"catalog.itemId == %@", self.catalogId];
 		_fetchedResultsController = [IGREntityExTrack MR_fetchAllGroupedBy:@"orderId"

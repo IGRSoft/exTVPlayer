@@ -1,5 +1,5 @@
 //
-//  IGREXCatalogHistoryItem.h
+//  IGREXCatalogTopShelfItem.h
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 2/23/16.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IGREXCatalogHistoryItem : NSObject
+@interface IGREXCatalogTopShelfItem : NSObject
 
 @property (nonatomic, copy) NSString *itemId;
 @property (nonatomic, copy) NSString *name;

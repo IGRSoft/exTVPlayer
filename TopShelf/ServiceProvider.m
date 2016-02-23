@@ -8,7 +8,7 @@
 
 #import "ServiceProvider.h"
 #import "IGRUserDefaults.h"
-#import "IGREXCatalogHistoryItem.h"
+#import "IGREXCatalogTopShelfItem.h"
 @import TVServices;
 
 typedef void (^TVContentItemCompletionBlock)(NSArray *contentItems, NSError *error);
@@ -62,33 +62,17 @@ typedef void (^TVContentItemCompletionBlock)(NSArray *contentItems, NSError *err
 		
 		self.userSettings = [[IGRUserDefaults alloc] init];
 		
-		NSArray *history = self.userSettings.history;
-		
-		TVContentIdentifier *sectionID = [[TVContentIdentifier alloc] initWithIdentifier:@"com.igrsoft.exTVPlayer.history" container:nil];
+		TVContentItem *favorites = [self sectionFromIdentifier:@"Favorites" withItems:self.userSettings.favorites];
+		TVContentItem *history = [self sectionFromIdentifier:@"History" withItems:self.userSettings.history];
 
-		NSArray *contentItems = @[];
-		NSMutableArray *tmpContentItems = [[NSMutableArray alloc] initWithCapacity:history.count];
-		for (NSData *itemData in history)
+		NSMutableArray *contentItems = [[NSMutableArray alloc] initWithCapacity:2];
+		if (favorites)
 		{
-			IGREXCatalogHistoryItem *item = [NSKeyedUnarchiver unarchiveObjectWithData:itemData];
-			
-			TVContentIdentifier *contentID = [[TVContentIdentifier alloc] initWithIdentifier:item.itemId container:nil];
-			TVContentItem *contentItem = [[TVContentItem alloc] initWithContentIdentifier:contentID];
-			contentItem.imageURL = [NSURL URLWithString:item.imgUrl];
-			contentItem.title = item.name;
-			contentItem.displayURL = [self urlItemId:item.itemId];
-			contentItem.imageShape = TVContentItemImageShapePoster;
-			
-			[tmpContentItems addObject:contentItem];
+			[contentItems addObject:favorites];
 		}
-		
-		if (tmpContentItems.count > 0)
+		if (history)
 		{
-			TVContentItem *sectionItem = [[TVContentItem alloc] initWithContentIdentifier:sectionID];
-			sectionItem.topShelfItems = tmpContentItems;
-			sectionItem.title = @"History";
-			
-			contentItems = @[sectionItem];
+			[contentItems addObject:history];
 		}
 		
 		if (completionBlock)
@@ -96,6 +80,37 @@ typedef void (^TVContentItemCompletionBlock)(NSArray *contentItems, NSError *err
 			completionBlock(contentItems, nil);
 		}
 	});
+}
+
+- (TVContentItem *)sectionFromIdentifier:(NSString *)anIdentifier withItems:(NSArray *)anItems
+{
+	NSMutableArray *tmpContentItems = [[NSMutableArray alloc] initWithCapacity:anItems.count];
+	for (NSData *itemData in anItems)
+	{
+		IGREXCatalogTopShelfItem *item = [NSKeyedUnarchiver unarchiveObjectWithData:itemData];
+		
+		TVContentIdentifier *contentID = [[TVContentIdentifier alloc] initWithIdentifier:item.itemId container:nil];
+		TVContentItem *contentItem = [[TVContentItem alloc] initWithContentIdentifier:contentID];
+		contentItem.imageURL = [NSURL URLWithString:item.imgUrl];
+		contentItem.title = item.name;
+		contentItem.displayURL = [self urlItemId:item.itemId];
+		contentItem.imageShape = TVContentItemImageShapePoster;
+		
+		[tmpContentItems addObject:contentItem];
+	}
+	
+	TVContentItem *sectionItem = nil;
+	
+	if (tmpContentItems.count > 0)
+	{
+		NSString *identifier = [NSString stringWithFormat:@"com.igrsoft.exTVPlayer.%@", anIdentifier];
+		TVContentIdentifier *sectionID = [[TVContentIdentifier alloc] initWithIdentifier:identifier container:nil];
+		sectionItem = [[TVContentItem alloc] initWithContentIdentifier:sectionID];
+		sectionItem.topShelfItems = tmpContentItems;
+		sectionItem.title = NSLocalizedString(anIdentifier, @"");
+	}
+
+	return sectionItem;
 }
 
 - (NSURL *)urlItemId:(NSString *)anItemId

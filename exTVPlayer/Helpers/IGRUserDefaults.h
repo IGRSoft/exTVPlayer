@@ -11,6 +11,7 @@
 @interface IGRUserDefaults : NSObject
 
 @property (nonatomic, strong) NSArray *history;
+@property (nonatomic, strong) NSArray *favorites;
 
 - (void)loadUserSettings;
 - (void)saveUserSettings;

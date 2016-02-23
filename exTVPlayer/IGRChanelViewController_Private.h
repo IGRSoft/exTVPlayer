@@ -6,7 +6,7 @@
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 
-@interface IGRCChanelViewController ()
+@interface IGRChanelViewController ()
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 

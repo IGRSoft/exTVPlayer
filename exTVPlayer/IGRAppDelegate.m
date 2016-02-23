@@ -9,9 +9,9 @@
 #import "IGRAppDelegate.h"
 #import "IGREntityExTrack.h"
 #import "IGREntityExCatalog.h"
-#import "IGREXCatalogHistoryItem.h"
+#import "IGREXCatalogTopShelfItem.h"
 #import "IGRUserDefaults.h"
-#import "IGRCChanelViewController.h"
+#import "IGRChanelViewController.h"
 
 @interface IGRAppDelegate ()
 
@@ -40,23 +40,44 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+	if (MR_DEFAULT_CONTEXT.hasChanges)
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:kApplicationWillResignActive object:nil];
 	
 	NSArray *entityHistory = [IGREntityExCatalog getHistory];
 	NSMutableArray *history = [[NSMutableArray alloc] initWithCapacity:entityHistory.count];
 	
-	for (IGREntityExCatalog *historyEntity in entityHistory)
+	for (IGREntityExCatalog *catalogEntity in entityHistory)
 	{
-		IGREXCatalogHistoryItem *item = [[IGREXCatalogHistoryItem alloc] init];
-		item.itemId = historyEntity.itemId;
-		item.name = historyEntity.name;
-		item.imgUrl = historyEntity.imgUrl;
+		IGREXCatalogTopShelfItem *item = [[IGREXCatalogTopShelfItem alloc] init];
+		item.itemId = catalogEntity.itemId;
+		item.name = catalogEntity.name;
+		item.imgUrl = catalogEntity.imgUrl;
 		
 		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:item];
 		[history addObject:data];
 	}
 	
+	NSArray *entityFavorites = [IGREntityExCatalog getFavorites];
+	NSMutableArray *favorites = [[NSMutableArray alloc] initWithCapacity:entityFavorites.count];
+	
+	for (IGREntityExCatalog *catalogEntity in entityFavorites)
+	{
+		IGREXCatalogTopShelfItem *item = [[IGREXCatalogTopShelfItem alloc] init];
+		item.itemId = catalogEntity.itemId;
+		item.name = catalogEntity.name;
+		item.imgUrl = catalogEntity.imgUrl;
+		
+		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:item];
+		[favorites addObject:data];
+	}
+	
 	self.userSettings.history = history;
+	self.userSettings.favorites = favorites;
+	
 	[self.userSettings saveUserSettings];
 }
 
@@ -89,9 +110,14 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 		UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
 		[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 		
-		tabBar.selectedIndex = 3;
-		IGRCChanelViewController *chanelView = tabBar.selectedViewController;
-		[chanelView selectCatalogId:itemId];
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+		IGRChanelViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRChanelViewController"];
+		[cvc setCatalog:itemId];
+		
+		[tabBar presentViewController:cvc animated:YES completion:^{
+			
+			[cvc performSegueWithIdentifier:@"openCatalog" sender:cvc];
+		}];
 		
 		return YES;
 	}

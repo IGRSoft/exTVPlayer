@@ -7,7 +7,7 @@
 //
 
 #import "IGRSearchViewController.h"
-#import "IGRCChanelViewController.h"
+#import "IGRChanelViewController.h"
 
 @interface IGRSearchViewController () <UITextFieldDelegate>
 
@@ -53,7 +53,7 @@
 {
 	if ([segue.identifier isEqualToString:@"openSearch"])
 	{
-		IGRCChanelViewController *chanelViewController = segue.destinationViewController;
+		IGRChanelViewController *chanelViewController = segue.destinationViewController;
 		
 		NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
 		NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.searchText];

@@ -7,7 +7,7 @@
 //
 
 #import "IGRMainCatalogController.h"
-#import "IGRCChanelViewController.h"
+#import "IGRChanelViewController.h"
 
 #import "IGREXParser.h"
 #import "IGREntityExChanel.h"
@@ -124,7 +124,7 @@
 {
 	if ([segue.identifier isEqualToString:@"showChanel"])
 	{
-		IGRCChanelViewController *catalogViewController = segue.destinationViewController;
+		IGRChanelViewController *catalogViewController = segue.destinationViewController;
 		
 		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
 													  inSection:(self.chanels.indexPathsForSelectedItems.firstObject.row + self.chanels.indexPathsForSelectedItems.firstObject.section)];

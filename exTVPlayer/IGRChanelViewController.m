@@ -6,8 +6,8 @@
 //  Copyright © 2015 IGR Software. All rights reserved.
 //
 
-#import "IGRCChanelViewController.h"
-#import "IGRCChanelViewController_Private.h"
+#import "IGRChanelViewController.h"
+#import "IGRChanelViewController_Private.h"
 
 #import "IGRCatalogViewController.h"
 
@@ -24,7 +24,7 @@
 #import "SDiOSVersion.h"
 #endif
 
-@interface IGRCChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
+@interface IGRChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UILabel *noContentLabel;
 @property (strong, nonatomic) UIActivityIndicatorView *parsingActivityIndicator;
@@ -52,7 +52,7 @@
 
 @end
 
-@implementation IGRCChanelViewController
+@implementation IGRChanelViewController
 
 - (void)viewDidLoad
 {
@@ -312,23 +312,6 @@
 							 weak.chanels = [NSMutableArray arrayWithArray:items];
 							 [weak asyncUpdateFromPosition:startPosition];
 						 }];
-}
-
-- (void)selectCatalogId:(NSString *)aCatalogId
-{
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		
-		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
-			
-			obj.highlighted = NO;
-			if (obj.tag == aCatalogId.integerValue)
-			{
-				*stop = YES;
-				
-				obj.highlighted = YES;
-			}
-		}];
-	});
 }
 
 - (void)asyncUpdateFromPosition:(NSUInteger)startPosition
@@ -762,6 +745,8 @@
 				
 				entityatalog.isFavorit = @(!catalogCell.favorit);
 				catalogCell.favorit = (entityatalog.isFavorit).boolValue;
+				
+				[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 				
 				self.lastSelectedItem = indexPath;
 				

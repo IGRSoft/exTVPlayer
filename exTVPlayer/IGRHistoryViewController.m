@@ -7,7 +7,7 @@
 //
 
 #import "IGRHistoryViewController.h"
-#import "IGRCChanelViewController_Private.h"
+#import "IGRChanelViewController_Private.h"
 #import "IGREntityExCatalog.h"
 
 @interface IGRHistoryViewController ()

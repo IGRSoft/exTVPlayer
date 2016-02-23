@@ -8,7 +8,8 @@
 
 #import "IGRUserDefaults.h"
 
-static NSString *kUDHistory   = @"excataloghistory";
+static NSString *kUDHistory		= @"excataloghistory";
+static NSString *kUDFavorites   = @"excatalogfavorites";
 
 @interface IGRUserDefaults ()
 
@@ -45,11 +46,13 @@ static NSString *kUDHistory   = @"excataloghistory";
 - (void)loadUserSettings
 {
 	_history = [self.defaults objectForKey:kUDHistory];
+	_favorites = [self.defaults objectForKey:kUDFavorites];
 }
 
 - (void)saveUserSettings
 {
 	[self.defaults setObject:_history forKey:kUDHistory];
+	[self.defaults setObject:_favorites forKey:kUDFavorites];
 	
 	[self.defaults synchronize];
 }

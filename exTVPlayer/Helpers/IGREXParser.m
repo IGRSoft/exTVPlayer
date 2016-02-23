@@ -85,7 +85,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	{
 		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < kUpdatedLimitMinutes)
 		{
-			aCompleateBlock(nil);
+			aCompleateBlock(@[catalog]);
 			return; //skip update
 		}
 	}

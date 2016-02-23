@@ -1,14 +1,14 @@
 //
-//  IGREXCatalogHistoryItem.m
+//  IGREXCatalogTopShelfItem.m
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 2/23/16.
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 
-#import "IGREXCatalogHistoryItem.h"
+#import "IGREXCatalogTopShelfItem.h"
 
-@implementation IGREXCatalogHistoryItem
+@implementation IGREXCatalogTopShelfItem
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {

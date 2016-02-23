@@ -24,4 +24,12 @@
 	return [history subarrayWithRange:NSMakeRange(0, count)];
 }
 
++ (NSArray *)getFavorites
+{
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
+	NSArray *favorites = [IGREntityExCatalog MR_findAllSortedBy:@"orderId" ascending:NO withPredicate:predicate];
+	
+	return favorites;
+}
+
 @end

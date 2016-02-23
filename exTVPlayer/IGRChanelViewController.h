@@ -8,13 +8,11 @@
 
 @class IGREntityExChanel;
 
-@interface IGRCChanelViewController : UICollectionViewController
+@interface IGRChanelViewController : UICollectionViewController
 
 - (void)setChanel:(NSString *)aChanel;
 - (void)setCatalog:(NSString *)aCatalog;
 - (void)setSearchResult:(NSString *)aSearchRequest;
-
-- (void)selectCatalogId:(NSString *)aCatalogId;
 
 @property (nonatomic, assign) BOOL needHighlightCell;
 

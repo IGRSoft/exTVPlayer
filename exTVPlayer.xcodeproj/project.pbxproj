@@ -12,8 +12,8 @@
 		A5005C7A1C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A5005C701C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A5005C951C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
 		A5005C961C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
-		A5005C9A1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */; };
-		A5005C9B1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */; };
+		A5005C9A1C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */; };
+		A5005C9B1C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */; };
 		A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
 		A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
@@ -63,6 +63,7 @@
 		A51F3BFE1C23266200F6080A /* exTVPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */; };
 		A53A17C81C74D23C0005898D /* IGRCountryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A53A17C71C74D23C0005898D /* IGRCountryParser.m */; };
 		A53A17C91C74D23C0005898D /* IGRCountryParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A53A17C71C74D23C0005898D /* IGRCountryParser.m */; };
+		A5569DBC1C7CFECC00F944D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
 		A55901F31C60D64C007D49E4 /* SDiOSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = A55901C41C60D64C007D49E4 /* SDiOSVersion.m */; };
 		A560A45D1C57D2820027D064 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45C1C57D2820027D064 /* AVKit.framework */; };
 		A560A45F1C57D2900027D064 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A560A45E1C57D2900027D064 /* CFNetwork.framework */; };
@@ -97,7 +98,7 @@
 		A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
 		A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
 		A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
-		A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */; };
+		A5654E511C5964E80000D882 /* IGRChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */; };
 		A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A5654E541C5964EE0000D882 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
@@ -134,7 +135,7 @@
 		A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
 		A569ED681C2581E1004EF247 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
 		A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
-		A569ED6F1C25D0D7004EF247 /* IGRCChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */; };
+		A569ED6F1C25D0D7004EF247 /* IGRChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */; };
 		A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
 		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -144,6 +145,8 @@
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
+		A58B0A7B1C7CEB4F00BBBCE5 /* IGREXCatalogTopShelfItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */; };
+		A58B0A8D1C7CEB5B00BBBCE5 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
 		A58F66EF1C47C33400D7518B /* IGRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */; };
 		A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */; };
 		A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F41C47C51800D7518B /* IGRBaseViewController.m */; };
@@ -440,8 +443,8 @@
 		A5005C921C7CAE6F00B7A766 /* TopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TopShelf.entitlements; sourceTree = "<group>"; };
 		A5005C931C7CAFC800B7A766 /* IGRUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRUserDefaults.h; sourceTree = "<group>"; };
 		A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRUserDefaults.m; sourceTree = "<group>"; };
-		A5005C981C7CB17D00B7A766 /* IGREXCatalogHistoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREXCatalogHistoryItem.h; sourceTree = "<group>"; };
-		A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXCatalogHistoryItem.m; sourceTree = "<group>"; };
+		A5005C981C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREXCatalogTopShelfItem.h; sourceTree = "<group>"; };
+		A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXCatalogTopShelfItem.m; sourceTree = "<group>"; };
 		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
 		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
 		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
@@ -602,8 +605,8 @@
 		A569ED661C2581E1004EF247 /* IGREntityExChanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExChanel.m; sourceTree = "<group>"; };
 		A569ED691C25889C004EF247 /* IGRChanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelCell.h; sourceTree = "<group>"; };
 		A569ED6A1C25889C004EF247 /* IGRChanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelCell.m; sourceTree = "<group>"; };
-		A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController.h; sourceTree = "<group>"; };
-		A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCChanelViewController.m; sourceTree = "<group>"; };
+		A569ED6D1C25D0D7004EF247 /* IGRChanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelViewController.h; sourceTree = "<group>"; };
+		A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelViewController.m; sourceTree = "<group>"; };
 		A569ED701C25D683004EF247 /* IGRCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogCell.h; sourceTree = "<group>"; };
 		A569ED711C25D683004EF247 /* IGRCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogCell.m; sourceTree = "<group>"; };
 		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
@@ -630,7 +633,7 @@
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
-		A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController_Private.h; sourceTree = "<group>"; };
+		A5D6F29E1C54CC420077BBFC /* IGRChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRChanelViewController_Private.h; sourceTree = "<group>"; };
 		A5E125D11C5FA7CE0070C1BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A5E125D31C5FA7CF0070C1BF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A5E125D71C5FA7E20070C1BF /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
@@ -700,8 +703,8 @@
 		A5005C971C7CB15500B7A766 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				A5005C981C7CB17D00B7A766 /* IGREXCatalogHistoryItem.h */,
-				A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */,
+				A5005C981C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.h */,
+				A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -1154,9 +1157,9 @@
 			isa = PBXGroup;
 			children = (
 				A5E81BD91C22B72D00EABFC5 /* Sources */,
+				A5005C731C7CA1CD00B7A766 /* TopShelf */,
 				A51F38301C22C50A00F6080A /* Submodules */,
 				A5E81BF11C22B7A500EABFC5 /* Resources */,
-				A5005C731C7CA1CD00B7A766 /* TopShelf */,
 				A51F38771C230F6A00F6080A /* Frameworks */,
 				A5E81BD81C22B72D00EABFC5 /* Products */,
 			);
@@ -1183,9 +1186,9 @@
 				A583B8991C52553D002B0BE9 /* Managers */,
 				A5E81BDD1C22B72D00EABFC5 /* IGRAppDelegate.h */,
 				A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */,
-				A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */,
-				A569ED6D1C25D0D7004EF247 /* IGRCChanelViewController.h */,
-				A569ED6E1C25D0D7004EF247 /* IGRCChanelViewController.m */,
+				A5D6F29E1C54CC420077BBFC /* IGRChanelViewController_Private.h */,
+				A569ED6D1C25D0D7004EF247 /* IGRChanelViewController.h */,
+				A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */,
 				A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */,
 				A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */,
 				A51F386E1C23091200F6080A /* IGRMediaViewController.h */,
@@ -1539,6 +1542,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5569DBC1C7CFECC00F944D2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1576,7 +1580,7 @@
 			files = (
 				A5005C761C7CA1CD00B7A766 /* ServiceProvider.m in Sources */,
 				A5005C961C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */,
-				A5005C9B1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */,
+				A5005C9B1C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1586,6 +1590,7 @@
 			files = (
 				A5654E441C5964CF0000D882 /* IGREntityExCatalog+CoreDataProperties.m in Sources */,
 				A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */,
+				A58B0A8D1C7CEB5B00BBBCE5 /* IGRUserDefaults.m in Sources */,
 				A5654F7D1C5973250000D882 /* IGREntityAppSettings.m in Sources */,
 				A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */,
 				A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */,
@@ -1595,6 +1600,7 @@
 				A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */,
 				A5654F631C59715C0000D882 /* NSManagedObject+MRExtensions.m in Sources */,
 				A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */,
+				A58B0A7B1C7CEB4F00BBBCE5 /* IGREXCatalogTopShelfItem.m in Sources */,
 				A5654E3F1C5964A80000D882 /* IGRSettingsViewController.m in Sources */,
 				A5654EA71C5967680000D882 /* exTVPlayer.xcdatamodeld in Sources */,
 				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
@@ -1615,7 +1621,7 @@
 				A53A17C91C74D23C0005898D /* IGRCountryParser.m in Sources */,
 				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
-				A5654E511C5964E80000D882 /* IGRCChanelViewController.m in Sources */,
+				A5654E511C5964E80000D882 /* IGRChanelViewController.m in Sources */,
 				A5654E3A1C59648F0000D882 /* IGRTabBarViewController.m in Sources */,
 				A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */,
 				A5654E3E1C5964A30000D882 /* IGRFavoritsViewController.m in Sources */,
@@ -1653,7 +1659,7 @@
 				A51F3BE61C23223900F6080A /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				A51F3BE31C23223900F6080A /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
 				A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */,
-				A5005C9A1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */,
+				A5005C9A1C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m in Sources */,
 				A51F3BD71C23223900F6080A /* NSFetchedResultsController+MagicalFetching.m in Sources */,
 				A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */,
 				A51F3BD41C23223900F6080A /* NSObject+MagicalDataImport.m in Sources */,
@@ -1686,7 +1692,7 @@
 				A51F3BE71C23223900F6080A /* NSArray+MagicalRecord.m in Sources */,
 				A51F3BD81C23223900F6080A /* NSManagedObject+MagicalAggregation.m in Sources */,
 				A51F3BDA1C23223900F6080A /* NSManagedObject+MagicalFetching.m in Sources */,
-				A569ED6F1C25D0D7004EF247 /* IGRCChanelViewController.m in Sources */,
+				A569ED6F1C25D0D7004EF247 /* IGRChanelViewController.m in Sources */,
 				A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */,
 				A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */,
 				A51F3BE91C23223900F6080A /* NSError+MagicalRecordErrorHandling.m in Sources */,

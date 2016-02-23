@@ -10,7 +10,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" customClass="IGRTabBarViewController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="IGRTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" customClass="IGRTabBarViewController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -31,7 +31,7 @@
         <!--Chanel View Controller-->
         <scene sceneID="vcY-Rs-v7i">
             <objects>
-                <collectionViewController id="9R8-1i-9t1" customClass="IGRCChanelViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="IGRChanelViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9R8-1i-9t1" customClass="IGRChanelViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WqX-nj-GMj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +121,7 @@
         <!--Catalog View Controller-->
         <scene sceneID="QTZ-QV-huY">
             <objects>
-                <viewController id="Ndh-2b-EAL" customClass="IGRCatalogViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IGRCatalogViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ndh-2b-EAL" customClass="IGRCatalogViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BX8-ay-q0E"/>
                         <viewControllerLayoutGuide type="bottom" id="kGc-1k-RLY"/>
@@ -261,7 +261,7 @@
         <!--Settings-->
         <scene sceneID="p4J-lc-QBk">
             <objects>
-                <viewController id="H8i-pE-L6u" customClass="IGRSettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IGRSettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H8i-pE-L6u" customClass="IGRSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xET-xl-gkB"/>
                         <viewControllerLayoutGuide type="bottom" id="vSp-4Z-EjS"/>
@@ -508,7 +508,7 @@
         <!--Favorites-->
         <scene sceneID="51o-FH-rgl">
             <objects>
-                <collectionViewController id="sCl-oZ-tos" customClass="IGRFavoritsViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="IGRFavoritsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sCl-oZ-tos" customClass="IGRFavoritsViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cgf-9d-bqq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -598,7 +598,7 @@
         <!--History-->
         <scene sceneID="4os-u2-LUt">
             <objects>
-                <collectionViewController id="Gsy-RV-XXf" customClass="IGRHistoryViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="IGRHistoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gsy-RV-XXf" customClass="IGRHistoryViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="59d-Um-zhg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -688,7 +688,7 @@
         <!--Search-->
         <scene sceneID="f3e-p2-ntz">
             <objects>
-                <viewController id="Rvc-e3-cYh" customClass="IGRSearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IGRSearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rvc-e3-cYh" customClass="IGRSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XmD-FI-F5i"/>
                         <viewControllerLayoutGuide type="bottom" id="PJP-ZK-i7Z"/>
@@ -743,7 +743,7 @@
         <!--Catalogs-->
         <scene sceneID="Mpo-JJ-aAp">
             <objects>
-                <viewController id="1Qz-Ss-ygS" customClass="IGRMainCatalogController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IGRMainCatalogController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Qz-Ss-ygS" customClass="IGRMainCatalogController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b8E-YA-jTN"/>
                         <viewControllerLayoutGuide type="bottom" id="2Dc-pd-27S"/>
@@ -863,7 +863,7 @@
         <!--Media View Controller-->
         <scene sceneID="frp-lU-xOB">
             <objects>
-                <viewController id="xdJ-Xj-l9k" customClass="IGRMediaViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IGRMediaViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xdJ-Xj-l9k" customClass="IGRMediaViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ua0-ax-qvS"/>
                         <viewControllerLayoutGuide type="bottom" id="v6k-lc-BzQ"/>
@@ -889,7 +889,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sWM-Zy-ibK"/>
+        <segue reference="fGg-yB-TDm"/>
         <segue reference="zvn-YI-lfq"/>
     </inferredMetricsTieBreakers>
 </document>
