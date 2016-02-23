@@ -16,11 +16,9 @@
 
 @import AVFoundation;
 
-static CGFloat const kSeekDelay = 0.1;
-
 static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControllerContext;
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate, AVPictureInPictureControllerDelegate>
+@interface IGRMediaViewController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSArray *tracks;
 @property (strong, nonatomic) NSArray *playlist;
@@ -31,11 +29,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 @property (assign, nonatomic) BOOL needResumeVideo;
 @property (assign, nonatomic) BOOL isPlaying;
-@property (assign, nonatomic) BOOL isReadyToPlay;
-
-@property (strong, nonatomic) NSDate *seekStartTime;
-@property (assign, nonatomic) Float64 seekStartPosition;
-@property (assign, nonatomic) NSInteger seekCount;
 
 @property (nonatomic, strong) AVPlayer						*player;
 @property (nonatomic, strong) AVPlayerViewController		*playerController;
@@ -73,9 +66,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	self.playerController.view.frame = self.view.bounds;
 	[self.view addSubview:self.playerController.view];
 	
-	self.seekStartTime = nil;
-	self.seekCount = 0;
-	self.seekStartPosition = 0;
 	self.isPIP = NO;
 }
 
@@ -107,11 +97,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		[defaultCenter addObserver:self
 						  selector:@selector(applicationDidBecomeActive:)
 							  name:kapplicationDidBecomeActive
-							object:nil];
-#elif TARGET_OS_IOS
-		[defaultCenter addObserver:self
-						  selector:@selector(itemTimeJumped:)
-							  name:AVPlayerItemTimeJumpedNotification
 							object:nil];
 #endif
 		
@@ -145,9 +130,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
-	
-	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
-	[self removePlayerItemObservers:item];
 }
 
 - (void)didReceiveMemoryWarning
@@ -213,9 +195,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	if ((self.currentTrackPosition + 1) < self.playlist.count)
 	{
-		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
-		[self removePlayerItemObservers:item];
-		
 		++self.currentTrackPosition;
 		[self playCurrentTrack];
 	}
@@ -229,9 +208,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	if ((self.currentTrackPosition - 1) >= 0)
 	{
-		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
-		[self removePlayerItemObservers:item];
-		
 		--self.currentTrackPosition;
 		[self playCurrentTrack];
 	}
@@ -252,7 +228,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	[self updatePlaylist];
 	
-	self.isReadyToPlay = NO;
 	self.playerController.showsPlaybackControls = NO;
 	
 	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
@@ -333,53 +308,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	[self playNextTrack:nil];
 }
 
-- (void)itemTimeJumped:(NSNotification*)aNotification
-{
-	if (!self.isReadyToPlay)
-	{
-		return;
-	}
-	
-	++self.seekCount;
-	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(tryPlayNext) object:nil];
-	
-	if (self.seekStartTime == nil)
-	{
-		self.seekStartPosition = CMTimeGetSeconds(self.player.currentTime);
-		self.seekStartTime = [NSDate date];
-	}
-	
-	[self performSelector:@selector(tryPlayNext) withObject:nil afterDelay:kSeekDelay];
-}
-
-- (void)tryPlayNext
-{
-	NSDate *currentTime = [NSDate date];
-	NSTimeInterval executionTime = [currentTime timeIntervalSinceDate:self.seekStartTime];
-	executionTime -= kSeekDelay;
-	
-	if (executionTime < kSeekDelay && self.seekCount > 1 /*need ignore pause/resume */)
-	{
-		Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
-		
-		if (currentTime - self.seekStartPosition > 0)
-		{
-			[self playNextTrack:nil];
-			NSLog(@"playNextTrack");
-		}
-		else if (currentTime - self.seekStartPosition < 0)
-		{
-			[self playPreviousTrack:nil];
-			NSLog(@"playPreviousTrack");
-		}
-	}
-	
-	self.seekStartTime = nil;
-	self.seekCount = 0;
-	self.seekStartPosition = 0;
-}
-
 #if	TARGET_OS_TV
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
@@ -451,10 +379,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 						
 						weak.playerController.showsPlaybackControls = YES;
 						
-						dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-							
-							weak.isReadyToPlay = YES;
-						});
+						AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
+						[weak removePlayerItemObservers:item];
 					};
 					
 					if (lastPosition > 0.0)

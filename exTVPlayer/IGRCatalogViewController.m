@@ -21,6 +21,7 @@
 @import AVFoundation;
 
 static const CGFloat reloadTime = 0.3;
+static IGRMediaViewController *_mediaViewController;
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
 UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
@@ -29,8 +30,6 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
 @property (strong, nonatomic) IBOutlet UIButton *favoritButton;
-
-@property (strong, nonatomic) IGRMediaViewController *mediaViewController;
 
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) UINavigationItem *navigationItem;
@@ -246,19 +245,19 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 {
 	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
 	{
-		[self.mediaViewController stopPIP];
-		self.mediaViewController = segue.destinationViewController;
+		[_mediaViewController stopPIP];
+		_mediaViewController = segue.destinationViewController;
 		
 		if (AVPictureInPictureController.isPictureInPictureSupported)
 		{
-			self.mediaViewController.delegate = self;
+			_mediaViewController.delegate = self;
 		}
 		
 		self.catalog.latestViewedTrack = @(self.tableView.indexPathForSelectedRow.section);
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
-			[self.mediaViewController setPlaylist:(self.fetchedResultsController).sections
+			[_mediaViewController setPlaylist:(self.fetchedResultsController).sections
 										 position:self.tableView.indexPathForSelectedRow.section];
 		});
 	}
@@ -635,12 +634,12 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 - (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController
 {
-	self.mediaViewController.isPIP = YES;
+	_mediaViewController.isPIP = YES;
 }
 
 - (void)playerViewControllerDidStopPictureInPicture:(AVPlayerViewController *)playerViewController
 {
-	self.mediaViewController.isPIP = NO;
+	_mediaViewController.isPIP = NO;
 }
 
 - (BOOL)playerViewControllerShouldAutomaticallyDismissAtPictureInPictureStart:(AVPlayerViewController *)playerViewController
@@ -650,13 +649,13 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 - (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler
 {
-	if (self.presentedViewController == self.mediaViewController)
+	if (self.presentedViewController == _mediaViewController)
 	{
 		completionHandler(NO);
 	}
 	else
 	{
-		[self presentViewController:self.mediaViewController animated:YES completion:^{
+		[self presentViewController:_mediaViewController animated:YES completion:^{
 			
 			completionHandler(YES);
 		}];
