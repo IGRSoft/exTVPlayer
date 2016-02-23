@@ -216,9 +216,7 @@
                                             <outlet property="savedIcon" destination="MmM-4b-lpd" id="VGp-39-T5t"/>
                                             <outlet property="title" destination="vJY-86-Trw" id="mXp-UX-3nZ"/>
                                             <outlet property="trackStatus" destination="KCl-2R-O9T" id="qp8-nk-Tp2"/>
-                                            <segue destination="A6e-N2-RTD" kind="show" identifier="playPlaylistPosition" id="ZR1-yd-t90">
-                                                <nil key="action"/>
-                                            </segue>
+                                            <segue destination="xdJ-Xj-l9k" kind="show" identifier="playPlaylistPosition" id="F63-Xa-VhC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -687,14 +685,6 @@
             </objects>
             <point key="canvasLocation" x="-426" y="823"/>
         </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="6Yl-N7-QMS">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="A6e-N2-RTD" customClass="IGRMediaViewController" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZEc-Q2-Zq8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2125" y="823"/>
-        </scene>
         <!--Search-->
         <scene sceneID="f3e-p2-ntz">
             <objects>
@@ -869,6 +859,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Tr-s3-vSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-426" y="-1517"/>
+        </scene>
+        <!--Media View Controller-->
+        <scene sceneID="frp-lU-xOB">
+            <objects>
+                <viewController id="xdJ-Xj-l9k" customClass="IGRMediaViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ua0-ax-qvS"/>
+                        <viewControllerLayoutGuide type="bottom" id="v6k-lc-BzQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wfw-dQ-TOH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1E8-h6-qPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2190" y="823"/>
         </scene>
     </scenes>
     <resources>

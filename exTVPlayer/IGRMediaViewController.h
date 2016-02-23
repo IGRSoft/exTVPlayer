@@ -15,8 +15,11 @@ typedef NS_ENUM(NSUInteger, IGRTrackProperties)
 	IGRTrackProperties_InConfiguration
 };
 
-@interface IGRMediaViewController : AVPlayerViewController
+@interface IGRMediaViewController : UIViewController
 
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition;
+
+@property (nonatomic, weak) id delegate;
+@property (nonatomic, assign) BOOL isPIP;
 
 @end

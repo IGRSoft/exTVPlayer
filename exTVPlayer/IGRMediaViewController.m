@@ -14,13 +14,13 @@
 #import "IGREntityAppSettings.h"
 #import "IGRSettingsViewController.h"
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
 
 static CGFloat const kSeekDelay = 0.1;
 
 static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControllerContext;
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
+@interface IGRMediaViewController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSArray *tracks;
 @property (strong, nonatomic) NSArray *playlist;
@@ -37,6 +37,10 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 @property (assign, nonatomic) Float64 seekStartPosition;
 @property (assign, nonatomic) NSInteger seekCount;
 
+@property (nonatomic, strong) AVPlayer					*player;
+@property (nonatomic, strong) AVPlayerViewController    *playerController;
+@property (nonatomic, strong) AVAudioSession            *session;
+
 @end
 
 @implementation IGRMediaViewController
@@ -44,20 +48,50 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	_session = [AVAudioSession sharedInstance];
+	[self.session setCategory:AVAudioSessionCategoryPlayback error:nil];
+	
+	_player = [[AVPlayer alloc] init];
+	
+	_playerController = [[AVPlayerViewController alloc] init];
+	self.playerController.player = self.player;
+	
+#if	TARGET_OS_IOS
+	
+	self.playerController.videoGravity = AVLayerVideoGravityResizeAspect;
+	self.playerController.delegate = self.delegate;
+	self.playerController.allowsPictureInPicturePlayback = YES;
+	self.playerController.showsPlaybackControls = YES;
+	self.playerController.view.translatesAutoresizingMaskIntoConstraints = true;
+#endif
+	
+	[self addChildViewController:self.playerController];
+	self.playerController.view.frame = self.view.bounds;
+	[self.view addSubview:self.playerController.view];
+	
+	self.seekStartTime = nil;
+	self.seekCount = 0;
+	self.seekStartPosition = 0;
+	self.isPIP = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
-	AVPlayer *player = [[AVPlayer alloc] init];
-#if	TARGET_OS_IOS
-	player.allowsExternalPlayback = YES;
-#endif
-	self.delegate = self;
-	self.player = player;
-	
 	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+	/* listen for notifications from the player */
+	[defaultCenter addObserver:self
+					  selector:@selector(itemDidPlayToEndTime:)
+						  name:AVPlayerItemDidPlayToEndTimeNotification
+						object:nil];
+	
+	[defaultCenter addObserver:self
+					  selector:@selector(itemFailedToPlayToEnd:)
+						  name:AVPlayerItemFailedToPlayToEndTimeNotification
+						object:nil];
+	
 #if	TARGET_OS_TV
 	/* listen for notifications from the application */
 	[defaultCenter addObserver:self
@@ -69,30 +103,17 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 					  selector:@selector(applicationDidBecomeActive:)
 						  name:kapplicationDidBecomeActive
 						object:nil];
-#endif
-	/* listen for notifications from the player */
-	[defaultCenter addObserver:self
-					  selector:@selector(itemDidPlayToEndTime:)
-						  name:AVPlayerItemDidPlayToEndTimeNotification
-						object:nil];
-	
-	[defaultCenter addObserver:self
-					  selector:@selector(itemFailedToPlayToEnd:)
-						  name:AVPlayerItemFailedToPlayToEndTimeNotification
-						object:nil];
-
-#if	TARGET_OS_IOS
+#elif TARGET_OS_IOS
 	[defaultCenter addObserver:self
 					  selector:@selector(itemTimeJumped:)
 						  name:AVPlayerItemTimeJumpedNotification
 						object:nil];
 #endif
 	
-	self.seekStartTime = nil;
-	self.seekCount = 0;
-	self.seekStartPosition = 0;
-	
-	[self playCurrentTrack];
+	if (!self.isPlaying)
+	{
+		[self playCurrentTrack];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -101,7 +122,10 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	[self.player pause];
+	if (!self.isPIP)
+	{
+		[self.player pause];
+	}
 	
 	Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
 	if (currentTime > 60)
@@ -113,8 +137,12 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	
-	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
-	[self removePlayerItemObservers:item];
+	if (!self.isPIP)
+	{
+		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
+		[self removePlayerItemObservers:item];
+	}
+	self.isPIP = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -204,7 +232,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	[self updatePlaylist];
 	
 	self.isReadyToPlay = NO;
-	self.showsPlaybackControls = NO;
+	self.playerController.showsPlaybackControls = NO;
 	
 	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
 	[self addPlayerItemObservers:item];
@@ -400,7 +428,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 					__weak typeof(self) weak = self;
 					void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
 						
-						weak.showsPlaybackControls = YES;
+						weak.playerController.showsPlaybackControls = YES;
 						
 						dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 							

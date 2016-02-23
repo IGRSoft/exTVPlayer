@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5005C561C7C6A1C00B7A766 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */; };
 		A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
 		A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
@@ -404,6 +405,7 @@
 
 /* Begin PBXFileReference section */
 		A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "exTVPlayer-2.xcdatamodel"; sourceTree = "<group>"; };
+		A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
 		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
 		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5005C561C7C6A1C00B7A766 /* MediaPlayer.framework in Frameworks */,
 				A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */,
 				A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */,
 				A5654EDD1C596A7C0000D882 /* CFNetwork.framework in Frameworks */,
@@ -694,6 +697,7 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */,
 				A5654F7B1C5972E70000D882 /* AVFoundation.framework */,
 				A5654ED91C596A0C0000D882 /* iOS */,
 				A5654ED21C5969DC0000D882 /* tvOS */,

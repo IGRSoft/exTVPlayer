@@ -18,15 +18,19 @@
 #import "IGRDownloadManager.h"
 #import "DALabeledCircularProgressView.h"
 
+@import AVFoundation;
+
 static const CGFloat reloadTime = 0.3;
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
-UIGestureRecognizerDelegate>
+UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
 @property (strong, nonatomic) IBOutlet UIButton *favoritButton;
+
+@property (strong, nonatomic) IGRMediaViewController *mediaViewController;
 
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) UINavigationItem *navigationItem;
@@ -242,13 +246,15 @@ UIGestureRecognizerDelegate>
 {
 	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
 	{
-		IGRMediaViewController *catalogViewController = segue.destinationViewController;
+		self.mediaViewController = segue.destinationViewController;
+		self.mediaViewController.delegate = self;
+		
 		self.catalog.latestViewedTrack = @(self.tableView.indexPathForSelectedRow.section);
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
-			[catalogViewController setPlaylist:(self.fetchedResultsController).sections
-									  position:self.tableView.indexPathForSelectedRow.section];
+			[self.mediaViewController setPlaylist:(self.fetchedResultsController).sections
+										 position:self.tableView.indexPathForSelectedRow.section];
 		});
 	}
 }
@@ -618,6 +624,33 @@ UIGestureRecognizerDelegate>
 			[self.tableView reloadRowsAtIndexPaths:@[aIndexPat] withRowAnimation:UITableViewRowAnimationNone];
 		});
 	}
+}
+
+#pragma mark - AVPlayerViewControllerDelegate
+
+- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController
+{
+	self.mediaViewController.isPIP = YES;
+}
+
+- (void)playerViewControllerWillStopPictureInPicture:(AVPlayerViewController *)playerViewController
+{
+	self.mediaViewController.isPIP = NO;
+}
+
+- (BOOL)playerViewControllerShouldAutomaticallyDismissAtPictureInPictureStart:(AVPlayerViewController *)playerViewController
+{
+	return YES;
+}
+
+- (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler
+{
+	[self presentViewController:self.mediaViewController animated:YES completion:^{
+		
+		[playerViewController.player play];
+		
+		completionHandler(YES);
+	}];
 }
 
 @end
