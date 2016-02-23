@@ -246,8 +246,13 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 {
 	if ([segue.identifier isEqualToString:@"playPlaylistPosition"])
 	{
+		[self.mediaViewController stopPIP];
 		self.mediaViewController = segue.destinationViewController;
-		self.mediaViewController.delegate = self;
+		
+		if (AVPictureInPictureController.isPictureInPictureSupported)
+		{
+			self.mediaViewController.delegate = self;
+		}
 		
 		self.catalog.latestViewedTrack = @(self.tableView.indexPathForSelectedRow.section);
 		
@@ -645,10 +650,17 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 - (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler
 {
-	[self presentViewController:self.mediaViewController animated:YES completion:^{
-		
-		completionHandler(YES);
-	}];
+	if (self.presentedViewController == self.mediaViewController)
+	{
+		completionHandler(NO);
+	}
+	else
+	{
+		[self presentViewController:self.mediaViewController animated:YES completion:^{
+			
+			completionHandler(YES);
+		}];
+	}
 }
 
 @end

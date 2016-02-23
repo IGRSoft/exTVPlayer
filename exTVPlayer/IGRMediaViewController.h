@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, IGRTrackProperties)
 
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition;
 
+- (void)stopPIP;
+
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, assign) BOOL isPIP;
 
