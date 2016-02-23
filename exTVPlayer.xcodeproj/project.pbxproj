@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		A5005C561C7C6A1C00B7A766 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */; };
+		A5005C761C7CA1CD00B7A766 /* ServiceProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C751C7CA1CD00B7A766 /* ServiceProvider.m */; };
+		A5005C7A1C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A5005C701C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A5005C951C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
+		A5005C961C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
+		A5005C9A1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */; };
+		A5005C9B1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */; };
 		A51F38451C22CAF300F6080A /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A51F38481C22D3E600F6080A /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
 		A51F38611C22F2FA00F6080A /* IGREXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38601C22F2FA00F6080A /* IGREXParser.m */; };
@@ -147,6 +153,7 @@
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
+		A5BF3ACC1C7CBF4C00ACF004 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
@@ -154,6 +161,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A5005C781C7CA1CD00B7A766 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5E81BCF1C22B72D00EABFC5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5005C6F1C7CA1CD00B7A766;
+			remoteInfo = TopShelf;
+		};
 		A5654E961C5965FF0000D882 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A57A12A21C59027A00504350 /* Ono.xcodeproj */;
@@ -374,6 +388,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A5005C8F1C7CA1CD00B7A766 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A5005C7A1C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5654EA01C5965FF0000D882 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -406,6 +431,17 @@
 /* Begin PBXFileReference section */
 		A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "exTVPlayer-2.xcdatamodel"; sourceTree = "<group>"; };
 		A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		A5005C701C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = exTVPlayerTopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5005C711C7CA1CD00B7A766 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
+		A5005C741C7CA1CD00B7A766 /* ServiceProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProvider.h; sourceTree = "<group>"; };
+		A5005C751C7CA1CD00B7A766 /* ServiceProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProvider.m; sourceTree = "<group>"; };
+		A5005C771C7CA1CD00B7A766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5005C911C7CAE5D00B7A766 /* exTVPlayer-tvOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "exTVPlayer-tvOS.entitlements"; path = "../../exTVPlayer-tvOS.entitlements"; sourceTree = "<group>"; };
+		A5005C921C7CAE6F00B7A766 /* TopShelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TopShelf.entitlements; sourceTree = "<group>"; };
+		A5005C931C7CAFC800B7A766 /* IGRUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRUserDefaults.h; sourceTree = "<group>"; };
+		A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRUserDefaults.m; sourceTree = "<group>"; };
+		A5005C981C7CB17D00B7A766 /* IGREXCatalogHistoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREXCatalogHistoryItem.h; sourceTree = "<group>"; };
+		A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREXCatalogHistoryItem.m; sourceTree = "<group>"; };
 		A51F38431C22CAF300F6080A /* IGRCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogViewController.h; sourceTree = "<group>"; };
 		A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogViewController.m; sourceTree = "<group>"; };
 		A51F38461C22D3E600F6080A /* IGRExItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRExItemCell.h; sourceTree = "<group>"; };
@@ -593,6 +629,7 @@
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		A5D6F29E1C54CC420077BBFC /* IGRCChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRCChanelViewController_Private.h; sourceTree = "<group>"; };
 		A5E125D11C5FA7CE0070C1BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A5E125D31C5FA7CF0070C1BF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -608,6 +645,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5005C6D1C7CA1CD00B7A766 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5BF3ACC1C7CBF4C00ACF004 /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5654DAA1C59452B0000D882 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -641,6 +686,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5005C731C7CA1CD00B7A766 /* TopShelf */ = {
+			isa = PBXGroup;
+			children = (
+				A5005C921C7CAE6F00B7A766 /* TopShelf.entitlements */,
+				A5005C741C7CA1CD00B7A766 /* ServiceProvider.h */,
+				A5005C751C7CA1CD00B7A766 /* ServiceProvider.m */,
+				A5005C771C7CA1CD00B7A766 /* Info.plist */,
+			);
+			path = TopShelf;
+			sourceTree = "<group>";
+		};
+		A5005C971C7CB15500B7A766 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				A5005C981C7CB17D00B7A766 /* IGREXCatalogHistoryItem.h */,
+				A5005C991C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		A5097B701C4291C900159377 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,6 +755,8 @@
 				A51F38601C22F2FA00F6080A /* IGREXParser.m */,
 				A53A17C61C74D23C0005898D /* IGRCountryParser.h */,
 				A53A17C71C74D23C0005898D /* IGRCountryParser.m */,
+				A5005C931C7CAFC800B7A766 /* IGRUserDefaults.h */,
+				A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -697,10 +764,12 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */,
 				A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */,
 				A5654F7B1C5972E70000D882 /* AVFoundation.framework */,
 				A5654ED91C596A0C0000D882 /* iOS */,
 				A5654ED21C5969DC0000D882 /* tvOS */,
+				A5005C711C7CA1CD00B7A766 /* TVServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -911,6 +980,7 @@
 		A5654E111C5947820000D882 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5005C911C7CAE5D00B7A766 /* exTVPlayer-tvOS.entitlements */,
 				A5654F971C5A0CFC0000D882 /* Assets-tvOS.xcassets */,
 				A5654E121C5947820000D882 /* InfoPlist.strings */,
 				A5654E141C5947820000D882 /* Localizable.strings */,
@@ -1086,6 +1156,7 @@
 				A5E81BD91C22B72D00EABFC5 /* Sources */,
 				A51F38301C22C50A00F6080A /* Submodules */,
 				A5E81BF11C22B7A500EABFC5 /* Resources */,
+				A5005C731C7CA1CD00B7A766 /* TopShelf */,
 				A51F38771C230F6A00F6080A /* Frameworks */,
 				A5E81BD81C22B72D00EABFC5 /* Products */,
 			);
@@ -1096,6 +1167,7 @@
 			children = (
 				A5E81BD71C22B72D00EABFC5 /* exTVPlayer-tvOS.app */,
 				A5654DAD1C59452B0000D882 /* exTVPlayer-iOS.app */,
+				A5005C701C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1103,6 +1175,7 @@
 		A5E81BD91C22B72D00EABFC5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A5005C971C7CB15500B7A766 /* Items */,
 				A51F388D1C23191B00F6080A /* Database */,
 				A51F385E1C22F2BD00F6080A /* Helpers */,
 				A569ED6C1C25B062004EF247 /* CustomView */,
@@ -1156,6 +1229,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A5005C6F1C7CA1CD00B7A766 /* exTVPlayerTopShelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5005C8E1C7CA1CD00B7A766 /* Build configuration list for PBXNativeTarget "exTVPlayerTopShelf" */;
+			buildPhases = (
+				A5005C6C1C7CA1CD00B7A766 /* Sources */,
+				A5005C6D1C7CA1CD00B7A766 /* Frameworks */,
+				A5005C6E1C7CA1CD00B7A766 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = exTVPlayerTopShelf;
+			productName = TopShelf;
+			productReference = A5005C701C7CA1CD00B7A766 /* exTVPlayerTopShelf.appex */;
+			productType = "com.apple.product-type.tv-app-extension";
+		};
 		A5654DAC1C59452B0000D882 /* exTVPlayer-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5654DD61C59452B0000D882 /* Build configuration list for PBXNativeTarget "exTVPlayer-iOS" */;
@@ -1186,6 +1276,7 @@
 				A5E81BD41C22B72D00EABFC5 /* Frameworks */,
 				A5E81BD51C22B72D00EABFC5 /* Resources */,
 				A569EE131C25D935004EF247 /* Embed Frameworks */,
+				A5005C8F1C7CA1CD00B7A766 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -1194,6 +1285,7 @@
 				A569EE121C25D935004EF247 /* PBXTargetDependency */,
 				A5868D0E1C4A9D170037D401 /* PBXTargetDependency */,
 				A57A12F41C59029500504350 /* PBXTargetDependency */,
+				A5005C791C7CA1CD00B7A766 /* PBXTargetDependency */,
 			);
 			name = "exTVPlayer-tvOS";
 			productName = exTVPlayer;
@@ -1209,6 +1301,15 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "IGR Software";
 				TargetAttributes = {
+					A5005C6F1C7CA1CD00B7A766 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = DMP42GVPJ3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					A5654DAC1C59452B0000D882 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DMP42GVPJ3;
@@ -1221,6 +1322,11 @@
 					A5E81BD61C22B72D00EABFC5 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DMP42GVPJ3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1259,6 +1365,7 @@
 			targets = (
 				A5E81BD61C22B72D00EABFC5 /* exTVPlayer-tvOS */,
 				A5654DAC1C59452B0000D882 /* exTVPlayer-iOS */,
+				A5005C6F1C7CA1CD00B7A766 /* exTVPlayerTopShelf */,
 			);
 		};
 /* End PBXProject section */
@@ -1428,6 +1535,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A5005C6E1C7CA1CD00B7A766 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5654DAB1C59452B0000D882 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1456,6 +1570,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5005C6C1C7CA1CD00B7A766 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5005C761C7CA1CD00B7A766 /* ServiceProvider.m in Sources */,
+				A5005C961C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */,
+				A5005C9B1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5654DA91C59452B0000D882 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1529,6 +1653,7 @@
 				A51F3BE61C23223900F6080A /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				A51F3BE31C23223900F6080A /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
 				A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */,
+				A5005C9A1C7CB17D00B7A766 /* IGREXCatalogHistoryItem.m in Sources */,
 				A51F3BD71C23223900F6080A /* NSFetchedResultsController+MagicalFetching.m in Sources */,
 				A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */,
 				A51F3BD41C23223900F6080A /* NSObject+MagicalDataImport.m in Sources */,
@@ -1551,6 +1676,7 @@
 				A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */,
 				A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */,
 				A569ED5E1C257CA7004EF247 /* IGREntityExTrack.m in Sources */,
+				A5005C951C7CAFC800B7A766 /* IGRUserDefaults.m in Sources */,
 				A51F3BDC1C23223900F6080A /* NSManagedObject+MagicalRecord.m in Sources */,
 				A51F38701C23091200F6080A /* IGRMediaViewController.m in Sources */,
 				A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */,
@@ -1583,6 +1709,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A5005C791C7CA1CD00B7A766 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5005C6F1C7CA1CD00B7A766 /* exTVPlayerTopShelf */;
+			targetProxy = A5005C781C7CA1CD00B7A766 /* PBXContainerItemProxy */;
+		};
 		A5654E971C5965FF0000D882 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Ono iOS";
@@ -1681,6 +1812,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A5005C7B1C7CA1CD00B7A766 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer.exTVPlayerTopShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		A5005C7C1C7CA1CD00B7A766 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer.exTVPlayerTopShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 		A5654DC41C59452B0000D882 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1804,7 +1975,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
+				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-tvOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1816,6 +1989,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1827,7 +2001,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
+				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-tvOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1839,6 +2015,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1848,6 +2025,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5005C8E1C7CA1CD00B7A766 /* Build configuration list for PBXNativeTarget "exTVPlayerTopShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5005C7B1C7CA1CD00B7A766 /* Debug */,
+				A5005C7C1C7CA1CD00B7A766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5654DD61C59452B0000D882 /* Build configuration list for PBXNativeTarget "exTVPlayer-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

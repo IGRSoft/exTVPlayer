@@ -14,6 +14,8 @@
 - (void)setCatalog:(NSString *)aCatalog;
 - (void)setSearchResult:(NSString *)aSearchRequest;
 
+- (void)selectCatalogId:(NSString *)aCatalogId;
+
 @property (nonatomic, assign) BOOL needHighlightCell;
 
 @end

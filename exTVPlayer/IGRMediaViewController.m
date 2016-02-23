@@ -155,8 +155,9 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		[self prerareViewForDisappear];
 		
 		[self.playerController.player pause];
-		
+#if	TARGET_OS_IOS
 		self.playerController.allowsPictureInPicturePlayback = NO;
+#endif
 		[self.playerController removeFromParentViewController];
 		self.playerController = nil;
 	}

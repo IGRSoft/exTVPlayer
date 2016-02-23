@@ -9,9 +9,19 @@
 #import "IGREntityExCatalog.h"
 #import "IGREntityExChanel.h"
 #import "IGREntityExTrack.h"
+#import "IGREntityAppSettings.h"
 
 @implementation IGREntityExCatalog
 
-// Insert code here to add functionality to your managed object subclass
++ (NSArray *)getHistory
+{
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"viewedTimestamp != nil"];
+	NSArray *history = [IGREntityExCatalog MR_findAllSortedBy:@"viewedTimestamp" ascending:NO withPredicate:predicate];
+	
+	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
+	NSUInteger count = MIN(settings.historySize.integerValue, history.count);
+	
+	return [history subarrayWithRange:NSMakeRange(0, count)];
+}
 
 @end

@@ -314,6 +314,23 @@
 						 }];
 }
 
+- (void)selectCatalogId:(NSString *)aCatalogId
+{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		
+		[self.catalogs.visibleCells enumerateObjectsUsingBlock:^(IGRCatalogCell *obj, NSUInteger idx, BOOL *stop) {
+			
+			obj.highlighted = NO;
+			if (obj.tag == aCatalogId.integerValue)
+			{
+				*stop = YES;
+				
+				obj.highlighted = YES;
+			}
+		}];
+	});
+}
+
 - (void)asyncUpdateFromPosition:(NSUInteger)startPosition
 {
 	self.updateInProgress = YES;
@@ -530,6 +547,7 @@
 	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
 	IGREntityExCatalog *catalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
 	
+	cell.tag = catalog.itemId.integerValue;
 	cell.title.text = catalog.name;
 	[cell.image sd_setImageWithURL:[NSURL URLWithString:catalog.imgUrl]
 				  placeholderImage:nil];

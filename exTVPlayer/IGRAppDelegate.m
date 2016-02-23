@@ -8,8 +8,14 @@
 
 #import "IGRAppDelegate.h"
 #import "IGREntityExTrack.h"
+#import "IGREntityExCatalog.h"
+#import "IGREXCatalogHistoryItem.h"
+#import "IGRUserDefaults.h"
+#import "IGRCChanelViewController.h"
 
 @interface IGRAppDelegate ()
+
+@property (nonatomic) IGRUserDefaults *userSettings;
 
 @end
 
@@ -20,6 +26,8 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	self.userSettings = [[IGRUserDefaults alloc] init];
+	
 	NSString *storeURL = [self copyDefaultStoreIfNecessary];
 	[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
 	MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtPath:storeURL];
@@ -33,6 +41,23 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:kApplicationWillResignActive object:nil];
+	
+	NSArray *entityHistory = [IGREntityExCatalog getHistory];
+	NSMutableArray *history = [[NSMutableArray alloc] initWithCapacity:entityHistory.count];
+	
+	for (IGREntityExCatalog *historyEntity in entityHistory)
+	{
+		IGREXCatalogHistoryItem *item = [[IGREXCatalogHistoryItem alloc] init];
+		item.itemId = historyEntity.itemId;
+		item.name = historyEntity.name;
+		item.imgUrl = historyEntity.imgUrl;
+		
+		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:item];
+		[history addObject:data];
+	}
+	
+	self.userSettings.history = history;
+	[self.userSettings saveUserSettings];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -53,6 +78,25 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+	NSURLComponents *component = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
+	if ([component.scheme isEqualToString:@"excatalog"])
+	{
+		NSString *itemId = [[[component queryItems] firstObject] value];
+		UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+		[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+		
+		tabBar.selectedIndex = 3;
+		IGRCChanelViewController *chanelView = tabBar.selectedViewController;
+		[chanelView selectCatalogId:itemId];
+		
+		return YES;
+	}
+	
+	return NO;
 }
 
 - (NSString *)copyDefaultStoreIfNecessary

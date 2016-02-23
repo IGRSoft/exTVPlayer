@@ -247,12 +247,12 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	{
 		[_mediaViewController stopPIP];
 		_mediaViewController = segue.destinationViewController;
-		
+#if	TARGET_OS_IOS
 		if (AVPictureInPictureController.isPictureInPictureSupported)
 		{
 			_mediaViewController.delegate = self;
 		}
-		
+#endif
 		self.catalog.latestViewedTrack = @(self.tableView.indexPathForSelectedRow.section);
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
