@@ -633,7 +633,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	self.mediaViewController.isPIP = YES;
 }
 
-- (void)playerViewControllerWillStopPictureInPicture:(AVPlayerViewController *)playerViewController
+- (void)playerViewControllerDidStopPictureInPicture:(AVPlayerViewController *)playerViewController
 {
 	self.mediaViewController.isPIP = NO;
 }
@@ -646,8 +646,6 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 - (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler
 {
 	[self presentViewController:self.mediaViewController animated:YES completion:^{
-		
-		[playerViewController.player play];
 		
 		completionHandler(YES);
 	}];

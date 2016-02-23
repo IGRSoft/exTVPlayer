@@ -110,7 +110,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 						object:nil];
 #endif
 	
-	if (!self.isPlaying)
+	if (!self.isPlaying && !self.isPIP)
 	{
 		[self playCurrentTrack];
 	}
@@ -142,7 +142,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		AVPlayerItem *item = self.playlist[self.currentTrackPosition];
 		[self removePlayerItemObservers:item];
 	}
-	self.isPIP = NO;
 }
 
 - (void)didReceiveMemoryWarning
