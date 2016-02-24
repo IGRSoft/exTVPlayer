@@ -165,7 +165,8 @@
 	
 	// Register for 3D Touch Previewing if available
 	self.definesPresentationContext = YES;
-	if (self.traitCollection.forceTouchCapability != UIForceTouchCapabilityUnavailable)
+	if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
+		self.traitCollection.forceTouchCapability != UIForceTouchCapabilityUnavailable)
 	{
 		[self registerForPreviewingWithDelegate:self sourceView:self.view];
 	}

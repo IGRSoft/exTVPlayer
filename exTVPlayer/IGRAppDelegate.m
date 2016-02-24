@@ -45,8 +45,11 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	[self createDynamicShortcutItems];
 	
 #if	TARGET_OS_IOS
-	UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
-	[self performActionForShortcutItem:item];
+	if (NSClassFromString(@"UIApplicationShortcutItem"))
+	{
+		UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
+		[self performActionForShortcutItem:item];
+	}
 #endif
 	
 	return YES;
