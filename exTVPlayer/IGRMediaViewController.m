@@ -18,7 +18,7 @@
 
 static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControllerContext;
 
-@interface IGRMediaViewController () <UIGestureRecognizerDelegate>
+@interface IGRMediaViewController ()
 
 @property (strong, nonatomic) NSArray *tracks;
 @property (strong, nonatomic) NSArray *playlist;
@@ -49,15 +49,14 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	
 	_playerController = [[AVPlayerViewController alloc] init];
 	self.playerController.player = self.player;
+	self.playerController.videoGravity = AVLayerVideoGravityResizeAspect;
 	
 #if	TARGET_OS_IOS
 	
 	if (AVPictureInPictureController.isPictureInPictureSupported)
 	{
-		self.playerController.videoGravity = AVLayerVideoGravityResizeAspect;
 		self.playerController.delegate = self.delegate;
 		self.playerController.allowsPictureInPicturePlayback = YES;
-		self.playerController.showsPlaybackControls = YES;
 		self.playerController.view.translatesAutoresizingMaskIntoConstraints = true;
 	}
 #endif
@@ -236,12 +235,11 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	[self updatePlaylist];
 	
-	self.playerController.showsPlaybackControls = NO;
-	
 	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
 	[self addPlayerItemObservers:item];
 	
 	[self.player replaceCurrentItemWithPlayerItem:item];
+	
 	[self.player play];
 }
 
@@ -344,8 +342,6 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 - (void)removePlayerItemObservers:(AVPlayerItem *)playerItem
 {
-	[playerItem cancelPendingSeeks];
-	
 	@try
 	{
 		[playerItem removeObserver:self
@@ -385,7 +381,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 					__weak typeof(self) weak = self;
 					void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
 						
-						weak.playerController.showsPlaybackControls = YES;
+						weak.playerController.requiresLinearPlayback = NO;
 						
 						AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
 						[weak removePlayerItemObservers:item];

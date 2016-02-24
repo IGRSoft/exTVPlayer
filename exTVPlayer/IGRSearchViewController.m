@@ -89,7 +89,13 @@
 	
 	if (isText && textChanged)
 	{
-		[self performSegueWithIdentifier:@"openSearch" sender:self];
+		CGFloat delay = 0.0;
+#if	TARGET_OS_TV
+		delay = kReloadTime * 2;
+#endif
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			[self performSegueWithIdentifier:@"openSearch" sender:self];
+		});
 	}
 }
 

@@ -31,6 +31,7 @@
 static NSString * const kIGRProxyAddres = @"";
 static NSUInteger const kIGRProxyPort   = 0;
 static BOOL		  const kIGRProxyHTTPS  = 0;
+static CGFloat    const kReloadTime = 0.3;
 
 typedef NS_ENUM(NSUInteger, IGRSourceType)
 {

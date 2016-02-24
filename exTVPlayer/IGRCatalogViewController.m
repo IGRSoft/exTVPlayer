@@ -20,8 +20,6 @@
 
 @import AVFoundation;
 
-static const CGFloat reloadTime = 0.3;
-
 #if	TARGET_OS_IOS
 static IGRMediaViewController *_mediaViewController;
 #endif
@@ -327,7 +325,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	
 	if (indexPath == tableView.indexPathsForVisibleRows.lastObject)
 	{
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			self.needUpdateSelection = NO;
 		});
 	}
@@ -581,7 +579,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 				[view addAction:cancel];
 				[self presentViewController:view animated:YES completion:nil];
 				
-				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 #if TARGET_OS_TV
 					[trackCell setHighlighted:YES];
 #else
@@ -622,7 +620,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	[self.downloadManager cancelDownloadTrack:aTrack];
 	if (aIndexPat)
 	{
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			[self.tableView reloadRowsAtIndexPaths:@[aIndexPat] withRowAnimation:UITableViewRowAnimationNone];
 		});
 	}
@@ -635,7 +633,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	
 	if (aIndexPat)
 	{
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(reloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			[self.tableView reloadRowsAtIndexPaths:@[aIndexPat] withRowAnimation:UITableViewRowAnimationNone];
 		});
 	}
