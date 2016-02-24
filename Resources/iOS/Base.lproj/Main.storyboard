@@ -697,7 +697,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Catalog ID or Title name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="paM-6j-vOq">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Catalog ID or Title name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="paM-6j-vOq">
                                 <rect key="frame" x="20" y="222" width="560" height="30"/>
                                 <color key="textColor" red="0.019607843140000001" green="0.1960784314" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -890,6 +890,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zvn-YI-lfq"/>
-        <segue reference="fGg-yB-TDm"/>
+        <segue reference="sWM-Zy-ibK"/>
     </inferredMetricsTieBreakers>
 </document>

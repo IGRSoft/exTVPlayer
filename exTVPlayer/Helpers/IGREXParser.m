@@ -21,7 +21,7 @@
 #import <CFNetwork/CFNetwork.h>
 #endif
 
-static const NSInteger kUpdatedLimitMinutes = 1;
+static const NSInteger kUpdatedLimitMinutes = 5;
 static BOOL _isLocked = NO;
 
 const NSUInteger kPrefixLength = 7;

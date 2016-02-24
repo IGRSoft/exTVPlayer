@@ -100,6 +100,8 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
 	}
 	
+	[self createDynamicShortcutItems];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:kApplicationWillResignActive object:nil];
 	
 	NSArray *entityHistory = [IGREntityExCatalog history];

@@ -78,6 +78,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+	BOOL textChanged = ![self.searchText isEqualToString:textField.text];
 	self.searchText = [textField.text copy];
 	
 	IGREntityAppSettings *settings = [self appSettings];
@@ -86,9 +87,9 @@
 	BOOL isText = self.searchText.length > 0;
 	self.getListButton.enabled = isText;
 	
-	if (isText)
+	if (isText && textChanged)
 	{
-		[self.getListButton becomeFirstResponder];
+		[self performSegueWithIdentifier:@"openSearch" sender:self];
 	}
 }
 
