@@ -39,6 +39,12 @@
 		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
 	}
 	
+	if (settings.removPlayedSavedTracks == nil)
+	{
+		settings.removPlayedSavedTracks	= @(YES);
+		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	}
+	
 	return settings;
 }
 

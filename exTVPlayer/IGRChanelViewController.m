@@ -87,7 +87,7 @@
 	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	self.parsingActivityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	if ([self isMemberOfClass:[IGRCChanelViewController class]])
+	if ([self isMemberOfClass:[IGRChanelViewController class]])
 	{
 		CGSize viewSize = self.view.frame.size;
 		
