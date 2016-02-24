@@ -11,7 +11,7 @@
 #import "IGREntityExCatalog.h"
 #import "IGREXCatalogTopShelfItem.h"
 #import "IGRUserDefaults.h"
-#import "IGRChanelViewController.h"
+#import "IGRCatalogViewController.h"
 
 @interface IGRAppDelegate ()
 
@@ -111,13 +111,10 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 		[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 		
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-		IGRChanelViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRChanelViewController"];
-		[cvc setCatalog:itemId];
+		IGRCatalogViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRCatalogViewController"];
+		[cvc setCatalogId:itemId];
 		
-		[tabBar presentViewController:cvc animated:YES completion:^{
-			
-			[cvc performSegueWithIdentifier:@"openCatalog" sender:cvc];
-		}];
+		[tabBar presentViewController:cvc animated:YES completion:nil];
 		
 		return YES;
 	}
