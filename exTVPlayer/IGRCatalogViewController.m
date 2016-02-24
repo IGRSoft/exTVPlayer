@@ -21,23 +21,30 @@
 @import AVFoundation;
 
 static const CGFloat reloadTime = 0.3;
+
+#if	TARGET_OS_IOS
 static IGRMediaViewController *_mediaViewController;
+#endif
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
 UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *navigationView;
-@property (weak, nonatomic) IBOutlet UILabel *catalogTitle;
+@property (weak,   nonatomic) IBOutlet UITableView *tableView;
+@property (weak,   nonatomic) IBOutlet UIView *navigationView;
+@property (weak,   nonatomic) IBOutlet UILabel *catalogTitle;
 @property (strong, nonatomic) IBOutlet UIButton *favoritButton;
 
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) UINavigationItem *navigationItem;
 
-@property (copy, nonatomic  ) NSString *catalogId;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+@property (copy,   nonatomic) NSString *catalogId;
 @property (strong, nonatomic) IGREntityExCatalog *catalog;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+#if	TARGET_OS_TV
+@property (weak, nonatomic)   IGRMediaViewController *mediaViewController;
+#endif
 @property (assign, nonatomic) BOOL needUpdateSelection;
 
 @property (strong, nonatomic) IGRDownloadManager *downloadManager;

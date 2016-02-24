@@ -127,6 +127,13 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		self.currentTrack.status = @(IGRTrackState_Half);
 		self.currentTrack.position = @(currentTime);
 	}
+
+#if	TARGET_OS_TV
+	[self.playerController.player pause];
+	self.playerController.player = nil;
+	self.playerController = nil;
+	self.session = nil;
+#endif
 	
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
