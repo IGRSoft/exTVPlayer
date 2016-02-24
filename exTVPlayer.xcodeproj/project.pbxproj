@@ -145,6 +145,9 @@
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
+		A58A0E3F1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58A0E3D1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m */; };
+		A58A0E401C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A58A0E3E1C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib */; };
+		A58A0E411C7DBFA600452E83 /* IGRCatalogPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58A0E3D1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m */; };
 		A58B0A7B1C7CEB4F00BBBCE5 /* IGREXCatalogTopShelfItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */; };
 		A58B0A8D1C7CEB5B00BBBCE5 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
 		A58F66EF1C47C33400D7518B /* IGRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */; };
@@ -616,6 +619,9 @@
 		A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
 		A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRDownloadManager.h; sourceTree = "<group>"; };
 		A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRDownloadManager.m; sourceTree = "<group>"; };
+		A58A0E3C1C7DBFA100452E83 /* IGRCatalogPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogPreviewViewController.h; sourceTree = "<group>"; };
+		A58A0E3D1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogPreviewViewController.m; sourceTree = "<group>"; };
+		A58A0E3E1C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGRCatalogPreviewViewController.xib; sourceTree = "<group>"; };
 		A58F66ED1C47C33400D7518B /* IGRSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSearchViewController.h; sourceTree = "<group>"; };
 		A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRSearchViewController.m; sourceTree = "<group>"; };
 		A58F66F01C47C42600D7518B /* IGRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSettingsViewController.h; sourceTree = "<group>"; };
@@ -1038,6 +1044,7 @@
 		A569ED6C1C25B062004EF247 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				A58A0E2A1C7DBF7900452E83 /* Preview */,
 				A583B89A1C525613002B0BE9 /* Cells */,
 				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
 				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
@@ -1151,6 +1158,16 @@
 				A5868D0A1C4A9CD30037D401 /* AFNetworking tvOS Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A58A0E2A1C7DBF7900452E83 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				A58A0E3C1C7DBFA100452E83 /* IGRCatalogPreviewViewController.h */,
+				A58A0E3D1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m */,
+				A58A0E3E1C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib */,
+			);
+			path = Preview;
 			sourceTree = "<group>";
 		};
 		A5E81BCE1C22B72D00EABFC5 = {
@@ -1552,6 +1569,7 @@
 			files = (
 				A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */,
 				A5654FD11C5A3F450000D882 /* iTunesArtwork in Resources */,
+				A58A0E401C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib in Resources */,
 				A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */,
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
@@ -1612,6 +1630,7 @@
 				A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */,
 				A5654E421C5964CF0000D882 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
 				A5654E391C5964850000D882 /* IGREXParser.m in Sources */,
+				A58A0E3F1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m in Sources */,
 				A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */,
 				A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */,
 				A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */,
@@ -1640,6 +1659,7 @@
 				A51F3BFA1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */,
 				A569ED5C1C257CA7004EF247 /* IGREntityExCatalog.m in Sources */,
 				A51F3BF61C23223900F6080A /* MagicalRecordStack+Actions.m in Sources */,
+				A58A0E411C7DBFA600452E83 /* IGRCatalogPreviewViewController.m in Sources */,
 				A51F3BD31C23223900F6080A /* NSNumber+MagicalDataImport.m in Sources */,
 				A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */,
 				A51F3BE01C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m in Sources */,

@@ -10,6 +10,7 @@
 #import "IGRChanelViewController_Private.h"
 
 #import "IGRCatalogViewController.h"
+#import "IGRCatalogPreviewViewController.h"
 
 #import "IGREntityExChanel.h"
 #import "IGREntityExCatalog.h"
@@ -24,7 +25,8 @@
 #import "SDiOSVersion.h"
 #endif
 
-@interface IGRChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
+@interface IGRChanelViewController () <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate,
+										UIViewControllerPreviewingDelegate, IGRCatalogPreviewViewControllerDelegate>
 
 @property (strong, nonatomic) UILabel *noContentLabel;
 @property (strong, nonatomic) UIActivityIndicatorView *parsingActivityIndicator;
@@ -160,6 +162,13 @@
 														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
+	
+	// Register for 3D Touch Previewing if available
+	self.definesPresentationContext = YES;
+	if (self.traitCollection.forceTouchCapability != UIForceTouchCapabilityUnavailable)
+	{
+		[self registerForPreviewingWithDelegate:self sourceView:self.view];
+	}
 #endif
 }
 
@@ -767,6 +776,47 @@
 			}
 		}
 	}
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate
+
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
+			  viewControllerForLocation:(CGPoint)location {
+	
+	NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
+	IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+	if (catalogCell)
+	{
+		self.lastSelectedItem = indexPath;
+		
+		previewingContext.sourceRect = catalogCell.frame;
+		NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0
+													  inSection:(indexPath.row + indexPath.section)];
+		IGREntityExCatalog *entityatalog = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
+		
+		IGRCatalogPreviewViewController *preview = [[IGRCatalogPreviewViewController alloc] initWithCatalog:entityatalog];
+		preview.delegate = self;
+		
+		return preview;
+	}
+	
+	return nil;
+}
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
+	 commitViewController:(UIViewController *)viewControllerToCommit {
+	
+	[self showDetailViewController:viewControllerToCommit sender:self];
+}
+
+
+- (void)openCatalogForPreview
+{
+	[self.catalogs selectItemAtIndexPath:self.lastSelectedItem
+								animated:NO
+						  scrollPosition:UICollectionViewScrollPositionNone];
+	
+	[self performSegueWithIdentifier:@"openCatalog" sender:self];
 }
 
 @end

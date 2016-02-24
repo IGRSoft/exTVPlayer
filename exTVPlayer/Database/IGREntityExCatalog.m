@@ -13,7 +13,7 @@
 
 @implementation IGREntityExCatalog
 
-+ (NSArray *)getHistory
++ (NSArray *)history
 {
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"viewedTimestamp != nil"];
 	NSArray *history = [IGREntityExCatalog MR_findAllSortedBy:@"viewedTimestamp" ascending:NO withPredicate:predicate];
@@ -24,7 +24,12 @@
 	return [history subarrayWithRange:NSMakeRange(0, count)];
 }
 
-+ (NSArray *)getFavorites
++ (IGREntityExCatalog *)lastViewed
+{
+	return [[IGREntityExCatalog history] firstObject];
+}
+
++ (NSArray *)favorites
 {
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
 	NSArray *favorites = [IGREntityExCatalog MR_findAllSortedBy:@"orderId" ascending:NO withPredicate:predicate];

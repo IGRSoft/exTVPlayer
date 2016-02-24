@@ -12,6 +12,8 @@
 #import "IGREXCatalogTopShelfItem.h"
 #import "IGRUserDefaults.h"
 #import "IGRCatalogViewController.h"
+#import "IGRSearchViewController.h"
+#import "IGRChanelViewController.h"
 
 @interface IGRAppDelegate ()
 
@@ -24,6 +26,11 @@
 static NSString * const kStoreMomdName = @"exTVPlayer.momd";
 static NSString * const kStoreName = @"exTVPlayer.sqlite";
 
+static NSString * const kLaunchItemSearch = @"com.igrsoft.exTVPlayer.search";
+static NSString * const kLaunchItemFavorit = @"com.igrsoft.exTVPlayer.favorit";
+static NSString * const kLaunchItemHistory = @"com.igrsoft.exTVPlayer.history";
+static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastviewed";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	self.userSettings = [[IGRUserDefaults alloc] init];
@@ -34,9 +41,54 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	[MagicalRecordStack setDefaultStack:stack];
 	
 	[self resetNotDownloadedTracks];
+
+	[self createDynamicShortcutItems];
+	
+#if	TARGET_OS_IOS
+	UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
+	[self performActionForShortcutItem:item];
+#endif
 	
 	return YES;
 }
+
+#if	TARGET_OS_IOS
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+	
+	[self performActionForShortcutItem:shortcutItem];
+	
+	completionHandler(YES);
+}
+
+- (void)performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem
+{
+	if (shortcutItem)
+	{
+		NSLog(@"We've launched from shortcut item: %@", shortcutItem.localizedTitle);
+	} else
+	{
+		NSLog(@"We've launched properly.");
+	}
+	
+	if ([shortcutItem.type isEqualToString:kLaunchItemSearch])
+	{
+		[self openSearch];
+	}
+	else if ([shortcutItem.type isEqualToString:kLaunchItemFavorit])
+	{
+		[self openFavorites];
+	}
+	else if ([shortcutItem.type isEqualToString:kLaunchItemHistory])
+	{
+		[self openHistory];
+	}
+	else if ([shortcutItem.type isEqualToString:kLaunchItemLastViewed])
+	{
+		NSDictionary *catalogInfo = shortcutItem.userInfo;
+		[self openCatalogId:catalogInfo[@"itemId"] force:NO];
+	}
+}
+#endif
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -47,7 +99,7 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:kApplicationWillResignActive object:nil];
 	
-	NSArray *entityHistory = [IGREntityExCatalog getHistory];
+	NSArray *entityHistory = [IGREntityExCatalog history];
 	NSMutableArray *history = [[NSMutableArray alloc] initWithCapacity:entityHistory.count];
 	
 	for (IGREntityExCatalog *catalogEntity in entityHistory)
@@ -61,7 +113,7 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 		[history addObject:data];
 	}
 	
-	NSArray *entityFavorites = [IGREntityExCatalog getFavorites];
+	NSArray *entityFavorites = [IGREntityExCatalog favorites];
 	NSMutableArray *favorites = [[NSMutableArray alloc] initWithCapacity:entityFavorites.count];
 	
 	for (IGREntityExCatalog *catalogEntity in entityFavorites)
@@ -106,15 +158,8 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	NSURLComponents *component = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
 	if ([component.scheme isEqualToString:@"excatalog"])
 	{
-		NSString *itemId = [[[component queryItems] firstObject] value];
-		UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
-		[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
-		
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-		IGRCatalogViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRCatalogViewController"];
-		[cvc setCatalogId:itemId];
-		
-		[tabBar presentViewController:cvc animated:YES completion:nil];
+		NSString *catalogId = [[[component queryItems] firstObject] value];
+		[self openCatalogId:catalogId force:YES];
 		
 		return YES;
 	}
@@ -207,6 +252,77 @@ static NSString * const kStoreName = @"exTVPlayer.sqlite";
 	}
 	
 	return destURL;
+}
+
+- (void)openCatalogId:(NSString *)aCatalogId force:(BOOL)aForce
+{
+	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+	
+	if (aForce)
+	{
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+		IGRCatalogViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRCatalogViewController"];
+		[cvc setCatalogId:aCatalogId];
+		
+		[tabBar presentViewController:cvc animated:YES completion:nil];
+	}
+	else
+	{
+		tabBar.selectedIndex = 3;
+		IGRChanelViewController *cvc = tabBar.selectedViewController;
+		[cvc performSegueWithIdentifier:@"openCatalog" sender:cvc];
+	}
+}
+
+- (void)openSearch
+{
+	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+	
+	tabBar.selectedIndex = 2;
+	
+	IGRSearchViewController *svc = tabBar.selectedViewController;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		
+		[svc activateSearchField];
+	});
+}
+
+- (void)openFavorites
+{
+	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+	
+	tabBar.selectedIndex = 1;
+}
+
+- (void)openHistory
+{
+	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
+	
+	tabBar.selectedIndex = 3;
+	
+}
+
+- (void)createDynamicShortcutItems
+{
+#if	TARGET_OS_IOS
+	IGREntityExCatalog *catalogEntity = [IGREntityExCatalog lastViewed];
+	
+	if (catalogEntity)
+	{
+		NSDictionary *catalog = @{@"itemId": catalogEntity.itemId};
+		
+		UIApplicationShortcutItem *catalogItem = [[UIApplicationShortcutItem alloc]initWithType:kLaunchItemLastViewed
+																				 localizedTitle:catalogEntity.name
+																			  localizedSubtitle:@""
+																						   icon:nil
+																					   userInfo:catalog];
+		[UIApplication sharedApplication].shortcutItems = @[catalogItem];
+	}
+#endif
 }
 
 @end

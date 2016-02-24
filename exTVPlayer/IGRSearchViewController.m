@@ -83,12 +83,23 @@
 	IGREntityAppSettings *settings = [self appSettings];
 	settings.lastPlayedCatalog = self.searchText;
 	
-	self.getListButton.enabled = self.searchText.length > 0;
+	BOOL isText = self.searchText.length > 0;
+	self.getListButton.enabled = isText;
+	
+	if (isText)
+	{
+		[self.getListButton becomeFirstResponder];
+	}
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	return [textField resignFirstResponder];
+}
+
+- (void)activateSearchField
+{
+	[self.catalogTextField becomeFirstResponder];
 }
 
 @end

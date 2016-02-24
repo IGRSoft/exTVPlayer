@@ -11,4 +11,6 @@
 
 @interface IGRSearchViewController : IGRBaseViewController
 
+- (void)activateSearchField;
+
 @end

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10112" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IGRCatalogPreviewViewController">
+            <connections>
+                <outlet property="imageView" destination="DRe-WY-uE5" id="ARS-Gd-da6"/>
+                <outlet property="titleLabel" destination="EPA-Ug-Hg4" id="TZk-7N-omh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="551"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DRe-WY-uE5">
+                    <rect key="frame" x="8" y="23" width="364" height="361"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPA-Ug-Hg4">
+                    <rect key="frame" x="8" y="392" width="364" height="151"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="151" id="8Lg-GA-faz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="top" secondItem="DRe-WY-uE5" secondAttribute="bottom" constant="8" id="0GM-8h-VeH"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="leading" secondItem="DRe-WY-uE5" secondAttribute="leading" id="4pV-pC-Rnh"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="KOR-Mi-PI4"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottomMargin" id="Pa3-rA-1wa"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="trailing" secondItem="DRe-WY-uE5" secondAttribute="trailing" id="eVE-sr-leu"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="top" secondItem="DRe-WY-uE5" secondAttribute="bottom" constant="8" symbolic="YES" id="lvx-QD-hOb"/>
+                <constraint firstItem="EPA-Ug-Hg4" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="oTR-w9-2ge"/>
+                <constraint firstItem="DRe-WY-uE5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" constant="15" id="old-uh-Jpd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="304" y="258.5"/>
+        </view>
+    </objects>
+</document>
