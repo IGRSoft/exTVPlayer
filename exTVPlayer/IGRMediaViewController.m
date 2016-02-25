@@ -380,9 +380,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 					
 					__weak typeof(self) weak = self;
 					void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
-						
-						weak.playerController.requiresLinearPlayback = NO;
-						
+												
 						AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
 						[weak removePlayerItemObservers:item];
 					};
