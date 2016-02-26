@@ -164,6 +164,7 @@
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
 		A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */; };
 		A5F372271C282FD500AB1395 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
+		A5FD73231C80BFC30035F1DD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5FD73211C80BFC30035F1DD /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -652,6 +653,10 @@
 		A5E81BE11C22B72D00EABFC5 /* IGRMainCatalogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGRMainCatalogController.m; sourceTree = "<group>"; };
 		A5F3720D1C282FD500AB1395 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
 		A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		A5FD73221C80BFC30035F1DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5FD73351C80BFE00035F1DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5FD73361C80BFE10035F1DD /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5FD73371C80BFE20035F1DD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -984,6 +989,7 @@
 				A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */,
 				A5654E311C5949740000D882 /* Main.storyboard */,
 				A5654DD91C5946F50000D882 /* Info.plist */,
+				A5FD73211C80BFC30035F1DD /* InfoPlist.strings */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -994,7 +1000,6 @@
 				A5005C911C7CAE5D00B7A766 /* exTVPlayer-tvOS.entitlements */,
 				A5654F971C5A0CFC0000D882 /* Assets-tvOS.xcassets */,
 				A5654E121C5947820000D882 /* InfoPlist.strings */,
-				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E161C5947820000D882 /* Main.storyboard */,
 				A5654E1C1C5947820000D882 /* Info.plist */,
 			);
@@ -1230,6 +1235,7 @@
 		A5E81BF11C22B7A500EABFC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E111C5947820000D882 /* tvOS */,
 				A5654DD81C5946F50000D882 /* iOS */,
 			);
@@ -1579,6 +1585,7 @@
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
 				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
+				A5FD73231C80BFC30035F1DD /* InfoPlist.strings in Resources */,
 				A5654FC11C5A0DB80000D882 /* Assets-iOS.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1808,6 +1815,7 @@
 				A5654E211C5947820000D882 /* uk */,
 			);
 			name = Localizable.strings;
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 		A5654E161C5947820000D882 /* Main.storyboard */ = {
@@ -1838,6 +1846,17 @@
 				A5E125D71C5FA7E20070C1BF /* uk */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A5FD73211C80BFC30035F1DD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5FD73221C80BFC30035F1DD /* Base */,
+				A5FD73351C80BFE00035F1DD /* en */,
+				A5FD73361C80BFE10035F1DD /* uk */,
+				A5FD73371C80BFE20035F1DD /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
