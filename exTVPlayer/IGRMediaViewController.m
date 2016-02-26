@@ -135,7 +135,11 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 #endif
 	
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	
+	if (MR_DEFAULT_CONTEXT.hasChanges)
+	{
+		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
 }
 
 - (void)didReceiveMemoryWarning

@@ -197,6 +197,15 @@
 	[self.catalogs addGestureRecognizer:lpgr];
 #endif
 	
+#if	TARGET_OS_IOS
+	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+	/* listen for notifications from the player */
+	[defaultCenter addObserver:self
+					  selector:@selector(didMergeChangesFromiCloud:)
+						  name:MagicalRecordDidMergeChangesFromiCloudNotification
+						object:nil];
+#endif
+	
 	[super viewWillAppear:animated];
 }
 
@@ -231,6 +240,8 @@
 		[obj setSelected:NO];
 		[obj setHighlighted:NO];
 	}];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[super viewWillDisappear:animated];
 }
@@ -818,6 +829,14 @@
 						  scrollPosition:UICollectionViewScrollPositionNone];
 	
 	[self performSegueWithIdentifier:@"openCatalog" sender:self];
+}
+
+#pragma mark - NSNotificationCenter
+
+- (void)didMergeChangesFromiCloud:(NSNotification*)aNotification
+{
+	[self.fetchedResultsController performFetch:nil];
+	[self.catalogs reloadData];
 }
 
 @end

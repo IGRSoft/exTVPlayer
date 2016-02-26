@@ -551,6 +551,7 @@
 		A51F3BCF1C23223900F6080A /* SQLiteWithSavingContextMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteWithSavingContextMagicalRecordStack.m; sourceTree = "<group>"; };
 		A51F3BFB1C23245000F6080A /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = exTVPlayer.xcdatamodel; sourceTree = "<group>"; };
+		A5208D691C80525C0029D5B8 /* exTVPlayer-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "exTVPlayer-iOS.entitlements"; path = "../../exTVPlayer-iOS.entitlements"; sourceTree = "<group>"; };
 		A53A17C61C74D23C0005898D /* IGRCountryParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCountryParser.h; sourceTree = "<group>"; };
 		A53A17C71C74D23C0005898D /* IGRCountryParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCountryParser.m; sourceTree = "<group>"; };
 		A55901C31C60D64C007D49E4 /* SDiOSVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDiOSVersion.h; path = SDVersion/SDiOSVersion/SDiOSVersion.h; sourceTree = "<group>"; };
@@ -977,6 +978,7 @@
 		A5654DD81C5946F50000D882 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5208D691C80525C0029D5B8 /* exTVPlayer-iOS.entitlements */,
 				A5654FCE1C5A3F450000D882 /* iTunesArtwork */,
 				A5654FBF1C5A0D3B0000D882 /* Assets-iOS.xcassets */,
 				A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */,
@@ -1335,6 +1337,9 @@
 						DevelopmentTeam = DMP42GVPJ3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1883,7 +1888,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
+				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
@@ -1907,6 +1914,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
+				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,

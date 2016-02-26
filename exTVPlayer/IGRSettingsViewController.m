@@ -79,8 +79,13 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 						@"name": [NSString stringWithFormat:@"%@%@", @(IGRSeekBack_60), NSLocalizedString(@"Sec", nil)]},
 					 ];
 	
-	[super viewDidLoad];
+	[self updateViews];
 	
+	[super viewDidLoad];
+}
+
+- (void)updateViews
+{
 	[self updateViewForSettings:IGRSettingsType_Source from:self.sourceButton];
 	[self updateViewForSettings:IGRSettingsType_LanguageCategory from:self.languageCategoryButton];
 	[self updateViewForSettings:IGRSettingsType_History from:self.historySizeButton];
@@ -88,9 +93,30 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	[self updateViewForSettings:IGRSettingsType_SeekBack from:self.seekBackButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+#if	TARGET_OS_IOS
+	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+	/* listen for notifications from the player */
+	[defaultCenter addObserver:self
+					  selector:@selector(didMergeChangesFromiCloud:)
+						  name:MagicalRecordDidMergeChangesFromiCloudNotification
+						object:nil];
+#endif
+	
+	[super viewWillAppear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -290,6 +316,13 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	aTrack.localName = nil;
 	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
 	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+}
+
+#pragma mark - NSNotificationCenter
+
+- (void)didMergeChangesFromiCloud:(NSNotification*)aNotification
+{
+	[self updateViews];
 }
 
 @end

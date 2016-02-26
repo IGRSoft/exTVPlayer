@@ -37,7 +37,11 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	
 	NSString *storeURL = [self copyDefaultStoreIfNecessary];
 	[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
-	MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtPath:storeURL];
+	AutoMigratingMagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtPath:storeURL];
+#if	TARGET_OS_IOS
+	stack.storeOptions = @{NSPersistentStoreUbiquitousContentNameKey : @"exTVPlayerUbiquityStore"};
+	[stack.context MR_observeiCloudChangesInCoordinator:stack.coordinator];
+#endif
 	[MagicalRecordStack setDefaultStack:stack];
 	
 	[self resetNotDownloadedTracks];
@@ -140,12 +144,18 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	
+#if	TARGET_OS_IOS
+	AutoMigratingMagicalRecordStack *stack = [AutoMigratingMagicalRecordStack defaultStack];
+	[stack.context MR_stopObservingiCloudChangesInCoordinator:stack.coordinator];
+#endif
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-
+#if	TARGET_OS_IOS
+	AutoMigratingMagicalRecordStack *stack = [AutoMigratingMagicalRecordStack defaultStack];
+	[stack.context MR_observeiCloudChangesInCoordinator:stack.coordinator];
+#endif
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -155,7 +165,10 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	
+#if	TARGET_OS_IOS
+	AutoMigratingMagicalRecordStack *stack = [AutoMigratingMagicalRecordStack defaultStack];
+	[stack.context MR_stopObservingiCloudChangesInCoordinator:stack.coordinator];
+#endif
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options

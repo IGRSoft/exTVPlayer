@@ -143,6 +143,20 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 #endif
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+#if	TARGET_OS_IOS
+	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+	/* listen for notifications from the player */
+	[defaultCenter addObserver:self
+					  selector:@selector(didMergeChangesFromiCloud:)
+						  name:MagicalRecordDidMergeChangesFromiCloudNotification
+						object:nil];
+#endif
+	
+	[super viewWillAppear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -186,12 +200,9 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 {
 	[ super viewWillDisappear:animated];
 	
-	[self.downloadManager removeAllProgresses];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	if (MR_DEFAULT_CONTEXT.hasChanges)
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	[self.downloadManager removeAllProgresses];
 	
 #if	TARGET_OS_TV
 	for (UIGestureRecognizer *gr in self.tableView.gestureRecognizers)
@@ -669,6 +680,14 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 			completionHandler(YES);
 		}];
 	}
+}
+
+#pragma mark - NSNotificationCenter
+
+- (void)didMergeChangesFromiCloud:(NSNotification*)aNotification
+{
+	[self.fetchedResultsController performFetch:nil];
+	[self.tableView reloadData];
 }
 
 @end
