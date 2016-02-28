@@ -30,7 +30,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 @property (assign, nonatomic) BOOL needResumeVideo;
 @property (assign, nonatomic) BOOL isPlaying;
 
-@property (nonatomic, strong) AVPlayer						*player;
+@property (nonatomic, strong) AVQueuePlayer					*player;
 @property (nonatomic, strong) AVPlayerViewController		*playerController;
 @property (nonatomic, strong) AVAudioSession				*session;
 
@@ -45,10 +45,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	_session = [AVAudioSession sharedInstance];
 	[self.session setCategory:AVAudioSessionCategoryPlayback error:nil];
 	
-	_player = [[AVPlayer alloc] init];
-	
 	_playerController = [[AVPlayerViewController alloc] init];
-	self.playerController.player = self.player;
+	
 	self.playerController.videoGravity = AVLayerVideoGravityResizeAspect;
 	
 #if	TARGET_OS_IOS
@@ -119,6 +117,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 - (void)prerareViewForDisappear
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self removeObserverFromUnplayedTracks];
 	
 	Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
 	if (currentTime > 60)
@@ -139,6 +138,18 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	if (MR_DEFAULT_CONTEXT.hasChanges)
 	{
 		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+	}
+}
+
+- (void)removeObserverFromUnplayedTracks
+{
+	NSUInteger pos = MIN((self.currentTrackPosition + 1), self.playlist.count);
+	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(pos,
+																  self.playlist.count - pos)];
+	
+	for(AVPlayerItem *item in items)
+	{
+		[self removePlayerItemObservers:item];
 	}
 }
 
@@ -202,12 +213,20 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	self.playlist = [NSArray arrayWithArray:playList];
 }
 
-- (void)playNextTrack:(id)sender
+- (void)playNextTrackFromRemoteControl:(BOOL)isFromRemoteControl
 {
 	if ((self.currentTrackPosition + 1) < self.playlist.count)
 	{
+		if (isFromRemoteControl)
+		{
+			[self removeObserverFromUnplayedTracks];
+		}
 		++self.currentTrackPosition;
-		[self playCurrentTrack];
+		
+		if (isFromRemoteControl)
+		{
+			[self playCurrentTrack];
+		}
 	}
 	else
 	{
@@ -215,12 +234,20 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	}
 }
 
-- (void)playPreviousTrack:(id)sender
+- (void)playPreviousTrackFromRemoteControl:(BOOL)isFromRemoteControl
 {
 	if ((self.currentTrackPosition - 1) >= 0)
 	{
+		if (isFromRemoteControl)
+		{
+			[self removeObserverFromUnplayedTracks];
+		}
 		--self.currentTrackPosition;
-		[self playCurrentTrack];
+		
+		if (isFromRemoteControl)
+		{
+			[self playCurrentTrack];
+		}
 	}
 	else
 	{
@@ -239,10 +266,18 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	[self updatePlaylist];
 	
-	AVPlayerItem *item = self.playlist[self.currentTrackPosition];
-	[self addPlayerItemObservers:item];
+	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(self.currentTrackPosition,
+																  self.playlist.count - self.currentTrackPosition)];
 	
-	[self.player replaceCurrentItemWithPlayerItem:item];
+	for(AVPlayerItem *item in items)
+	{
+		[self addPlayerItemObservers:item];
+	}
+	
+	_player = [[AVQueuePlayer alloc] initWithItems:items];
+	self.player.actionAtItemEnd = AVPlayerActionAtItemEndAdvance;
+	
+	self.playerController.player = self.player;
 	
 	[self.player play];
 }
@@ -280,7 +315,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		if (deltaTouchTime < timeLimit)
 		{
 			saveTrackTimePosition();
-			[self playPreviousTrack:nil];
+			[self playPreviousTrackFromRemoteControl:YES];
 		}
 		else
 		{
@@ -292,7 +327,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		if (deltaTouchTime < timeLimit)
 		{
 			saveTrackTimePosition();
-			[self playNextTrack:nil];
+			[self playNextTrackFromRemoteControl:YES];
 		}
 		else
 		{
@@ -307,15 +342,15 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 {
 	self.currentTrack.status = @(IGRTrackState_Done);
 	self.currentTrack.position = @(0.0);
-	
+		
 	[IGRSettingsViewController removeSavedTrack:self.currentTrack];
 	
-	[self playNextTrack:nil];
+	[self playNextTrackFromRemoteControl:YES];
 }
 
 - (void)itemFailedToPlayToEnd:(NSNotification*)aNotification
 {
-	[self playNextTrack:nil];
+	[self playNextTrackFromRemoteControl:YES];
 }
 
 #if	TARGET_OS_TV
