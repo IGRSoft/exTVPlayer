@@ -22,7 +22,7 @@
 #endif
 
 static const NSInteger kUpdatedLimitMinutes = 5;
-static BOOL _isLocked = NO;
+static BOOL _isLocked = YES;
 
 const NSUInteger kPrefixLength = 7;
 unichar kPrefix[kPrefixLength] =	{0x68, 0x74, 0x74, 0x70, 0x3A,
@@ -65,7 +65,10 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		}
 		else
 		{
-			_isLocked = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
+			if ([AFNetworkReachabilityManager sharedManager].isReachable)
+			{
+				_isLocked = [NSData dataWithContentsOfURL:[NSURL URLWithString:kIGRLock]].bytes > 0;
+			}
 		}
 	}
 #else
