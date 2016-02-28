@@ -15,33 +15,12 @@ typedef void (^TVContentItemCompletionBlock)(NSArray *contentItems, NSError *err
 
 @interface ServiceProvider ()
 
-@property (nonatomic, copy) NSArray *items;
 @property (nonatomic) IGRUserDefaults *userSettings;
 
 @end
 
 @implementation ServiceProvider
 
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self)
-	{
-		self.items = @[];
-		[self loadSectionedItemsWithCompletion:^(NSArray *contentItems, NSError *error) {
-			
-			if (contentItems.count > 0)
-			{
-				self.items = [contentItems copy];
-				[[NSNotificationCenter defaultCenter] postNotificationName:TVTopShelfItemsDidChangeNotification
-																	object:nil];
-			}
-		}];
-    }
-	
-    return self;
-}
 
 #pragma mark - TVTopShelfProvider protocol
 
@@ -53,33 +32,29 @@ typedef void (^TVContentItemCompletionBlock)(NSArray *contentItems, NSError *err
 
 - (NSArray <TVContentItem *> *)topShelfItems
 {
-    return [self.items copy];
+	NSArray *items = [self loadItems];
+	
+	return items;
 }
 
-- (void)loadSectionedItemsWithCompletion:(TVContentItemCompletionBlock)completionBlock
+- (NSArray *)loadItems
 {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		
-		self.userSettings = [[IGRUserDefaults alloc] init];
-		
-		TVContentItem *favorites = [self sectionFromIdentifier:@"Favorites" withItems:self.userSettings.favorites];
-		TVContentItem *history = [self sectionFromIdentifier:@"History" withItems:self.userSettings.history];
-
-		NSMutableArray *contentItems = [[NSMutableArray alloc] initWithCapacity:2];
-		if (favorites)
-		{
-			[contentItems addObject:favorites];
-		}
-		if (history)
-		{
-			[contentItems addObject:history];
-		}
-		
-		if (completionBlock)
-		{
-			completionBlock(contentItems, nil);
-		}
-	});
+	self.userSettings = [[IGRUserDefaults alloc] init];
+	
+	TVContentItem *favorites = [self sectionFromIdentifier:@"Favorites" withItems:self.userSettings.favorites];
+	TVContentItem *history = [self sectionFromIdentifier:@"History" withItems:self.userSettings.history];
+	
+	NSMutableArray *contentItems = [[NSMutableArray alloc] initWithCapacity:2];
+	if (favorites)
+	{
+		[contentItems addObject:favorites];
+	}
+	if (history)
+	{
+		[contentItems addObject:history];
+	}
+	
+	return [contentItems copy];
 }
 
 - (TVContentItem *)sectionFromIdentifier:(NSString *)anIdentifier withItems:(NSArray *)anItems
