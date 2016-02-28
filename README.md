@@ -6,28 +6,41 @@ EX Player
 
 EX Player allow you watch video from EX.UA site on Apple TV 4G (with tvOS) and for all iPads, iPhones and iPods Touch with iOS 8.0+.
  
-**You can:**
-* Watch video from any Languages and any Category;
-* Search by Title or Catalog ID;
+Ex.ua is said to be the largest file-sharing service in Ukraine!!!
 
-**Plays most codecs:**
-* MPEG-2, MPEG-4, H.264, MKV, WebM, WMV, MP3... 
+EX Player allows you free acces to all ex.ua video content.
+
+**For you:**
+* Movies & Series;
+* Cartoons & Anime;
+* Sport;
+* Documentaries;
+* Shows;
+* Lessons & Trainings;
+* Live Concerts;
+* Trailers;
+* etc.
 
 **Some features:**
+
 * Watch any video from ex.ua;
 * Save tracks;
 * Remembers watched tracks;
 * Remembers track position;
 * History;
-* Controll from Apple Remore;
-* Autoplay next track.
-
-Control
+* Control from Apple Remore;
+* Autoplay next track. 
+* Dynamic Top Shelf (tvOS);
+* Picture in Picture support (iOS);
+* 3D Touch support (iOS);
+* Sync history and favorites via iCloud (iOS).
+ 
+**Control**
 -------------
 
 [Control #1][control1], [Control #2][control2], [Control #3][control3],
 
-ScreenShots
+**ScreenShots**
 -------------
 
 [Screenshot #1][screen1], [Screenshot #2][screen2],
@@ -43,12 +56,7 @@ Credits
 
 Developer: Vitalii (Korich) Parovishnyk 
 
-Known Issues
--------------
-
-* Doesn't support stream buffering.
-
-Licence
+**Licence**
 -------------
 
 This application is free open source software and licensed under the LGPL 2.1.
