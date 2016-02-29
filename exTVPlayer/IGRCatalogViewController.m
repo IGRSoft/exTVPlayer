@@ -480,9 +480,6 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 			if (trackCell.isHighlighted)
 			{
 				UIAlertControllerStyle style = UIAlertControllerStyleActionSheet;
-#if	TARGET_OS_IOS
-				style = UIAlertControllerStyleAlert;
-#endif
 				UIAlertController *view = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Tracks Options", @"")
 																			  message:@""
 																	   preferredStyle:style];
@@ -591,11 +588,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 				[self presentViewController:view animated:YES completion:nil];
 				
 				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-#if TARGET_OS_TV
 					[trackCell setHighlighted:YES];
-#else
-					[trackCell setHighlighted:NO];
-#endif
 				});
 				
 				break;

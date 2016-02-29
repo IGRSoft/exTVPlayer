@@ -157,6 +157,7 @@
 		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
+		A591841A1C844345003516E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59184191C844345003516E6 /* CloudKit.framework */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5BF3ACC1C7CBF4C00ACF004 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */; };
@@ -638,6 +639,7 @@
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		A59184191C844345003516E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -672,6 +674,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A591841A1C844345003516E6 /* CloudKit.framework in Frameworks */,
 				A5005C561C7C6A1C00B7A766 /* MediaPlayer.framework in Frameworks */,
 				A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */,
 				A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */,
@@ -779,6 +782,7 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A59184191C844345003516E6 /* CloudKit.framework */,
 				A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */,
 				A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */,
 				A5654F7B1C5972E70000D882 /* AVFoundation.framework */,
@@ -1970,7 +1974,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_BUILD_NUMBER = 1.1.0;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1990,7 +1995,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				VERSION_INFO_EXPORT_DECL = 27;
 			};
 			name = Debug;
 		};
@@ -2011,7 +2015,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_BUILD_NUMBER = 1.1.0;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2025,7 +2030,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				VALIDATE_PRODUCT = YES;
-				VERSION_INFO_EXPORT_DECL = 27;
 			};
 			name = Release;
 		};

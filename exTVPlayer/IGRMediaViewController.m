@@ -55,7 +55,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	{
 		self.playerController.delegate = self.delegate;
 		self.playerController.allowsPictureInPicturePlayback = YES;
-		self.playerController.view.translatesAutoresizingMaskIntoConstraints = true;
+		self.view.translatesAutoresizingMaskIntoConstraints = YES;
+		self.playerController.view.translatesAutoresizingMaskIntoConstraints = YES;
 	}
 #endif
 	
@@ -345,12 +346,12 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		
 	[IGRSettingsViewController removeSavedTrack:self.currentTrack];
 	
-	[self playNextTrackFromRemoteControl:YES];
+	[self playNextTrackFromRemoteControl:NO];
 }
 
 - (void)itemFailedToPlayToEnd:(NSNotification*)aNotification
 {
-	[self playNextTrackFromRemoteControl:YES];
+	[self playNextTrackFromRemoteControl:NO];
 }
 
 #if	TARGET_OS_TV

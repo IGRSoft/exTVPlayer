@@ -39,7 +39,10 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	[MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
 	AutoMigratingMagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtPath:storeURL];
 #if	TARGET_OS_IOS
-	stack.storeOptions = @{NSPersistentStoreUbiquitousContentNameKey : @"exTVPlayerUbiquityStore"};
+	stack.storeOptions = @{
+						   NSPersistentStoreUbiquitousContentNameKey : @"exTVPlayerUbiquityStore",
+						   NSPersistentStoreUbiquitousContentURLKey:[self cloudDirectory]
+						   };
 	[stack.context MR_observeiCloudChangesInCoordinator:stack.coordinator];
 #endif
 	[MagicalRecordStack setDefaultStack:stack];
@@ -270,6 +273,18 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	}
 	
 	return destURL;
+}
+
+- (NSURL *)cloudDirectory
+{
+	NSFileManager *fileManager=[NSFileManager defaultManager];
+	NSString *teamID = @"iCloud";
+	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+	NSString *cloudRoot = [NSString stringWithFormat:@"%@.%@", teamID, bundleID];
+	NSURL *cloudRootURL = [fileManager URLForUbiquityContainerIdentifier:cloudRoot];
+	NSLog (@"cloudRootURL = %@", cloudRootURL);
+	
+	return cloudRootURL;
 }
 
 - (void)openCatalogId:(NSString *)aCatalogId force:(BOOL)aForce
