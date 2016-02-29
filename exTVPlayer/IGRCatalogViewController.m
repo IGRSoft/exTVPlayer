@@ -278,7 +278,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			[_mediaViewController setPlaylist:(self.fetchedResultsController).sections
-										 position:self.tableView.indexPathForSelectedRow.section];
+									 position:self.tableView.indexPathForSelectedRow.section];
 		});
 	}
 }
@@ -386,7 +386,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	}
 }
 
-#pragma mark UITableViewRowAction
+#pragma mark - UITableViewRowAction
 
 #if	TARGET_OS_IOS
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -395,50 +395,101 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 	
 	__weak typeof(self) weak = self;
 	IGRExItemCell *trackCell = (IGRExItemCell *)[tableView cellForRowAtIndexPath:indexPath];
+	
 	UITableViewRowAction *actionSaveTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-																			   title:NSLocalizedString(@"Save Track", @"")
+																			   title:@"\U0001F4E5"
 																			 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
 											 {
-												 [weak.tableView setEditing:NO animated:YES];
 												 [weak startDownloadTrack:track
 																 withCell:trackCell
 															   onPosition:indexPath];
+												 
+												 [weak.tableView setEditing:NO animated:YES];
 											 }];
 	
 	UITableViewRowAction *actionCancelDownload = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-																					title:NSLocalizedString(@"Cancel Download", @"")
+																					title:@"\U0001F6AB"
 																				  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
 												  {
-													  [weak.tableView setEditing:NO animated:YES];
 													  [weak cancelDownloadTrack:track onPosition:indexPath];
+													  
+													  [weak.tableView setEditing:NO animated:YES];
 												  }];
 	
 	UITableViewRowAction *actionRemoveDownloadedTrack = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-																						   title:NSLocalizedString(@"Remove Track", @"")
+																						   title:@"\u274C"
 																						 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
 														 {
-															 [weak.tableView setEditing:NO animated:YES];
 															 [weak removeSavedTrack:track onPosition:indexPath];
+															 
+															 [weak.tableView setEditing:NO animated:YES];
 														 }];
 	
 	actionSaveTrack.backgroundColor = IGR_LIGHTBLUECOLOR;
 	actionCancelDownload.backgroundColor = IGR_LIGHTBLUECOLOR;
 	actionRemoveDownloadedTrack.backgroundColor = IGR_LIGHTBLUECOLOR;
 	
-	if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Web)])
+	__weak typeof(indexPath) weakIndexPath = indexPath;
+	UITableViewRowAction *markPlayedAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+																				title:@"\u26AA\uFE0F"
+																			  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+											  {
+												  track.status = @(IGRTrackState_Done);
+												  track.position = @0;
+												  
+												  [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+												  
+												  [weak.tableView setEditing:NO animated:YES];
+											  }];
+
+	
+	UITableViewRowAction *markUnplayedAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+																			   title:@"\U0001F535"
+																			 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+											 {
+												 track.status = @(IGRTrackState_New);
+												 track.position = @0;
+												 
+												 [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+												 
+												 [weak.tableView setEditing:NO animated:YES];
+											 }];
+	
+	markPlayedAction.backgroundColor = IGR_YELLOWCOLOR;
+	markUnplayedAction.backgroundColor = IGR_YELLOWCOLOR;
+	
+	NSMutableArray *actions = [NSMutableArray arrayWithCapacity:3];
+	
+	switch (track.dataStatus.integerValue)
 	{
-		return @[actionSaveTrack];
-	}
-	else if ([track.dataStatus isEqualToNumber:@(IGRTrackDataStatus_Downloading)])
-	{
-		return @[actionCancelDownload];
-	}
-	else
-	{
-		return @[actionRemoveDownloadedTrack];
+		case IGRTrackDataStatus_Web:
+			[actions addObject:actionSaveTrack];
+			break;
+			
+		case IGRTrackDataStatus_Downloading:
+			[actions addObject:actionCancelDownload];
+			break;
+		case IGRTrackDataStatus_Local:
+			[actions addObject:actionRemoveDownloadedTrack];
+			break;
 	}
 	
-	return @[];
+	switch (track.status.integerValue)
+	{
+		case IGRTrackState_New:
+			[actions addObject:markPlayedAction];
+			break;
+			
+		case IGRTrackState_Half:
+			[actions addObject:markPlayedAction];
+			[actions addObject:markUnplayedAction];
+			break;
+		case IGRTrackState_Done:
+			[actions addObject:markUnplayedAction];
+			break;
+	}
+	
+	return actions;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -534,32 +585,32 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 				[view addAction:action];
 				
 				UIAlertAction *markPlayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Played", @"")
-																			style:UIAlertActionStyleDefault
-																		  handler:^(UIAlertAction * action)
-													{
-														
-														track.status = @(IGRTrackState_Done);
-														track.position = @0;
-														
-														[weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-														
-														[view dismissViewControllerAnimated:YES completion:nil];
-														
-													}];
-				
-				UIAlertAction *markUnplayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Unplayed", @"")
 																		   style:UIAlertActionStyleDefault
 																		 handler:^(UIAlertAction * action)
-													  {
-														  
-														  track.status = @(IGRTrackState_New);
-														  track.position = @0;
-														  
-														  [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-														  
-														  [view dismissViewControllerAnimated:YES completion:nil];
-														  
-													  }];
+												   {
+													   
+													   track.status = @(IGRTrackState_Done);
+													   track.position = @0;
+													   
+													   [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+													   
+													   [view dismissViewControllerAnimated:YES completion:nil];
+													   
+												   }];
+				
+				UIAlertAction *markUnplayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Unplayed", @"")
+																			 style:UIAlertActionStyleDefault
+																		   handler:^(UIAlertAction * action)
+													 {
+														 
+														 track.status = @(IGRTrackState_New);
+														 track.position = @0;
+														 
+														 [weak.tableView reloadRowsAtIndexPaths:@[weakIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+														 
+														 [view dismissViewControllerAnimated:YES completion:nil];
+														 
+													 }];
 				
 				switch (track.status.integerValue)
 				{
