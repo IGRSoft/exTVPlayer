@@ -533,7 +533,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 				
 				[view addAction:action];
 				
-				UIAlertAction *markPlayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark sa Played", @"")
+				UIAlertAction *markPlayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Played", @"")
 																			style:UIAlertActionStyleDefault
 																		  handler:^(UIAlertAction * action)
 													{
@@ -547,7 +547,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 														
 													}];
 				
-				UIAlertAction *markUnplayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark sa Unplayed", @"")
+				UIAlertAction *markUnplayedAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Mark as Unplayed", @"")
 																		   style:UIAlertActionStyleDefault
 																		 handler:^(UIAlertAction * action)
 													  {
