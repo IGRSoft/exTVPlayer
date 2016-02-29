@@ -1869,12 +1869,8 @@
 		A5005C7B1C7CA1CD00B7A766 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer.exTVPlayerTopShelf;
@@ -1889,12 +1885,8 @@
 		A5005C7C1C7CA1CD00B7A766 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer.exTVPlayerTopShelf;
@@ -1913,7 +1905,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
@@ -1938,8 +1929,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
@@ -1975,7 +1965,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_BUILD_NUMBER = 1.1.0;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2013,10 +2003,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_BUILD_NUMBER = 1.1.0;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2040,7 +2029,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-tvOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -2065,8 +2053,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-tvOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
