@@ -15,4 +15,6 @@
 
 @property (assign, nonatomic, readonly) BOOL isHighlighted;
 
+@property (weak,nonatomic) id<UIViewControllerPreviewingDelegate> previewingDelegate;
+
 @end

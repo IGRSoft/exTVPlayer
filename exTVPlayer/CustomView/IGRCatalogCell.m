@@ -73,4 +73,17 @@
 	[self setNeedsDisplay];
 }
 
+- (void)setPreviewingDelegate:(id<UIViewControllerPreviewingDelegate>)previewingDelegate{
+	
+	if (!_previewingDelegate)
+	{
+		_previewingDelegate = previewingDelegate;
+		
+		UIViewController *controller = (UIViewController *)previewingDelegate;
+		controller.definesPresentationContext = YES;
+		[controller registerForPreviewingWithDelegate:previewingDelegate sourceView:self.contentView];
+	}
+}
+
+
 @end

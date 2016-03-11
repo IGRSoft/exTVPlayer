@@ -162,14 +162,6 @@
 														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
-	
-	// Register for 3D Touch Previewing if available
-	self.definesPresentationContext = YES;
-	if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
-		self.traitCollection.forceTouchCapability != UIForceTouchCapabilityUnavailable)
-	{
-		[self registerForPreviewingWithDelegate:self sourceView:self.view];
-	}
 #endif
 }
 
@@ -557,6 +549,16 @@
 				  placeholderImage:nil];
 	
 	cell.favorit = (catalog.isFavorit).boolValue;
+
+#if	TARGET_OS_IOS
+	// Register for 3D Touch Previewing if available
+	
+	if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
+		self.traitCollection.forceTouchCapability != UIForceTouchCapabilityUnavailable)
+	{
+		cell.previewingDelegate = self;
+	}
+#endif
 	
 	return cell;
 }
@@ -795,7 +797,10 @@
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
 			  viewControllerForLocation:(CGPoint)location {
 	
-	NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
+	UIView *contentView = previewingContext.sourceView;
+	CGPoint iLocation = [contentView convertPoint:location toView:self.collectionView];
+	
+	NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:iLocation];
 	IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
 	if (catalogCell)
 	{

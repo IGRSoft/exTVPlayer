@@ -340,7 +340,6 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 	
 	tabBar.selectedIndex = 3;
-	
 }
 
 - (void)createDynamicShortcutItems
