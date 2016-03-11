@@ -346,18 +346,22 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 - (void)createDynamicShortcutItems
 {
 #if	TARGET_OS_IOS
-	IGREntityExCatalog *catalogEntity = [IGREntityExCatalog lastViewed];
-	
-	if (catalogEntity)
+	id shortcutItemClass = NSClassFromString(@"UIApplicationShortcutItem");
+	if (shortcutItemClass)
 	{
-		NSDictionary *catalog = @{@"itemId": catalogEntity.itemId};
+		IGREntityExCatalog *catalogEntity = [IGREntityExCatalog lastViewed];
 		
-		UIApplicationShortcutItem *catalogItem = [[UIApplicationShortcutItem alloc]initWithType:kLaunchItemLastViewed
-																				 localizedTitle:catalogEntity.name
-																			  localizedSubtitle:@""
-																						   icon:nil
-																					   userInfo:catalog];
-		[UIApplication sharedApplication].shortcutItems = @[catalogItem];
+		if (catalogEntity)
+		{
+			NSDictionary *catalog = @{@"itemId": catalogEntity.itemId};
+			
+			UIApplicationShortcutItem *catalogItem = [[UIApplicationShortcutItem alloc]initWithType:kLaunchItemLastViewed
+																					 localizedTitle:catalogEntity.name
+																				  localizedSubtitle:@""
+																							   icon:nil
+																						   userInfo:catalog];
+			[UIApplication sharedApplication].shortcutItems = @[catalogItem];
+		}
 	}
 #endif
 }

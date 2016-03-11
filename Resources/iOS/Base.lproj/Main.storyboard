@@ -370,7 +370,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onChangeLanguage:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="lE3-YQ-e6g"/>
+                                            <action selector="onChangeLanguage:" destination="H8i-pE-L6u" eventType="touchUpInside" id="vTy-YS-53a"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saf-Ks-NQo">
@@ -387,7 +387,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onChangeHistorySize:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="Pyq-yy-5mB"/>
+                                            <action selector="onChangeHistorySize:" destination="H8i-pE-L6u" eventType="touchUpInside" id="fvD-Sm-ajW"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTF-SF-SQy">
@@ -404,7 +404,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onCleenAllSavedTracks:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="ZdS-Rk-B0a"/>
+                                            <action selector="onCleenAllSavedTracks:" destination="H8i-pE-L6u" eventType="touchUpInside" id="wM5-nt-mZT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6o-Zn-Ws8">
@@ -421,7 +421,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onChangeSource:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="MXW-Wp-eGO"/>
+                                            <action selector="onChangeSource:" destination="H8i-pE-L6u" eventType="touchUpInside" id="Ifu-32-zKV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9N2-am-hhx">
@@ -438,7 +438,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onCleenAllSavedTracks:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="JgN-I9-AJn"/>
+                                            <action selector="onRemovePlayedSavedTracks:" destination="H8i-pE-L6u" eventType="touchUpInside" id="brM-wD-hAm"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxM-dl-cJ3">
@@ -455,7 +455,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onChangeSeekBack:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="huc-VS-BFm"/>
+                                            <action selector="onChangeSeekBack:" destination="H8i-pE-L6u" eventType="touchUpInside" id="btf-xE-zUF"/>
                                         </connections>
                                     </button>
                                 </subviews>

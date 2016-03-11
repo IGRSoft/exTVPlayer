@@ -158,6 +158,8 @@
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
 		A591841A1C844345003516E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59184191C844345003516E6 /* CloudKit.framework */; };
+		A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
+		A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5BF3ACC1C7CBF4C00ACF004 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */; };
@@ -640,6 +642,7 @@
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		A59184191C844345003516E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		A59BD5041C92D2C100F27723 /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -1239,6 +1242,7 @@
 		A5E81BF11C22B7A500EABFC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A59BD5041C92D2C100F27723 /* ru_rss.xml */,
 				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E111C5947820000D882 /* tvOS */,
 				A5654DD81C5946F50000D882 /* iOS */,
@@ -1330,6 +1334,7 @@
 		A5E81BCF1C22B72D00EABFC5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = IGR;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "IGR Software";
 				TargetAttributes = {
@@ -1585,6 +1590,7 @@
 				A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */,
 				A5654FD11C5A3F450000D882 /* iTunesArtwork in Resources */,
 				A58A0E401C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib in Resources */,
+				A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */,
 				A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */,
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
@@ -1601,6 +1607,7 @@
 				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
 				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
 				A5654F981C5A0CFC0000D882 /* Assets-tvOS.xcassets in Resources */,
+				A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */,
 				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

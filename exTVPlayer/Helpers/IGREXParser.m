@@ -86,7 +86,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	
 	if (catalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:catalog.timestamp] < kUpdatedLimitMinutes)
+		if ([[self class] hoursBetweenCurrwntDate:catalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(@[catalog]);
 			return; //skip update
@@ -155,7 +155,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
+		if ([[self class] hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -210,7 +210,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																		 withValue:aChanelId];
 	if (chanel.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:chanel.timestamp] < kUpdatedLimitMinutes)
+		if ([[self class] hoursBetweenCurrwntDate:chanel.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -237,7 +237,6 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 chanel.timestamp = [NSDate date];
 			 
-			 //    return_type (^blockName)(var_type) = ^return_type (var_type varName)
 			 void (^exitBlock)(IGREntityExChanel *) = ^void (IGREntityExChanel *chanel) {
 				 
 				 if (MR_DEFAULT_CONTEXT.hasChanges)
@@ -283,7 +282,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 																						   withValue:aVideoCatalogId];
 	if (videoCatalog.timestamp)
 	{
-		if ([IGREXParser hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
+		if ([[self class] hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
 		{
 			aCompleateBlock(nil);
 			return; //skip update
@@ -291,6 +290,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	}
 	
 	NSString *lang = @"en";
+	BOOL useRSSForVideoCatalog = NO;
 	switch (aVideoCatalogId.integerValue)
 	{
 		case IGRVideoCategory_Rus:
@@ -299,9 +299,19 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		case IGRVideoCategory_Ukr:
 			lang = @"uk";
 			break;
-		default:
-			lang = @"en";
+		case IGRVideoCategory_Eng:
+			lang = @"uk";
 			break;
+		default:
+			useRSSForVideoCatalog = YES;
+			break;
+	}
+	
+	if (useRSSForVideoCatalog)
+	{
+		[[self class] parseVideoCatalogContent:aVideoCatalogId compleateBlock:aCompleateBlock];
+		
+		return;
 	}
 	
 	NSString *command = [NSString stringWithCharacters:kMainCatalog length:kMainCatalogLength];
@@ -312,18 +322,38 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	 {
 		 if (xmlDocument)
 		 {
-			 [xmlDocument enumerateElementsWithXPath:@"//object"
-										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
-			  {
-				  
-				  NSString *title = [element firstChildWithTag:@"title"].stringValue;
-				  NSString *itemId = [element firstChildWithTag:@"id"].stringValue;
-				  
-				  IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
-																					   withValue:itemId];
-				  chanel.name = title;
-				  chanel.videoCatalog = videoCatalog;
-			  }];
+			 videoCatalog.name = aVideoCatalogId;
+			 
+			 void (^parseXml)(ONOXMLElement *) = ^void (ONOXMLElement * xml)
+			 {
+				 [xml enumerateElementsWithXPath:@"//object"
+									  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
+				  {
+					  
+					  NSString *title = [element  valueForAttribute:@"title"];
+					  NSString *itemId = [element valueForAttribute:@"id"];
+					  
+					  if (_isLocked && [[self blockedIDs] containsObject:itemId])
+					  {
+						  return;
+					  }
+					  
+					  IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstOrCreateByAttribute:@"itemId"
+																						   withValue:itemId];
+					  chanel.name = title;
+					  chanel.videoCatalog = videoCatalog;
+				  }];
+			 };
+
+			 parseXml(xmlDocument);
+			 
+			 if (aVideoCatalogId.integerValue == IGRVideoCategory_Rus)
+			 {
+				 NSData *data = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ru_rss" ofType:@"xml"]];
+				 ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:data error:nil];
+				 
+				 parseXml(document.rootElement);
+			 }
 			 
 			 videoCatalog.timestamp = [NSDate date];
 			 
@@ -451,7 +481,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 
 + (NSArray *)blockedIDs
 {
-	return @[@"2", @"70538", @"1988", @"422546", @"1989", @"73427589", @"7513588", @"607160", @"1991", @"69663", @"28713", @"23786", @"1987", @"70533", //RUS
+	return @[@"2", @"70538", @"1988", @"422546", @"1989", @"73427589", @"78103603", @"639512", @"7513588", @"607160", @"1991", @"69663", @"28713", @"23786", @"1987", @"70533", //RUS
 			 @"82470", @"82473", @"82480", @"82484", @"82489", @"82493", @"82496", @"82476", @"82488", @"82490", //UA
 			 @"82316", @"82325", @"82329", @"82333", @"82339", @"82348", @"82331", @"82318", @"82335", //EN
 			 @"188005", @"188015", @"188029", @"188000", @"188012", @"188018", @"188001", //ESP

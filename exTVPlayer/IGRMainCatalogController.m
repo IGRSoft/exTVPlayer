@@ -56,12 +56,16 @@
 		self.lastVideoCatalog = langId;
 		
 		__weak typeof(self) weak = self;
-		[IGREXParser parseVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray *items) {
+		
+		[IGREXParser parseLiveVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray * _Nullable items) {
 			
-			weak.fetchedResultsController = nil;
-			weak.lastSelectedItem = nil;
-			
-			[weak.chanels reloadData];
+			[IGREXParser parseVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray *items) {
+				
+				weak.fetchedResultsController = nil;
+				weak.lastSelectedItem = nil;
+				
+				[weak.chanels reloadData];
+			}];
 		}];
 		
 	}

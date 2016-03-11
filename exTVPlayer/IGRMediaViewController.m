@@ -55,9 +55,9 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	{
 		self.playerController.delegate = self.delegate;
 		self.playerController.allowsPictureInPicturePlayback = YES;
-		self.view.translatesAutoresizingMaskIntoConstraints = YES;
-		self.playerController.view.translatesAutoresizingMaskIntoConstraints = YES;
 	}
+	self.view.translatesAutoresizingMaskIntoConstraints = YES;
+	self.playerController.view.translatesAutoresizingMaskIntoConstraints = YES;
 #endif
 	
 	[self addChildViewController:self.playerController];

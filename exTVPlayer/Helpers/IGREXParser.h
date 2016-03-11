@@ -16,6 +16,9 @@ typedef void (^IGREXParserCompleateBlock)(NSArray * _Nullable items);
 + (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
++ (void)parseLiveVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
+					  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
+
 + (void)parseChanelContent:(nonnull NSString *)aChanelId
 			compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
