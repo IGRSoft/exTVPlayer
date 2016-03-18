@@ -11,6 +11,7 @@
 
 #import "IGRCatalogViewController.h"
 #import "IGRCatalogPreviewViewController.h"
+#import "IGRUpdateView.h"
 
 #import "IGREntityExChanel.h"
 #import "IGREntityExCatalog.h"
@@ -29,12 +30,15 @@
 										UIViewControllerPreviewingDelegate, IGRCatalogPreviewViewControllerDelegate>
 
 @property (strong, nonatomic) UILabel *noContentLabel;
-@property (strong, nonatomic) UIActivityIndicatorView *parsingActivityIndicator;
+@property (strong, nonatomic) IGRUpdateView *updateView;
+@property (strong, nonatomic) NSLayoutConstraint *updateViewConstraintLandscape;
+@property (strong, nonatomic) NSLayoutConstraint *updateViewConstraintPortrait;
 
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) UINavigationItem *navigationItem;
 
 @property (weak,   nonatomic) IBOutlet UICollectionView *catalogs;
+
 @property (strong, nonatomic) NSIndexPath *lastSelectedItem;
 
 @property (strong, nonatomic) NSMutableArray<NSString*> *chanels;
@@ -48,9 +52,6 @@
 @property (assign, nonatomic) BOOL hasSomeData;
 @property (assign, nonatomic) BOOL updateInProgress;
 @property (assign, nonatomic) BOOL waitingDoneUpdate;
-
-@property (strong, nonatomic) NSTimer *refreshTimer;
-@property (assign, atomic   ) BOOL needRefresh;
 
 @end
 
@@ -75,19 +76,17 @@
 	
 	[self.view addSubview:self.noContentLabel];
 	
-	self.parsingActivityIndicator = [[UIActivityIndicatorView alloc]
-									 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	
-	self.parsingActivityIndicator.color = IGR_DARKBLUECOLOR;
-	self.parsingActivityIndicator.center = self.view.center;
-	self.parsingActivityIndicator.hidesWhenStopped = YES;
-	[self.parsingActivityIndicator stopAnimating];
-	[self.view addSubview:self.parsingActivityIndicator];
+	self.updateView = [[IGRUpdateView alloc] init];
+	CGRect newRect = self.updateView.frame;
+	newRect.origin.x = (self.view.frame.size.width - newRect.size.width) * 0.5;
+	newRect.origin.y = self.view.frame.size.height;
+	self.updateView.frame = newRect;
+	[self.view addSubview:self.updateView];
 	
 #if	TARGET_OS_IOS
 	
 	self.noContentLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	self.parsingActivityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+	self.updateView.translatesAutoresizingMaskIntoConstraints = NO;
 	
 	if ([self isMemberOfClass:[IGRChanelViewController class]])
 	{
@@ -146,7 +145,24 @@
 														   constant:0.0]];
 	
 	// Center horizontally
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.parsingActivityIndicator
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.updateView
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeWidth
+														 multiplier:1.0
+														   constant:self.updateView.frame.size.width]];
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.updateView
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:self.updateView.frame.size.height]];
+	
+	// Center horizontally
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.updateView
 														  attribute:NSLayoutAttributeCenterX
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
@@ -154,14 +170,31 @@
 														 multiplier:1.0
 														   constant:0.0]];
 	
-	// Center vertically
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.parsingActivityIndicator
-														  attribute:NSLayoutAttributeCenterY
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeCenterY
-														 multiplier:1.0
-														   constant:0.0]];
+	// Bottom vertically
+	CGSize size = self.view.frame.size;
+	CGFloat multiplier = 1.0 + (self.updateView.frame.size.height) / (MAX(size.width, size.height));
+	self.updateViewConstraintPortrait = [NSLayoutConstraint constraintWithItem:self.updateView
+																	 attribute:NSLayoutAttributeBottom
+																	 relatedBy:NSLayoutRelationEqual
+																		toItem:self.view
+																	 attribute:NSLayoutAttributeBottom
+																	multiplier:multiplier
+																	  constant:0.0];
+	[self.view addConstraint:self.updateViewConstraintPortrait];
+	
+	multiplier = 1.0 + (self.updateView.frame.size.height) / (MIN(size.width, size.height));
+	self.updateViewConstraintLandscape = [NSLayoutConstraint constraintWithItem:self.updateView
+																	  attribute:NSLayoutAttributeBottom
+																	  relatedBy:NSLayoutRelationEqual
+																		 toItem:self.view
+																	  attribute:NSLayoutAttributeBottom
+																	 multiplier:multiplier
+																	   constant:0.0];
+	[self.view addConstraint:self.updateViewConstraintLandscape];
+	
+	self.updateViewConstraintPortrait.active = (size.width < size.height);
+	self.updateViewConstraintLandscape.active = (size.width > size.height);
+	
 #endif
 }
 
@@ -174,12 +207,6 @@
 #endif
 	self.updateInProgress = NO;
 	self.waitingDoneUpdate = NO;
-	
-	self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:2
-												  target:self
-												selector:@selector(refreshTimerExceeded)
-												userInfo:nil
-												 repeats:YES];
 	
 #if	TARGET_OS_TV
 	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
@@ -254,12 +281,27 @@
 #endif
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+		toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+	{
+		self.updateViewConstraintPortrait.active = NO;
+		self.updateViewConstraintLandscape.active = YES;
+	}
+	else
+	{
+		self.updateViewConstraintLandscape.active = NO;
+		self.updateViewConstraintPortrait.active = YES;
+	}
+	
+	[self.view layoutIfNeeded];
+}
+
 #pragma mark - Public
 
 - (void)setChanel:(NSString *)aChanel
 {
-	self.onceToken = 0;
-	
 	IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
 
 	self.chanelMode = [settings.sourceType isEqualToNumber:@(IGRSourceType_RSS)] ? IGRChanelMode_Catalog :
@@ -285,7 +327,7 @@
 		_liveChanel = aChanel;
 		_livePage = 0;
 		__weak typeof(self) weak = self;
-		[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage compleateBlock:^(NSArray *items) {
+		[IGREXParser parseLiveChanel:self.liveChanel page:self.livePage compleateBlock:^(NSArray *items) {
 			
 			NSUInteger startPosition = weak.chanels.count;
 			weak.chanels = [NSMutableArray arrayWithArray:items];
@@ -318,7 +360,7 @@
 	__weak typeof(self) weak = self;
 	[IGREXParser parseLiveSearchContent:self.liveSearchRequest
 								   page:self.livePage
-								catalog:self.liveChanel
+								 chanel:self.liveChanel
 						 compleateBlock:^(NSArray *items) {
 							 
 							 NSUInteger startPosition = weak.chanels.count;
@@ -332,39 +374,19 @@
 	self.updateInProgress = YES;
 	
 	NSUInteger count = self.chanels.count;
-	__block NSUInteger position = startPosition;
-	__block NSUInteger parsePosition = 0;
-	__weak typeof(self) weak = self;
 	
-	NSArray *chanelsRange = [self.chanels subarrayWithRange:NSMakeRange(startPosition, count - startPosition)];
+	NSArray *catalogsRange = [self.chanels subarrayWithRange:NSMakeRange(startPosition, count - startPosition)];
 	
-	if (chanelsRange.count)
+	if (catalogsRange.count)
 	{
-		[chanelsRange enumerateObjectsUsingBlock:^(NSString * _Nonnull chanel, NSUInteger idx, BOOL * _Nonnull stop) {
+		__weak typeof(self) weak = self;
+		[catalogsRange enumerateObjectsUsingBlock:^(NSString * _Nonnull catalog, NSUInteger idx, BOOL * _Nonnull stop) {
 			
-			[IGREXParser parseCatalogContent:chanel
+			[IGREXParser parseCatalogContent:catalog
 							  compleateBlock:^(NSArray *items)
 			{
-				weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
-
-				if ((parsePosition != 0 && (parsePosition % 20) == 0) || (parsePosition + 1) == count)
-				{
-					weak.hasSomeData = [weak.fetchedResultsController performFetch:nil];
-					
-					if (position == startPosition)
-					{
-						[weak showParsingProgress:NO];
-						weak.needRefresh = YES;
-					}
-					else
-					{
-						weak.needRefresh = YES;
-					}
-
-					position = startPosition + parsePosition;
-				}
-				
-				++parsePosition;
+				[NSObject cancelPreviousPerformRequestsWithTarget:weak];
+				[weak performSelector:@selector(refreshCatalog) withObject:nil afterDelay:0.5];
 			}];
 		}];
 		
@@ -380,23 +402,19 @@
 
 - (void)showParsingProgress:(BOOL)show
 {
-	if (self.hasSomeData)
-	{
-		[self.parsingActivityIndicator stopAnimating];
-		self.noContentLabel.hidden = YES;
-	}
-	else
-	{
+	__weak typeof(self) weak = self;
+	dispatch_async(dispatch_get_main_queue(), ^{
+		
 		if (show)
 		{
-			[self.parsingActivityIndicator startAnimating];
+			[weak.updateView startUpdating];
 		}
 		else
 		{
-			[self.parsingActivityIndicator stopAnimating];
-			self.noContentLabel.hidden = NO;
+			[weak.updateView stopUpdating];
+			weak.noContentLabel.hidden = weak.hasSomeData;
 		}
-	}
+	});
 }
 
 - (void)reloadData
@@ -405,23 +423,22 @@
 	[self.catalogs reloadData];
 }
 
-- (void)refreshTimerExceeded
+- (void)refreshCatalog
 {
-	if (self.needRefresh)
-	{
-		[self.catalogs reloadData];
-		_needRefresh = NO;
-		
-		[self deselectVisibleCells];
+	self.hasSomeData = [self.fetchedResultsController performFetch:nil];
+	[self.catalogs reloadData];
+	
+	[self showParsingProgress:NO];
+	
+	[self deselectVisibleCells];
 #if	TARGET_OS_TV
-		IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+	IGRCatalogCell *catalogCell = (IGRCatalogCell *)[self.catalogs cellForItemAtIndexPath:self.lastSelectedItem];
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			
-			[catalogCell setHighlighted:YES];
-		});
+		[catalogCell setHighlighted:YES];
+	});
 #endif
-	}
 }
 
 - (void)deselectVisibleCells
@@ -491,14 +508,16 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+	if (!self.hasSomeData)
+	{
+		dispatch_once(&_onceToken, ^{
+			
+			[self showParsingProgress:YES];
+		});
+	}
+
 	self.catalogCount = (self.fetchedResultsController).sections.count;
 	self.hasSomeData = self.catalogCount > 0;
-	
-	dispatch_once(&_onceToken, ^{
-
-		[self showParsingProgress:YES];
-	});
-	
 	if (self.chanelMode == IGRChanelMode_History)
 	{
 		IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
@@ -673,6 +692,8 @@
 	}
 	else
 	{
+		[self showParsingProgress:YES];
+		
 		++self.livePage;
 		
 		__weak typeof(self) weak = self;
@@ -702,12 +723,12 @@
 		{
 			[IGREXParser parseLiveSearchContent:self.liveSearchRequest
 										   page:self.livePage
-										catalog:self.liveChanel
+										 chanel:self.liveChanel
 								 compleateBlock:updateChanels];
 		}
 		else
 		{
-			[IGREXParser parseLiveCatalog:self.liveChanel page:self.livePage compleateBlock:updateChanels];
+			[IGREXParser parseLiveChanel:self.liveChanel page:self.livePage compleateBlock:updateChanels];
 		}
 	}
 }

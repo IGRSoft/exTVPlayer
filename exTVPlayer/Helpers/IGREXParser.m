@@ -369,14 +369,26 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 
 + (void)parseLiveSearchContent:(nullable NSString *)aSearchText
 						  page:(NSUInteger)aPage
-					   catalog:(nullable NSString *)aCatalog
+						chanel:(nullable NSString *)aChanel
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
-	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=100", [self serverAddress], command, @(aPage)];
-	if (aCatalog.length > 0)
+	if (aPage == 0)
 	{
-		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", aCatalog];
+		NSBatchUpdateRequest *req = [[NSBatchUpdateRequest alloc] initWithEntityName:@"ExCatalog"];
+		NSDate *now = [NSDate date];
+		NSDate *minutesAgo = [now dateByAddingTimeInterval:-(kUpdatedLimitMinutes * 60)];
+		req.predicate = [NSPredicate predicateWithFormat:@"chanel == nil AND timestamp <= %@", minutesAgo];
+		req.propertiesToUpdate = @{@"orderId" : @(0)};
+		req.resultType = NSUpdatedObjectsCountResultType;
+		NSBatchUpdateResult *res = (NSBatchUpdateResult *)[MR_DEFAULT_CONTEXT executeRequest:req error:nil];
+		NSLog(@"%@ objects updated", res.result);
+	}
+	
+	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
+	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=50", [self serverAddress], command, @(aPage)];
+	if (aChanel.length > 0)
+	{
+		rrsUrl = [rrsUrl stringByAppendingFormat:@"&original_id=%@", aChanel];
 	}
 	if (aSearchText.length > 0)
 	{
@@ -402,13 +414,13 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	 }];
 }
 
-+ (void)parseLiveCatalog:(nonnull NSString *)aCatalog
-					page:(NSUInteger)aPage
-		  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
++ (void)parseLiveChanel:(nonnull NSString *)aChanel
+				   page:(NSUInteger)aPage
+		 compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
 	return [self parseLiveSearchContent:nil
 								   page:aPage
-								catalog:aCatalog
+								 chanel:aChanel
 						 compleateBlock:aCompleateBlock];
 }
 
@@ -445,7 +457,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		  {
 			  ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
 #if DEBUG
-			  NSLog(@"%@", document.rootElement);
+			  //NSLog(@"%@", document.rootElement);
 #endif
 			  aCompleateBlock(document.rootElement);
 		  }

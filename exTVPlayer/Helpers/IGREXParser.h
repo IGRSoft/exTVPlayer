@@ -24,11 +24,11 @@ typedef void (^IGREXParserCompleateBlock)(NSArray * _Nullable items);
 
 + (void)parseLiveSearchContent:(nullable NSString *)aSearchText
 						  page:(NSUInteger)aPage
-					   catalog:(nullable NSString *)aCatalog
+						chanel:(nullable NSString *)aCatalog
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
-+ (void)parseLiveCatalog:(nonnull NSString *)aCatalog
-					page:(NSUInteger)aPage
-		  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
++ (void)parseLiveChanel:(nonnull NSString *)aChanel
+				   page:(NSUInteger)aPage
+		 compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock;
 
 @end

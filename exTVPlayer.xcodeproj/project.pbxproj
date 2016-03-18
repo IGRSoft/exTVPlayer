@@ -142,6 +142,9 @@
 		A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
 		A57A12F11C59029500504350 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; };
 		A57A12F21C59029500504350 /* Ono.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A57C09601C9C25C200315C6C /* IGRUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A57C095F1C9C25C200315C6C /* IGRUpdateView.m */; };
+		A57C09611C9C25C200315C6C /* IGRUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A57C095F1C9C25C200315C6C /* IGRUpdateView.m */; };
+		A57C09811C9C38A800315C6C /* IGRUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57C097B1C9C38A800315C6C /* IGRUpdateView.xib */; };
 		A5868D0B1C4A9D170037D401 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; };
 		A5868D0C1C4A9D170037D401 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5868D041C4A9CD30037D401 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
@@ -162,6 +165,7 @@
 		A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
+		A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B073081C9C52310068CFC8 /* IGRUpdateView.xib */; };
 		A5BF3ACC1C7CBF4C00ACF004 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */; };
 		A5E81BDC1C22B72D00EABFC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5E81BDF1C22B72D00EABFC5 /* IGRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDE1C22B72D00EABFC5 /* IGRAppDelegate.m */; };
@@ -621,6 +625,12 @@
 		A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTableViewCell.h; sourceTree = "<group>"; };
 		A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTableViewCell.m; sourceTree = "<group>"; };
 		A57A12A21C59027A00504350 /* Ono.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Ono.xcodeproj; sourceTree = "<group>"; };
+		A57C095E1C9C25C200315C6C /* IGRUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRUpdateView.h; sourceTree = "<group>"; };
+		A57C095F1C9C25C200315C6C /* IGRUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRUpdateView.m; sourceTree = "<group>"; };
+		A57C097C1C9C38A800315C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
+		A57C09861C9C390900315C6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
+		A57C09871C9C390C00315C6C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
+		A57C09881C9C390E00315C6C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
 		A5868BB21C4A9CD20037D401 /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
 		A5868D0F1C4AA5DA0037D401 /* IGRDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRDownloadManager.h; sourceTree = "<group>"; };
 		A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRDownloadManager.m; sourceTree = "<group>"; };
@@ -645,6 +655,10 @@
 		A59BD5041C92D2C100F27723 /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		A5B073071C9C52310068CFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
+		A5B0730A1C9C52330068CFC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
+		A5B0730C1C9C52340068CFC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
+		A5B0730E1C9C52350068CFC8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/IGRUpdateView.strings; sourceTree = "<group>"; };
 		A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.1.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		A5D6F29E1C54CC420077BBFC /* IGRChanelViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRChanelViewController_Private.h; sourceTree = "<group>"; };
 		A5E125D11C5FA7CE0070C1BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1058,6 +1072,7 @@
 		A569ED6C1C25B062004EF247 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				A57C094C1C9C257E00315C6C /* UpdateView */,
 				A58A0E2A1C7DBF7900452E83 /* Preview */,
 				A583B89A1C525613002B0BE9 /* Cells */,
 				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
@@ -1109,6 +1124,33 @@
 				A57A12EB1C59027A00504350 /* Ono tvOS Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A57C094C1C9C257E00315C6C /* UpdateView */ = {
+			isa = PBXGroup;
+			children = (
+				A57C09831C9C38C000315C6C /* iOS */,
+				A57C097A1C9C38A800315C6C /* tvOS */,
+				A57C095E1C9C25C200315C6C /* IGRUpdateView.h */,
+				A57C095F1C9C25C200315C6C /* IGRUpdateView.m */,
+			);
+			path = UpdateView;
+			sourceTree = "<group>";
+		};
+		A57C097A1C9C38A800315C6C /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A57C097B1C9C38A800315C6C /* IGRUpdateView.xib */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		A57C09831C9C38C000315C6C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A5B073081C9C52310068CFC8 /* IGRUpdateView.xib */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		A583B8981C525514002B0BE9 /* Tabs */ = {
@@ -1590,6 +1632,7 @@
 				A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */,
 				A5654FD11C5A3F450000D882 /* iTunesArtwork in Resources */,
 				A58A0E401C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib in Resources */,
+				A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */,
 				A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */,
 				A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */,
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
@@ -1606,6 +1649,7 @@
 			files = (
 				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
 				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
+				A57C09811C9C38A800315C6C /* IGRUpdateView.xib in Resources */,
 				A5654F981C5A0CFC0000D882 /* Assets-tvOS.xcassets in Resources */,
 				A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */,
 				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
@@ -1664,6 +1708,7 @@
 				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
 				A5654E511C5964E80000D882 /* IGRChanelViewController.m in Sources */,
+				A57C09611C9C25C200315C6C /* IGRUpdateView.m in Sources */,
 				A5654E3A1C59648F0000D882 /* IGRTabBarViewController.m in Sources */,
 				A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */,
 				A5654E3E1C5964A30000D882 /* IGRFavoritsViewController.m in Sources */,
@@ -1743,6 +1788,7 @@
 				A51F3BE11C23223900F6080A /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				A51F3BF01C23223900F6080A /* MagicalRecordShorthand.m in Sources */,
 				A51F3BF81C23223900F6080A /* ManuallyMigratingMagicalRecordStack.m in Sources */,
+				A57C09601C9C25C200315C6C /* IGRUpdateView.m in Sources */,
 				A51F3BF71C23223900F6080A /* MagicalRecordStack.m in Sources */,
 				A51F3BDB1C23223900F6080A /* NSManagedObject+MagicalFinders.m in Sources */,
 				A51F3BF51C23223900F6080A /* InMemoryMagicalRecordStack.m in Sources */,
@@ -1857,6 +1903,28 @@
 				A5E125D71C5FA7E20070C1BF /* uk */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A57C097B1C9C38A800315C6C /* IGRUpdateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A57C097C1C9C38A800315C6C /* Base */,
+				A57C09861C9C390900315C6C /* en */,
+				A57C09871C9C390C00315C6C /* ru */,
+				A57C09881C9C390E00315C6C /* uk */,
+			);
+			name = IGRUpdateView.xib;
+			sourceTree = "<group>";
+		};
+		A5B073081C9C52310068CFC8 /* IGRUpdateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5B073071C9C52310068CFC8 /* Base */,
+				A5B0730A1C9C52330068CFC8 /* en */,
+				A5B0730C1C9C52340068CFC8 /* ru */,
+				A5B0730E1C9C52350068CFC8 /* uk */,
+			);
+			name = IGRUpdateView.xib;
 			sourceTree = "<group>";
 		};
 		A5FD73211C80BFC30035F1DD /* InfoPlist.strings */ = {
