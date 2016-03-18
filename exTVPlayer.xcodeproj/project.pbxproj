@@ -160,7 +160,6 @@
 		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
-		A591841A1C844345003516E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59184191C844345003516E6 /* CloudKit.framework */; };
 		A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
 		A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
@@ -651,7 +650,6 @@
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		A59184191C844345003516E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		A59BD5041C92D2C100F27723 /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
@@ -691,7 +689,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A591841A1C844345003516E6 /* CloudKit.framework in Frameworks */,
 				A5005C561C7C6A1C00B7A766 /* MediaPlayer.framework in Frameworks */,
 				A5654F7A1C5972DA0000D882 /* AVFoundation.framework in Frameworks */,
 				A5654EDA1C596A430000D882 /* CoreData.framework in Frameworks */,
@@ -799,7 +796,6 @@
 		A51F38771C230F6A00F6080A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A59184191C844345003516E6 /* CloudKit.framework */,
 				A5BF3ACB1C7CBF4C00ACF004 /* TVServices.framework */,
 				A5005C551C7C6A1C00B7A766 /* MediaPlayer.framework */,
 				A5654F7B1C5972E70000D882 /* AVFoundation.framework */,
@@ -2004,7 +2000,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-iOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
 					/usr/include/libxml2,
@@ -2039,8 +2035,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_BUILD_NUMBER = 1.1.0;
-				CURRENT_PROJECT_VERSION = 110.29;
+				CURRENT_BUILD_NUMBER = 1.1.1;
+				CURRENT_PROJECT_VERSION = 111.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2079,8 +2075,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_BUILD_NUMBER = 1.1.0;
-				CURRENT_PROJECT_VERSION = 110.29;
+				CURRENT_BUILD_NUMBER = 1.1.1;
+				CURRENT_PROJECT_VERSION = 111.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

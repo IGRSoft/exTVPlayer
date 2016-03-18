@@ -457,7 +457,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		  {
 			  ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
 #if DEBUG
-			  //NSLog(@"%@", document.rootElement);
+			  NSLog(@"%@", document.rootElement);
 #endif
 			  aCompleateBlock(document.rootElement);
 		  }
