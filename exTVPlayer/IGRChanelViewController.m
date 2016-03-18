@@ -619,7 +619,7 @@
 {
 	if (self.chanelMode == IGRChanelMode_Search || self.chanelMode == IGRChanelMode_Catalog_Live)
 	{
-		if ((indexPath.row + indexPath.section) == (self.catalogCount - 4
+		if ((indexPath.row + indexPath.section) == (self.catalogCount - 10
 													) && self.livePage >= 0)
 		{
 			if (self.updateInProgress && self.waitingDoneUpdate)
