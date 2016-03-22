@@ -20,15 +20,16 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 @interface IGRMediaViewController ()
 
-@property (strong, nonatomic) NSArray *tracks;
-@property (strong, nonatomic) NSArray *playlist;
-@property (assign, nonatomic) IGREntityExTrack *currentTrack;
-@property (assign, nonatomic) NSInteger currentTrackPosition;
+@property (nonatomic, strong) NSArray *tracks;
+@property (nonatomic, strong) NSArray *playlist;
+@property (nonatomic, assign) IGREntityExTrack *currentTrack;
+@property (nonatomic, assign) NSInteger currentTrackPosition;
 
-@property (assign, nonatomic) NSTimeInterval latestPressTimestamp;
+@property (nonatomic, assign) NSTimeInterval latestPressTimestamp;
 
-@property (assign, nonatomic) BOOL needResumeVideo;
-@property (assign, nonatomic) BOOL isPlaying;
+@property (nonatomic, assign) BOOL needResumeVideo;
+@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign) BOOL isBuffering;
 
 @property (nonatomic, strong) AVQueuePlayer					*player;
 @property (nonatomic, strong) AVPlayerViewController		*playerController;
@@ -65,6 +66,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	[self.view addSubview:self.playerController.view];
 	
 	self.isPIP = NO;
+	self.isBuffering = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -265,6 +267,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 - (void)playCurrentTrack
 {
+	self.isBuffering = YES;
+	
 	[self updatePlaylist];
 	
 	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(self.currentTrackPosition,
@@ -298,6 +302,11 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
 	[super pressesEnded:presses withEvent:event];
+	
+	if (self.isBuffering)
+	{
+		return;
+	}
 	
 	UIPress *press = presses.anyObject;
 	NSTimeInterval deltaTouchTime = [NSDate timeIntervalSinceReferenceDate] - self.latestPressTimestamp;
@@ -406,24 +415,29 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		
 		if (newStatus != oldStatus)
 		{
+			__weak typeof(self) weak = self;
+			void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
+				
+				AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
+				[weak removePlayerItemObservers:item];
+				
+				weak.isBuffering = NO;
+			};
+			
 			switch (newStatus)
 			{
 				case AVPlayerItemStatusUnknown:
 				{
 					NSLog(@"Video player Status Unknown");
+					
+					seekCompletionHandler(NO);
+					
 					break;
 				}
 				case AVPlayerItemStatusReadyToPlay:
 				{
 					IGREntityAppSettings *settings = [IGREntityAppSettings MR_findFirst];
 					Float64 lastPosition = MAX(0.0, self.currentTrack.position.floatValue - settings.seekBack.floatValue);
-					
-					__weak typeof(self) weak = self;
-					void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
-												
-						AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
-						[weak removePlayerItemObservers:item];
-					};
 					
 					if (lastPosition > 0.0)
 					{
@@ -442,6 +456,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 				{
 					NSLog(@"Video player Status Failed: player item error = %@", self.player.currentItem.error);
 					NSLog(@"Video player Status Failed: player error = %@", self.player.error);
+					
+					seekCompletionHandler(NO);
 					
 					[self closePlayback];
 					

@@ -8,13 +8,6 @@
 
 @import AVKit;
 
-typedef NS_ENUM(NSUInteger, IGRTrackProperties)
-{
-	IGRTrackProperties_None = 0,
-	IGRTrackProperties_Setuped,
-	IGRTrackProperties_InConfiguration
-};
-
 @interface IGRMediaViewController : UIViewController
 
 - (void)setPlaylist:(NSArray *)aPlayList position:(NSUInteger)aPosition;
