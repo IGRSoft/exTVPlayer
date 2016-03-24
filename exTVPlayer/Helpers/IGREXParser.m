@@ -300,7 +300,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			lang = @"uk";
 			break;
 		case IGRVideoCategory_Eng:
-			lang = @"uk";
+			lang = @"en";
 			break;
 		default:
 			useRSSForVideoCatalog = YES;
@@ -379,9 +379,8 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		NSDate *minutesAgo = [now dateByAddingTimeInterval:-(kUpdatedLimitMinutes * 60)];
 		req.predicate = [NSPredicate predicateWithFormat:@"chanel == nil AND timestamp <= %@", minutesAgo];
 		req.propertiesToUpdate = @{@"orderId" : @(0)};
-		req.resultType = NSUpdatedObjectsCountResultType;
-		NSBatchUpdateResult *res = (NSBatchUpdateResult *)[MR_DEFAULT_CONTEXT executeRequest:req error:nil];
-		NSLog(@"%@ objects updated", res.result);
+		req.resultType = NSStatusOnlyResultType;
+		[MR_DEFAULT_CONTEXT executeRequest:req error:nil];
 	}
 	
 	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
@@ -493,12 +492,25 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 
 + (NSArray *)blockedIDs
 {
-	return @[@"2", @"70538", @"1988", @"422546", @"1989", @"73427589", @"78103603", @"639512", @"7513588", @"607160", @"1991", @"69663", @"28713", @"23786", @"1987", @"70533", //RUS
-			 @"82470", @"82473", @"82480", @"82484", @"82489", @"82493", @"82496", @"82476", @"82488", @"82490", //UA
-			 @"82316", @"82325", @"82329", @"82333", @"82339", @"82348", @"82331", @"82318", @"82335", //EN
-			 @"188005", @"188015", @"188029", @"188000", @"188012", @"188018", @"188001", //ESP
-			 @"45234", @"45252", @"45256", @"45253", @"82500", @"82348", @"45254", @"45246", @"82498", @"82420", //DE
-			 @"969014", @"969016", @"969022", @"969023" /*PL*/];
+	static NSArray *blockedIDs = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		
+		NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"block_list" ofType:@"plist"];
+		NSDictionary *blockList =  [NSDictionary dictionaryWithContentsOfFile:plistPath];
+		
+		NSMutableArray *_blockedIDs = [NSMutableArray array];
+		
+		[blockList enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+			
+			[_blockedIDs addObjectsFromArray:obj];
+		}];
+		
+		blockedIDs = [_blockedIDs copy];
+	});
+	
+	
+	return blockedIDs;
 }
 
 @end

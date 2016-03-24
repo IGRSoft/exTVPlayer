@@ -73,8 +73,8 @@
 	[self setNeedsDisplay];
 }
 
-- (void)setPreviewingDelegate:(id<UIViewControllerPreviewingDelegate>)previewingDelegate{
-	
+- (void)setPreviewingDelegate:(id<UIViewControllerPreviewingDelegate>)previewingDelegate
+{
 	if (!_previewingDelegate)
 	{
 		_previewingDelegate = previewingDelegate;
@@ -84,6 +84,5 @@
 		[controller registerForPreviewingWithDelegate:previewingDelegate sourceView:self.contentView];
 	}
 }
-
 
 @end

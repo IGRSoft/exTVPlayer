@@ -295,7 +295,7 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 #if	TARGET_OS_IOS
 		self.favoritButton.selected = (self.catalog.isFavorit).boolValue;
 #else
-		UIImage *image = (self.catalog.isFavorit).boolValue ?	[UIImage imageNamed:@"favorit-on"] :
+		UIImage *image = (self.catalog.isFavorit).boolValue ? [UIImage imageNamed:@"favorit-on"] :
 		[UIImage imageNamed:@"favorit-off"];
 		[self.favoritButton setImage:image forState:UIControlStateNormal];
 #endif

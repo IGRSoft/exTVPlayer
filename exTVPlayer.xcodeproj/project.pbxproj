@@ -160,8 +160,10 @@
 		A58F66FB1C47D4D400D7518B /* IGRTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */; };
 		A58F670F1C47E90900D7518B /* IGRHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */; };
 		A58F67201C4829E300D7518B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F671F1C4829E300D7518B /* UIView+Extension.m */; };
-		A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
-		A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A59BD5041C92D2C100F27723 /* ru_rss.xml */; };
+		A596A1F51CA3FE0B003E06AC /* block_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F31CA3FE0B003E06AC /* block_list.plist */; };
+		A596A1F61CA3FE0B003E06AC /* block_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F31CA3FE0B003E06AC /* block_list.plist */; };
+		A596A1F71CA3FE0B003E06AC /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F41CA3FE0B003E06AC /* ru_rss.xml */; };
+		A596A1F81CA3FE0B003E06AC /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F41CA3FE0B003E06AC /* ru_rss.xml */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B073081C9C52310068CFC8 /* IGRUpdateView.xib */; };
@@ -650,7 +652,8 @@
 		A58F670E1C47E90900D7518B /* IGRHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRHistoryViewController.m; sourceTree = "<group>"; };
 		A58F671E1C4829E300D7518B /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		A59BD5041C92D2C100F27723 /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
+		A596A1F31CA3FE0B003E06AC /* block_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = block_list.plist; sourceTree = "<group>"; };
+		A596A1F41CA3FE0B003E06AC /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5B073071C9C52310068CFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
@@ -1222,6 +1225,15 @@
 			path = Preview;
 			sourceTree = "<group>";
 		};
+		A596A1F21CA3FE0B003E06AC /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				A596A1F31CA3FE0B003E06AC /* block_list.plist */,
+				A596A1F41CA3FE0B003E06AC /* ru_rss.xml */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
@@ -1280,7 +1292,7 @@
 		A5E81BF11C22B7A500EABFC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A59BD5041C92D2C100F27723 /* ru_rss.xml */,
+				A596A1F21CA3FE0B003E06AC /* Lists */,
 				A5654E141C5947820000D882 /* Localizable.strings */,
 				A5654E111C5947820000D882 /* tvOS */,
 				A5654DD81C5946F50000D882 /* iOS */,
@@ -1629,13 +1641,14 @@
 				A5654FD11C5A3F450000D882 /* iTunesArtwork in Resources */,
 				A58A0E401C7DBFA100452E83 /* IGRCatalogPreviewViewController.xib in Resources */,
 				A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */,
-				A59BD5061C92D2CA00F27723 /* ru_rss.xml in Resources */,
 				A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */,
+				A596A1F61CA3FE0B003E06AC /* block_list.plist in Resources */,
 				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
 				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
 				A5FD73231C80BFC30035F1DD /* InfoPlist.strings in Resources */,
 				A5654FC11C5A0DB80000D882 /* Assets-iOS.xcassets in Resources */,
+				A596A1F81CA3FE0B003E06AC /* ru_rss.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,10 +1657,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5654E241C5947820000D882 /* Localizable.strings in Resources */,
+				A596A1F71CA3FE0B003E06AC /* ru_rss.xml in Resources */,
 				A5654E231C5947820000D882 /* InfoPlist.strings in Resources */,
+				A596A1F51CA3FE0B003E06AC /* block_list.plist in Resources */,
 				A57C09811C9C38A800315C6C /* IGRUpdateView.xib in Resources */,
 				A5654F981C5A0CFC0000D882 /* Assets-tvOS.xcassets in Resources */,
-				A59BD5051C92D2C100F27723 /* ru_rss.xml in Resources */,
 				A5654E251C5947820000D882 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2036,7 +2050,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_BUILD_NUMBER = 1.1.1;
-				CURRENT_PROJECT_VERSION = 111.3;
+				CURRENT_PROJECT_VERSION = 111.6;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2076,7 +2090,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_BUILD_NUMBER = 1.1.1;
-				CURRENT_PROJECT_VERSION = 111.3;
+				CURRENT_PROJECT_VERSION = 111.6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
