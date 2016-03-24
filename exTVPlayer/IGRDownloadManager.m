@@ -106,7 +106,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 			
 			aTrack.localName = filePath.lastPathComponent;
 			aTrack.dataStatus = @(IGRTrackDataStatus_Local);
-			[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
+			MR_DEFAULT_CONTEXT_SAVEONLY;
 			
 			NSMutableDictionary *downloadObject = [weak downloadObjectForTrack:aTrack];
 			
@@ -168,7 +168,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 	[downloadTask cancel];
 	
 	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
-	[aTrack.managedObjectContext MR_saveOnlySelfAndWait];
+	MR_DEFAULT_CONTEXT_SAVEONLY;
 }
 
 - (void)removeAllProgresses

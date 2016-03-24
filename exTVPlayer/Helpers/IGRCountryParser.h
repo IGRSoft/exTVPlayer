@@ -6,8 +6,6 @@
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface IGRCountryParser : NSObject
 
 + (IGRVideoCategory)currentCountry;

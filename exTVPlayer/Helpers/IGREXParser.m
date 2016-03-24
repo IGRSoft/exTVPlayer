@@ -19,6 +19,7 @@
 
 #if (PROXY_ENABLED)
 #import <CFNetwork/CFNetwork.h>
+#import "IGRProxyConstants.h"
 #endif
 
 static const NSInteger kUpdatedLimitMinutes = 5;
@@ -138,10 +139,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 				 catalog.orderId = @(++orderId);
 			 }
 			 
-			 if (MR_DEFAULT_CONTEXT.hasChanges)
-			 {
-				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-			 }
+			 MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 		 }
 		 
 		 aCompleateBlock(@[catalog]);
@@ -193,10 +191,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 videoCatalog.timestamp = [NSDate date];
 			 
-			 if (MR_DEFAULT_CONTEXT.hasChanges)
-			 {
-				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-			 }
+			 MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 		 }
 		 
 		 aCompleateBlock(@[videoCatalog]);
@@ -239,10 +234,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 void (^exitBlock)(IGREntityExChanel *) = ^void (IGREntityExChanel *chanel) {
 				 
-				 if (MR_DEFAULT_CONTEXT.hasChanges)
-				 {
-					 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-				 }
+				 MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 				 
 				 aCompleateBlock(@[chanel]);
 			 };
@@ -357,10 +349,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 
 			 videoCatalog.timestamp = [NSDate date];
 			 
-			 if (MR_DEFAULT_CONTEXT.hasChanges)
-			 {
-				 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-			 }
+			 MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 		 }
 		 
 		 aCompleateBlock(@[videoCatalog]);

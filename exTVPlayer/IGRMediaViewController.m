@@ -8,6 +8,7 @@
 
 #import "IGRMediaViewController.h"
 #import "IGRAppDelegate.h"
+#import "IGRNotificationConstants.h"
 
 #import "IGREntityExTrack.h"
 #import "IGREntityExCatalog.h"
@@ -138,10 +139,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	
 	self.currentTrack.catalog.latestViewedTrack = @(self.currentTrackPosition);
 	
-	if (MR_DEFAULT_CONTEXT.hasChanges)
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 }
 
 - (void)removeObserverFromUnplayedTracks

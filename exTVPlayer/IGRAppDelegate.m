@@ -14,6 +14,8 @@
 #import "IGRCatalogViewController.h"
 #import "IGRSearchViewController.h"
 #import "IGRChanelViewController.h"
+#import "IGRTabBarConstants.h"
+#import "IGRNotificationConstants.h"
 
 @interface IGRAppDelegate ()
 
@@ -106,10 +108,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-	if (MR_DEFAULT_CONTEXT.hasChanges)
-	{
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
-	}
+	MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 	
 	[self createDynamicShortcutItems];
 	
@@ -254,7 +253,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 			track.dataStatus = @(IGRTrackDataStatus_Web);
 		}
 		
-		[MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];
+		MR_DEFAULT_CONTEXT_SAVETOPERSISTENTSTORE;
 	}
 }
 
@@ -306,7 +305,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	}
 	else
 	{
-		tabBar.selectedIndex = 3;
+		tabBar.selectedIndex = IGRTabBarViews_History;
 		IGRChanelViewController *cvc = tabBar.selectedViewController;
 		[cvc performSegueWithIdentifier:@"openCatalog" sender:cvc];
 	}
@@ -317,7 +316,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
 	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 	
-	tabBar.selectedIndex = 2;
+	tabBar.selectedIndex = IGRTabBarViews_Search;
 	
 	IGRSearchViewController *svc = tabBar.selectedViewController;
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kReloadTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -331,7 +330,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
 	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 	
-	tabBar.selectedIndex = 1;
+	tabBar.selectedIndex = IGRTabBarViews_Favorites;
 }
 
 - (void)openHistory
@@ -339,7 +338,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
 	[tabBar.selectedViewController dismissViewControllerAnimated:NO completion:nil];
 	
-	tabBar.selectedIndex = 3;
+	tabBar.selectedIndex = IGRTabBarViews_History;
 }
 
 - (void)createDynamicShortcutItems

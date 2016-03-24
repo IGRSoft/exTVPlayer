@@ -9,90 +9,13 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 #endif
 
-#if	TARGET_OS_TV
-#import "MagicalRecord.h"
-#else
-#import <MagicalRecord/MagicalRecord.h>
-#endif
+#import "IGRDatabaseConstants.h"
+#import "IGRGraphicsConstants.h"
+#import "IGRSettingsConstants.h"
 
 #define APP_STORE 0
-
-#define MR_DEFAULT_CONTEXT [[MagicalRecordStack defaultStack] context]
-
-#define IGR_LIGHTBLUECOLOR [UIColor colorWithRed:0.015 green:0.250 blue:0.900 alpha:1.000]
-#define IGR_DARKBLUECOLOR [UIColor colorWithRed:0.020 green:0.200 blue:0.520 alpha:1.000]
-#define IGR_DARKBLUECOLORALPHA [UIColor colorWithRed:0.020 green:0.200 blue:0.520 alpha:0.300]
-#define IGR_DARKCOLOR [UIColor colorWithWhite:0.100 alpha:1.000]
-#define IGR_YELLOWCOLOR [UIColor colorWithRed:0.996 green:0.851 blue:0.286 alpha:1.000]
-
 #define PROXY_ENABLED 0
-static NSString * const kIGRProxyAddres = @"";
-static NSUInteger const kIGRProxyPort   = 0;
-static BOOL		  const kIGRProxyHTTPS  = 0;
-static CGFloat    const kReloadTime = 0.3;
-
-typedef NS_ENUM(NSUInteger, IGRSourceType)
-{
-	IGRSourceType_RSS		= 0,
-	IGRSourceType_Live		= 1
-};
-
-typedef NS_ENUM(NSUInteger, IGRTrackState)
-{
-	IGRTrackState_New = 0,
-	IGRTrackState_Half,
-	IGRTrackState_Done
-};
-
-typedef NS_ENUM(NSUInteger, IGRTrackDataStatus)
-{
-	IGRTrackDataStatus_Web = 0,
-	IGRTrackDataStatus_Downloading,
-	IGRTrackDataStatus_Local
-};
-
-typedef NS_ENUM(NSUInteger, IGRVideoCategory)
-{
-	IGRVideoCategory_Rus = 23775,
-	IGRVideoCategory_Ukr = 80934,
-	IGRVideoCategory_Eng = 80925,
-	IGRVideoCategory_Esp = 187077,
-	IGRVideoCategory_De  = 45205,
-	IGRVideoCategory_Pl  = 968815
-};
-
-typedef NS_ENUM(NSUInteger, IGRHistorySize)
-{
-	IGRHistorySize_5	= 5,
-	IGRHistorySize_10	= 10,
-	IGRHistorySize_20	= 20,
-	IGRHistorySize_50	= 50
-};
-
-typedef NS_ENUM(NSUInteger, IGRChanelMode)
-{
-	IGRChanelMode_Catalog		= 0,
-	IGRChanelMode_Catalog_Live,
-	IGRChanelMode_Catalog_One,
-	IGRChanelMode_Favorites,
-	IGRChanelMode_History,
-	IGRChanelMode_Search
-};
-
-typedef NS_ENUM(NSUInteger, IGRSeekBack)
-{
-	IGRSeekBack_0		= 0,
-	IGRSeekBack_5		= 5,
-	IGRSeekBack_10		= 10,
-	IGRSeekBack_15		= 15,
-	IGRSeekBack_30		= 30,
-	IGRSeekBack_60		= 60,
-};
-
-static NSString * const kApplicationWillResignActive = @"ApplicationWillResignActive";
-static NSString * const kapplicationDidBecomeActive = @"ApplicationDidBecomeActive";
 
 static NSString * const kIGRLock = @"https://igrsoft.com/wp-content/explayer/lock";

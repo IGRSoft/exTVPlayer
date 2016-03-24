@@ -654,6 +654,12 @@
 		A58F671F1C4829E300D7518B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		A596A1F31CA3FE0B003E06AC /* block_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = block_list.plist; sourceTree = "<group>"; };
 		A596A1F41CA3FE0B003E06AC /* ru_rss.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ru_rss.xml; sourceTree = "<group>"; };
+		A596A2011CA41C43003E06AC /* IGRTabBarConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRTabBarConstants.h; sourceTree = "<group>"; };
+		A596A2161CA41F26003E06AC /* IGRGraphicsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRGraphicsConstants.h; sourceTree = "<group>"; };
+		A596A2171CA41F26003E06AC /* IGRSettingsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRSettingsConstants.h; sourceTree = "<group>"; };
+		A596A2181CA41F5F003E06AC /* IGRDatabaseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRDatabaseConstants.h; sourceTree = "<group>"; };
+		A596A2191CA41FD3003E06AC /* IGRProxyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRProxyConstants.h; sourceTree = "<group>"; };
+		A596A21A1CA420A0003E06AC /* IGRNotificationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRNotificationConstants.h; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5B073071C9C52310068CFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
@@ -1074,6 +1080,7 @@
 				A57C094C1C9C257E00315C6C /* UpdateView */,
 				A58A0E2A1C7DBF7900452E83 /* Preview */,
 				A583B89A1C525613002B0BE9 /* Cells */,
+				A596A2011CA41C43003E06AC /* IGRTabBarConstants.h */,
 				A58F66F91C47D4D400D7518B /* IGRTabBarViewController.h */,
 				A58F66FA1C47D4D400D7518B /* IGRTabBarViewController.m */,
 				A58F66F31C47C51800D7518B /* IGRBaseViewController.h */,
@@ -1234,6 +1241,18 @@
 			path = Lists;
 			sourceTree = "<group>";
 		};
+		A596A2151CA41F26003E06AC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A596A2161CA41F26003E06AC /* IGRGraphicsConstants.h */,
+				A596A2171CA41F26003E06AC /* IGRSettingsConstants.h */,
+				A596A2181CA41F5F003E06AC /* IGRDatabaseConstants.h */,
+				A596A2191CA41FD3003E06AC /* IGRProxyConstants.h */,
+				A596A21A1CA420A0003E06AC /* IGRNotificationConstants.h */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		A5E81BCE1C22B72D00EABFC5 = {
 			isa = PBXGroup;
 			children = (
@@ -1259,6 +1278,7 @@
 		A5E81BD91C22B72D00EABFC5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A596A2151CA41F26003E06AC /* Constants */,
 				A5005C971C7CB15500B7A766 /* Items */,
 				A51F388D1C23191B00F6080A /* Database */,
 				A51F385E1C22F2BD00F6080A /* Helpers */,

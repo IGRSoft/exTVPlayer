@@ -789,7 +789,7 @@
 				entityatalog.isFavorit = @(!catalogCell.favorit);
 				catalogCell.favorit = (entityatalog.isFavorit).boolValue;
 				
-				[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+				MR_DEFAULT_CONTEXT_SAVEONLY;
 				
 				self.lastSelectedItem = indexPath;
 				

@@ -206,7 +206,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 			break;
 	}
 	
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	MR_DEFAULT_CONTEXT_SAVEONLY;
 }
 
 - (void)updateViewForSettings:(IGRSettingsType)aSettingsType from:(UIButton *)sender
@@ -315,7 +315,7 @@ typedef NS_ENUM(NSUInteger, IGRSettingsType)
 	
 	aTrack.localName = nil;
 	aTrack.dataStatus = @(IGRTrackDataStatus_Web);
-	[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+	MR_DEFAULT_CONTEXT_SAVEONLY;
 }
 
 #pragma mark - NSNotificationCenter

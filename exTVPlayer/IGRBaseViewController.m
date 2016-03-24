@@ -29,20 +29,20 @@
 		settings.removPlayedSavedTracks	= @(YES);
 		settings.seekBack				= @(IGRSeekBack_10);
 		
-		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+		MR_DEFAULT_CONTEXT_SAVEONLY;
 	}
 	
 	// migration to v2
 	if (settings.seekBack == nil)
 	{
 		settings.seekBack	= @(IGRSeekBack_10);
-		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+		MR_DEFAULT_CONTEXT_SAVEONLY;
 	}
 	
 	if (settings.removPlayedSavedTracks == nil)
 	{
 		settings.removPlayedSavedTracks	= @(YES);
-		[MR_DEFAULT_CONTEXT MR_saveOnlySelfAndWait];
+		MR_DEFAULT_CONTEXT_SAVEONLY;
 	}
 	
 	return settings;
