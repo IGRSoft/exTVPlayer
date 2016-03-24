@@ -397,7 +397,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"Exception removing observer: %@", exception);
+		IGRLog(@"Exception removing observer: %@", exception);
 	}
 }
 
@@ -426,7 +426,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 			{
 				case AVPlayerItemStatusUnknown:
 				{
-					NSLog(@"Video player Status Unknown");
+					IGRLog(@"Video player Status Unknown");
 					
 					seekCompletionHandler(NO);
 					
@@ -452,8 +452,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 				}
 				case AVPlayerItemStatusFailed:
 				{
-					NSLog(@"Video player Status Failed: player item error = %@", self.player.currentItem.error);
-					NSLog(@"Video player Status Failed: player error = %@", self.player.error);
+					IGRLog(@"Video player Status Failed: player item error = %@", self.player.currentItem.error);
+					IGRLog(@"Video player Status Failed: player error = %@", self.player.error);
 					
 					seekCompletionHandler(NO);
 					

@@ -94,7 +94,6 @@
 		A5654E4A1C5964CF0000D882 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
 		A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
 		A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
-		A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
 		A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
 		A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
 		A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
@@ -134,7 +133,6 @@
 		A569ED621C257CA7004EF247 /* NSManagedObject+MRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED591C257CA7004EF247 /* NSManagedObject+MRExtensions.m */; };
 		A569ED671C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */; };
 		A569ED681C2581E1004EF247 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
-		A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6A1C25889C004EF247 /* IGRChanelCell.m */; };
 		A569ED6F1C25D0D7004EF247 /* IGRChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */; };
 		A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
@@ -616,8 +614,6 @@
 		A569ED641C2581E1004EF247 /* IGREntityExChanel+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IGREntityExChanel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A569ED651C2581E1004EF247 /* IGREntityExChanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGREntityExChanel.h; sourceTree = "<group>"; };
 		A569ED661C2581E1004EF247 /* IGREntityExChanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGREntityExChanel.m; sourceTree = "<group>"; };
-		A569ED691C25889C004EF247 /* IGRChanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelCell.h; sourceTree = "<group>"; };
-		A569ED6A1C25889C004EF247 /* IGRChanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelCell.m; sourceTree = "<group>"; };
 		A569ED6D1C25D0D7004EF247 /* IGRChanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRChanelViewController.h; sourceTree = "<group>"; };
 		A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRChanelViewController.m; sourceTree = "<group>"; };
 		A569ED701C25D683004EF247 /* IGRCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogCell.h; sourceTree = "<group>"; };
@@ -1190,8 +1186,6 @@
 			children = (
 				A51F38461C22D3E600F6080A /* IGRExItemCell.h */,
 				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
-				A569ED691C25889C004EF247 /* IGRChanelCell.h */,
-				A569ED6A1C25889C004EF247 /* IGRChanelCell.m */,
 				A569ED701C25D683004EF247 /* IGRCatalogCell.h */,
 				A569ED711C25D683004EF247 /* IGRCatalogCell.m */,
 				A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */,
@@ -1733,7 +1727,6 @@
 				A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */,
 				A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
 				A5654E3B1C5964940000D882 /* IGRBaseViewController.m in Sources */,
-				A5654E4D1C5964D60000D882 /* IGRChanelCell.m in Sources */,
 				A53A17C91C74D23C0005898D /* IGRCountryParser.m in Sources */,
 				A5654E461C5964CF0000D882 /* IGREntityExTrack+CoreDataProperties.m in Sources */,
 				A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */,
@@ -1761,7 +1754,6 @@
 				A51F3BD31C23223900F6080A /* NSNumber+MagicalDataImport.m in Sources */,
 				A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */,
 				A51F3BE01C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m in Sources */,
-				A569ED6B1C25889C004EF247 /* IGRChanelCell.m in Sources */,
 				A51F3BE81C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m in Sources */,
 				A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */,
 				A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */,

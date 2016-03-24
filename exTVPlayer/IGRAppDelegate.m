@@ -25,9 +25,6 @@
 
 @implementation IGRAppDelegate
 
-static NSString * const kStoreMomdName = @"exTVPlayer.momd";
-static NSString * const kStoreName = @"exTVPlayer.sqlite";
-
 static NSString * const kLaunchItemSearch = @"com.igrsoft.exTVPlayer.search";
 static NSString * const kLaunchItemFavorit = @"com.igrsoft.exTVPlayer.favorit";
 static NSString * const kLaunchItemHistory = @"com.igrsoft.exTVPlayer.history";
@@ -45,7 +42,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	if (iCloudPath.absoluteString.length)
 	{
 		stack.storeOptions = @{
-							   NSPersistentStoreUbiquitousContentNameKey : @"exTVPlayerUbiquityStore",
+							   NSPersistentStoreUbiquitousContentNameKey : kIGRPersistentStoreUbiquitousContentNameKey,
 							   NSPersistentStoreUbiquitousContentURLKey : iCloudPath
 								   };
 		[stack.context MR_observeiCloudChangesInCoordinator:stack.coordinator];
@@ -80,10 +77,10 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 {
 	if (shortcutItem)
 	{
-		NSLog(@"We've launched from shortcut item: %@", shortcutItem.localizedTitle);
+		IGRLog(@"We've launched from shortcut item: %@", shortcutItem.localizedTitle);
 	} else
 	{
-		NSLog(@"We've launched properly.");
+		IGRLog(@"We've launched properly.");
 	}
 	
 	if ([shortcutItem.type isEqualToString:kLaunchItemSearch])
@@ -233,7 +230,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 				error = [NSError errorWithDomain:@"com.igrsoft.extvplayer.database" code:9999 userInfo:dict];
 				// Replace this with code to handle the error appropriately.
 				// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-				NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+				IGRLog(@"Unresolved error %@, %@", error, error.userInfo);
 				abort();
 			}
 		}
@@ -285,7 +282,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
 	NSString *cloudRoot = [NSString stringWithFormat:@"%@.%@", teamID, bundleID];
 	NSURL *cloudRootURL = [fileManager URLForUbiquityContainerIdentifier:cloudRoot];
-	NSLog (@"cloudRootURL = %@", cloudRootURL);
+	IGRLog(@"cloudRootURL = %@", cloudRootURL);
 	
 	return cloudRootURL;
 }
@@ -298,7 +295,7 @@ static NSString * const kLaunchItemLastViewed = @"com.igrsoft.exTVPlayer.lastvie
 	if (aForce)
 	{
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-		IGRCatalogViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:@"IGRCatalogViewController"];
+		IGRCatalogViewController *cvc = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([IGRCatalogViewController class])];
 		[cvc setCatalogId:aCatalogId];
 		
 		[tabBar presentViewController:cvc animated:YES completion:nil];

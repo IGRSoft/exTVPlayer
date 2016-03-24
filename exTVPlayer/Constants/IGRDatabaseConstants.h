@@ -26,4 +26,8 @@
 [MR_DEFAULT_CONTEXT MR_saveToPersistentStoreAndWait];\
 }
 
+static NSString * const kStoreMomdName	= @"exTVPlayer.momd";
+static NSString * const kStoreName		= @"exTVPlayer.sqlite";
+static NSString * const kIGRPersistentStoreUbiquitousContentNameKey = @"exTVPlayerUbiquityStore";
+
 #endif /* IGRDatabaseConstants_h */

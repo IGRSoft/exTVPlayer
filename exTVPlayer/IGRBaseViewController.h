@@ -13,6 +13,4 @@
 
 @property (nonatomic, readonly, strong) IGREntityAppSettings *appSettings;
 
-- (void)callCustomAction;
-
 @end

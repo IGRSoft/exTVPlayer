@@ -12,7 +12,7 @@
 #import "IGREXParser.h"
 #import "IGREntityExChanel.h"
 
-#import "IGRChanelCell.h"
+#import "IGRTableViewCell.h"
 
 #if	TARGET_OS_IOS
 #import "SDiOSVersion.h"
@@ -79,7 +79,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRChanelCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRTableViewCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		
 		[obj setSelected:NO];
 		[obj setHighlighted:NO];
@@ -109,15 +109,13 @@
 {
 	if ([context.nextFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")])
 	{
-		[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRChanelCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-			
-			[obj setHighlighted:NO];
-		}];
+		[self deselectVisibleCells];
 	}
-	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")] &&
-			 [context.nextFocusedView isKindOfClass:[IGRChanelCell class]])
+	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")]
+			 && [context.nextFocusedView isKindOfClass:[IGRTableViewCell class]])
 	{
-		[(IGRChanelCell *)context.nextFocusedView setHighlighted:YES];
+		[self deselectVisibleCells];
+		[(IGRTableViewCell *)context.nextFocusedView setHighlighted:YES];
 	}
 }
 #endif
@@ -152,8 +150,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
 				  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	IGRChanelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRChanelCell"
-																	forIndexPath:indexPath];
+	IGRTableViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRTableViewCell"
+																	   forIndexPath:indexPath];
 	
 	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
 	IGREntityExChanel *track = [self.fetchedResultsController objectAtIndexPath:dbIndexPath];
@@ -168,14 +166,30 @@
 
 #if	TARGET_OS_TV
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
-{
-	IGRChanelCell *previouslyFocusedCell = (IGRChanelCell *)context.previouslyFocusedView;
-	IGRChanelCell *nextFocusedCell = (IGRChanelCell *)context.nextFocusedView;
+{	
+	IGRTableViewCell *previouslyFocusedCell = (IGRTableViewCell *)context.previouslyFocusedView;
+	IGRTableViewCell *nextFocusedCell = (IGRTableViewCell *)context.nextFocusedView;
 	
-	[previouslyFocusedCell setHighlighted:NO];
-	[nextFocusedCell setHighlighted:YES];
+	if ([previouslyFocusedCell isKindOfClass:[IGRTableViewCell class]])
+	{
+		[previouslyFocusedCell setHighlighted:NO];
+	}
+	
+	if ([nextFocusedCell isKindOfClass:[IGRTableViewCell class]])
+	{
+		[self deselectVisibleCells];
+		[nextFocusedCell setHighlighted:YES];		
+	}
 	
 	return YES;
+}
+
+- (void)deselectVisibleCells
+{
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRTableViewCell *obj, NSUInteger idx, BOOL *stop) {
+		
+		[obj setHighlighted:NO];
+	}];
 }
 #endif
 

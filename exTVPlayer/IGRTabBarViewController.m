@@ -23,11 +23,6 @@
 	[[UITabBar appearance] setTintColor:IGR_LIGHTBLUECOLOR];
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-
-}
-
 - (BOOL)canPerformAction:(SEL)action withSender:(nullable id)sender
 {
 	return YES;

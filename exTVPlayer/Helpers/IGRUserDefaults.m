@@ -26,7 +26,6 @@ static NSString *kUDFavorites   = @"excatalogfavorites";
 	
 	// Register the dictionary of defaults
 	[self.defaults registerDefaults: defaultValues];
-	//DBNSLog(@"registered defaults: %@", defaultValues);
 }
 
 - (instancetype)init

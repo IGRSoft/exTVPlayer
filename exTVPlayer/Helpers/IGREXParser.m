@@ -444,15 +444,14 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		  if(!error)
 		  {
 			  ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
-#if DEBUG
-			  NSLog(@"%@", document.rootElement);
-#endif
+			  IGRLog(@"%@", document.rootElement);
+			  
 			  aCompleateBlock(document.rootElement);
 		  }
 		  else
 		  {
 			  NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-			  NSLog(@"%@", errorStr);
+			  IGRLog(@"%@", errorStr);
 			  
 			  aCompleateBlock(nil);
 		  }

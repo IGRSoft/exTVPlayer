@@ -48,9 +48,4 @@
 	return settings;
 }
 
-- (void)callCustomAction
-{
-
-}
-
 @end

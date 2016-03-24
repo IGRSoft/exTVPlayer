@@ -102,7 +102,7 @@ static NSString * const kIGRKeyCompleate = @"compleate";
 	{
 		if (!error)
 		{
-			NSLog(@"File downloaded to: %@", filePath);
+			IGRLog(@"File downloaded to: %@", filePath);
 			
 			aTrack.localName = filePath.lastPathComponent;
 			aTrack.dataStatus = @(IGRTrackDataStatus_Local);

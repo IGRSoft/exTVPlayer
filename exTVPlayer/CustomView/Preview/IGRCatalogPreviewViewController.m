@@ -34,7 +34,7 @@
 
 - (instancetype)initWithCatalog:(IGREntityExCatalog *)aCatalog
 {
-	if (self = [super initWithNibName:@"IGRCatalogPreviewViewController" bundle:[NSBundle mainBundle]])
+	if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:[NSBundle mainBundle]])
 	{
 		self.catalog = aCatalog;
 	}
@@ -54,7 +54,9 @@
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
 {
 	__weak typeof(self) weak = self;
-	UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:@"Open" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+	UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:@"Open"
+															 style:UIPreviewActionStyleDefault
+														   handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
 		
 		if ([weak.delegate respondsToSelector:@selector(openCatalogForPreview)])
 		{
@@ -64,4 +66,5 @@
 	
 	return @[openAction];
 }
+
 @end
