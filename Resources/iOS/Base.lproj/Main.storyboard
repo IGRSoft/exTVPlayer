@@ -762,7 +762,7 @@
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRChanelCell" id="ZFt-YM-QLm" customClass="IGRChanelCell">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IGRCollectionCell" id="ZFt-YM-QLm" customClass="IGRCollectionCell">
                                         <rect key="frame" x="150" y="30" width="300" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -822,9 +822,9 @@
                                         </constraints>
                                         <size key="customSize" width="300" height="50"/>
                                         <connections>
-                                            <outlet property="backgroundView" destination="8F3-kP-DO5" id="EdN-O6-ZrC"/>
-                                            <outlet property="progress" destination="s1O-cb-feK" id="Kun-Ig-gJu"/>
-                                            <outlet property="title" destination="c34-TB-qoe" id="lCl-kT-3Z9"/>
+                                            <outlet property="backgroundView" destination="8F3-kP-DO5" id="DRz-59-yHv"/>
+                                            <outlet property="progress" destination="s1O-cb-feK" id="l5B-eG-UFM"/>
+                                            <outlet property="title" destination="c34-TB-qoe" id="V2y-VC-KXQ"/>
                                             <segue destination="9R8-1i-9t1" kind="show" identifier="showChanel" id="fGg-yB-TDm">
                                                 <nil key="action"/>
                                             </segue>
@@ -889,7 +889,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fGg-yB-TDm"/>
         <segue reference="zvn-YI-lfq"/>
-        <segue reference="sWM-Zy-ibK"/>
     </inferredMetricsTieBreakers>
 </document>

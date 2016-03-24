@@ -1,5 +1,5 @@
 //
-//  IGRTableViewCell.h
+//  IGRCollectionCell.h
 //  exTVPlayer
 //
 //  Created by Vitalii Parovishnyk on 12/19/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IGRTableViewCell : UICollectionViewCell
+@interface IGRCollectionCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *progress;

@@ -22,7 +22,7 @@
 {
 	self.layer.cornerRadius = 10;
 	self.layer.masksToBounds = YES;
-	self.layer.borderColor = IGR_DARKBLUECOLORALPHA.CGColor;
+	self.layer.borderColor = IGR_DARKCOLORALPHA.CGColor;
 	self.layer.borderWidth = 2.0;
 	
 	CAGradientLayer *gradient = [CAGradientLayer layer];

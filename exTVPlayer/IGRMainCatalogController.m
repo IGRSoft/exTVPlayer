@@ -12,7 +12,7 @@
 #import "IGREXParser.h"
 #import "IGREntityExChanel.h"
 
-#import "IGRTableViewCell.h"
+#import "IGRCollectionCell.h"
 
 #if	TARGET_OS_IOS
 #import "SDiOSVersion.h"
@@ -79,7 +79,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRTableViewCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRCollectionCell *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		
 		[obj setSelected:NO];
 		[obj setHighlighted:NO];
@@ -112,10 +112,10 @@
 		[self deselectVisibleCells];
 	}
 	else if ([context.previouslyFocusedView isKindOfClass:NSClassFromString(@"UITabBarButton")]
-			 && [context.nextFocusedView isKindOfClass:[IGRTableViewCell class]])
+			 && [context.nextFocusedView isKindOfClass:[IGRCollectionCell class]])
 	{
 		[self deselectVisibleCells];
-		[(IGRTableViewCell *)context.nextFocusedView setHighlighted:YES];
+		[(IGRCollectionCell *)context.nextFocusedView setHighlighted:YES];
 	}
 }
 #endif
@@ -150,7 +150,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
 				  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	IGRTableViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRTableViewCell"
+	IGRCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IGRCollectionCell"
 																	   forIndexPath:indexPath];
 	
 	NSIndexPath *dbIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.row + indexPath.section)];
@@ -167,15 +167,15 @@
 #if	TARGET_OS_TV
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {	
-	IGRTableViewCell *previouslyFocusedCell = (IGRTableViewCell *)context.previouslyFocusedView;
-	IGRTableViewCell *nextFocusedCell = (IGRTableViewCell *)context.nextFocusedView;
+	IGRCollectionCell *previouslyFocusedCell = (IGRCollectionCell *)context.previouslyFocusedView;
+	IGRCollectionCell *nextFocusedCell = (IGRCollectionCell *)context.nextFocusedView;
 	
-	if ([previouslyFocusedCell isKindOfClass:[IGRTableViewCell class]])
+	if ([previouslyFocusedCell isKindOfClass:[IGRCollectionCell class]])
 	{
 		[previouslyFocusedCell setHighlighted:NO];
 	}
 	
-	if ([nextFocusedCell isKindOfClass:[IGRTableViewCell class]])
+	if ([nextFocusedCell isKindOfClass:[IGRCollectionCell class]])
 	{
 		[self deselectVisibleCells];
 		[nextFocusedCell setHighlighted:YES];		
@@ -186,7 +186,7 @@
 
 - (void)deselectVisibleCells
 {
-	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRTableViewCell *obj, NSUInteger idx, BOOL *stop) {
+	[self.chanels.visibleCells enumerateObjectsUsingBlock:^(IGRCollectionCell *obj, NSUInteger idx, BOOL *stop) {
 		
 		[obj setHighlighted:NO];
 	}];

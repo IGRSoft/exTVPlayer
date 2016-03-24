@@ -95,7 +95,7 @@
 		A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED661C2581E1004EF247 /* IGREntityExChanel.m */; };
 		A5654E4C1C5964D60000D882 /* IGRExItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38471C22D3E600F6080A /* IGRExItemCell.m */; };
 		A5654E4E1C5964D60000D882 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
-		A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
+		A5654E4F1C5964D60000D882 /* IGRCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRCollectionCell.m */; };
 		A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
 		A5654E511C5964E80000D882 /* IGRChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */; };
 		A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
@@ -137,7 +137,7 @@
 		A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED711C25D683004EF247 /* IGRCatalogCell.m */; };
 		A569EE0F1C25D935004EF247 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; };
 		A569EE101C25D935004EF247 /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A569EE0C1C25D8FD004EF247 /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */; };
+		A56BA53D1C25FF6700E3D129 /* IGRCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRCollectionCell.m */; };
 		A57A12F11C59029500504350 /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; };
 		A57A12F21C59029500504350 /* Ono.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A57A12E91C59027A00504350 /* Ono.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A57C09601C9C25C200315C6C /* IGRUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A57C095F1C9C25C200315C6C /* IGRUpdateView.m */; };
@@ -619,8 +619,8 @@
 		A569ED701C25D683004EF247 /* IGRCatalogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCatalogCell.h; sourceTree = "<group>"; };
 		A569ED711C25D683004EF247 /* IGRCatalogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCatalogCell.m; sourceTree = "<group>"; };
 		A569EDB51C25D8FD004EF247 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
-		A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRTableViewCell.h; sourceTree = "<group>"; };
-		A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRTableViewCell.m; sourceTree = "<group>"; };
+		A56BA53B1C25FF6700E3D129 /* IGRCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRCollectionCell.h; sourceTree = "<group>"; };
+		A56BA53C1C25FF6700E3D129 /* IGRCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRCollectionCell.m; sourceTree = "<group>"; };
 		A57A12A21C59027A00504350 /* Ono.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Ono.xcodeproj; sourceTree = "<group>"; };
 		A57C095E1C9C25C200315C6C /* IGRUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRUpdateView.h; sourceTree = "<group>"; };
 		A57C095F1C9C25C200315C6C /* IGRUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRUpdateView.m; sourceTree = "<group>"; };
@@ -1188,8 +1188,8 @@
 				A51F38471C22D3E600F6080A /* IGRExItemCell.m */,
 				A569ED701C25D683004EF247 /* IGRCatalogCell.h */,
 				A569ED711C25D683004EF247 /* IGRCatalogCell.m */,
-				A56BA53B1C25FF6700E3D129 /* IGRTableViewCell.h */,
-				A56BA53C1C25FF6700E3D129 /* IGRTableViewCell.m */,
+				A56BA53B1C25FF6700E3D129 /* IGRCollectionCell.h */,
+				A56BA53C1C25FF6700E3D129 /* IGRCollectionCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1715,7 +1715,7 @@
 				A5654E431C5964CF0000D882 /* IGREntityExCatalog.m in Sources */,
 				A55901F31C60D64C007D49E4 /* SDiOSVersion.m in Sources */,
 				A5654E3D1C59649F0000D882 /* IGRHistoryViewController.m in Sources */,
-				A5654E4F1C5964D60000D882 /* IGRTableViewCell.m in Sources */,
+				A5654E4F1C5964D60000D882 /* IGRCollectionCell.m in Sources */,
 				A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */,
 				A5654E411C5964B70000D882 /* IGRMainCatalogController.m in Sources */,
 				A5654E3C1C5964980000D882 /* UIView+Extension.m in Sources */,
@@ -1755,7 +1755,7 @@
 				A569ED721C25D683004EF247 /* IGRCatalogCell.m in Sources */,
 				A51F3BE01C23223900F6080A /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				A51F3BE81C23223900F6080A /* NSDictionary+MagicalRecordAdditions.m in Sources */,
-				A56BA53D1C25FF6700E3D129 /* IGRTableViewCell.m in Sources */,
+				A56BA53D1C25FF6700E3D129 /* IGRCollectionCell.m in Sources */,
 				A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */,
 				A51F3BF41C23223900F6080A /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */,
 				A5868D111C4AA5DA0037D401 /* IGRDownloadManager.m in Sources */,
