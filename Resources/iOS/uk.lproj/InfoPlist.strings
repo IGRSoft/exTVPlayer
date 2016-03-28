@@ -1,15 +1,6 @@
-/* 
-  InfoPlist.strings
-  exTVPlayer
-
-  Created by Vitalii Parovishnyk on 2/26/16.
-  Copyright © 2016 IGR Software. All rights reserved.
-*/
-
-CFBundleDisplayName = "EX Плеєр";
-
-"Find" = "Знайти";
-
-"Favorites" = "Вибрані";
-
-"History" = "Історія";
+{
+	CFBundleDisplayName = "EX \U041f\U043b\U0435\U0454\U0440";
+	Find = "\U0417\U043d\U0430\U0439\U0442\U0438";
+	Favorites = "\U0412\U0438\U0431\U0440\U0430\U043d\U0456";
+	History = "\U0406\U0441\U0442\U043e\U0440\U0456\U044f";
+}

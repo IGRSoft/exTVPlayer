@@ -57,7 +57,7 @@
 		
 		NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
 		NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.searchText];
-		if ([alphaNums isSupersetOfSet:inStringSet])
+		if (self.searchText.length > 4 && [alphaNums isSupersetOfSet:inStringSet]) //Max: 9999
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
 				
