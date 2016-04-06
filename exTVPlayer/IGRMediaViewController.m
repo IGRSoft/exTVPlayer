@@ -120,8 +120,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 - (void)prerareViewForDisappear
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self removeObserverFromUnplayedTracks];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	Float64 currentTime = CMTimeGetSeconds(self.player.currentTime);
 	if (currentTime > 60)
@@ -144,7 +144,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 - (void)removeObserverFromUnplayedTracks
 {
-	NSUInteger pos = MIN((self.currentTrackPosition + 1), self.playlist.count);
+	NSUInteger pos = MIN((self.currentTrackPosition + (self.isBuffering ? 0 : 1)), self.playlist.count);
 	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(pos,
 																  self.playlist.count - pos)];
 	
@@ -152,6 +152,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	{
 		[self removePlayerItemObservers:item];
 	}
+	
+	self.isBuffering = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -416,8 +418,11 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 			__weak typeof(self) weak = self;
 			void (^seekCompletionHandler)(BOOL) = ^void (BOOL finished) {
 				
-				AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
-				[weak removePlayerItemObservers:item];
+				if (weak.isBuffering)
+				{
+					AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
+					[weak removePlayerItemObservers:item];
+				}
 				
 				weak.isBuffering = NO;
 			};

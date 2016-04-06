@@ -716,7 +716,6 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onCleenAllSavedTracks:" destination="H8i-pE-L6u" eventType="primaryActionTriggered" id="uxz-Qr-ADp"/>
                                     <segue destination="9R8-1i-9t1" kind="show" identifier="openSearch" id="sWM-Zy-ibK"/>
                                 </connections>
                             </button>
@@ -734,6 +733,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="DOY-tP-EoZ"/>
                     <connections>
                         <outlet property="catalogTextField" destination="paM-6j-vOq" id="KHY-Hg-IS6"/>
+                        <outlet property="getListButton" destination="mkK-rQ-ily" id="btd-54-38W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cmc-pV-D6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -889,7 +889,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fGg-yB-TDm"/>
         <segue reference="zvn-YI-lfq"/>
+        <segue reference="sWM-Zy-ibK"/>
     </inferredMetricsTieBreakers>
 </document>
