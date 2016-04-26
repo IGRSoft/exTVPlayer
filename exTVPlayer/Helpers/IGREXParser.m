@@ -364,9 +364,6 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	if (aPage == 0)
 	{
 		NSBatchUpdateRequest *req = [[NSBatchUpdateRequest alloc] initWithEntityName:@"ExCatalog"];
-		NSDate *now = [NSDate date];
-		NSDate *minutesAgo = [now dateByAddingTimeInterval:-(kUpdatedLimitMinutes * 60)];
-		req.predicate = [NSPredicate predicateWithFormat:@"chanel == nil AND timestamp <= %@", minutesAgo];
 		req.propertiesToUpdate = @{@"orderId" : @(0)};
 		req.resultType = NSStatusOnlyResultType;
 		[MR_DEFAULT_CONTEXT executeRequest:req error:nil];
