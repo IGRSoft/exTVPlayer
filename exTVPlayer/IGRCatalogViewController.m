@@ -33,7 +33,7 @@ static IGRMediaViewController *_mediaViewController;
 @property (weak,   nonatomic) IBOutlet UITableView *tableView;
 @property (weak,   nonatomic) IBOutlet UIView      *navigationView;
 @property (weak,   nonatomic) IBOutlet UILabel     *catalogTitle;
-@property (weak,   nonatomic) IBOutlet UILabel     *catalogDescription;
+@property (weak,   nonatomic) IBOutlet UITextView  *catalogDescription;
 @property (weak,   nonatomic) IBOutlet UIImageView *catalogImage;
 @property (strong, nonatomic) IBOutlet UIButton    *favoritButton;
 
@@ -175,6 +175,10 @@ static IGRMediaViewController *_mediaViewController;
 #else
 		self.catalogTitle.text = self.catalog.name;
         self.catalogDescription.text = self.catalog.catalogDescription;
+        
+        self.catalogDescription.selectable = YES;
+        self.catalogDescription.panGestureRecognizer.allowedTouchTypes = @[@(UITouchTypeIndirect)];
+        
         [self.catalogImage sd_setImageWithURL:[NSURL URLWithString:self.catalog.imgUrl]
                              placeholderImage:nil];
 #endif

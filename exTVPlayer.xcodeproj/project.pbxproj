@@ -98,7 +98,6 @@
 		A5654E4F1C5964D60000D882 /* IGRCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56BA53C1C25FF6700E3D129 /* IGRCollectionCell.m */; };
 		A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5868D101C4AA5DA0037D401 /* IGRDownloadManager.m */; };
 		A5654E511C5964E80000D882 /* IGRChanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A569ED6E1C25D0D7004EF247 /* IGRChanelViewController.m */; };
-		A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A5654E531C5964E80000D882 /* IGRMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F386F1C23091200F6080A /* IGRMediaViewController.m */; };
 		A5654E541C5964EE0000D882 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E81BDB1C22B72D00EABFC5 /* main.m */; };
 		A5654E551C5965000000D882 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F3720E1C282FD500AB1395 /* DACircularProgressView.m */; };
@@ -162,6 +161,7 @@
 		A596A1F61CA3FE0B003E06AC /* block_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F31CA3FE0B003E06AC /* block_list.plist */; };
 		A596A1F71CA3FE0B003E06AC /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F41CA3FE0B003E06AC /* ru_rss.xml */; };
 		A596A1F81CA3FE0B003E06AC /* ru_rss.xml in Resources */ = {isa = PBXBuildFile; fileRef = A596A1F41CA3FE0B003E06AC /* ru_rss.xml */; };
+		A5A678021CE21DD20016866C /* UITextView+UIFocusUpdateContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A678011CE21DD20016866C /* UITextView+UIFocusUpdateContext.m */; };
 		A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5A91D741C5F97F10016F6BC /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */; };
 		A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B073081C9C52310068CFC8 /* IGRUpdateView.xib */; };
@@ -657,6 +657,8 @@
 		A596A2191CA41FD3003E06AC /* IGRProxyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRProxyConstants.h; sourceTree = "<group>"; };
 		A596A21A1CA420A0003E06AC /* IGRNotificationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRNotificationConstants.h; sourceTree = "<group>"; };
 		A5A677EE1CE20F8E0016866C /* exTVPlayer-3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "exTVPlayer-3.xcdatamodel"; sourceTree = "<group>"; };
+		A5A678001CE21DD20016866C /* UITextView+UIFocusUpdateContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+UIFocusUpdateContext.h"; sourceTree = "<group>"; };
+		A5A678011CE21DD20016866C /* UITextView+UIFocusUpdateContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+UIFocusUpdateContext.m"; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5B073071C9C52310068CFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
@@ -1084,6 +1086,8 @@
 				A58F66F41C47C51800D7518B /* IGRBaseViewController.m */,
 				A58F671E1C4829E300D7518B /* UIView+Extension.h */,
 				A58F671F1C4829E300D7518B /* UIView+Extension.m */,
+				A5A678001CE21DD20016866C /* UITextView+UIFocusUpdateContext.h */,
+				A5A678011CE21DD20016866C /* UITextView+UIFocusUpdateContext.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1702,7 +1706,6 @@
 				A5654E401C5964AF0000D882 /* IGRSearchViewController.m in Sources */,
 				A58B0A8D1C7CEB5B00BBBCE5 /* IGRUserDefaults.m in Sources */,
 				A5654F7D1C5973250000D882 /* IGREntityAppSettings.m in Sources */,
-				A5654E521C5964E80000D882 /* IGRCatalogViewController.m in Sources */,
 				A5654E471C5964CF0000D882 /* IGREntityExVideoCatalog.m in Sources */,
 				A5654E541C5964EE0000D882 /* main.m in Sources */,
 				A5654E451C5964CF0000D882 /* IGREntityExTrack.m in Sources */,
@@ -1775,6 +1778,7 @@
 				A5E81BE21C22B72D00EABFC5 /* IGRMainCatalogController.m in Sources */,
 				A51F3BD41C23223900F6080A /* NSObject+MagicalDataImport.m in Sources */,
 				A51F3BDF1C23223900F6080A /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				A5A678021CE21DD20016866C /* UITextView+UIFocusUpdateContext.m in Sources */,
 				A569ED5B1C257CA7004EF247 /* IGREntityAppSettings+CoreDataProperties.m in Sources */,
 				A569ED5A1C257CA7004EF247 /* IGREntityAppSettings.m in Sources */,
 				A5A91D621C5F93490016F6BC /* DALabeledCircularProgressView.m in Sources */,
@@ -1984,7 +1988,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TopShelf/TopShelf.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.exTVPlayer.exTVPlayerTopShelf;
@@ -2151,7 +2155,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-tvOS";
 				CODE_SIGN_ENTITLEMENTS = "exTVPlayer-tvOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = exTVPlayer/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
