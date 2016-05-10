@@ -169,11 +169,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="hZy-T1-m3Y">
-                                <rect key="frame" x="0.0" y="81" width="1920" height="999"/>
+                                <rect key="frame" x="0.0" y="714" width="1920" height="366"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="IGRExItemCell" rowHeight="70" id="n3V-JD-V6d" customClass="IGRExItemCell">
-                                        <rect key="frame" x="0.0" y="54" width="1920" height="70"/>
+                                        <rect key="frame" x="0.0" y="199" width="1920" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n3V-JD-V6d" id="kig-lV-2na">
                                             <rect key="frame" x="0.0" y="0.0" width="1904" height="70"/>
@@ -221,17 +221,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT5-Dp-i97">
-                                        <rect key="frame" x="1847" y="10" width="64" height="60"/>
-                                        <color key="tintColor" red="0.83529411760000005" green="0.90588235289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="favorit-off"/>
-                                        <connections>
-                                            <action selector="onTouchFavorit:" destination="WAl-RG-hb9" eventType="primaryActionTriggered" id="TT2-XD-tpa"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgA-Jn-RJi">
+                                <rect key="frame" x="20" y="88" width="450" height="618"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyv-NA-ilp">
+                                <rect key="frame" x="478" y="88" width="1422" height="618"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lT5-Dp-i97">
+                                <rect key="frame" x="396" y="104" width="64" height="60"/>
+                                <color key="tintColor" red="0.83529411760000005" green="0.90588235289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="favorit-off"/>
+                                <connections>
+                                    <action selector="onTouchFavorit:" destination="WAl-RG-hb9" eventType="primaryActionTriggered" id="TT2-XD-tpa"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <toolbarItems>
@@ -240,6 +250,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="catalogDescription" destination="Uyv-NA-ilp" id="ER5-md-wQr"/>
+                        <outlet property="catalogImage" destination="TgA-Jn-RJi" id="cJt-nM-cji"/>
                         <outlet property="catalogTitle" destination="AXw-fN-k8y" id="vnX-Br-SQD"/>
                         <outlet property="favoritButton" destination="lT5-Dp-i97" id="Sjc-uB-pRP"/>
                         <outlet property="tableView" destination="hZy-T1-m3Y" id="OvP-Ob-9fa"/>
@@ -667,7 +679,7 @@
         <image name="settings" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aUR-Ax-IOr"/>
-        <segue reference="4Q3-pp-UYR"/>
+        <segue reference="jKU-aj-G2k"/>
+        <segue reference="qbP-pN-dRE"/>
     </inferredMetricsTieBreakers>
 </document>

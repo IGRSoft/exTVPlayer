@@ -14,9 +14,12 @@
 #import "IGREntityExCatalog.h"
 #import "IGREntityExTrack.h"
 #import "IGRExItemCell.h"
-#import "DACircularProgressView.h"
+
 #import "IGRDownloadManager.h"
+
+#import "DACircularProgressView.h"
 #import "DALabeledCircularProgressView.h"
+#import <WebImage/WebImage.h>
 
 @import AVFoundation;
 
@@ -25,14 +28,16 @@ static IGRMediaViewController *_mediaViewController;
 #endif
 
 @interface IGRCatalogViewController () <NSFetchedResultsControllerDelegate, UITableViewDelegate,
-UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
+                                        UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 
 @property (weak,   nonatomic) IBOutlet UITableView *tableView;
-@property (weak,   nonatomic) IBOutlet UIView *navigationView;
-@property (weak,   nonatomic) IBOutlet UILabel *catalogTitle;
-@property (strong, nonatomic) IBOutlet UIButton *favoritButton;
+@property (weak,   nonatomic) IBOutlet UIView      *navigationView;
+@property (weak,   nonatomic) IBOutlet UILabel     *catalogTitle;
+@property (weak,   nonatomic) IBOutlet UILabel     *catalogDescription;
+@property (weak,   nonatomic) IBOutlet UIImageView *catalogImage;
+@property (strong, nonatomic) IBOutlet UIButton    *favoritButton;
 
-@property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, nonatomic) UINavigationBar  *navigationBar;
 @property (strong, nonatomic) UINavigationItem *navigationItem;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -169,6 +174,9 @@ UIGestureRecognizerDelegate, AVPlayerViewControllerDelegate>
 		self.navigationItem.title = self.catalog.name;
 #else
 		self.catalogTitle.text = self.catalog.name;
+        self.catalogDescription.text = self.catalog.catalogDescription;
+        [self.catalogImage sd_setImageWithURL:[NSURL URLWithString:self.catalog.imgUrl]
+                             placeholderImage:nil];
 #endif
 	}
 	[self onTouchFavorit:nil];

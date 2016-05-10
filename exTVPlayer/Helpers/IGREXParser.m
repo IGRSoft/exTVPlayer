@@ -102,6 +102,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 		 if (xmlDocument)
 		 {
 			 catalog.name = [xmlDocument firstChildWithTag:@"title"].stringValue;
+             catalog.catalogDescription = [xmlDocument firstChildWithTag:@"post"].stringValue;
 			 catalog.imgUrl = [[xmlDocument firstChildWithTag:@"picture"] valueForAttribute:@"url"];
 			 __block NSUInteger orderId = 0;
 			 
@@ -361,13 +362,20 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 						chanel:(nullable NSString *)aChanel
 				compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	if (aPage == 0)
-	{
-		NSBatchUpdateRequest *req = [[NSBatchUpdateRequest alloc] initWithEntityName:@"ExCatalog"];
-		req.propertiesToUpdate = @{@"orderId" : @(0)};
-		req.resultType = NSStatusOnlyResultType;
-		[MR_DEFAULT_CONTEXT executeRequest:req error:nil];
-	}
+    IGREntityExChanel *chanel = [IGREntityExChanel MR_findFirstByAttribute:@"itemId"
+                                                                 withValue:aChanel];
+    if (chanel.timestamp)
+    {
+        if (aPage == 0 && [[self class] hoursBetweenCurrwntDate:chanel.timestamp] > kUpdatedLimitMinutes)
+        {
+            NSBatchUpdateRequest *req = [[NSBatchUpdateRequest alloc] initWithEntityName:@"ExCatalog"];
+            req.propertiesToUpdate = @{@"orderId" : @(0)};
+            req.resultType = NSStatusOnlyResultType;
+            [MR_DEFAULT_CONTEXT executeRequest:req error:nil];
+            
+            chanel.timestamp = [NSDate date];
+        }
+    }
 	
 	NSString *command = [NSString stringWithCharacters:kSearch length:kSearchLength];
 	NSString *rrsUrl = [NSString stringWithFormat:@"%@/%@?p=%@&per=50", [self serverAddress], command, @(aPage)];
@@ -435,25 +443,25 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	}
 	
 	[[__xmlManager dataTaskWithRequest:request
-					 completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-	  {
-		  
-		  if(!error)
-		  {
-			  ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
-			  IGRLog(@"%@", document.rootElement);
-			  
-			  aCompleateBlock(document.rootElement);
-		  }
-		  else
-		  {
-			  NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-			  IGRLog(@"%@", errorStr);
-			  
-			  aCompleateBlock(nil);
-		  }
-		  
-	  }] resume];
+                        uploadProgress:nil
+                      downloadProgress:nil
+                     completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                         
+                         if (!error)
+                         {
+                             ONOXMLDocument *document = [ONOXMLDocument XMLDocumentWithData:responseObject error:&error];
+                             IGRLog(@"%@", document.rootElement);
+                             
+                             aCompleateBlock(document.rootElement);
+                         }
+                         else
+                         {
+                             NSString *errorStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                             IGRLog(@"%@", errorStr);
+                             
+                             aCompleateBlock(nil);
+                         }
+                     }] resume];
 }
 
 + (NSString *)serverAddress

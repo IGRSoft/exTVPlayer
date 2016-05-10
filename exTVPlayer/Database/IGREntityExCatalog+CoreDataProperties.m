@@ -2,7 +2,7 @@
 //  IGREntityExCatalog+CoreDataProperties.m
 //  exTVPlayer
 //
-//  Created by Vitalii Parovishnyk on 1/14/16.
+//  Created by Vitalii Parovishnyk on 5/10/16.
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,6 +21,7 @@
 @dynamic orderId;
 @dynamic timestamp;
 @dynamic viewedTimestamp;
+@dynamic catalogDescription;
 @dynamic chanel;
 @dynamic tracks;
 

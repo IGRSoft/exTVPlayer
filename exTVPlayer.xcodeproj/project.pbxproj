@@ -656,6 +656,7 @@
 		A596A2181CA41F5F003E06AC /* IGRDatabaseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRDatabaseConstants.h; sourceTree = "<group>"; };
 		A596A2191CA41FD3003E06AC /* IGRProxyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRProxyConstants.h; sourceTree = "<group>"; };
 		A596A21A1CA420A0003E06AC /* IGRNotificationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRNotificationConstants.h; sourceTree = "<group>"; };
+		A5A677EE1CE20F8E0016866C /* exTVPlayer-3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "exTVPlayer-3.xcdatamodel"; sourceTree = "<group>"; };
 		A5A91D601C5F93490016F6BC /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		A5A91D611C5F93490016F6BC /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		A5B073071C9C52310068CFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IGRUpdateView.xib; sourceTree = "<group>"; };
@@ -2214,10 +2215,11 @@
 		A51F3BFC1C23266200F6080A /* exTVPlayer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A5A677EE1CE20F8E0016866C /* exTVPlayer-3.xcdatamodel */,
 				A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */,
 				A51F3BFD1C23266200F6080A /* exTVPlayer.xcdatamodel */,
 			);
-			currentVersion = A5005C2E1C7B50B300B7A766 /* exTVPlayer-2.xcdatamodel */;
+			currentVersion = A5A677EE1CE20F8E0016866C /* exTVPlayer-3.xcdatamodel */;
 			name = exTVPlayer.xcdatamodeld;
 			path = ../../Resources/exTVPlayer.xcdatamodeld;
 			sourceTree = "<group>";

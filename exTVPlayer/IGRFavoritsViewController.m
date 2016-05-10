@@ -69,7 +69,7 @@
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
 		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
 															   withPredicate:predicate
-																	sortedBy:@"orderId"
+																	sortedBy:@"isFavorit"
 																   ascending:NO];
 	}
 	

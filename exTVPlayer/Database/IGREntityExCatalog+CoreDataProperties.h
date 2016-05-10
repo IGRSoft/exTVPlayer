@@ -2,7 +2,7 @@
 //  IGREntityExCatalog+CoreDataProperties.h
 //  exTVPlayer
 //
-//  Created by Vitalii Parovishnyk on 1/14/16.
+//  Created by Vitalii Parovishnyk on 5/10/16.
 //  Copyright © 2016 IGR Software. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *orderId;
 @property (nullable, nonatomic, retain) NSDate *timestamp;
 @property (nullable, nonatomic, retain) NSDate *viewedTimestamp;
+@property (nullable, nonatomic, retain) NSString *catalogDescription;
 @property (nullable, nonatomic, retain) IGREntityExChanel *chanel;
 @property (nullable, nonatomic, retain) NSSet<IGREntityExTrack *> *tracks;
 
