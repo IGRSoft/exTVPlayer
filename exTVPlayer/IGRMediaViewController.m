@@ -36,6 +36,8 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 @property (nonatomic, strong) AVPlayerViewController		*playerController;
 @property (nonatomic, strong) AVAudioSession				*session;
 
+@property (nonatomic, strong) NSMutableArray				*itemsWithObserver;
+
 @end
 
 @implementation IGRMediaViewController
@@ -144,16 +146,10 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 
 - (void)removeObserverFromUnplayedTracks
 {
-	NSUInteger pos = MIN((self.currentTrackPosition + (self.isBuffering ? 0 : 1)), self.playlist.count);
-	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(pos,
-																  self.playlist.count - pos)];
-	
-	for(AVPlayerItem *item in items)
-	{
-		[self removePlayerItemObservers:item];
-	}
-	
-	self.isBuffering = NO;
+    __weak typeof(self) weak = self;
+    [self.playlist enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [weak removePlayerItemObservers:idx];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -192,6 +188,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 - (void)updatePlaylist
 {
 	/* create a media object and give it to the player */
+    self.itemsWithObserver = [NSMutableArray arrayWithCapacity:self.tracks.count];
 	NSMutableArray *playList = [NSMutableArray arrayWithCapacity:self.tracks.count];
 	for (NSUInteger i = 0; i < self.tracks.count; ++i)
 	{
@@ -211,6 +208,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		
 		AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
 		[playList addObject:item];
+        [self.itemsWithObserver addObject:@0];
 	}
 	
 	self.playlist = [NSArray arrayWithArray:playList];
@@ -224,6 +222,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		{
 			[self removeObserverFromUnplayedTracks];
 		}
+        
 		++self.currentTrackPosition;
 		
 		if (isFromRemoteControl)
@@ -245,6 +244,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 		{
 			[self removeObserverFromUnplayedTracks];
 		}
+        
 		--self.currentTrackPosition;
 		
 		if (isFromRemoteControl)
@@ -274,9 +274,11 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 	NSArray *items = [self.playlist subarrayWithRange:NSMakeRange(self.currentTrackPosition,
 																  self.playlist.count - self.currentTrackPosition)];
 	
-	for(AVPlayerItem *item in items)
+    NSUInteger pos = self.currentTrackPosition;
+	for (AVPlayerItem *item in items)
 	{
 		[self addPlayerItemObservers:item];
+        [self.itemsWithObserver replaceObjectAtIndex:pos++ withObject:@1];
 	}
 	
 	_player = [[AVQueuePlayer alloc] initWithItems:items];
@@ -389,18 +391,23 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 					context:IGRMediaViewControllerContext];
 }
 
-- (void)removePlayerItemObservers:(AVPlayerItem *)playerItem
+- (void)removePlayerItemObservers:(NSUInteger)playerItemPos
 {
-	@try
-	{
-		[playerItem removeObserver:self
-						forKeyPath:NSStringFromSelector(@selector(status))
-						   context:IGRMediaViewControllerContext];
-	}
-	@catch (NSException *exception)
-	{
-		IGRLog(@"Exception removing observer: %@", exception);
-	}
+    if ([self.itemsWithObserver[playerItemPos] isEqualToNumber:@1])
+    {
+        [self.itemsWithObserver replaceObjectAtIndex:playerItemPos withObject:@0];
+        @try
+        {
+            AVPlayerItem *item = self.playlist[playerItemPos];
+            [item removeObserver:self
+                      forKeyPath:NSStringFromSelector(@selector(status))
+                         context:IGRMediaViewControllerContext];
+        }
+        @catch (NSException *exception)
+        {
+            IGRLog(@"Exception removing observer: %@", exception);
+        }
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -420,8 +427,7 @@ static void * const IGRMediaViewControllerContext = (void*)&IGRMediaViewControll
 				
 				if (weak.isBuffering)
 				{
-					AVPlayerItem *item = weak.playlist[weak.currentTrackPosition];
-					[weak removePlayerItemObservers:item];
+					[weak removePlayerItemObservers:weak.currentTrackPosition];
 				}
 				
 				weak.isBuffering = NO;

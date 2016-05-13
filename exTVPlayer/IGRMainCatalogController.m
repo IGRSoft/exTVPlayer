@@ -59,7 +59,7 @@
 		
 		[IGREXParser parseLiveVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray * _Nullable items) {
 			
-			[IGREXParser parseVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray *items) {
+			[IGREXParser parseVideoCatalogContent:langId.stringValue compleateBlock:^(NSArray *_Nullable items) {
 				
 				weak.fetchedResultsController = nil;
 				weak.lastSelectedItem = nil;

@@ -150,23 +150,14 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 + (void)parseVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 				  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
-																						   withValue:aVideoCatalogId];
-	if (videoCatalog.timestamp)
-	{
-		if ([[self class] hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
-		{
-			aCompleateBlock(nil);
-			return; //skip update
-		}
-	}
-	
 	NSString *command = [NSString stringWithCharacters:kRSS length:kRSSLength];
 	NSString *xspfUrl = [NSString stringWithFormat:@"%@/%@/%@", [self serverAddress], command, aVideoCatalogId];
 	
 	[self downloadXMLFrom:xspfUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
 	 {
+         IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+                                                                                                withValue:aVideoCatalogId];
 		 if (xmlDocument)
 		 {
 			 NSString *title = [[xmlDocument firstChildWithTag:@"channel"] firstChildWithTag:@"title"].stringValue;
@@ -271,17 +262,6 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 + (void)parseLiveVideoCatalogContent:(nonnull NSString *)aVideoCatalogId
 					  compleateBlock:(nonnull IGREXParserCompleateBlock)aCompleateBlock
 {
-	IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
-																						   withValue:aVideoCatalogId];
-	if (videoCatalog.timestamp)
-	{
-		if ([[self class] hoursBetweenCurrwntDate:videoCatalog.timestamp] < kUpdatedLimitMinutes)
-		{
-			aCompleateBlock(nil);
-			return; //skip update
-		}
-	}
-	
 	NSString *lang = @"en";
 	BOOL useRSSForVideoCatalog = NO;
 	switch (aVideoCatalogId.integerValue)
@@ -313,6 +293,9 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 	[self downloadXMLFrom:xspfUrl
 		   compleateBlock:^(ONOXMLElement *xmlDocument)
 	 {
+         IGREntityExVideoCatalog *videoCatalog = [IGREntityExVideoCatalog MR_findFirstOrCreateByAttribute:@"itemId"
+                                                                                                withValue:aVideoCatalogId];
+         
 		 if (xmlDocument)
 		 {
 			 videoCatalog.name = aVideoCatalogId;
