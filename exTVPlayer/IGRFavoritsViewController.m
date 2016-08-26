@@ -67,9 +67,9 @@
 	if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Favorites)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorit == YES"];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"itemId"
 															   withPredicate:predicate
-																	sortedBy:@"isFavorit"
+																	sortedBy:@"timestamp"
 																   ascending:NO];
 	}
 	

@@ -749,7 +749,7 @@
 	if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chanel.itemId == %@", self.chanels.firstObject];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"itemId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"
 																   ascending:NO];
@@ -757,7 +757,7 @@
 	else if (_fetchedResultsController == nil && self.chanelMode == IGRChanelMode_Catalog_One)
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", self.chanels.firstObject];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"itemId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"
 																   ascending:NO];
@@ -766,7 +766,7 @@
 												  self.chanelMode == IGRChanelMode_Catalog_Live))
 	{
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId IN %@", self.chanels];
-		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"orderId"
+		_fetchedResultsController = [IGREntityExCatalog MR_fetchAllGroupedBy:@"itemId"
 															   withPredicate:predicate
 																	sortedBy:@"orderId"
 																   ascending:YES];

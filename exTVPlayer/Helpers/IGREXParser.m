@@ -104,7 +104,7 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 			 catalog.name = [xmlDocument firstChildWithTag:@"title"].stringValue;
              catalog.catalogDescription = [xmlDocument firstChildWithTag:@"post"].stringValue;
 			 catalog.imgUrl = [[xmlDocument firstChildWithTag:@"picture"] valueForAttribute:@"url"];
-			 __block NSUInteger orderId = 0;
+			 __block NSUInteger trackOrderId = 0;
 			 
 			 [xmlDocument enumerateElementsWithXPath:@"//file_list/file"
 										  usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop)
@@ -125,12 +125,12 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
 					  track.dataStatus = @(IGRTrackDataStatus_Web);
 					  track.position = @(0.0);
 					  track.catalog = catalog;
-					  track.orderId = @(orderId);
+					  track.orderId = @(trackOrderId);
 					  track.duration = @(duration);
 				  }
 				  track.webPath = webPath;
 				  
-				  ++orderId;
+				  ++trackOrderId;
 			  }];
 			 
 			 catalog.timestamp = [NSDate date];
@@ -349,13 +349,12 @@ typedef void (^IGREXParserDownloadCompleateBlock)(ONOXMLElement *xmlDocument);
                                                                  withValue:aChanel];
     if (chanel.timestamp)
     {
-        if (aPage == 0 && [[self class] hoursBetweenCurrwntDate:chanel.timestamp] > kUpdatedLimitMinutes)
+        if (aPage == 0 && [self hoursBetweenCurrwntDate:chanel.timestamp] > kUpdatedLimitMinutes)
         {
             NSBatchUpdateRequest *req = [[NSBatchUpdateRequest alloc] initWithEntityName:@"ExCatalog"];
-            req.predicate = [NSPredicate predicateWithFormat:@"isFavorit == NO"];
             req.propertiesToUpdate = @{@"orderId" : @(0)};
-            req.resultType = NSStatusOnlyResultType;
-            [MR_DEFAULT_CONTEXT executeRequest:req error:nil];
+            req.resultType = NSUpdatedObjectsCountResultType;
+            __unused NSBatchUpdateResult *result = [MR_DEFAULT_CONTEXT executeRequest:req error:nil];
             
             chanel.timestamp = [NSDate date];
         }
