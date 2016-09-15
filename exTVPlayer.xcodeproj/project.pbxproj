@@ -71,7 +71,6 @@
 		A5654E231C5947820000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
 		A5654E241C5947820000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
 		A5654E251C5947820000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E161C5947820000D882 /* Main.storyboard */; };
-		A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E121C5947820000D882 /* InfoPlist.strings */; };
 		A5654E2C1C5947EE0000D882 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5654E141C5947820000D882 /* Localizable.strings */; };
 		A5654E371C5949BE0000D882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E311C5949740000D882 /* Main.storyboard */; };
 		A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5654E2F1C5949740000D882 /* LaunchScreen.storyboard */; };
@@ -150,6 +149,7 @@
 		A58A0E411C7DBFA600452E83 /* IGRCatalogPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58A0E3D1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m */; };
 		A58B0A7B1C7CEB4F00BBBCE5 /* IGREXCatalogTopShelfItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C991C7CB17D00B7A766 /* IGREXCatalogTopShelfItem.m */; };
 		A58B0A8D1C7CEB5B00BBBCE5 /* IGRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A5005C941C7CAFC800B7A766 /* IGRUserDefaults.m */; };
+		A58CC5C91D7449D00064DD5F /* IGRCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A51F38441C22CAF300F6080A /* IGRCatalogViewController.m */; };
 		A58F66EF1C47C33400D7518B /* IGRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66EE1C47C33400D7518B /* IGRSearchViewController.m */; };
 		A58F66F21C47C42600D7518B /* IGRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F11C47C42600D7518B /* IGRSettingsViewController.m */; };
 		A58F66F51C47C51800D7518B /* IGRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58F66F41C47C51800D7518B /* IGRBaseViewController.m */; };
@@ -1404,7 +1404,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IGR;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "IGR Software";
 				TargetAttributes = {
 					A5005C6F1C7CA1CD00B7A766 = {
@@ -1662,7 +1662,6 @@
 				A5B073061C9C52310068CFC8 /* IGRUpdateView.xib in Resources */,
 				A5654FD21C5A3F450000D882 /* iTunesArtwork@2x in Resources */,
 				A596A1F61CA3FE0B003E06AC /* block_list.plist in Resources */,
-				A5654E2B1C5947E90000D882 /* InfoPlist.strings in Resources */,
 				A5654E381C5949C80000D882 /* LaunchScreen.storyboard in Resources */,
 				A5654E371C5949BE0000D882 /* Main.storyboard in Resources */,
 				A5FD73231C80BFC30035F1DD /* InfoPlist.strings in Resources */,
@@ -1727,6 +1726,7 @@
 				A5654E391C5964850000D882 /* IGREXParser.m in Sources */,
 				A58A0E3F1C7DBFA100452E83 /* IGRCatalogPreviewViewController.m in Sources */,
 				A5654E4B1C5964CF0000D882 /* IGREntityExChanel.m in Sources */,
+				A58CC5C91D7449D00064DD5F /* IGRCatalogViewController.m in Sources */,
 				A5654DD71C59462E0000D882 /* IGRAppDelegate.m in Sources */,
 				A5654E501C5964E80000D882 /* IGRDownloadManager.m in Sources */,
 				A5654E481C5964CF0000D882 /* IGREntityExVideoCatalog+CoreDataProperties.m in Sources */,
@@ -2054,6 +2054,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2061,8 +2062,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -2094,6 +2097,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2101,8 +2105,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;

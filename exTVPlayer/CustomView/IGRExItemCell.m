@@ -14,6 +14,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
 	self.trackStatus.thicknessRatio = 1.0;
 	self.trackStatus.clockwiseProgress = NO;
 	self.trackStatus.trackTintColor = IGR_YELLOWCOLOR;
